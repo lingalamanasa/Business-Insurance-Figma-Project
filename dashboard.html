@@ -741,17 +741,17 @@
             <h3 class="dash-card-title" style="margin-bottom: 1.25rem;">Company Profile</h3>
             <div class="dash-form-field">
               <label class="dash-form-label">Insured Entity Name</label>
-              <input type="text" class="dash-form-input" value="Apex Dynamics Corporation" />
+              <input type="text" class="dash-form-input" id="settingsCompanyName" value="Apex Dynamics Corporation" />
             </div>
             <div class="dash-form-field">
               <label class="dash-form-label">Primary Policyholder Contact</label>
-              <input type="text" class="dash-form-input" value="Sarah Jenkins" />
+              <input type="text" class="dash-form-input" id="settingsContactName" value="Sarah Jenkins" />
             </div>
             <div class="dash-form-field">
               <label class="dash-form-label">Corporate Email Address</label>
-              <input type="email" class="dash-form-input" value="s.jenkins@apexdynamics.com" />
+              <input type="email" class="dash-form-input" id="settingsEmail" value="s.jenkins@apexdynamics.com" />
             </div>
-            <button type="button" class="dash-action-btn" style="align-self: flex-start; margin-top: 0.5rem;" onclick="alert('Profile details updated successfully!');">Save Changes</button>
+            <button type="button" class="dash-action-btn" id="settingsSaveBtn" style="align-self: flex-start; margin-top: 0.5rem;">Save Changes</button>
           </article>
 
           <article class="dash-chart-card">
@@ -848,48 +848,133 @@
       });
     }
 
-    // ═══ 4. TAB ROUTING SYSTEM (ALL 6 MARKED SECTIONS) ═══
+    // ═══ 4. DYNAMIC USER PROFILE & TAB ROUTING SYSTEM ═══
     const navItems = document.querySelectorAll('.dash-nav-item');
     const viewSections = document.querySelectorAll('.dash-view-content');
     const dashWelcomeHeading = document.getElementById('dashWelcomeHeading');
     const dashWelcomeSub = document.getElementById('dashWelcomeSub');
+    const userAvatar = document.getElementById('userAvatar');
+    const userName = document.getElementById('userName');
+    const sidebarRoleLabel = document.getElementById('sidebarRoleLabel');
+    const modeUserBtn = document.getElementById('modeUserBtn');
+    const modeAdminBtn = document.getElementById('modeAdminBtn');
+    const settingsContactName = document.getElementById('settingsContactName');
+    const settingsSaveBtn = document.getElementById('settingsSaveBtn');
 
     let currentRole = 'user';
     let currentTab = 'overview';
+    let activeUserName = 'Sarah Jenkins';
 
-    const tabMeta = {
+    // Helper: Compute clean avatar initials from full name
+    function getInitials(name) {
+      if (!name) return 'SJ';
+      const parts = name.trim().split(/\s+/).filter(Boolean);
+      if (parts.length === 0) return 'SJ';
+      if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+
+    // Helper: Retrieve stored user name from URL params or localStorage
+    function getStoredUserName(role) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramUser = urlParams.get('user') || urlParams.get('name');
+      if (paramUser && paramUser.trim()) {
+        return paramUser.trim();
+      }
+      try {
+        const saved = localStorage.getItem('stackly_user_name');
+        if (saved && saved.trim()) return saved.trim();
+      } catch (e) {}
+
+      return role === 'admin' ? 'Admin Supervisor' : 'Sarah Jenkins';
+    }
+
+    // Contextual subtitles for all 6 tabs
+    const tabSubtitles = {
       overview: {
-        user: { title: 'Welcome back, Sarah', sub: 'Here is your live commercial coverage performance overview.' },
-        admin: { title: 'Admin Command Portal', sub: 'Underwriting queue, regional portfolio metrics & claim approvals.' }
+        user: 'Here is your live commercial coverage performance overview.',
+        admin: 'Underwriting queue, regional portfolio metrics & claim approvals.'
       },
       policies: {
-        user: { title: 'Commercial Policy Portfolio', sub: 'Manage, renew, and download official Certificates of Insurance (COI).' },
-        admin: { title: 'Enterprise Underwriting Roster', sub: 'Active commercial policies across all regional accounts & renewal status.' }
+        user: 'Commercial Policy Portfolio • Manage, renew & download official COI certificates.',
+        admin: 'Enterprise Underwriting Roster • Active commercial policies across regional accounts.'
       },
       claims: {
-        user: { title: 'Direct Claims Resolution Center', sub: 'Zero third-party broker friction. Guaranteed 48-hour assessment pipeline.' },
-        admin: { title: 'Claims Adjudication Queue', sub: 'Verify incident evidence, assess damages & authorize direct wire payouts.' }
+        user: 'Direct Claims Resolution Center • Guaranteed 48-hour assessment pipeline.',
+        admin: 'Claims Adjudication Queue • Verify incident evidence & authorize direct wire payouts.'
       },
       analytics: {
-        user: { title: 'Risk Intelligence & Audit Benchmarks', sub: 'AI-assisted loss prevention and annual policyholder safety scoring.' },
-        admin: { title: 'Actuarial Portfolio Risk Modeling', sub: 'Aggregate loss ratios, safety compliance & catastrophic stress tests.' }
+        user: 'Risk Intelligence & Audit Benchmarks • AI-assisted loss prevention and safety scoring.',
+        admin: 'Actuarial Portfolio Risk Modeling • Aggregate loss ratios & stress tests.'
       },
       billing: {
-        user: { title: 'Billing, Invoices & Premium Stewardship', sub: 'Zero third-party broker commissions. 100% direct policyholder value.' },
-        admin: { title: 'Premium Revenue & Ledger Reconciliation', sub: 'Automated ACH collections, wire reconciliations & treasury payouts.' }
+        user: 'Billing, Invoices & Premium Stewardship • Direct policyholder value.',
+        admin: 'Premium Revenue & Ledger Reconciliation • Automated ACH collections & treasury.'
       },
       settings: {
-        user: { title: 'Account & Security Settings', sub: 'Manage corporate underwriting profile, security credentials, and alert preferences.' },
-        admin: { title: 'System Configuration & Underwriter Roles', sub: 'API credentials, permission tiers, audit logs & compliance rules.' }
+        user: 'Account & Security Settings • Manage corporate profile & security credentials.',
+        admin: 'System Configuration & Underwriter Roles • API credentials, permissions & audit logs.'
       }
     };
 
     function updateHeaderInfo() {
-      const meta = tabMeta[currentTab] ? tabMeta[currentTab][currentRole] : tabMeta.overview[currentRole];
-      if (meta && dashWelcomeHeading && dashWelcomeSub) {
-        dashWelcomeHeading.textContent = meta.title;
-        dashWelcomeSub.textContent = meta.sub;
+      if (dashWelcomeHeading) {
+        dashWelcomeHeading.textContent = currentRole === 'admin' 
+          ? `Welcome back, ${activeUserName}` 
+          : `Welcome back, ${activeUserName}`;
       }
+      if (dashWelcomeSub) {
+        const subText = tabSubtitles[currentTab] ? tabSubtitles[currentTab][currentRole] : tabSubtitles.overview[currentRole];
+        dashWelcomeSub.textContent = subText;
+      }
+    }
+
+    function updateAllUserDisplays() {
+      if (userName) userName.textContent = activeUserName;
+      if (userAvatar) userAvatar.textContent = getInitials(activeUserName);
+      if (settingsContactName && document.activeElement !== settingsContactName) {
+        settingsContactName.value = activeUserName;
+      }
+      updateHeaderInfo();
+    }
+
+    // Floating Notification Toast Helper
+    function showToast(msg) {
+      let toast = document.getElementById('dashToastNotification');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'dashToastNotification';
+        toast.style.cssText = `
+          position: fixed;
+          bottom: 24px;
+          right: 24px;
+          background: #111923;
+          color: #FFFFFF;
+          border: 1px solid var(--dash-gold);
+          padding: 12px 20px;
+          border-radius: 12px;
+          font-size: 0.88rem;
+          font-weight: 600;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--dash-gold-glow);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          opacity: 0;
+          transform: translateY(20px);
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        `;
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--dash-gold); font-size:1.1rem;"></i> <span>${msg}</span>`;
+      requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+      });
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+      }, 4000);
     }
 
     function switchTab(tab) {
@@ -979,12 +1064,6 @@
     });
 
     // ═══ 6. ROLE SWITCHER (USER VS ADMIN VIEW) ═══
-    const modeUserBtn = document.getElementById('modeUserBtn');
-    const modeAdminBtn = document.getElementById('modeAdminBtn');
-    const sidebarRoleLabel = document.getElementById('sidebarRoleLabel');
-    const userAvatar = document.getElementById('userAvatar');
-    const userName = document.getElementById('userName');
-
     function applyRole(role) {
       currentRole = role;
       if (role === 'admin') {
@@ -992,28 +1071,51 @@
         modeUserBtn.classList.remove('active');
         sidebarRoleLabel.textContent = 'ADMIN';
         sidebarRoleLabel.style.color = '#38BDF8';
-        userAvatar.textContent = 'AD';
         userAvatar.style.background = 'linear-gradient(135deg, #38BDF8, #0284C7)';
-        userName.textContent = 'Admin Supervisor';
+        userAvatar.style.color = '#FFFFFF';
+        if (activeUserName === 'Sarah Jenkins') {
+          activeUserName = 'Admin Supervisor';
+        }
       } else {
         modeUserBtn.classList.add('active');
         modeAdminBtn.classList.remove('active');
         sidebarRoleLabel.textContent = 'USER';
         sidebarRoleLabel.style.color = 'var(--dash-gold)';
-        userAvatar.textContent = 'SJ';
         userAvatar.style.background = 'linear-gradient(135deg, var(--dash-gold), #DEB528)';
-        userName.textContent = 'Sarah Jenkins';
+        userAvatar.style.color = '#000000';
+        if (activeUserName === 'Admin Supervisor') {
+          activeUserName = getStoredUserName('user');
+        }
       }
-      updateHeaderInfo();
+      updateAllUserDisplays();
     }
 
     modeUserBtn.addEventListener('click', () => applyRole('user'));
     modeAdminBtn.addEventListener('click', () => applyRole('admin'));
 
+    // Handle Settings Contact Name Save
+    if (settingsSaveBtn && settingsContactName) {
+      settingsSaveBtn.addEventListener('click', () => {
+        const newName = settingsContactName.value.trim();
+        if (newName) {
+          activeUserName = newName;
+          try {
+            localStorage.setItem('stackly_user_name', newName);
+          } catch (e) {}
+          updateAllUserDisplays();
+          showToast(`Profile updated! Welcome back, ${activeUserName}`);
+        } else {
+          alert('Please enter a valid contact name.');
+        }
+      });
+    }
+
     // Handle Initial URL Query & Hash Routing
     function handleInitialRoute() {
       const urlParams = new URLSearchParams(window.location.search);
       const initialRole = urlParams.get('role');
+      activeUserName = getStoredUserName(initialRole === 'admin' ? 'admin' : 'user');
+
       if (initialRole === 'admin') {
         applyRole('admin');
       } else {
@@ -1021,16 +1123,17 @@
       }
 
       const initialHash = window.location.hash.replace('#', '');
-      if (initialHash && tabMeta[initialHash]) {
+      if (initialHash && tabSubtitles[initialHash]) {
         switchTab(initialHash);
       } else {
         switchTab('overview');
       }
+      updateAllUserDisplays();
     }
 
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash && tabMeta[hash]) {
+      if (hash && tabSubtitles[hash]) {
         switchTab(hash);
       }
     });

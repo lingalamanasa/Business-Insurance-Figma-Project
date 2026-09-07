@@ -435,10 +435,17 @@
       signupSubmitBtn.querySelector('span').textContent = 'Creating Account...';
       triggerGravityParticles(signupSubmitBtn);
 
+      try {
+        localStorage.setItem('stackly_user_name', name);
+        localStorage.setItem('stackly_user_email', email);
+      } catch (err) {
+        console.warn('LocalStorage access blocked', err);
+      }
+
       setTimeout(() => {
         showAlert(`Congratulations ${name}! Your ${role.toUpperCase()} account has been created. Redirecting to Login page...`, true);
         setTimeout(() => {
-          window.location.href = `login.html?registered=true&role=${encodeURIComponent(role)}`;
+          window.location.href = `login.html?registered=true&role=${encodeURIComponent(role)}&name=${encodeURIComponent(name)}`;
         }, 1100);
       }, 700);
     });

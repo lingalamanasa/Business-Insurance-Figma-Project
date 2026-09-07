@@ -367,14 +367,44 @@
         return;
       }
 
+      // Determine clean user display name
+      const urlParams = new URLSearchParams(window.location.search);
+      let userName = urlParams.get('name') || '';
+      if (!userName) {
+        try {
+          userName = localStorage.getItem('stackly_user_name') || '';
+        } catch (e) {}
+      }
+
+      if (!userName || userName.trim() === '') {
+        // Derive from email prefix
+        const rawPrefix = email.split('@')[0];
+        userName = rawPrefix
+          .replace(/[._-]+/g, ' ')
+          .split(' ')
+          .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+          .join(' ')
+          .trim();
+      }
+
+      if (!userName) {
+        userName = role === 'admin' ? 'Admin Supervisor' : 'Sarah Jenkins';
+      }
+
+      try {
+        localStorage.setItem('stackly_user_name', userName);
+        localStorage.setItem('stackly_user_email', email);
+        localStorage.setItem('stackly_user_role', role);
+      } catch (err) {}
+
       loginSubmitBtn.disabled = true;
       loginSubmitBtn.querySelector('span').textContent = 'Authenticating...';
       triggerGravityParticles(loginSubmitBtn);
 
       setTimeout(() => {
-        showAlert(`Welcome back! Authenticated as ${role.toUpperCase()}. Redirecting to dashboard...`, true);
+        showAlert(`Welcome back, ${userName}! Authenticated as ${role.toUpperCase()}. Redirecting to dashboard...`, true);
         setTimeout(() => {
-          window.location.href = `dashboard.html?role=${encodeURIComponent(role)}`;
+          window.location.href = `dashboard.html?role=${encodeURIComponent(role)}&user=${encodeURIComponent(userName)}`;
         }, 1100);
       }, 700);
     });
@@ -385,14 +415,21 @@
 
       const urlParams = new URLSearchParams(window.location.search);
       const role = urlParams.get('role');
+      const name = urlParams.get('name');
       if (role === 'admin') {
         setRole('admin');
       } else {
         setRole('user');
       }
 
+      if (name) {
+        try {
+          localStorage.setItem('stackly_user_name', name);
+        } catch (e) {}
+      }
+
       if (urlParams.get('registered') === 'true') {
-        showAlert('Account created successfully! Please enter your credentials to login.', true);
+        showAlert(`Account created successfully for ${name || 'you'}! Please enter your credentials to login.`, true);
       }
     });
   </script>
