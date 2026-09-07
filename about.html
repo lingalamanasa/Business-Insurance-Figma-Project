@@ -635,13 +635,48 @@
         });
       }
 
-      // 2. GSAP Animations & Hero Slide In From Sides
+      // 2. GSAP Animations & Split Text Reveal Animations
       if (typeof gsap !== 'undefined') {
         if (typeof ScrollTrigger !== 'undefined') {
           gsap.registerPlugin(ScrollTrigger);
         }
 
-        // Hero Slide In From Sides Timeline
+        // Split Text Helper for GSAP Word-by-Word Reveal Animations
+        function splitTextIntoWords(element, isOutline = false) {
+          if (!element) return [];
+          const text = element.textContent.trim();
+          if (!text) return [];
+          const words = text.split(/\s+/);
+          element.innerHTML = '';
+          const wordSpans = [];
+          words.forEach((word, idx) => {
+            const wrap = document.createElement('span');
+            wrap.className = isOutline ? 'split-text-word-wrap split-text-word-wrap--outline' : 'split-text-word-wrap';
+            const inner = document.createElement('span');
+            inner.className = 'split-text-word';
+            inner.textContent = word;
+            wrap.appendChild(inner);
+            element.appendChild(wrap);
+            wordSpans.push(inner);
+            if (idx < words.length - 1) {
+              element.appendChild(document.createTextNode(' '));
+            }
+          });
+          return wordSpans;
+        }
+
+        // Elements for Hero Split Text
+        const heroEyebrowEl = document.querySelector('.about-hero__eyebrow');
+        const heroHeadlineEl = document.querySelector('.about-hero__headline');
+        const heroBodyEl = document.querySelector('.about-hero__body');
+        const heroCaptionEl = document.querySelector('.about-hero__year-caption');
+
+        const eyebrowWords = heroEyebrowEl ? splitTextIntoWords(heroEyebrowEl) : [];
+        const headlineWords = heroHeadlineEl ? splitTextIntoWords(heroHeadlineEl) : [];
+        const bodyWords = heroBodyEl ? splitTextIntoWords(heroBodyEl) : [];
+        const captionWords = heroCaptionEl ? splitTextIntoWords(heroCaptionEl) : [];
+
+        // Hero Slide In From Sides & Split Text Reveal Timeline
         const heroShape = document.getElementById('heroShape');
         const heroLeft = document.getElementById('heroLeft');
         const heroRight = document.getElementById('heroRight');
@@ -652,11 +687,17 @@
 
           // Set initial hidden positions
           if (heroShape) gsap.set(heroShape, { xPercent: -105 });
-          gsap.set(heroLeft, { x: -80, opacity: 0 });
-          gsap.set(heroRight, { x: 80, opacity: 0 });
+          gsap.set(heroLeft, { opacity: 1 });
+          gsap.set(heroRight, { opacity: 1 });
           if (yearEl) gsap.set(yearEl, { scale: 0.75, opacity: 0 });
 
-          // Slide In From Left (Shape + Left Content)
+          // Hide split words initially
+          const allHeroWords = [...eyebrowWords, ...headlineWords, ...bodyWords, ...captionWords];
+          if (allHeroWords.length) {
+            gsap.set(allHeroWords, { y: '120%', opacity: 0, rotateX: -20 });
+          }
+
+          // Slide In From Left (Shape)
           if (heroShape) {
             heroTl.to(heroShape, {
               xPercent: 0,
@@ -665,20 +706,53 @@
             }, 0.1);
           }
 
-          heroTl.to(heroLeft, {
-            x: 0,
-            opacity: 1,
-            duration: 1.1,
-            ease: 'power4.out'
-          }, 0.2);
+          // Split Text Word-by-Word Reveal for Eyebrow
+          if (eyebrowWords.length) {
+            heroTl.to(eyebrowWords, {
+              y: '0%',
+              opacity: 1,
+              rotateX: 0,
+              duration: 0.7,
+              stagger: 0.05,
+              ease: 'power3.out'
+            }, 0.25);
+          }
 
-          // Slide In From Right (Right Column & 1912)
-          heroTl.to(heroRight, {
-            x: 0,
-            opacity: 1,
-            duration: 1.1,
-            ease: 'power4.out'
-          }, 0.25);
+          // Split Text Word-by-Word Reveal for Headline
+          if (headlineWords.length) {
+            heroTl.to(headlineWords, {
+              y: '0%',
+              opacity: 1,
+              rotateX: 0,
+              duration: 0.9,
+              stagger: 0.045,
+              ease: 'power3.out'
+            }, 0.35);
+          }
+
+          // Split Text Word-by-Word Reveal for Body Paragraph
+          if (bodyWords.length) {
+            heroTl.to(bodyWords, {
+              y: '0%',
+              opacity: 1,
+              rotateX: 0,
+              duration: 0.75,
+              stagger: 0.015,
+              ease: 'power2.out'
+            }, 0.6);
+          }
+
+          // Split Text Word-by-Word Reveal for Right Year Caption
+          if (captionWords.length) {
+            heroTl.to(captionWords, {
+              y: '0%',
+              opacity: 1,
+              rotateX: 0,
+              duration: 0.75,
+              stagger: 0.03,
+              ease: 'power3.out'
+            }, 0.5);
+          }
 
           if (yearEl) {
             heroTl.to(yearEl, {
@@ -686,7 +760,7 @@
               opacity: 1,
               duration: 0.85,
               ease: 'back.out(1.7)'
-            }, 0.45);
+            }, 0.4);
 
             // Counter roll up to 1912
             heroTl.fromTo({ val: 1840 }, {
@@ -696,7 +770,77 @@
               onUpdate: function () {
                 yearEl.textContent = Math.round(this.targets()[0].val);
               }
-            }, 0.45);
+            }, 0.4);
+          }
+        }
+
+        // Timeline "4 decisions that shaped the company" Split Text Reveal with ScrollTrigger
+        const timelineTitle = document.getElementById('timeline-title');
+        if (timelineTitle) {
+          const outlineSpan = timelineTitle.querySelector('.about-timeline__title-outline');
+          let timelineWords = [];
+
+          if (outlineSpan) {
+            const outlineText = outlineSpan.textContent.trim();
+            outlineSpan.remove();
+            const remainingText = timelineTitle.textContent.trim();
+            timelineTitle.innerHTML = '';
+
+            // Split outline words
+            const outlineWords = outlineText.split(/\s+/);
+            outlineWords.forEach((word, idx) => {
+              const wrap = document.createElement('span');
+              wrap.className = 'split-text-word-wrap split-text-word-wrap--outline';
+              const inner = document.createElement('span');
+              inner.className = 'split-text-word';
+              inner.textContent = word;
+              wrap.appendChild(inner);
+              timelineTitle.appendChild(wrap);
+              timelineWords.push(inner);
+              if (idx < outlineWords.length - 1) {
+                timelineTitle.appendChild(document.createTextNode(' '));
+              }
+            });
+
+            timelineTitle.appendChild(document.createTextNode(' '));
+
+            // Split normal title words
+            const normalWords = remainingText.split(/\s+/);
+            normalWords.forEach((word, idx) => {
+              const wrap = document.createElement('span');
+              wrap.className = 'split-text-word-wrap';
+              const inner = document.createElement('span');
+              inner.className = 'split-text-word';
+              inner.textContent = word;
+              wrap.appendChild(inner);
+              timelineTitle.appendChild(wrap);
+              timelineWords.push(inner);
+              if (idx < normalWords.length - 1) {
+                timelineTitle.appendChild(document.createTextNode(' '));
+              }
+            });
+          } else {
+            timelineWords = splitTextIntoWords(timelineTitle);
+          }
+
+          if (timelineWords.length) {
+            gsap.set(timelineWords, { y: '120%', opacity: 0, rotateX: -25 });
+
+            ScrollTrigger.create({
+              trigger: timelineTitle,
+              start: 'top 85%',
+              once: true,
+              onEnter: () => {
+                gsap.to(timelineWords, {
+                  y: '0%',
+                  opacity: 1,
+                  rotateX: 0,
+                  duration: 0.85,
+                  stagger: 0.05,
+                  ease: 'power3.out'
+                });
+              }
+            });
           }
         }
 

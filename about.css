@@ -92,6 +92,30 @@
   max-width: 220px;
 }
 
+/* ─── GSAP SPLIT TEXT REVEAL ANIMATION STYLES ───────── */
+.split-text-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.26em;
+  padding-bottom: 0.12em;
+}
+
+.split-text-word {
+  display: inline-block;
+  will-change: transform, opacity;
+  transform-origin: 50% 100%;
+}
+
+.split-text-word-wrap--outline {
+  margin-right: 0.28em;
+}
+
+.split-text-word-wrap--outline .split-text-word {
+  -webkit-text-stroke: 1.5px var(--black);
+  color: transparent;
+}
+
 /* ─── TIMELINE: 4 DECISIONS SECTION ──────────────────── */
 .about-timeline {
   padding: 7rem 0 5rem;
