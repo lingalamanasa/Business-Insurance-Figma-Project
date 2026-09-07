@@ -449,6 +449,45 @@ body.auth-split-body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ─── GRAVITY FORM ANIMATION ENHANCEMENTS ─────────────── */
+.auth-split-card.gravity-active {
+  transform-origin: center top;
+  will-change: transform, opacity;
+}
+
+.auth-form-group, .auth-role-section, .auth-meta-helper, .auth-main-btn {
+  will-change: transform, opacity;
+}
+
+.auth-form-group.anti-gravity-floating {
+  transform: translateY(-4px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-form-group.anti-gravity-floating .auth-text-input {
+  box-shadow: 0 10px 25px rgba(18, 26, 36, 0.12), 0 0 0 3px rgba(244, 211, 94, 0.3);
+  border-color: #121A24;
+}
+
+/* Gravity Sparks / Burst Particles Container */
+.gravity-particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.gravity-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
 /* ─── RESPONSIVE BREAKPOINTS ─────────────────────────── */
 @media (max-width: 960px) {
   .auth-split-card {

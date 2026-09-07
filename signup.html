@@ -181,7 +181,150 @@
 
   </div>
 
+  <!-- Scripts: GSAP for Gravity Physics Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script>
+    // ═══ GSAP GRAVITY FORM ANIMATION ═══
+    function initAuthGravityAnimation() {
+      if (typeof gsap === 'undefined') return;
+
+      const card = document.getElementById('authSplitCard');
+      const visualBody = document.querySelector('.auth-split-visual__body');
+      const formHeader = document.querySelector('.auth-form-header');
+      const formGroups = document.querySelectorAll('.auth-form-group');
+      const roleSection = document.querySelector('.auth-role-section');
+      const metaHelper = document.querySelector('.auth-meta-helper');
+      const submitBtn = document.querySelector('.auth-main-btn');
+
+      // 1. Initial Gravitational Drop of Split Card
+      const gravityTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      gravityTL.fromTo(card,
+        { y: -160, opacity: 0, scaleY: 0.88, scaleX: 1.05 },
+        { y: 0, opacity: 1, scaleY: 1, scaleX: 1, duration: 1.25, ease: 'bounce.out' },
+        0
+      );
+
+      // Left visual body slides into place
+      if (visualBody) {
+        gravityTL.fromTo(visualBody,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          0.3
+        );
+      }
+
+      // Cascading staggered gravity drop of form children
+      const formItems = [formHeader, ...formGroups, roleSection, metaHelper, submitBtn].filter(Boolean);
+      gravityTL.fromTo(formItems,
+        { y: -35, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.65, stagger: 0.08, ease: 'bounce.out' },
+        0.35
+      );
+
+      // 2. Gravitational Magnetic Pull on Submit Button
+      if (submitBtn) {
+        submitBtn.addEventListener('mousemove', (e) => {
+          const rect = submitBtn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          gsap.to(submitBtn, {
+            x: x * 0.35,
+            y: y * 0.4,
+            duration: 0.25,
+            ease: 'power2.out'
+          });
+        });
+
+        submitBtn.addEventListener('mouseleave', () => {
+          gsap.to(submitBtn, {
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: 'elastic.out(1.2, 0.4)'
+          });
+        });
+      }
+
+      // 3. Anti-Gravity Float on Input Focus
+      const inputs = document.querySelectorAll('.auth-text-input');
+      inputs.forEach(input => {
+        const parent = input.closest('.auth-form-group');
+        if (!parent) return;
+
+        input.addEventListener('focus', () => {
+          parent.classList.add('anti-gravity-floating');
+          gsap.to(parent, {
+            y: -5,
+            scale: 1.015,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+
+        input.addEventListener('blur', () => {
+          parent.classList.remove('anti-gravity-floating');
+          gsap.to(parent, {
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            ease: 'elastic.out(1, 0.5)'
+          });
+        });
+      });
+    }
+
+    // 4. Gravity Particles Burst on Form Submission
+    function triggerGravityParticles(originEl) {
+      const container = document.createElement('div');
+      container.className = 'gravity-particles-container';
+      document.body.appendChild(container);
+
+      const rect = originEl.getBoundingClientRect();
+      const originX = rect.left + rect.width / 2;
+      const originY = rect.top + rect.height / 2;
+
+      const colors = ['#F4D35E', '#DEB528', '#FFFFFF', '#38BDF8', '#10B981'];
+      const particleCount = 28;
+
+      for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement('div');
+        p.className = 'gravity-particle';
+        const size = Math.random() * 8 + 4;
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        p.style.boxShadow = `0 0 8px ${p.style.backgroundColor}`;
+        p.style.left = originX + 'px';
+        p.style.top = originY + 'px';
+        container.appendChild(p);
+
+        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5);
+        const velocity = Math.random() * 160 + 90;
+        const peakX = originX + Math.cos(angle) * velocity;
+        const peakY = originY - (Math.random() * 140 + 80);
+        const gravityDropY = peakY + (Math.random() * 450 + 250);
+
+        gsap.to(p, {
+          x: peakX - originX,
+          y: peakY - originY,
+          duration: 0.45,
+          ease: 'power2.out',
+          onComplete: () => {
+            gsap.to(p, {
+              y: gravityDropY - originY,
+              opacity: 0,
+              duration: 0.75 + Math.random() * 0.4,
+              ease: 'power2.in',
+              onComplete: () => p.remove()
+            });
+          }
+        });
+      }
+
+      setTimeout(() => container.remove(), 1600);
+    }
+
     // ═══ ROLE TOGGLE (ADMIN VS USER) ═══
     const roleAdminBtn = document.getElementById('roleAdminBtn');
     const roleUserBtn = document.getElementById('roleUserBtn');
@@ -283,6 +426,7 @@
 
       signupSubmitBtn.disabled = true;
       signupSubmitBtn.querySelector('span').textContent = 'Creating Account...';
+      triggerGravityParticles(signupSubmitBtn);
 
       setTimeout(() => {
         showAlert(`Congratulations ${name}! Your ${role.toUpperCase()} account has been created. Redirecting to Login page...`, true);
@@ -290,6 +434,11 @@
           window.location.href = `login.html?registered=true&role=${encodeURIComponent(role)}`;
         }, 1100);
       }, 700);
+    });
+
+    // ═══ INITIALIZE ON LOAD ═══
+    window.addEventListener('DOMContentLoaded', () => {
+      initAuthGravityAnimation();
     });
   </script>
 </body>
