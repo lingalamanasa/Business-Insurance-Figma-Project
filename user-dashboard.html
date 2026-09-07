@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard — Stackly Policyholder Portal</title>
+  <meta name="description" content="Stackly Commercial Policyholder Dashboard. Manage in-force policies, file and track claims, review enterprise risk scores, and process premium payments." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="dash-body">
+
+  <!-- Sidebar Backdrop Overlay -->
+  <div class="dash-sidebar-overlay" id="dashSidebarOverlay" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       USER SIDEBAR NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__brand">
+      <a href="index.html" aria-label="Stackly Home">
+        <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="dash-sidebar__logo" />
+      </a>
+      <button class="dash-sidebar-close" id="dashSidebarClose" aria-label="Close sidebar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Policyholder User Profile Card -->
+    <div class="dash-sidebar__user-card" id="sidebarUserCard">
+      <div class="dash-user-avatar" id="sidebarUserAvatar">SJ</div>
+      <div class="dash-sidebar__user-details">
+        <strong id="sidebarUserName">Sarah Jenkins</strong>
+        <span id="sidebarUserRoleText">Commercial Policyholder</span>
+      </div>
+    </div>
+
+    <!-- 6 Navigation Tabs -->
+    <nav class="dash-sidebar__nav" id="sidebarNav">
+      <a href="#overview" class="dash-nav-item active" data-tab="overview">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Overview</span>
+      </a>
+      <a href="#policies" class="dash-nav-item" data-tab="policies">
+        <i class="fa-solid fa-file-shield"></i>
+        <span>Active Policies</span>
+      </a>
+      <a href="#claims" class="dash-nav-item" data-tab="claims">
+        <i class="fa-solid fa-bolt-lightning"></i>
+        <span>Claims Center</span>
+      </a>
+      <a href="#analytics" class="dash-nav-item" data-tab="analytics">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Risk Analytics</span>
+      </a>
+      <a href="#billing" class="dash-nav-item" data-tab="billing">
+        <i class="fa-solid fa-wallet"></i>
+        <span>Billing &amp; Premium</span>
+      </a>
+      <a href="#settings" class="dash-nav-item" data-tab="settings">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <div class="dash-role-badge-pill">
+        <span>Account Tier:</span>
+        <span class="role-tag" style="color:#38BDF8;">ENTERPRISE USER</span>
+      </div>
+      <a href="index.html" class="dash-back-link">
+        <i class="fa-solid fa-house"></i>
+        <span>Back to Website</span>
+      </a>
+      <a href="login.html" class="dash-logout-link" id="sidebarLogoutBtn">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN USER DASHBOARD WORKSPACE
+  ═══════════════════════════════════════════ -->
+  <main class="dash-main">
+    
+    <!-- Top Dashboard Header -->
+    <header class="dash-header">
+      <div class="dash-header__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="dash-header__welcome">
+          <h1 id="dashWelcomeHeading">Welcome back, Sarah Jenkins</h1>
+          <p id="dashWelcomeSub">Here is your live commercial coverage performance, active policies, and risk overview.</p>
+        </div>
+      </div>
+
+      <div class="dash-header__actions">
+        <!-- Switch to Admin Dashboard View -->
+        <div class="dash-mode-switch" role="tablist">
+          <a href="user-dashboard.html" class="dash-mode-btn active">User View</a>
+          <a href="admin-dashboard.html" class="dash-mode-btn">Admin View</a>
+        </div>
+
+        <div class="dash-user-profile">
+          <div class="dash-user-avatar" id="userAvatar">SJ</div>
+          <div class="dash-user-info">
+            <span id="userName">Sarah Jenkins</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dash-container">
+      
+      <!-- ═══════════════════════════════════════════
+           TAB 1: OVERVIEW (6 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content active" id="view-overview">
+        
+        <!-- SECTION 1: Top 4 KPI Count Up Metric Cards -->
+        <div class="dash-stats-grid" aria-label="Key Performance Metrics">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Total Protected Value</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="1420000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              <span>+14.8% vs previous term</span>
+            </div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Claim Payout Velocity</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-bolt"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span class="count-up" data-target="99.8" data-decimals="1">0</span><span>%</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-clock"></i>
+              <span>48hr direct settlement guarantee</span>
+            </div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">In-Force Policies</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-file-contract"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span class="count-up" data-target="18">0</span><span> policies</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-check"></i>
+              <span>100% compliant across 4 regions</span>
+            </div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Safety Audit Score</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-award"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span class="count-up" data-target="96" data-decimals="0">0</span><span> / 100</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              <span>Tier-1 safety premium discount</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- SECTION 2: Interactive Policy Trajectory Line Chart -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Policy Premium &amp; Cash Flow Outlay</h2>
+              <p class="dash-card-subtitle">Real-time outlay curve and safety credit amortization</p>
+            </div>
+            <div class="dash-filter-pills">
+              <button type="button" class="dash-filter-btn" data-period="1M">1M</button>
+              <button type="button" class="dash-filter-btn" data-period="6M">6M</button>
+              <button type="button" class="dash-filter-btn active" data-period="1Y">1Y</button>
+              <button type="button" class="dash-filter-btn" data-period="ALL">ALL</button>
+            </div>
+          </div>
+          <div class="dash-line-chart-wrap">
+            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="userChartGoldGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#F4D35E" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="#F4D35E" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+              <path class="chart-area-path" d="M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35 L 580 190 L 20 190 Z" fill="url(#userChartGoldGrad)"></path>
+              <path class="chart-line-path" d="M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35"></path>
+              <circle cx="20" cy="160" class="chart-data-point" />
+              <circle cx="150" cy="130" class="chart-data-point" />
+              <circle cx="270" cy="85" class="chart-data-point" />
+              <circle cx="390" cy="100" class="chart-data-point" />
+              <circle cx="510" cy="45" class="chart-data-point" />
+              <circle cx="580" cy="35" class="chart-data-point" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- SECTION 3: Coverage Distribution & Circular Progress Rings -->
+        <div class="dash-charts-grid">
+          <article class="dash-chart-card">
+            <div class="dash-card-head">
+              <div>
+                <h2 class="dash-card-title">Coverage Allocation by Policy Domain</h2>
+                <p class="dash-card-subtitle">Active distribution of your commercial asset portfolio</p>
+              </div>
+              <span class="dash-badge dash-badge--gold">100% In-Force</span>
+            </div>
+            <div class="dash-barchart-container">
+              <div class="dash-barchart-row">
+                <div class="dash-barchart-meta">
+                  <span class="dash-barchart-name"><i class="fa-solid fa-building-shield" style="color:var(--dash-gold);"></i> Commercial General Liability</span>
+                  <span class="dash-barchart-val">$2,000,000 (35%)</span>
+                </div>
+                <div class="dash-barchart-track">
+                  <div class="dash-barchart-fill" style="width: 70%;"></div>
+                </div>
+              </div>
+              <div class="dash-barchart-row">
+                <div class="dash-barchart-meta">
+                  <span class="dash-barchart-name"><i class="fa-solid fa-network-wired" style="color:#38BDF8;"></i> Cyber Defense &amp; Extortion</span>
+                  <span class="dash-barchart-val">$5,000,000 (45%)</span>
+                </div>
+                <div class="dash-barchart-track">
+                  <div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 90%;"></div>
+                </div>
+              </div>
+              <div class="dash-barchart-row">
+                <div class="dash-barchart-meta">
+                  <span class="dash-barchart-name"><i class="fa-solid fa-warehouse" style="color:#34D399;"></i> Commercial Property &amp; Interruption</span>
+                  <span class="dash-barchart-val">$3,500,000 (20%)</span>
+                </div>
+                <div class="dash-barchart-track">
+                  <div class="dash-barchart-fill dash-barchart-fill--emerald" style="width: 40%;"></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="dash-chart-card">
+            <div class="dash-card-head">
+              <div>
+                <h2 class="dash-card-title">Compliance &amp; Risk Health Gauge</h2>
+                <p class="dash-card-subtitle">Multi-point operational audit scores</p>
+              </div>
+            </div>
+            <div class="dash-rings-grid">
+              <div class="dash-ring-box">
+                <div class="dash-ring-svg-wrap">
+                  <svg viewBox="0 0 100 100" class="dash-ring-svg">
+                    <circle cx="50" cy="50" r="40" class="ring-bg" />
+                    <circle cx="50" cy="50" r="40" class="ring-fill ring-gold" style="stroke-dasharray: 251.2; stroke-dashoffset: 25.1;" />
+                  </svg>
+                  <span class="dash-ring-center">90%</span>
+                </div>
+                <span class="dash-ring-title">Facility Security</span>
+                <span class="dash-ring-desc">Hardened</span>
+              </div>
+              <div class="dash-ring-box">
+                <div class="dash-ring-svg-wrap">
+                  <svg viewBox="0 0 100 100" class="dash-ring-svg">
+                    <circle cx="50" cy="50" r="40" class="ring-bg" />
+                    <circle cx="50" cy="50" r="40" class="ring-fill ring-emerald" style="stroke-dasharray: 251.2; stroke-dashoffset: 12.5;" />
+                  </svg>
+                  <span class="dash-ring-center">95%</span>
+                </div>
+                <span class="dash-ring-title">Cyber Hygiene</span>
+                <span class="dash-ring-desc">SOC2 Certified</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- SECTION 4: Live Claims Pipeline & Resolution Stepper -->
+        <article class="dash-pipeline-card">
+          <div class="dash-card-head">
+            <div>
+              <strong style="font-size: 1.1rem; color:#FFFFFF;">Active Claim Pipeline #CLM-2026-081</strong>
+              <p class="dash-card-subtitle">Incident: Minor Water Ingress at Headquarters Facility • Filed Sep 02, 2026</p>
+            </div>
+            <span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Expedited Review</span>
+          </div>
+          <div class="dash-pipeline-steps">
+            <div class="dash-pipeline-step completed">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-check"></i></div>
+              <span class="dash-pipeline-label">FNOL Received</span>
+              <span class="dash-pipeline-time">Sep 02, 09:14 AM</span>
+            </div>
+            <div class="dash-pipeline-step completed">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-check"></i></div>
+              <span class="dash-pipeline-label">Damage Appraised</span>
+              <span class="dash-pipeline-time">Sep 03, 02:30 PM</span>
+            </div>
+            <div class="dash-pipeline-step current">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-spinner fa-spin"></i></div>
+              <span class="dash-pipeline-label">Adjuster Approval</span>
+              <span class="dash-pipeline-time">In Progress</span>
+            </div>
+            <div class="dash-pipeline-step">
+              <div class="dash-pipeline-dot">4</div>
+              <span class="dash-pipeline-label">ACH Payout</span>
+              <span class="dash-pipeline-time">Estimated Sep 09</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 5: Recent Policy Portfolio Table -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">In-Force Policy Portfolio</h2>
+              <p class="dash-card-subtitle">Direct underwritten policies managed by Stackly</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Verified &amp; Active</span>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Policy Name &amp; Code</th>
+                  <th>Coverage Limit</th>
+                  <th>Deductible</th>
+                  <th>Renewal Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Commercial General Liability</strong><br><small style="color:var(--dash-text-muted);">#POL-88219-GL</small></td>
+                  <td>$2,000,000</td>
+                  <td>$5,000</td>
+                  <td>Oct 15, 2026</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Enterprise Cyber Defense &amp; Extortion</strong><br><small style="color:var(--dash-text-muted);">#POL-94112-CY</small></td>
+                  <td>$5,000,000</td>
+                  <td>$10,000</td>
+                  <td>Nov 01, 2026</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Commercial Property &amp; Interruption</strong><br><small style="color:var(--dash-text-muted);">#POL-31049-CP</small></td>
+                  <td>$3,500,000</td>
+                  <td>$7,500</td>
+                  <td>Dec 22, 2026</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 6: Quick Action & Certificate of Insurance (COI) Hub -->
+        <div class="dash-grid-3">
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Instant COI Issuance</span>
+              <i class="fa-solid fa-file-pdf" style="color:var(--dash-gold);"></i>
+            </div>
+            <span class="dash-mini-card__val">One-Click</span>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Generate certified certificates for new commercial landlords or vendors.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto;" onclick="alert('Generating official Certificate of Insurance (COI) PDF...');">
+              <i class="fa-solid fa-download"></i> Generate COI PDF
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">File Incident Report</span>
+              <i class="fa-solid fa-triangle-exclamation" style="color:#EF4444;"></i>
+            </div>
+            <span class="dash-mini-card__val">Direct FNOL</span>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Direct submission to our underwriting desk without broker paperwork.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:#EF4444; color:#fff;" onclick="alert('Opening First Notice of Loss (FNOL) incident intake form...');">
+              <i class="fa-solid fa-plus"></i> Submit Notice
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Underwriter Support Desk</span>
+              <i class="fa-solid fa-headset" style="color:#34D399;"></i>
+            </div>
+            <span class="dash-mini-card__val">24/7 Dedicated</span>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Speak directly with your assigned senior commercial risk underwriter.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:var(--dash-surface);" onclick="alert('Connecting to Senior Commercial Underwriter: desk@stacklyinsurance.com | +1 (800) 555-0199');">
+              <i class="fa-solid fa-phone"></i> Contact Underwriter
+            </button>
+          </article>
+        </div>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 2: ACTIVE POLICIES (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-policies">
+        
+        <!-- SECTION 1: Policy Portfolio Summary Metrics -->
+        <div class="dash-stats-grid">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Total In-Force Limit</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-vault"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="10500000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-shield-check"></i> 100% primary liability backing</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Active Endorsements</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-stamp"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="12">0</span><span> riders</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-check"></i> Blanketed additional insured included</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Avg. Claim Deductible</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+            </div>
+            <div class="dash-stat-value"><span>$</span><span class="count-up" data-target="7500" data-format="currency">0</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-arrow-trend-down"></i> -25% due to zero-loss credit</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Days to Earliest Renewal</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="37">0</span><span> days</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-clock"></i> Auto-bind renewal guaranteed</div>
+          </article>
+        </div>
+
+        <!-- SECTION 2: In-Depth Policy Cards Grid -->
+        <div class="dash-section-divider">
+          <div>
+            <h3><i class="fa-solid fa-folder-open" style="color:var(--dash-gold);"></i> Commercial Policy Schedule</h3>
+            <p>Comprehensive terms, deductibles, limits, and downloadable policy documents</p>
+          </div>
+        </div>
+
+        <div class="dash-policies-grid">
+          <!-- Policy 1 -->
+          <article class="dash-policy-card">
+            <div>
+              <div class="dash-policy-card__top">
+                <div class="dash-policy-card__icon"><i class="fa-solid fa-building-shield"></i></div>
+                <span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span>
+              </div>
+              <h3 class="dash-policy-card__name">Commercial General Liability</h3>
+              <span class="dash-policy-card__id">#POL-88219-GL</span>
+              <div class="dash-policy-card__stats">
+                <div class="dash-policy-stat-row"><span>Coverage Limit</span><span>$2,000,000</span></div>
+                <div class="dash-policy-stat-row"><span>Deductible</span><span>$5,000</span></div>
+                <div class="dash-policy-stat-row"><span>Renewal Date</span><span style="color:var(--dash-gold);">Oct 15, 2026</span></div>
+              </div>
+            </div>
+            <div class="dash-policy-card__actions">
+              <button type="button" class="dash-policy-btn" onclick="alert('Viewing Schedule for #POL-88219-GL');"><i class="fa-solid fa-eye"></i> View</button>
+              <button type="button" class="dash-policy-btn" onclick="alert('Generated COI for Commercial General Liability');"><i class="fa-solid fa-download"></i> COI</button>
+            </div>
+          </article>
+
+          <!-- Policy 2 -->
+          <article class="dash-policy-card">
+            <div>
+              <div class="dash-policy-card__top">
+                <div class="dash-policy-card__icon" style="background:rgba(56,189,248,0.1); color:var(--dash-blue);"><i class="fa-solid fa-network-wired"></i></div>
+                <span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span>
+              </div>
+              <h3 class="dash-policy-card__name">Cyber Defense &amp; Extortion</h3>
+              <span class="dash-policy-card__id">#POL-94112-CY</span>
+              <div class="dash-policy-card__stats">
+                <div class="dash-policy-stat-row"><span>Coverage Limit</span><span>$5,000,000</span></div>
+                <div class="dash-policy-stat-row"><span>Deductible</span><span>$10,000</span></div>
+                <div class="dash-policy-stat-row"><span>Renewal Date</span><span style="color:var(--dash-gold);">Nov 01, 2026</span></div>
+              </div>
+            </div>
+            <div class="dash-policy-card__actions">
+              <button type="button" class="dash-policy-btn" onclick="alert('Viewing Schedule for #POL-94112-CY');"><i class="fa-solid fa-eye"></i> View</button>
+              <button type="button" class="dash-policy-btn" onclick="alert('Generated COI for Cyber Defense');"><i class="fa-solid fa-download"></i> COI</button>
+            </div>
+          </article>
+
+          <!-- Policy 3 -->
+          <article class="dash-policy-card">
+            <div>
+              <div class="dash-policy-card__top">
+                <div class="dash-policy-card__icon" style="background:rgba(16,185,129,0.1); color:var(--dash-emerald);"><i class="fa-solid fa-warehouse"></i></div>
+                <span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span>
+              </div>
+              <h3 class="dash-policy-card__name">Commercial Property</h3>
+              <span class="dash-policy-card__id">#POL-31049-CP</span>
+              <div class="dash-policy-card__stats">
+                <div class="dash-policy-stat-row"><span>Coverage Limit</span><span>$3,500,000</span></div>
+                <div class="dash-policy-stat-row"><span>Deductible</span><span>$7,500</span></div>
+                <div class="dash-policy-stat-row"><span>Renewal Date</span><span style="color:var(--dash-gold);">Dec 22, 2026</span></div>
+              </div>
+            </div>
+            <div class="dash-policy-card__actions">
+              <button type="button" class="dash-policy-btn" onclick="alert('Viewing Schedule for #POL-31049-CP');"><i class="fa-solid fa-eye"></i> View</button>
+              <button type="button" class="dash-policy-btn" onclick="alert('Generated COI for Commercial Property');"><i class="fa-solid fa-download"></i> COI</button>
+            </div>
+          </article>
+        </div>
+
+        <!-- SECTION 3: Coverage vs. Risk Exposure Bar Graph -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Coverage Limits vs. Maximum Modeled Exposure</h2>
+              <p class="dash-card-subtitle">Actuarial stress-testing against 1-in-100 year loss events</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Adequately Covered</span>
+          </div>
+          <div class="dash-barchart-container">
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Third-Party Bodily Injury &amp; Property Damage</span>
+                <span class="dash-barchart-val">Limit: $2.0M | Modeled Loss: $650k (Safe)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--emerald" style="width: 32%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Ransomware Extortion &amp; Business Interruption</span>
+                <span class="dash-barchart-val">Limit: $5.0M | Modeled Loss: $1.8M (Safe)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 36%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Catastrophic Water &amp; Structural Damage</span>
+                <span class="dash-barchart-val">Limit: $3.5M | Modeled Loss: $1.2M (Safe)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--purple" style="width: 34%;"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 4: Endorsements & Custom Riders Ledger -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Active Policy Endorsements &amp; Riders</h2>
+              <p class="dash-card-subtitle">Custom extensions and blanket waiver declarations</p>
+            </div>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Endorsement Code</th>
+                  <th>Endorsement Type</th>
+                  <th>Associated Policy</th>
+                  <th>Effective Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#END-BLANKET-AI</strong></td>
+                  <td>Blanket Additional Insured (Landlords &amp; Clients)</td>
+                  <td>#POL-88219-GL</td>
+                  <td>Jan 01, 2026</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> In-Force</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#END-SUBRO-WAIVER</strong></td>
+                  <td>Waiver of Transfer of Rights of Recovery (Subrogation)</td>
+                  <td>#POL-88219-GL</td>
+                  <td>Jan 01, 2026</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> In-Force</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#END-CYBER-EXT</strong></td>
+                  <td>Social Engineering &amp; Invoice Manipulation Extension</td>
+                  <td>#POL-94112-CY</td>
+                  <td>Mar 15, 2026</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> In-Force</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 5: Policy Renewal & Audit Calendar -->
+        <div class="dash-grid-2">
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Annual Policy Review &amp; Payroll Audit</span>
+              <span class="dash-badge dash-badge--gold">Upcoming</span>
+            </div>
+            <p style="font-size:0.9rem; color:#fff; font-weight:600; margin-top:0.5rem;">Audit Scheduled for September 28, 2026</p>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Submit updated payroll and contractor 1099 declarations online in 3 minutes.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto;" onclick="alert('Opening online payroll & contractor audit portal...');">
+              <i class="fa-solid fa-file-invoice"></i> Launch Audit Assistant
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Automated Renewal Guarantee</span>
+              <span class="dash-badge dash-badge--emerald">Protected</span>
+            </div>
+            <p style="font-size:0.9rem; color:#fff; font-weight:600; margin-top:0.5rem;">Zero-Lapse Rate Lock Protocol Active</p>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Your premium rate is protected against market volatility with our continuous binding pledge.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:var(--dash-surface);" onclick="alert('Continuous Binding Certificate Active for Sarah Jenkins account.');">
+              <i class="fa-solid fa-lock"></i> View Rate Protection
+            </button>
+          </article>
+        </div>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 3: CLAIMS CENTER (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-claims">
+        
+        <!-- SECTION 1: Claims Velocity & Performance Metrics -->
+        <div class="dash-stats-grid">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Avg. Resolution Speed</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-stopwatch"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="2.4" data-decimals="1">0</span><span> days</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-bolt"></i> 8x faster than traditional brokers</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Total Claims Recovered</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            </div>
+            <div class="dash-stat-value"><span>$</span><span class="count-up" data-target="184500" data-format="currency">0</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-check-double"></i> 100% full recovery settlement</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Open Incidents</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-folder-open"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="1">0</span><span> active</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-spinner fa-spin"></i> Direct payout pending</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Satisfaction Rating</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-star"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="4.9" data-decimals="1">0</span><span> / 5.0</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-award"></i> Dedicated senior adjuster rating</div>
+          </article>
+        </div>
+
+        <!-- SECTION 2: Active Claim Investigation Stepper -->
+        <article class="dash-pipeline-card">
+          <div class="dash-card-head">
+            <div>
+              <strong style="font-size: 1.15rem; color:#FFFFFF;">Investigation Tracker: #CLM-2026-081</strong>
+              <p class="dash-card-subtitle">Building Damage: HVAC Water Drainage Incident • Assigned Adjuster: Mark Sterling</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Connecting to Adjuster Mark Sterling via Secure Messenger...');">
+              <i class="fa-solid fa-comment-dots"></i> Message Adjuster
+            </button>
+          </div>
+          <div class="dash-pipeline-steps">
+            <div class="dash-pipeline-step completed">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-check"></i></div>
+              <span class="dash-pipeline-label">FNOL Lodged</span>
+              <span class="dash-pipeline-time">Sep 02, 09:14 AM</span>
+            </div>
+            <div class="dash-pipeline-step completed">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-check"></i></div>
+              <span class="dash-pipeline-label">Evidence Uploaded</span>
+              <span class="dash-pipeline-time">Sep 02, 11:30 AM</span>
+            </div>
+            <div class="dash-pipeline-step completed">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-check"></i></div>
+              <span class="dash-pipeline-label">Loss Assessed</span>
+              <span class="dash-pipeline-time">Sep 03, 04:00 PM</span>
+            </div>
+            <div class="dash-pipeline-step current">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-money-bill-transfer fa-spin"></i></div>
+              <span class="dash-pipeline-label">ACH Settlement</span>
+              <span class="dash-pipeline-time">In Clearance ($18,500)</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 3: Comprehensive Claims History Data Table -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Claims History &amp; Settlements</h2>
+              <p class="dash-card-subtitle">All historical and active commercial casualty records</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Exporting Claims History CSV...');">
+              <i class="fa-solid fa-file-csv"></i> Export CSV
+            </button>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Claim ID</th>
+                  <th>Incident Type</th>
+                  <th>Policy Applied</th>
+                  <th>Claim Amount</th>
+                  <th>Payout Disbursed</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#CLM-2026-081</strong></td>
+                  <td>Facility Water Ingress</td>
+                  <td>#POL-31049-CP</td>
+                  <td>$18,500</td>
+                  <td>$18,500 (ACH Pending)</td>
+                  <td><span class="dash-status-pill pending"><i class="fa-solid fa-spinner fa-spin"></i> Settling</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#CLM-2025-042</strong></td>
+                  <td>Client Slips &amp; Falls Incident</td>
+                  <td>#POL-88219-GL</td>
+                  <td>$42,000</td>
+                  <td>$42,000 (Settled)</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Closed</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#CLM-2024-118</strong></td>
+                  <td>Phishing Fraud Data Breach Defense</td>
+                  <td>#POL-94112-CY</td>
+                  <td>$124,000</td>
+                  <td>$124,000 (Settled)</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Closed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 4: Historical Claims Payouts by Loss Category Bar Graph -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Historical Claims Payout by Loss Category</h2>
+              <p class="dash-card-subtitle">Cumulative indemnity recovered through Stackly direct underwriting</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">Total: $184.5k</span>
+          </div>
+          <div class="dash-barchart-container">
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name"><i class="fa-solid fa-shield-virus" style="color:#38BDF8;"></i> Cyber Security &amp; Forensic Defense</span>
+                <span class="dash-barchart-val">$124,000 (67%)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 67%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name"><i class="fa-solid fa-user-injured" style="color:var(--dash-gold);"></i> Commercial General Liability</span>
+                <span class="dash-barchart-val">$42,000 (23%)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill" style="width: 23%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name"><i class="fa-solid fa-water" style="color:#34D399;"></i> Commercial Property &amp; Water Damage</span>
+                <span class="dash-barchart-val">$18,500 (10%)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--emerald" style="width: 10%;"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 5: Emergency Adjuster Dispatch & 24/7 Hotline -->
+        <div class="dash-grid-2">
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">24/7 First Notice of Loss Hotline</span>
+              <span class="dash-badge dash-badge--red">Emergency</span>
+            </div>
+            <p style="font-size:1.1rem; color:#fff; font-weight:800; margin-top:0.5rem;">+1 (800) 844-STACKLY</p>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Direct toll-free hotline to dispatch emergency forensic engineers and structural remediation crews.</p>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Dedicated Claims Adjuster</span>
+              <span class="dash-badge dash-badge--emerald">Assigned</span>
+            </div>
+            <p style="font-size:1rem; color:#fff; font-weight:700; margin-top:0.5rem;">Mark Sterling, Senior Loss Counsel</p>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Direct line: ext. 4082 • Email: m.sterling@stacklyinsurance.com</p>
+          </article>
+        </div>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 4: RISK ANALYTICS (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-analytics">
+        
+        <!-- SECTION 1: Real-Time Enterprise Risk Scorecard -->
+        <div class="dash-stats-grid">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Overall Risk Rating</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-gauge-high"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="96">0</span><span> / 100</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-shield"></i> Top 2% in Logistics Industry</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Cyber Threat Index</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-shield-virus"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="98">0</span><span>%</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-lock"></i> Zero CVE vulnerabilities detected</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Workplace Safety Score</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-hard-hat"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="94">0</span><span> / 100</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-check"></i> 720 consecutive safe work days</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Discount Earned</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-tags"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="22">0</span><span>%</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-arrow-down"></i> Annual savings of $8,400</div>
+          </article>
+        </div>
+
+        <!-- SECTION 2: 12-Month Incident Frequency Line Graph -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">12-Month Incident Frequency &amp; Risk Curve</h2>
+              <p class="dash-card-subtitle">Downward trending risk exposure due to implemented security safeguards</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">-64% Incident Reduction</span>
+          </div>
+          <div class="dash-line-chart-wrap">
+            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="riskBlueGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.4" />
+                  <stop offset="100%" stop-color="#38BDF8" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+              <path class="chart-area-path" d="M 20 50 Q 120 70 200 90 T 360 120 T 480 150 L 580 165 L 580 190 L 20 190 Z" fill="url(#riskBlueGrad)"></path>
+              <path class="chart-line-path" d="M 20 50 Q 120 70 200 90 T 360 120 T 480 150 L 580 165" stroke="#38BDF8"></path>
+              <circle cx="20" cy="50" class="chart-data-point" fill="#38BDF8" />
+              <circle cx="200" cy="90" class="chart-data-point" fill="#38BDF8" />
+              <circle cx="360" cy="120" class="chart-data-point" fill="#38BDF8" />
+              <circle cx="480" cy="150" class="chart-data-point" fill="#38BDF8" />
+              <circle cx="580" cy="165" class="chart-data-point" fill="#38BDF8" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- SECTION 3: Industry Benchmark Comparison Bar Chart -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Industry Peer Loss Ratio Benchmark</h2>
+              <p class="dash-card-subtitle">Stackly Policyholder vs Commercial Sector Average</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">Superior Performance</span>
+          </div>
+          <div class="dash-barchart-container">
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Your Company Claim Ratio (Last 3 Years)</span>
+                <span class="dash-barchart-val" style="color:#34D399;">12.4% (Ultra-Low)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--emerald" style="width: 15%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Logistics Industry Average Loss Ratio</span>
+                <span class="dash-barchart-val" style="color:#F87171;">58.2% (Benchmark)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--red" style="width: 58%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Commercial General Liability Peer Group</span>
+                <span class="dash-barchart-val" style="color:var(--dash-gold);">44.8% (Benchmark)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill" style="width: 45%;"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 4: Multi-Domain Vulnerability Matrix -->
+        <div class="dash-section-divider">
+          <div>
+            <h3><i class="fa-solid fa-shield-halved" style="color:#38BDF8;"></i> Security &amp; Risk Domain Audits</h3>
+            <p>Automated verification against underwriter standard ISO 27001 &amp; OSHA criteria</p>
+          </div>
+        </div>
+
+        <div class="dash-matrix-grid">
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Physical Facility Fire &amp; Sprinkler Sensor Grid</h4>
+              <p>Automated telemetry connected to local municipal response</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Passed 100%</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Commercial Fleet Telematics &amp; Driver Safety</h4>
+              <p>Real-time speed and maintenance logs verified monthly</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Passed 98%</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Cloud Infrastructure MFA &amp; Immutable Backups</h4>
+              <p>Automated daily offsite encryption check verified</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Passed 100%</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Contractor 1099 Certificate of Insurance Compliance</h4>
+              <p>Automated verification before contractor entry</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">Passed 92%</span>
+          </div>
+        </div>
+
+        <!-- SECTION 5: Underwriter Risk Mitigation Recommendations -->
+        <article class="dash-table-card" style="margin-top:1.5rem;">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Actionable Underwriter Recommendations</h2>
+              <p class="dash-card-subtitle">Complete these actions to unlock additional 5% premium discount</p>
+            </div>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Recommendation</th>
+                  <th>Domain</th>
+                  <th>Estimated Discount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Deploy Water Leak Sensors in Server Rooms</strong></td>
+                  <td>Property Loss Control</td>
+                  <td><span style="color:#34D399; font-weight:700;">-$1,200 / yr</span></td>
+                  <td><button type="button" class="dash-policy-btn" onclick="alert('Ordering subsidized Stackly IoT Water Sensors...');">Order IoT Kit</button></td>
+                </tr>
+                <tr>
+                  <td><strong>Conduct Annual Phishing Simulation for Staff</strong></td>
+                  <td>Cyber Defense</td>
+                  <td><span style="color:#34D399; font-weight:700;">-$2,400 / yr</span></td>
+                  <td><button type="button" class="dash-policy-btn" onclick="alert('Launching automated phishing drill module...');">Launch Drill</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 5: BILLING & PREMIUM (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-billing">
+        
+        <!-- SECTION 1: Premium & Autopay Summary Metrics -->
+        <div class="dash-billing-banner">
+          <div class="dash-billing-left">
+            <span class="dash-stat-label">Next Scheduled Autopay</span>
+            <div class="dash-stat-value" style="font-size: 2.2rem; color: var(--dash-gold); margin: 0.25rem 0;">
+              $4,850.00
+            </div>
+            <p style="color: var(--dash-text-muted); font-size: 0.85rem;">
+              Due on <strong>November 01, 2026</strong> • Linked to Corporate ACH (•••• 8912)
+            </p>
+          </div>
+          <button type="button" class="dash-action-btn" onclick="alert('Processing early payment of $4,850.00 via Corporate ACH (•••• 8912)...');">
+            <i class="fa-solid fa-credit-card"></i>
+            <span>Pay Premium Early</span>
+          </button>
+        </div>
+
+        <!-- SECTION 2: 12-Month Premium Outflow Line Graph -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">12-Month Premium Outlay Trajectory</h2>
+              <p class="dash-card-subtitle">Stable monthly amortization with zero broker commissions</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">Fixed Rate Protected</span>
+          </div>
+          <div class="dash-line-chart-wrap">
+            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+              <path class="chart-line-path" d="M 20 100 L 120 100 L 220 100 L 320 100 L 420 100 L 580 100" stroke="#F4D35E" stroke-dasharray="5,5"></path>
+              <circle cx="20" cy="100" class="chart-data-point" />
+              <circle cx="120" cy="100" class="chart-data-point" />
+              <circle cx="220" cy="100" class="chart-data-point" />
+              <circle cx="320" cy="100" class="chart-data-point" />
+              <circle cx="420" cy="100" class="chart-data-point" />
+              <circle cx="580" cy="100" class="chart-data-point" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- SECTION 3: Invoices & Receipts Table -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Recent Invoices &amp; Receipts</h2>
+              <p class="dash-card-subtitle">Download official tax invoices and payment vouchers</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Downloading Annual Tax Ledger ZIP...');">
+              <i class="fa-solid fa-file-zipper"></i> Download Annual Tax ZIP
+            </button>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Billing Period</th>
+                  <th>Amount</th>
+                  <th>Payment Method</th>
+                  <th>Receipt PDF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#INV-2026-10</strong></td>
+                  <td>Oct 01 - Oct 31, 2026</td>
+                  <td>$4,850.00</td>
+                  <td>Corporate ACH (•••• 8912)</td>
+                  <td><button type="button" class="dash-policy-btn" onclick="alert('Downloading PDF Receipt for #INV-2026-10');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
+                </tr>
+                <tr>
+                  <td><strong>#INV-2026-09</strong></td>
+                  <td>Sep 01 - Sep 30, 2026</td>
+                  <td>$4,850.00</td>
+                  <td>Corporate ACH (•••• 8912)</td>
+                  <td><button type="button" class="dash-policy-btn" onclick="alert('Downloading PDF Receipt for #INV-2026-09');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
+                </tr>
+                <tr>
+                  <td><strong>#INV-2026-08</strong></td>
+                  <td>Aug 01 - Aug 31, 2026</td>
+                  <td>$4,850.00</td>
+                  <td>Corporate ACH (•••• 8912)</td>
+                  <td><button type="button" class="dash-policy-btn" onclick="alert('Downloading PDF Receipt for #INV-2026-08');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 4: Payment Methods & Linked Accounts -->
+        <div class="dash-grid-2">
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Primary Payment Method</span>
+              <span class="dash-badge dash-badge--emerald">Verified</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; margin:0.75rem 0;">
+              <i class="fa-solid fa-building-columns" style="font-size:1.8rem; color:var(--dash-gold);"></i>
+              <div>
+                <strong style="display:block; color:#fff;">JPMorgan Chase Corporate Treasury</strong>
+                <span style="font-size:0.8rem; color:var(--dash-text-muted);">ACH Direct Debit • Account Ending •••• 8912</span>
+              </div>
+            </div>
+            <button type="button" class="dash-action-btn" style="margin-top:auto;" onclick="alert('Opening secure payment account update modal...');">
+              <i class="fa-solid fa-pen-to-square"></i> Update ACH Account
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Backup Payment Card</span>
+              <span class="dash-badge dash-badge--blue">Secondary</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; margin:0.75rem 0;">
+              <i class="fa-brands fa-cc-visa" style="font-size:1.8rem; color:#38BDF8;"></i>
+              <div>
+                <strong style="display:block; color:#fff;">Corporate Visa Infinite Commercial</strong>
+                <span style="font-size:0.8rem; color:var(--dash-text-muted);">Card Ending •••• 4022 • Exp 09/29</span>
+              </div>
+            </div>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:var(--dash-surface);" onclick="alert('Managing backup corporate cards...');">
+              <i class="fa-solid fa-credit-card"></i> Manage Card
+            </button>
+          </article>
+        </div>
+
+        <!-- SECTION 5: Premium Tax Deductibility Breakdown -->
+        <article class="dash-chart-card" style="margin-top:1.5rem;">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Tax Deductibility &amp; Schedule C Breakdown</h2>
+              <p class="dash-card-subtitle">100% ordinary and necessary business expense classification</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">100% Tax Deductible</span>
+          </div>
+          <div class="dash-barchart-container">
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">General Liability &amp; Casualty Deduction</span>
+                <span class="dash-barchart-val">$24,000 / yr</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill" style="width: 50%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Cyber Extortion &amp; Technical Risk Defense</span>
+                <span class="dash-barchart-val">$18,200 / yr</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 38%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Property &amp; Physical Asset Protection</span>
+                <span class="dash-barchart-val">$16,000 / yr</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--emerald" style="width: 32%;"></div></div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 6: SETTINGS (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-settings">
+        
+        <!-- SECTION 1: Company Profile & Registered Entities -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Commercial Entity &amp; Policyholder Profile</h2>
+              <p class="dash-card-subtitle">Primary named insured declarations on policy schedules</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Company profile changes saved.');">
+              <i class="fa-solid fa-floppy-disk"></i> Save Profile
+            </button>
+          </div>
+          <div class="dash-settings-grid">
+            <div class="dash-form-group">
+              <label class="dash-form-label">Legal Business Entity Name</label>
+              <input type="text" class="dash-form-input" value="Apex Global Logistics Corporation" />
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label">Federal Employer ID (EIN)</label>
+              <input type="text" class="dash-form-input" value="XX-XXX8912" disabled />
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label">Headquarters Physical Address</label>
+              <input type="text" class="dash-form-input" value="100 Commercial Plaza, Suite 400, Chicago, IL 60601" />
+            </div>
+            <div class="dash-form-group">
+              <label class="dash-form-label">Primary Risk Officer Email</label>
+              <input type="email" class="dash-form-input" value="s.jenkins@apexlogistics.com" />
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 2: Multi-Factor Security & Session Manager -->
+        <div class="dash-grid-2">
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Multi-Factor Authentication (MFA)</span>
+              <span class="dash-badge dash-badge--emerald">Enforced</span>
+            </div>
+            <p style="font-size:0.85rem; color:#fff; font-weight:600; margin-top:0.4rem;">FIDO2 WebAuthn &amp; Hardware Key Active</p>
+            <p style="font-size:0.78rem; color:var(--dash-text-muted);">Protects your commercial policy schedules and banking direct debit authorizations.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto;" onclick="alert('MFA Configuration Verified.');">
+              <i class="fa-solid fa-key"></i> Configure Keys
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Active Sign-In Sessions</span>
+              <span class="dash-badge dash-badge--blue">Current Device</span>
+            </div>
+            <p style="font-size:0.85rem; color:#fff; font-weight:600; margin-top:0.4rem;">Chrome on Windows 11 • IP: 198.51.100.42</p>
+            <p style="font-size:0.78rem; color:var(--dash-text-muted);">Last active 2 minutes ago in Chicago, IL (TLS 1.3 Encrypted).</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:rgba(239,68,68,0.1); color:#EF4444;" onclick="alert('Terminated all other active browser sessions.');">
+              <i class="fa-solid fa-right-from-bracket"></i> Revoke Other Sessions
+            </button>
+          </article>
+        </div>
+
+        <!-- SECTION 3: Notification & Alert Dispatch Preferences -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Real-Time Notification Dispatch Settings</h2>
+              <p class="dash-card-subtitle">Select channels for claims updates, renewal alerts, and policy changes</p>
+            </div>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Notification Event</th>
+                  <th>Email Alert</th>
+                  <th>SMS Mobile Alert</th>
+                  <th>Webhook Notification</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Claim Status Change &amp; Payout Release</strong></td>
+                  <td><input type="checkbox" checked /> Enabled</td>
+                  <td><input type="checkbox" checked /> Enabled</td>
+                  <td><input type="checkbox" checked /> Enabled</td>
+                </tr>
+                <tr>
+                  <td><strong>Policy Renewal &amp; Rate Guarantee Notice (30 Days)</strong></td>
+                  <td><input type="checkbox" checked /> Enabled</td>
+                  <td><input type="checkbox" /> Disabled</td>
+                  <td><input type="checkbox" checked /> Enabled</td>
+                </tr>
+                <tr>
+                  <td><strong>Monthly Autopay Receipt &amp; Tax Deduction Voucher</strong></td>
+                  <td><input type="checkbox" checked /> Enabled</td>
+                  <td><input type="checkbox" /> Disabled</td>
+                  <td><input type="checkbox" /> Disabled</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 4: Authorized Signers & Member Access -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Authorized Account Officers &amp; Team Members</h2>
+              <p class="dash-card-subtitle">Colleagues with permission to request endorsements or view COIs</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Opening Invite Team Member dialog...');">
+              <i class="fa-solid fa-user-plus"></i> Invite Team Member
+            </button>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Member Name</th>
+                  <th>Corporate Role</th>
+                  <th>Permission Level</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Sarah Jenkins</strong><br><small>s.jenkins@apexlogistics.com</small></td>
+                  <td>Chief Risk Officer</td>
+                  <td><span class="dash-badge dash-badge--gold">Primary Signer</span></td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>David Vance</strong><br><small>d.vance@apexlogistics.com</small></td>
+                  <td>General Counsel</td>
+                  <td><span class="dash-badge dash-badge--blue">Claims &amp; Legal</span></td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Elena Rostova</strong><br><small>e.rostova@apexlogistics.com</small></td>
+                  <td>Controller &amp; Treasury</td>
+                  <td><span class="dash-badge dash-badge--emerald">Billing Only</span></td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 5: Audit Log & Account Data Archive Export -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Security Audit Log &amp; Account Compliance Export</h2>
+              <p class="dash-card-subtitle">Immutable chronological log of all policy modifications and downloads</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Exporting Complete Compliance Audit Log ZIP...');">
+              <i class="fa-solid fa-download"></i> Export Audit Archive
+            </button>
+          </div>
+          <div class="dash-matrix-grid">
+            <div class="dash-matrix-card">
+              <div class="dash-matrix-info">
+                <h4>COI Generated: #POL-88219-GL for Prologis Logistics Park</h4>
+                <p>Requested by Sarah Jenkins • Sep 04, 2026, 14:22 UTC</p>
+              </div>
+              <span class="dash-badge dash-badge--emerald">Logged</span>
+            </div>
+            <div class="dash-matrix-card">
+              <div class="dash-matrix-info">
+                <h4>ACH Autopay Cleared: $4,850.00 for Invoice #INV-2026-09</h4>
+                <p>Automated clearing via JPMorgan Chase • Sep 01, 2026, 08:00 UTC</p>
+              </div>
+              <span class="dash-badge dash-badge--emerald">Logged</span>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Interactive Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Dynamic User Name & Query String Processing
+      const urlParams = new URLSearchParams(window.location.search);
+      let user = urlParams.get('user') || '';
+      if (!user) {
+        try { user = localStorage.getItem('stackly_user_name') || ''; } catch (e) {}
+      }
+      if (!user) user = 'Sarah Jenkins';
+
+      const initials = user.split(' ').map(w => w[0]).join('').toUpperCase().substring(0, 2) || 'SJ';
+
+      const welcomeHeading = document.getElementById('dashWelcomeHeading');
+      const userNameEl = document.getElementById('userName');
+      const sidebarNameEl = document.getElementById('sidebarUserName');
+      const userAvatarEl = document.getElementById('userAvatar');
+      const sidebarAvatarEl = document.getElementById('sidebarUserAvatar');
+
+      if (welcomeHeading) welcomeHeading.textContent = `Welcome back, ${user}`;
+      if (userNameEl) userNameEl.textContent = user;
+      if (sidebarNameEl) sidebarNameEl.textContent = user;
+      if (userAvatarEl) userAvatarEl.textContent = initials;
+      if (sidebarAvatarEl) sidebarAvatarEl.textContent = initials;
+
+      // 2. Tab Switching Engine
+      const navItems = document.querySelectorAll('.dash-sidebar__nav .dash-nav-item');
+      const viewSections = document.querySelectorAll('.dash-view-content');
+
+      function switchTab(targetId) {
+        const cleanId = targetId.replace('#', '');
+        navItems.forEach(item => {
+          const tab = item.getAttribute('data-tab');
+          if (tab === cleanId) item.classList.add('active');
+          else item.classList.remove('active');
+        });
+
+        viewSections.forEach(section => {
+          if (section.id === `view-${cleanId}`) {
+            section.classList.add('active');
+            triggerCountUps(section);
+          } else {
+            section.classList.remove('active');
+          }
+        });
+      }
+
+      navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const tab = item.getAttribute('data-tab');
+          switchTab(tab);
+          // Close mobile sidebar if open
+          const sidebar = document.getElementById('dashSidebar');
+          const overlay = document.getElementById('dashSidebarOverlay');
+          if (sidebar) sidebar.classList.remove('open');
+          if (overlay) overlay.classList.remove('active');
+        });
+      });
+
+      // 3. Count Up Animation Engine
+      function triggerCountUps(container = document) {
+        const counters = container.querySelectorAll('.count-up');
+        counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-target') || 0);
+          const decimals = parseInt(counter.getAttribute('data-decimals') || 0, 10);
+          const format = counter.getAttribute('data-format');
+          const duration = 1200;
+          const startTime = performance.now();
+
+          function updateCount(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentVal = target * easeOut;
+
+            if (format === 'currency') {
+              counter.textContent = Math.floor(currentVal).toLocaleString();
+            } else if (decimals > 0) {
+              counter.textContent = currentVal.toFixed(decimals);
+            } else {
+              counter.textContent = Math.floor(currentVal);
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCount);
+            } else {
+              if (format === 'currency') {
+                counter.textContent = target.toLocaleString();
+              } else if (decimals > 0) {
+                counter.textContent = target.toFixed(decimals);
+              } else {
+                counter.textContent = target;
+              }
+            }
+          }
+          requestAnimationFrame(updateCount);
+        });
+      }
+
+      // Initial Count Up trigger
+      triggerCountUps();
+
+      // 4. Mobile Sidebar Drawer Logic
+      const toggleBtn = document.getElementById('dashSidebarToggle');
+      const closeBtn = document.getElementById('dashSidebarClose');
+      const sidebar = document.getElementById('dashSidebar');
+      const overlay = document.getElementById('dashSidebarOverlay');
+
+      if (toggleBtn && sidebar && overlay) {
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.add('open');
+          overlay.classList.add('active');
+        });
+      }
+
+      if (closeBtn && sidebar && overlay) {
+        closeBtn.addEventListener('click', () => {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('active');
+        });
+      }
+
+      if (overlay && sidebar) {
+        overlay.addEventListener('click', () => {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('active');
+        });
+      }
+
+      // 5. Line Chart Period Filter Buttons
+      const filterBtns = document.querySelectorAll('.dash-filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

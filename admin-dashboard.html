@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Stackly Commercial Underwriting &amp; Executive Portal</title>
+  <meta name="description" content="Stackly Executive & Underwriting Administration Portal. Global Book of Business KPI tracking, Actuarial Risk Models, High-Loss Claims Stewardship, Reinsurance Treaties, and Broker Commissions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="dash-body">
+
+  <!-- Sidebar Backdrop Overlay -->
+  <div class="dash-sidebar-overlay" id="dashSidebarOverlay" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       ADMIN SIDEBAR NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <aside class="dash-sidebar" id="dashSidebar" style="border-right: 1px solid rgba(244, 211, 94, 0.2);">
+    <div class="dash-sidebar__brand">
+      <a href="index.html" aria-label="Stackly Home">
+        <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="dash-sidebar__logo" />
+      </a>
+      <button class="dash-sidebar-close" id="dashSidebarClose" aria-label="Close sidebar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Admin Supervisor Profile Card -->
+    <div class="dash-sidebar__user-card" id="sidebarUserCard" style="background: rgba(244, 211, 94, 0.06); border-color: rgba(244, 211, 94, 0.3);">
+      <div class="dash-user-avatar" id="sidebarUserAvatar" style="background: var(--dash-gold); color: #000;">AS</div>
+      <div class="dash-sidebar__user-details">
+        <strong id="sidebarUserName" style="color: var(--dash-gold);">Admin Supervisor</strong>
+        <span id="sidebarUserRoleText">Managing Risk Underwriter</span>
+      </div>
+    </div>
+
+    <!-- 6 Executive Admin Tabs -->
+    <nav class="dash-sidebar__nav" id="sidebarNav">
+      <a href="#overview" class="dash-nav-item active" data-tab="overview">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Executive Overview</span>
+      </a>
+      <a href="#underwriting" class="dash-nav-item" data-tab="underwriting">
+        <i class="fa-solid fa-book-bookmark"></i>
+        <span>Underwriting &amp; Book</span>
+      </a>
+      <a href="#claims-stewardship" class="dash-nav-item" data-tab="claims-stewardship">
+        <i class="fa-solid fa-shield-halved"></i>
+        <span>Claims &amp; Reserves</span>
+      </a>
+      <a href="#actuarial" class="dash-nav-item" data-tab="actuarial">
+        <i class="fa-solid fa-brain"></i>
+        <span>Actuarial &amp; Risk Eng</span>
+      </a>
+      <a href="#treasury" class="dash-nav-item" data-tab="treasury">
+        <i class="fa-solid fa-coins"></i>
+        <span>Treasury &amp; Cessions</span>
+      </a>
+      <a href="#system-rbac" class="dash-nav-item" data-tab="system-rbac">
+        <i class="fa-solid fa-user-shield"></i>
+        <span>Security &amp; RBAC</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <div class="dash-role-badge-pill">
+        <span>Admin Status:</span>
+        <span class="role-tag" style="color:var(--dash-gold);"><i class="fa-solid fa-crown"></i> SUPERVISOR</span>
+      </div>
+      <a href="index.html" class="dash-back-link">
+        <i class="fa-solid fa-house"></i>
+        <span>Back to Website</span>
+      </a>
+      <a href="login.html" class="dash-logout-link" id="sidebarLogoutBtn">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN ADMIN WORKSPACE
+  ═══════════════════════════════════════════ -->
+  <main class="dash-main">
+    
+    <!-- Top Dashboard Header -->
+    <header class="dash-header">
+      <div class="dash-header__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="dash-header__welcome">
+          <h1 id="dashWelcomeHeading">Admin Executive Control: Book of Business</h1>
+          <p id="dashWelcomeSub">Global portfolio underwriting telemetry, loss reserve solvency, and catastrophe management.</p>
+        </div>
+      </div>
+
+      <div class="dash-header__actions">
+        <!-- Switch between User and Admin Dashboard View -->
+        <div class="dash-mode-switch" role="tablist">
+          <a href="user-dashboard.html" class="dash-mode-btn">User View</a>
+          <a href="admin-dashboard.html" class="dash-mode-btn active">Admin View</a>
+        </div>
+
+        <div class="dash-user-profile" style="border-color: rgba(244, 211, 94, 0.35);">
+          <div class="dash-user-avatar" id="userAvatar" style="background: var(--dash-gold); color: #000;">AS</div>
+          <div class="dash-user-info">
+            <span id="userName" style="color: var(--dash-gold);">Admin Supervisor</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dash-container">
+      
+      <!-- ═══════════════════════════════════════════
+           TAB 1: EXECUTIVE OVERVIEW (6 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content active" id="view-overview">
+        
+        <!-- SECTION 1: Top 4 Executive KPI Count-Up Metric Cards -->
+        <div class="dash-stats-grid">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Direct Written Premium (DWP)</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="148500000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              <span>+28.4% YoY Book Growth</span>
+            </div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Net Incurred Loss Ratio</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-percent"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span class="count-up" data-target="41.2" data-decimals="1">0</span><span>%</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Superior vs 58.4% Industry Index</span>
+            </div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Active Corporate Accounts</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-building-user"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span class="count-up" data-target="1420">0</span><span> accounts</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-award"></i>
+              <span>97.4% Client Policy Retention</span>
+            </div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Reinsurance Capital Solvency</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-landmark"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="48500000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-shield"></i>
+              <span>A.M. Best 'A+' Capital Adequacy</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- SECTION 2: Combined Ratio & Underwriting Profitability Line Chart -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Underwriting Margin &amp; Combined Ratio Trajectory</h2>
+              <p class="dash-card-subtitle">Quarterly loss expense vs premium profitability trajectory</p>
+            </div>
+            <div class="dash-filter-pills">
+              <button type="button" class="dash-filter-btn" data-period="Q1">Q1</button>
+              <button type="button" class="dash-filter-btn" data-period="Q2">Q2</button>
+              <button type="button" class="dash-filter-btn active" data-period="YTD">YTD</button>
+              <button type="button" class="dash-filter-btn" data-period="5YR">5YR</button>
+            </div>
+          </div>
+          <div class="dash-line-chart-wrap">
+            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="adminChartGoldGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#F4D35E" stop-opacity="0.4" />
+                  <stop offset="100%" stop-color="#F4D35E" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+              <path class="chart-area-path" d="M 20 170 Q 100 130 180 110 T 340 70 T 460 40 L 580 25 L 580 190 L 20 190 Z" fill="url(#adminChartGoldGrad)"></path>
+              <path class="chart-line-path" d="M 20 170 Q 100 130 180 110 T 340 70 T 460 40 L 580 25"></path>
+              <circle cx="20" cy="170" class="chart-data-point" />
+              <circle cx="180" cy="110" class="chart-data-point" />
+              <circle cx="340" cy="70" class="chart-data-point" />
+              <circle cx="460" cy="40" class="chart-data-point" />
+              <circle cx="580" cy="25" class="chart-data-point" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- SECTION 3: Book Exposure by Commercial Industry Sector Bar Chart -->
+        <div class="dash-charts-grid">
+          <article class="dash-chart-card">
+            <div class="dash-card-head">
+              <div>
+                <h2 class="dash-card-title">Book Exposure by Industry Sector</h2>
+                <p class="dash-card-subtitle">Active distribution of the $148.5M commercial portfolio</p>
+              </div>
+              <span class="dash-badge dash-badge--gold">Balanced Risk</span>
+            </div>
+            <div class="dash-barchart-container">
+              <div class="dash-barchart-row">
+                <div class="dash-barchart-meta">
+                  <span class="dash-barchart-name"><i class="fa-solid fa-truck-fast" style="color:var(--dash-gold);"></i> Supply Chain, Freight &amp; Logistics</span>
+                  <span class="dash-barchart-val">$52.0M (35%)</span>
+                </div>
+                <div class="dash-barchart-track"><div class="dash-barchart-fill" style="width: 70%;"></div></div>
+              </div>
+              <div class="dash-barchart-row">
+                <div class="dash-barchart-meta">
+                  <span class="dash-barchart-name"><i class="fa-solid fa-microchip" style="color:#38BDF8;"></i> Enterprise Cloud &amp; High-Tech</span>
+                  <span class="dash-barchart-val">$44.5M (30%)</span>
+                </div>
+                <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 60%;"></div></div>
+              </div>
+              <div class="dash-barchart-row">
+                <div class="dash-barchart-meta">
+                  <span class="dash-barchart-name"><i class="fa-solid fa-industry" style="color:#34D399;"></i> Advanced Industrial Manufacturing</span>
+                  <span class="dash-barchart-val">$32.0M (22%)</span>
+                </div>
+                <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--emerald" style="width: 44%;"></div></div>
+              </div>
+              <div class="dash-barchart-row">
+                <div class="dash-barchart-meta">
+                  <span class="dash-barchart-name"><i class="fa-solid fa-hospital" style="color:#C084FC;"></i> Commercial Healthcare &amp; Biotech</span>
+                  <span class="dash-barchart-val">$20.0M (13%)</span>
+                </div>
+                <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--purple" style="width: 26%;"></div></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Underwriting Efficiency Rings -->
+          <article class="dash-chart-card">
+            <div class="dash-card-head">
+              <div>
+                <h2 class="dash-card-title">Underwriting Automation &amp; STP Rates</h2>
+                <p class="dash-card-subtitle">Straight-Through Processing (STP) metrics</p>
+              </div>
+            </div>
+            <div class="dash-rings-grid">
+              <div class="dash-ring-box">
+                <div class="dash-ring-svg-wrap">
+                  <svg viewBox="0 0 100 100" class="dash-ring-svg">
+                    <circle cx="50" cy="50" r="40" class="ring-bg" />
+                    <circle cx="50" cy="50" r="40" class="ring-fill ring-gold" style="stroke-dasharray: 251.2; stroke-dashoffset: 35.1;" />
+                  </svg>
+                  <span class="dash-ring-center">86%</span>
+                </div>
+                <span class="dash-ring-title">Automated Bind</span>
+                <span class="dash-ring-desc">&lt; 15 Minute Quote</span>
+              </div>
+              <div class="dash-ring-box">
+                <div class="dash-ring-svg-wrap">
+                  <svg viewBox="0 0 100 100" class="dash-ring-svg">
+                    <circle cx="50" cy="50" r="40" class="ring-bg" />
+                    <circle cx="50" cy="50" r="40" class="ring-fill ring-emerald" style="stroke-dasharray: 251.2; stroke-dashoffset: 17.5;" />
+                  </svg>
+                  <span class="dash-ring-center">93%</span>
+                </div>
+                <span class="dash-ring-title">AI Fraud Shield</span>
+                <span class="dash-ring-desc">SIU Clean Rate</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- SECTION 4: High-Value Enterprise Claim Escalations Table -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">High-Value Claim Escalations ($100k+ Threshold)</h2>
+              <p class="dash-card-subtitle">Executive underwriter oversight and reserve allocations</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Exporting High-Exposure Claims Reserve Audit File...');">
+              <i class="fa-solid fa-file-export"></i> Export Audit Sheet
+            </button>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Claim ID</th>
+                  <th>Enterprise Account</th>
+                  <th>Loss Category</th>
+                  <th>Incurred Loss</th>
+                  <th>Case Reserve</th>
+                  <th>Executive Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#CLM-EXEC-9941</strong></td>
+                  <td>Vanguard Aerospace Ltd</td>
+                  <td>Commercial Aviation Cargo</td>
+                  <td>$1,250,000</td>
+                  <td>$1,250,000</td>
+                  <td><span class="dash-status-pill pending"><i class="fa-solid fa-gavel"></i> Counsel Review</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#CLM-EXEC-8412</strong></td>
+                  <td>OmniCloud Data Centers Inc</td>
+                  <td>Cyber Extortion Defense</td>
+                  <td>$850,000</td>
+                  <td>$850,000</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Authorized</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#CLM-EXEC-7190</strong></td>
+                  <td>Pacifica Maritime Freight</td>
+                  <td>Hull &amp; Cargo Interruption</td>
+                  <td>$420,000</td>
+                  <td>$420,000</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Disbursed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 5: Reinsurance Treaty & Capital Adequacy Gauge -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Reinsurance Treaty Backing &amp; Solvency Layers</h2>
+              <p class="dash-card-subtitle">Munich Re &amp; Swiss Re Quota Share Treaty Cessions</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Treaty Capacity: $500M</span>
+          </div>
+          <div class="dash-barchart-container">
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Primary Retained Risk Layer (Stackly Direct)</span>
+                <span class="dash-barchart-val">$25,000,000 (100% Solvency)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill" style="width: 25%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">First Excess of Loss Layer (Munich Re Treaty)</span>
+                <span class="dash-barchart-val">$100,000,000 (Attached)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 50%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Catastrophic Stop-Loss Layer (Swiss Re Syndicate)</span>
+                <span class="dash-barchart-val">$375,000,000 (Fully Backed)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--emerald" style="width: 85%;"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 6: Executive Operations & Batch Controls -->
+        <div class="dash-grid-3">
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Batch Underwriting Rating</span>
+              <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--dash-gold);"></i>
+            </div>
+            <span class="dash-mini-card__val">Re-Rate Engine</span>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Batch re-price 240+ renewals against updated state loss indices.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto;" onclick="alert('Batch Re-Rate Calculation Completed for 240 Enterprise Accounts.');">
+              <i class="fa-solid fa-play"></i> Execute Batch
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Treaty Cession Settlement</span>
+              <i class="fa-solid fa-handshake" style="color:#38BDF8;"></i>
+            </div>
+            <span class="dash-mini-card__val">$18.4M Monthly</span>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Disburse monthly reinsurance premiums to treaty syndicates.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:var(--dash-surface);" onclick="alert('Cession ledger verified. Ready for wire authorization.');">
+              <i class="fa-solid fa-file-invoice-dollar"></i> Review Cession
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">DOI Regulatory Filing</span>
+              <i class="fa-solid fa-building-columns" style="color:#34D399;"></i>
+            </div>
+            <span class="dash-mini-card__val">50 States Active</span>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Quarterly statutory financial statements and actuarial exhibits.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:var(--dash-surface);" onclick="alert('Generated DOI NAIC Statutory Report Package (ZIP)');">
+              <i class="fa-solid fa-download"></i> Download Filing
+            </button>
+          </article>
+        </div>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 2: POLICY UNDERWRITING & BOOK (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-underwriting">
+        
+        <!-- SECTION 1: Pipeline Metrics -->
+        <div class="dash-stats-grid">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Monthly Submissions</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-inbox"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="384">0</span><span> applications</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i> +32% vs last month</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Bound Quote Ratio</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-bullseye"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="78.4" data-decimals="1">0</span><span>%</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-check"></i> High conversion efficiency</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Avg. Account Premium</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+            </div>
+            <div class="dash-stat-value"><span>$</span><span class="count-up" data-target="34200" data-format="currency">0</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i> Mid-market expansion</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Underwriter Turnaround</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-bolt"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="18.4" data-decimals="1">0</span><span> hrs</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-clock"></i> Industry leading SLA</div>
+          </article>
+        </div>
+
+        <!-- SECTION 2: Enterprise Account Underwriting Portfolio Table -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Enterprise Commercial Account Portfolio</h2>
+              <p class="dash-card-subtitle">Active insured accounts with exposure grading and loss histories</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Opening New Policy Binding Wizard...');">
+              <i class="fa-solid fa-plus"></i> Bind New Policy
+            </button>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Account Legal Name</th>
+                  <th>Primary Policy Lines</th>
+                  <th>Annual Written Premium</th>
+                  <th>Loss Ratio</th>
+                  <th>Risk Grade</th>
+                  <th>Underwriter</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Apex Global Logistics Corp</strong><br><small>Chicago, IL • 420 Employees</small></td>
+                  <td>GL + Cyber + Property</td>
+                  <td>$58,200</td>
+                  <td>12.4%</td>
+                  <td><span class="dash-badge dash-badge--emerald">Tier 1 (AAA)</span></td>
+                  <td>Mark Sterling</td>
+                </tr>
+                <tr>
+                  <td><strong>Helios Solar Grid Systems</strong><br><small>Austin, TX • 280 Employees</small></td>
+                  <td>Commercial Property + Inland Marine</td>
+                  <td>$94,000</td>
+                  <td>28.1%</td>
+                  <td><span class="dash-badge dash-badge--emerald">Tier 1 (AA)</span></td>
+                  <td>Elena Rostova</td>
+                </tr>
+                <tr>
+                  <td><strong>Nexus BioHealth Labs Inc</strong><br><small>Boston, MA • 190 Employees</small></td>
+                  <td>Product Liability + D&amp;O + Cyber</td>
+                  <td>$142,000</td>
+                  <td>34.5%</td>
+                  <td><span class="dash-badge dash-badge--gold">Tier 2 (A)</span></td>
+                  <td>David Vance</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 3: Industry Sector Loss Ratio Comparison Graph -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Sector Loss Ratio &amp; Margin Performance</h2>
+              <p class="dash-card-subtitle">Target ceiling: 50% max permissible loss ratio</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">All Sectors Profitable</span>
+          </div>
+          <div class="dash-barchart-container">
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Supply Chain &amp; Logistics Book</span>
+                <span class="dash-barchart-val" style="color:#34D399;">36.4% Loss Ratio (Target &lt; 45%)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--emerald" style="width: 36%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Enterprise Tech &amp; Cloud SaaS Book</span>
+                <span class="dash-barchart-val" style="color:#38BDF8;">28.2% Loss Ratio (Target &lt; 40%)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 28%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Commercial Property &amp; Manufacturing</span>
+                <span class="dash-barchart-val" style="color:var(--dash-gold);">44.8% Loss Ratio (Target &lt; 50%)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill" style="width: 45%;"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 4: Actuarial Exposure & Pricing Multiplier Matrix -->
+        <div class="dash-section-divider">
+          <div>
+            <h3><i class="fa-solid fa-sliders" style="color:var(--dash-gold);"></i> Automated Rate Multiplier Tables</h3>
+            <p>Active underwriting debits &amp; credits deployed on Stackly direct quote engine</p>
+          </div>
+        </div>
+
+        <div class="dash-matrix-grid">
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>ISO Telematics Safety Discount</h4>
+              <p>Applied to commercial fleets with verified dashcam telemetry</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">-15% Credit</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Enterprise SOC2 / ISO 27001 Credit</h4>
+              <p>Applied to cyber coverage with hardware security key MFA</p>
+            </div>
+            <span class="dash-badge dash-badge--blue">-20% Credit</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Coastal Tier-1 Windstorm Surcharge</h4>
+              <p>Automated reinsurance loading for properties within 5 miles of ocean</p>
+            </div>
+            <span class="dash-badge dash-badge--red">+12% Debit</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Multi-Line Account Portfolio Bundle</h4>
+              <p>Applied when client binds GL + Cyber + Commercial Property</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">-10% Credit</span>
+          </div>
+        </div>
+
+        <!-- SECTION 5: Bulk Policy Operations Engine -->
+        <div class="dash-grid-2" style="margin-top:1.5rem;">
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Mass Endorsement Deployment</span>
+              <span class="dash-badge dash-badge--gold">Global Action</span>
+            </div>
+            <p style="font-size:0.9rem; color:#fff; font-weight:600; margin-top:0.5rem;">Deploy Subcontractor Waiver Rider to 1,420 Policies</p>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Automatically pushes digital endorsement addendum to all active commercial policyholders.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto;" onclick="alert('Endorsement rider successfully broadcast to 1,420 accounts.');">
+              <i class="fa-solid fa-bullhorn"></i> Broadcast Endorsement
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Actuarial Loss Experience Export</span>
+              <span class="dash-badge dash-badge--emerald">NAIC Ready</span>
+            </div>
+            <p style="font-size:0.9rem; color:#fff; font-weight:600; margin-top:0.5rem;">Generate Form 10-K &amp; NAIC Exhibit 5 Triangle</p>
+            <p style="font-size:0.8rem; color:var(--dash-text-muted);">Loss development triangles calculated using chain-ladder and Bornhuetter-Ferguson methods.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:var(--dash-surface);" onclick="alert('Exporting Loss Development Triangle XLSX file...');">
+              <i class="fa-solid fa-file-excel"></i> Export Triangle XLSX
+            </button>
+          </article>
+        </div>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 3: CLAIMS STEWARDSHIP & RESERVES (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-claims-stewardship">
+        
+        <!-- SECTION 1: Claims Stewardship Metrics -->
+        <div class="dash-stats-grid">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Total Incurred Losses (YTD)</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-chart-column"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="14250000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-check"></i> Within actuarial expectation</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Total Open Case Reserves</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-vault"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="6800000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-shield"></i> 100% collateralized in Treasury</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Litigation Dispute Rate</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-gavel"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="0.04" data-decimals="2">0</span><span>%</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-star"></i> Industry best settlement rate</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Subrogation Recovery</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="3240000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i> Recovered from third parties</div>
+          </article>
+        </div>
+
+        <!-- SECTION 2: High-Severity Incident Investigation Tracker -->
+        <article class="dash-pipeline-card">
+          <div class="dash-card-head">
+            <div>
+              <strong style="font-size: 1.15rem; color:#FFFFFF;">Major Incident Investigation: #CLM-EXEC-9941</strong>
+              <p class="dash-card-subtitle">Vanguard Aerospace Ltd • Aviation Cargo Structural Loss ($1.25M)</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">Reinsurance Notified</span>
+          </div>
+          <div class="dash-pipeline-steps">
+            <div class="dash-pipeline-step completed">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-check"></i></div>
+              <span class="dash-pipeline-label">FNOL Received</span>
+              <span class="dash-pipeline-time">Aug 14, 2026</span>
+            </div>
+            <div class="dash-pipeline-step completed">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-check"></i></div>
+              <span class="dash-pipeline-label">Forensic Engineering</span>
+              <span class="dash-pipeline-time">Aug 20, 2026</span>
+            </div>
+            <div class="dash-pipeline-step current">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-scale-balanced fa-spin"></i></div>
+              <span class="dash-pipeline-label">Treaty Allocation</span>
+              <span class="dash-pipeline-time">Munich Re Excess Active</span>
+            </div>
+            <div class="dash-pipeline-step">
+              <div class="dash-pipeline-dot">4</div>
+              <span class="dash-pipeline-label">Settlement Release</span>
+              <span class="dash-pipeline-time">Pending Sign-off</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 3: Fraud Detection (SIU) Analytics Line Chart -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">AI Fraud Detection &amp; Special Investigation (SIU) Telemetry</h2>
+              <p class="dash-card-subtitle">Automated image metadata &amp; digital invoice verification</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">99.2% Clean Assessment</span>
+          </div>
+          <div class="dash-line-chart-wrap">
+            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+              <path class="chart-line-path" d="M 20 180 L 120 175 L 220 185 L 320 170 L 420 180 L 580 182" stroke="#10B981"></path>
+              <circle cx="20" cy="180" class="chart-data-point" fill="#10B981" />
+              <circle cx="120" cy="175" class="chart-data-point" fill="#10B981" />
+              <circle cx="220" cy="185" class="chart-data-point" fill="#10B981" />
+              <circle cx="320" cy="170" class="chart-data-point" fill="#10B981" />
+              <circle cx="420" cy="180" class="chart-data-point" fill="#10B981" />
+              <circle cx="580" cy="182" class="chart-data-point" fill="#10B981" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- SECTION 4: Legal Expense & Defense Cost Reserve Allocation Bar Graph -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Defense &amp; Cost Containment (DCC) Reserve Allocation</h2>
+              <p class="dash-card-subtitle">Allocation of legal defense reserves across casualty lines</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">Reserve Fund: $6.8M</span>
+          </div>
+          <div class="dash-barchart-container">
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Commercial General Liability Defense Fund</span>
+                <span class="dash-barchart-val">$3,200,000 (47%)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill" style="width: 47%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Cyber Incident Response &amp; Forensic Retainers</span>
+                <span class="dash-barchart-val">$2,400,000 (35%)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 35%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Directors &amp; Officers (D&amp;O) Securities Defense</span>
+                <span class="dash-barchart-val">$1,200,000 (18%)</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--purple" style="width: 18%;"></div></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 5: Adjuster Settlement Authority Matrix -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Senior Adjuster Settlement Authority Tiers</h2>
+              <p class="dash-card-subtitle">Direct settlement signing limits underwritten by Stackly Governance</p>
+            </div>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Adjuster Name</th>
+                  <th>Title &amp; Jurisdiction</th>
+                  <th>Single Claim Authority</th>
+                  <th>Dual Authorization Required</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Mark Sterling, Esq.</strong></td>
+                  <td>Senior Managing Loss Counsel (US East &amp; Central)</td>
+                  <td><strong>$500,000</strong></td>
+                  <td>&gt; $500,000 (Executive Approval)</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Authorized</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Elena Rostova, CPCU</strong></td>
+                  <td>Commercial Casualty Director (US West)</td>
+                  <td><strong>$350,000</strong></td>
+                  <td>&gt; $350,000 (Executive Approval)</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Authorized</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 4: ACTUARIAL & RISK ENGINEERING (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-actuarial">
+        
+        <!-- SECTION 1: Actuarial Capital & PML Metrics -->
+        <div class="dash-stats-grid">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">1-in-250 Yr Catastrophe PML</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-volcano"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="32500000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-shield"></i> Fully covered by Stop-Loss Treaty</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Risk-Based Capital (RBC) Ratio</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-chart-pie"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="440" data-decimals="0">0</span><span>%</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-award"></i> Well above 200% NAIC Regulatory Requirement</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Cyber Aggregate Limit Pool</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-server"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="150000000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-lock"></i> Dedicated cloud syndicate backing</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Expected Annual Loss (AAL)</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-calculator"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="4800000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-check"></i> 3.2% of Total Written Premium</div>
+          </article>
+        </div>
+
+        <!-- SECTION 2: Dynamic Loss Ratio Stochastic Simulation Line Graph -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Monte Carlo Stochastic Loss Simulation (10,000 Trials)</h2>
+              <p class="dash-card-subtitle">99.5% Value-at-Risk (VaR) probability density curve</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">99.5% VaR: $18.2M</span>
+          </div>
+          <div class="dash-line-chart-wrap">
+            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+              <path class="chart-area-path" d="M 20 180 Q 200 170 300 30 Q 400 170 580 185 L 580 190 L 20 190 Z" fill="url(#adminChartGoldGrad)"></path>
+              <path class="chart-line-path" d="M 20 180 Q 200 170 300 30 Q 400 170 580 185"></path>
+              <circle cx="300" cy="30" class="chart-data-point" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- SECTION 3: Geolocation Hazard Risk & Territory Exposure Heatmap Breakdown -->
+        <div class="dash-section-divider">
+          <div>
+            <h3><i class="fa-solid fa-map-location-dot" style="color:#38BDF8;"></i> Geographic Territory Exposure Matrix</h3>
+            <p>Underwriting concentration across meteorological and seismic risk zones</p>
+          </div>
+        </div>
+
+        <div class="dash-matrix-grid">
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Midwest Logistics Corridor (IL, IN, OH)</h4>
+              <p>Total Insured Value: $62.4M • Hazard Index: Low (1.02x)</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">42% of Book</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Texas Industrial Energy Corridor (TX, OK)</h4>
+              <p>Total Insured Value: $38.0M • Hail &amp; Freeze Index: Moderate (1.18x)</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">26% of Book</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Northeast Tech &amp; Commercial Hub (NY, MA, NJ)</h4>
+              <p>Total Insured Value: $32.1M • Severe Weather Index: Low (1.05x)</p>
+            </div>
+            <span class="dash-badge dash-badge--blue">22% of Book</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>West Coast Cloud &amp; Biomedical (CA, WA)</h4>
+              <p>Total Insured Value: $16.0M • Seismic Capped: Strict Cap ($20M)</p>
+            </div>
+            <span class="dash-badge dash-badge--purple">10% of Book</span>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Underwriting Guideline & Rule Engine -->
+        <article class="dash-table-card" style="margin-top:1.5rem;">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Automated Underwriting Rule Engine Triggers</h2>
+              <p class="dash-card-subtitle">Real-time bind boundaries and referral thresholds</p>
+            </div>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Rule Name</th>
+                  <th>Automatic Bind Boundary</th>
+                  <th>Referral Action Trigger</th>
+                  <th>Current State</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Maximum Single Policy Limit</strong></td>
+                  <td>$\le$ $10,000,000</td>
+                  <td>Requires Senior Managing Underwriter Sign-off</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Enforced</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Prior 3-Year Loss History</strong></td>
+                  <td>$\le$ 3 claims totaling $\le$ $100k</td>
+                  <td>Refer to Actuarial Pricing Desk</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Enforced</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Cyber Cloud Provider Multi-Tenant</strong></td>
+                  <td>AWS / Azure / GCP Tier-4</td>
+                  <td>Custom SIU inspection required for unlisted hosting</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Enforced</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 5: Reinsurance Treaty Capacity & Ceded Breakdown -->
+        <article class="dash-chart-card" style="margin-top:1.5rem;">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Treaty Capacity &amp; Ceded Premium Distribution</h2>
+              <p class="dash-card-subtitle">Breakdown of gross written premium ceded to global reinsurers</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">Annual Cession: $38.2M</span>
+          </div>
+          <div class="dash-barchart-container">
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Munich Re Treaty Cession (40% Quota Share)</span>
+                <span class="dash-barchart-val">$22,000,000 / yr</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill" style="width: 58%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Swiss Re Excess of Loss Layer</span>
+                <span class="dash-barchart-val">$11,200,000 / yr</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 29%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Lloyd's of London Cyber Syndicate</span>
+                <span class="dash-barchart-val">$5,000,000 / yr</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--purple" style="width: 13%;"></div></div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 5: TREASURY, BILLING & COMMISSIONS (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-treasury">
+        
+        <!-- SECTION 1: Treasury & Cash Flow Metrics -->
+        <div class="dash-stats-grid">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Monthly Gross Premium Inflow</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="12375000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-check"></i> 99.4% Automated ACH clearing</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Direct Collection Efficiency</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-chart-line"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="99.8" data-decimals="1">0</span><span>%</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-bolt"></i> Zero broker payment delays</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Delinquency Rate</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            </div>
+            <div class="dash-stat-value"><span class="count-up" data-target="0.2" data-decimals="1">0</span><span>%</span></div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-shield"></i> Top tier commercial solvency</div>
+          </article>
+
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label">Net Investment Income (Float)</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-coins"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" data-target="2480000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up"><i class="fa-solid fa-arrow-trend-up"></i> 5.2% annualized Treasury yield</div>
+          </article>
+        </div>
+
+        <!-- SECTION 2: Gross Premium vs Cessions & Reserve Cash Flow Chart -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Treasury Cash Flow: Written Inflow vs Cessions</h2>
+              <p class="dash-card-subtitle">Monthly balance tracking across operating float and claims trust</p>
+            </div>
+            <span class="dash-badge dash-badge--gold">Net Monthly Operating Surplus: $6.2M</span>
+          </div>
+          <div class="dash-line-chart-wrap">
+            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+              <path class="chart-area-path" d="M 20 120 L 120 110 L 220 95 L 320 80 L 420 65 L 580 40 L 580 190 L 20 190 Z" fill="url(#adminChartGoldGrad)"></path>
+              <path class="chart-line-path" d="M 20 120 L 120 110 L 220 95 L 320 80 L 420 65 L 580 40"></path>
+              <circle cx="20" cy="120" class="chart-data-point" />
+              <circle cx="120" cy="110" class="chart-data-point" />
+              <circle cx="220" cy="95" class="chart-data-point" />
+              <circle cx="320" cy="80" class="chart-data-point" />
+              <circle cx="420" cy="65" class="chart-data-point" />
+              <circle cx="580" cy="40" class="chart-data-point" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- SECTION 3: Broker Commission & Treaty Cession Settlement Table -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Broker Commission &amp; Treaty Cession Settlements</h2>
+              <p class="dash-card-subtitle">Authorized monthly disbursements and clearing verification</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Exporting Treasury Disbursements Ledger CSV...');">
+              <i class="fa-solid fa-file-csv"></i> Export Ledger
+            </button>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Recipient Entity</th>
+                  <th>Disbursement Type</th>
+                  <th>Gross Basis</th>
+                  <th>Amount Disbursed</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Munich Re America Syndicate</strong></td>
+                  <td>Treaty Quota Share Cession</td>
+                  <td>$52,000,000 GL Book</td>
+                  <td>$1,833,333 / mo</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Cleared</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Marsh McLennan Commercial Brokerage</strong></td>
+                  <td>Direct Producer Commission</td>
+                  <td>$14,200,000 Bound</td>
+                  <td>$142,000 / mo</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Cleared</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Aon Commercial Risk Advisory</strong></td>
+                  <td>Direct Producer Commission</td>
+                  <td>$22,500,000 Bound</td>
+                  <td>$225,000 / mo</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Cleared</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 4: Delinquency & Cancellation Risk Monitor -->
+        <div class="dash-grid-2">
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Zero-Delinquency Rate Lock</span>
+              <span class="dash-badge dash-badge--emerald">99.8% Healthy</span>
+            </div>
+            <p style="font-size:0.9rem; color:#fff; font-weight:600; margin-top:0.4rem;">Only 3 accounts in 15-day grace period ($14,550 total exposure).</p>
+            <p style="font-size:0.78rem; color:var(--dash-text-muted);">Automated ACH retry protocol active with zero policy cancellations required.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto;" onclick="alert('Viewing 3 accounts currently in grace period review...');">
+              <i class="fa-solid fa-eye"></i> View Grace Accounts
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">State DOI Premium Tax Ledger</span>
+              <span class="dash-badge dash-badge--blue">Quarterly Current</span>
+            </div>
+            <p style="font-size:0.9rem; color:#fff; font-weight:600; margin-top:0.4rem;">$3,415,500 Remitted to State Insurance Departments</p>
+            <p style="font-size:0.78rem; color:var(--dash-text-muted);">Surplus lines and admitted commercial premium tax returns filed electronically.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:var(--dash-surface);" onclick="alert('Generated State DOI Tax Proof Certificates.');">
+              <i class="fa-solid fa-download"></i> View Tax Receipts
+            </button>
+          </article>
+        </div>
+
+        <!-- SECTION 5: Investment Float & Yield Performance -->
+        <article class="dash-chart-card" style="margin-top:1.5rem;">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Insurance Premium Float &amp; Investment Yield</h2>
+              <p class="dash-card-subtitle">Conservative, high-grade AAA Treasury and municipal bond holdings</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Total Float: $48.5M</span>
+          </div>
+          <div class="dash-barchart-container">
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Short-Term US Treasury Bills (3M - 6M)</span>
+                <span class="dash-barchart-val">$28,000,000 (58%) • 5.3% Yield</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill" style="width: 58%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">High-Grade AAA Municipal Liquidity Fund</span>
+                <span class="dash-barchart-val">$15,500,000 (32%) • 4.8% Yield</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--blue" style="width: 32%;"></div></div>
+            </div>
+            <div class="dash-barchart-row">
+              <div class="dash-barchart-meta">
+                <span class="dash-barchart-name">Immediate Settlement Overnight Repo</span>
+                <span class="dash-barchart-val">$5,000,000 (10%) • 5.0% Yield</span>
+              </div>
+              <div class="dash-barchart-track"><div class="dash-barchart-fill dash-barchart-fill--emerald" style="width: 10%;"></div></div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 6: SECURITY & RBAC CONTROLS (5 COMPLETE SECTIONS)
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-system-rbac">
+        
+        <!-- SECTION 1: Underwriter RBAC Access Matrix -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Underwriting Staff Role-Based Access Control (RBAC)</h2>
+              <p class="dash-card-subtitle">Granular signing limits, policy binding permissions, and audit logs</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Opening Add Underwriter Officer Dialog...');">
+              <i class="fa-solid fa-user-plus"></i> Add Underwriting Officer
+            </button>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Underwriter Name</th>
+                  <th>Role Level</th>
+                  <th>Binding Limit</th>
+                  <th>Claim Authority</th>
+                  <th>MFA Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Admin Supervisor</strong><br><small>admin@stacklyinsurance.com</small></td>
+                  <td><span class="dash-badge dash-badge--gold">Managing Principal</span></td>
+                  <td>$25,000,000</td>
+                  <td>$5,000,000</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-shield"></i> Enforced</span></td>
+                  <td><button type="button" class="dash-policy-btn" onclick="alert('Editing permissions for Admin Supervisor');">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><strong>Mark Sterling, Esq.</strong><br><small>m.sterling@stacklyinsurance.com</small></td>
+                  <td><span class="dash-badge dash-badge--blue">Senior Loss Counsel</span></td>
+                  <td>$10,000,000</td>
+                  <td>$1,000,000</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-shield"></i> Enforced</span></td>
+                  <td><button type="button" class="dash-policy-btn" onclick="alert('Editing permissions for Mark Sterling');">Edit</button></td>
+                </tr>
+                <tr>
+                  <td><strong>Elena Rostova, CPCU</strong><br><small>e.rostova@stacklyinsurance.com</small></td>
+                  <td><span class="dash-badge dash-badge--emerald">Lead Underwriter</span></td>
+                  <td>$5,000,000</td>
+                  <td>$500,000</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-shield"></i> Enforced</span></td>
+                  <td><button type="button" class="dash-policy-btn" onclick="alert('Editing permissions for Elena Rostova');">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 2: Platform Infrastructure Health & API Latency Monitor -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Platform Infrastructure &amp; Quote Engine Latency</h2>
+              <p class="dash-card-subtitle">Real-time p99 API response time: 24ms across 6 global edge nodes</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">99.99% Uptime</span>
+          </div>
+          <div class="dash-line-chart-wrap">
+            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+              <path class="chart-line-path" d="M 20 160 L 120 155 L 220 162 L 320 158 L 420 152 L 580 156" stroke="#38BDF8"></path>
+              <circle cx="20" cy="160" class="chart-data-point" fill="#38BDF8" />
+              <circle cx="120" cy="155" class="chart-data-point" fill="#38BDF8" />
+              <circle cx="220" cy="162" class="chart-data-point" fill="#38BDF8" />
+              <circle cx="320" cy="158" class="chart-data-point" fill="#38BDF8" />
+              <circle cx="420" cy="152" class="chart-data-point" fill="#38BDF8" />
+              <circle cx="580" cy="156" class="chart-data-point" fill="#38BDF8" />
+            </svg>
+          </div>
+        </article>
+
+        <!-- SECTION 3: State DOI Compliance & Regulatory Tracker -->
+        <div class="dash-section-divider">
+          <div>
+            <h3><i class="fa-solid fa-stamp" style="color:var(--dash-gold);"></i> 50-State Department of Insurance (DOI) Compliance</h3>
+            <p>Active licenses, admitted paper filings, and surplus lines declarations</p>
+          </div>
+        </div>
+
+        <div class="dash-matrix-grid">
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Illinois DOI Certificate of Authority</h4>
+              <p>Admitted Commercial Property &amp; Casualty Carrier (#IL-84210)</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Current &amp; Active</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>New York DFS Cyber Underwriting Stamp</h4>
+              <p>23 NYCRR 500 Cybersecurity Underwriting Accreditation</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Current &amp; Active</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>California CDI Commercial Casualty License</h4>
+              <p>Admitted Casualty &amp; Commercial Fleet Filing (#CA-99120)</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Current &amp; Active</span>
+          </div>
+
+          <div class="dash-matrix-card">
+            <div class="dash-matrix-info">
+              <h4>Texas TDI Catastrophe &amp; Commercial Multi-Peril</h4>
+              <p>Admitted Windstorm &amp; Commercial Property Authority</p>
+            </div>
+            <span class="dash-badge dash-badge--emerald">Current &amp; Active</span>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Enterprise Security Threat Detection & Incident Audit Log -->
+        <article class="dash-table-card" style="margin-top:1.5rem;">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Enterprise Security Audit &amp; Policy Modification Log</h2>
+              <p class="dash-card-subtitle">Real-time immutable ledger of all underwriter binding transactions</p>
+            </div>
+            <button type="button" class="dash-action-btn" onclick="alert('Exporting ISO 27001 Security Audit Log (CSV)...');">
+              <i class="fa-solid fa-download"></i> Export Audit Log
+            </button>
+          </div>
+          <div class="dash-table-wrap">
+            <table class="dash-data-table">
+              <thead>
+                <tr>
+                  <th>Timestamp (UTC)</th>
+                  <th>Action Event</th>
+                  <th>Actor / Underwriter</th>
+                  <th>IP Address</th>
+                  <th>Verification</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2026-09-08 00:54:12</td>
+                  <td><strong>Policy Bound: #POL-88219-GL ($2.0M Limit)</strong></td>
+                  <td>Mark Sterling (Underwriter)</td>
+                  <td>198.51.100.42</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> FIDO2 MFA</span></td>
+                </tr>
+                <tr>
+                  <td>2026-09-07 18:22:45</td>
+                  <td><strong>Reserve Raised: #CLM-EXEC-9941 to $1.25M</strong></td>
+                  <td>Admin Supervisor</td>
+                  <td>198.51.100.18</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> FIDO2 MFA</span></td>
+                </tr>
+                <tr>
+                  <td>2026-09-07 14:10:00</td>
+                  <td><strong>Treaty Quota Share Cession Wire Authorized</strong></td>
+                  <td>Admin Supervisor</td>
+                  <td>198.51.100.18</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-check"></i> Dual Token</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <!-- SECTION 5: Policy Database Disaster Recovery & Orchestration -->
+        <div class="dash-grid-2" style="margin-top:1.5rem;">
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Immutable Policy Ledger Backup</span>
+              <span class="dash-badge dash-badge--emerald">Continuous RPO: 0s</span>
+            </div>
+            <p style="font-size:0.9rem; color:#fff; font-weight:600; margin-top:0.4rem;">Multi-Region Hot Standby in US-East &amp; US-West</p>
+            <p style="font-size:0.78rem; color:var(--dash-text-muted);">Cryptographically signed transaction blocks guaranteed against data alteration.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto;" onclick="alert('Database integrity check: 100% verified across all 1,420 accounts.');">
+              <i class="fa-solid fa-shield-halved"></i> Run Integrity Check
+            </button>
+          </article>
+
+          <article class="dash-mini-card">
+            <div class="dash-mini-card__top">
+              <span class="dash-mini-card__title">Disaster Recovery (DR) Drill Status</span>
+              <span class="dash-badge dash-badge--blue">Passed SOC2</span>
+            </div>
+            <p style="font-size:0.9rem; color:#fff; font-weight:600; margin-top:0.4rem;">RTO: 42 Seconds • Failover Zero-Data-Loss</p>
+            <p style="font-size:0.78rem; color:var(--dash-text-muted);">Quarterly live failover simulation completed with zero policy disruption.</p>
+            <button type="button" class="dash-action-btn" style="margin-top:auto; background:var(--dash-surface);" onclick="alert('Viewing SOC2 Type II Disaster Recovery Attestation Report.');">
+              <i class="fa-solid fa-file-shield"></i> View DR Report
+            </button>
+          </article>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Interactive Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Dynamic User Name & Query String Processing
+      const urlParams = new URLSearchParams(window.location.search);
+      let user = urlParams.get('user') || '';
+      if (!user) {
+        try { user = localStorage.getItem('stackly_user_name') || ''; } catch (e) {}
+      }
+      if (!user) user = 'Admin Supervisor';
+
+      const initials = user.split(' ').map(w => w[0]).join('').toUpperCase().substring(0, 2) || 'AS';
+
+      const welcomeHeading = document.getElementById('dashWelcomeHeading');
+      const userNameEl = document.getElementById('userName');
+      const sidebarNameEl = document.getElementById('sidebarUserName');
+      const userAvatarEl = document.getElementById('userAvatar');
+      const sidebarAvatarEl = document.getElementById('sidebarUserAvatar');
+
+      if (welcomeHeading) welcomeHeading.textContent = `Admin Executive Control: ${user}`;
+      if (userNameEl) userNameEl.textContent = user;
+      if (sidebarNameEl) sidebarNameEl.textContent = user;
+      if (userAvatarEl) userAvatarEl.textContent = initials;
+      if (sidebarAvatarEl) sidebarAvatarEl.textContent = initials;
+
+      // 2. Tab Switching Engine
+      const navItems = document.querySelectorAll('.dash-sidebar__nav .dash-nav-item');
+      const viewSections = document.querySelectorAll('.dash-view-content');
+
+      function switchTab(targetId) {
+        const cleanId = targetId.replace('#', '');
+        navItems.forEach(item => {
+          const tab = item.getAttribute('data-tab');
+          if (tab === cleanId) item.classList.add('active');
+          else item.classList.remove('active');
+        });
+
+        viewSections.forEach(section => {
+          if (section.id === `view-${cleanId}`) {
+            section.classList.add('active');
+            triggerCountUps(section);
+          } else {
+            section.classList.remove('active');
+          }
+        });
+      }
+
+      navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const tab = item.getAttribute('data-tab');
+          switchTab(tab);
+          // Close mobile sidebar if open
+          const sidebar = document.getElementById('dashSidebar');
+          const overlay = document.getElementById('dashSidebarOverlay');
+          if (sidebar) sidebar.classList.remove('open');
+          if (overlay) overlay.classList.remove('active');
+        });
+      });
+
+      // 3. Count Up Animation Engine
+      function triggerCountUps(container = document) {
+        const counters = container.querySelectorAll('.count-up');
+        counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-target') || 0);
+          const decimals = parseInt(counter.getAttribute('data-decimals') || 0, 10);
+          const format = counter.getAttribute('data-format');
+          const duration = 1200;
+          const startTime = performance.now();
+
+          function updateCount(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentVal = target * easeOut;
+
+            if (format === 'currency') {
+              counter.textContent = Math.floor(currentVal).toLocaleString();
+            } else if (decimals > 0) {
+              counter.textContent = currentVal.toFixed(decimals);
+            } else {
+              counter.textContent = Math.floor(currentVal);
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCount);
+            } else {
+              if (format === 'currency') {
+                counter.textContent = target.toLocaleString();
+              } else if (decimals > 0) {
+                counter.textContent = target.toFixed(decimals);
+              } else {
+                counter.textContent = target;
+              }
+            }
+          }
+          requestAnimationFrame(updateCount);
+        });
+      }
+
+      // Initial Count Up trigger
+      triggerCountUps();
+
+      // 4. Mobile Sidebar Drawer Logic
+      const toggleBtn = document.getElementById('dashSidebarToggle');
+      const closeBtn = document.getElementById('dashSidebarClose');
+      const sidebar = document.getElementById('dashSidebar');
+      const overlay = document.getElementById('dashSidebarOverlay');
+
+      if (toggleBtn && sidebar && overlay) {
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.add('open');
+          overlay.classList.add('active');
+        });
+      }
+
+      if (closeBtn && sidebar && overlay) {
+        closeBtn.addEventListener('click', () => {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('active');
+        });
+      }
+
+      if (overlay && sidebar) {
+        overlay.addEventListener('click', () => {
+          sidebar.classList.remove('open');
+          overlay.classList.remove('active');
+        });
+      }
+
+      // 5. Line Chart Period Filter Buttons
+      const filterBtns = document.querySelectorAll('.dash-filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

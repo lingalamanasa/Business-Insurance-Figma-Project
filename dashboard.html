@@ -10,6 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="dashboard.css" />
+  <script>
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let role = urlParams.get('role');
+      if (!role) {
+        try { role = localStorage.getItem('stackly_user_role') || 'user'; } catch (e) { role = 'user'; }
+      }
+      const user = urlParams.get('user') || '';
+      const hash = window.location.hash || '';
+      if (role === 'admin') {
+        window.location.replace(`admin-dashboard.html?role=admin${user ? '&user=' + encodeURIComponent(user) : ''}${hash}`);
+      } else {
+        window.location.replace(`user-dashboard.html?role=user${user ? '&user=' + encodeURIComponent(user) : ''}${hash}`);
+      }
+    })();
+  </script>
 </head>
 <body class="dash-body">
 
