@@ -230,15 +230,18 @@
       }, 700);
     });
 
-    // Forgot Password
-    document.getElementById('forgotPasswordLink').addEventListener('click', (e) => {
-      e.preventDefault();
-      const email = loginEmail.value.trim();
-      if (email) {
-        showAlert(`Password reset instructions sent to ${email}.`, true);
+    // Check URL parameters for registration or role
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const role = urlParams.get('role');
+      if (role === 'admin') {
+        setRole('admin');
       } else {
-        showAlert('Please enter your email address first.');
-        loginEmail.focus();
+        setRole('user');
+      }
+
+      if (urlParams.get('registered') === 'true') {
+        showAlert('Account created successfully! Please enter your credentials to log in.', true);
       }
     });
   </script>

@@ -285,11 +285,11 @@
       signupSubmitBtn.querySelector('span').textContent = 'Creating Account...';
 
       setTimeout(() => {
-        showAlert(`Congratulations ${name}! Your ${role.toUpperCase()} account has been created. Redirecting to your dashboard...`, true);
+        showAlert(`Congratulations ${name}! Your ${role.toUpperCase()} account has been created. Redirecting to Login page...`, true);
         setTimeout(() => {
-          window.location.href = `dashboard.html?role=${encodeURIComponent(role)}`;
-        }, 1200);
-      }, 800);
+          window.location.href = `login.html?registered=true&role=${encodeURIComponent(role)}`;
+        }, 1100);
+      }, 700);
     });
   </script>
 </body>
