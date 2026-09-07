@@ -297,474 +297,57 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 })();
 
 /* ══════════════════════════════════════════════════════
-   7. QUOTE FORM — VALIDATION & SUBMISSION
+   7. QUOTE FORM — SUBMISSION NAVIGATES TO 404
    ══════════════════════════════════════════════════════ */
 (function initQuoteForm() {
   const form = $('#quote-form');
   if (!form) return;
 
-  const submitBtn = $('#get-quote-btn');
-  const submitText = submitBtn ? submitBtn.querySelector('.quote-form__submit-text') : null;
-  const successMsg = $('#quote-success');
-
-  // Field configs
-  const fields = [
-    {
-      id: 'business-name',
-      errorId: 'business-name-error',
-      validate: (v) => v.trim().length >= 2 ? null : 'Please enter your business name (at least 2 characters).'
-    },
-    {
-      id: 'industry',
-      errorId: 'industry-error',
-      validate: (v) => v.trim().length >= 2 ? null : 'Please enter your industry.'
-    },
-    {
-      id: 'employees',
-      errorId: 'employees-error',
-      validate: (v) => {
-        const n = parseInt(v, 10);
-        if (!v.trim()) return 'Please enter the number of employees.';
-        if (isNaN(n) || n < 1) return 'Please enter a valid number (minimum 1).';
-        return null;
-      }
-    },
-    {
-      id: 'work-email',
-      errorId: 'email-error',
-      validate: (v) => {
-        if (!v.trim()) return 'Please enter your work email.';
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(v.trim()) ? null : 'Please enter a valid email address.';
-      }
-    }
-  ];
-
-  // Validate single field
-  const validateField = ({ id, errorId, validate }) => {
-    const input = $(`#${id}`);
-    const errorEl = $(`#${errorId}`);
-    if (!input) return true;
-
-    const error = validate(input.value);
-    if (error) {
-      input.classList.add('error');
-      if (errorEl) errorEl.textContent = error;
-      input.setAttribute('aria-invalid', 'true');
-      return false;
-    } else {
-      input.classList.remove('error');
-      if (errorEl) errorEl.textContent = '';
-      input.removeAttribute('aria-invalid');
-      return true;
-    }
-  };
-
-  // Live validation on blur & input
-  fields.forEach(field => {
-    const input = $(`#${field.id}`);
-    if (!input) return;
-
-    input.addEventListener('blur', () => validateField(field));
-    input.addEventListener('input', () => {
-      if (input.classList.contains('error')) validateField(field);
-    });
-  });
-
-  // Form submit
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    e.stopPropagation();
-
-    const allValid = fields.every(f => validateField(f));
-    if (!allValid) {
-      // Focus first invalid
-      const firstInvalid = form.querySelector('[aria-invalid="true"]');
-      if (firstInvalid) firstInvalid.focus();
-      return;
-    }
-
-    // Show loading state on button
-    if (submitBtn) {
-      submitBtn.classList.add('loading');
-      submitBtn.disabled = true;
-      if (submitText) submitText.textContent = 'Submitting...';
-    }
-
-    // Trigger gravity particles if available
-    if (typeof triggerGravityParticles === 'function' && submitBtn) {
-      try { triggerGravityParticles(submitBtn); } catch (e) {}
-    }
-
-    try {
-      // Simulate API call (750ms)
-      await new Promise(resolve => setTimeout(resolve, 750));
-
-      // Reset form input values and clear error classes
-      form.reset();
-      fields.forEach(f => {
-        const inp = $(`#${f.id}`);
-        const err = $(`#${f.errorId}`);
-        if (inp) {
-          inp.classList.remove('error');
-          inp.removeAttribute('aria-invalid');
-        }
-        if (err) err.textContent = '';
-      });
-
-      // Show success message with smooth animation
-      if (successMsg) {
-        successMsg.removeAttribute('hidden');
-        successMsg.style.display = 'flex';
-        successMsg.style.opacity = '0';
-        successMsg.style.transform = 'translateY(10px) scale(0.98)';
-        
-        requestAnimationFrame(() => {
-          successMsg.style.transition = 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
-          successMsg.style.opacity = '1';
-          successMsg.style.transform = 'translateY(0) scale(1)';
-        });
-      }
-
-      // Update submit button to Quote Requested state
-      if (submitBtn) {
-        submitBtn.classList.remove('loading');
-        if (submitText) submitText.textContent = 'Quote Requested ✓';
-        submitBtn.disabled = true;
-
-        setTimeout(() => {
-          if (submitText) submitText.textContent = 'Get My Quote';
-          submitBtn.disabled = false;
-        }, 4000);
-      }
-
-    } catch (err) {
-      if (submitBtn) {
-        submitBtn.classList.remove('loading');
-        if (submitText) submitText.textContent = 'Get My Quote';
-        submitBtn.disabled = false;
-      }
-      console.error('Form submission error:', err);
-    }
+    window.location.href = '404.html';
   });
 })();
 
 /* ══════════════════════════════════════════════════════
-   7B. FOOTER NEWSLETTER FORMS — UNIVERSAL VALIDATION & SUBMISSION
+   7B. FOOTER NEWSLETTER FORMS — SUBMISSION NAVIGATES TO 404
    ══════════════════════════════════════════════════════ */
 (function initNewsletterForms() {
   const forms = $$('.footer__newsletter-form');
   if (!forms.length) return;
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   forms.forEach(form => {
     form.removeAttribute('onsubmit');
-
-    const input = $('.footer__newsletter-input', form);
-    const submitBtn = $('.footer__newsletter-btn', form);
-
-    // Ensure feedback element exists
-    let feedback = $('.footer__newsletter-feedback', form);
-    if (!feedback) {
-      feedback = document.createElement('span');
-      feedback.className = 'footer__newsletter-feedback';
-      feedback.setAttribute('role', 'status');
-      feedback.setAttribute('aria-live', 'polite');
-      form.appendChild(feedback);
-    }
-
-    const showFeedback = (msg, isSuccess = false) => {
-      feedback.textContent = msg;
-      feedback.className = `footer__newsletter-feedback visible ${isSuccess ? 'is-success' : 'is-error'}`;
-    };
-
-    const clearFeedback = () => {
-      feedback.textContent = '';
-      feedback.className = 'footer__newsletter-feedback';
-      if (input) input.style.borderColor = '';
-    };
-
-    if (input) {
-      input.addEventListener('input', () => {
-        if (feedback.classList.contains('is-error')) {
-          clearFeedback();
-        }
-      });
-    }
-
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      e.stopPropagation();
-
-      if (!input) return;
-      const email = input.value.trim();
-
-      if (!email || !emailRegex.test(email)) {
-        showFeedback('Please enter a valid email address.', false);
-        if (input) {
-          input.style.borderColor = '#F87171';
-          input.focus();
-        }
-        return;
-      }
-
-      // Valid email: show loading state
-      const origBtnText = submitBtn ? submitBtn.textContent : 'Subscribe';
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Subscribing...';
-      }
-
-      // Trigger gravity particles if available
-      if (typeof triggerGravityParticles === 'function' && submitBtn) {
-        try { triggerGravityParticles(submitBtn); } catch (err) {}
-      }
-
-      await new Promise(r => setTimeout(r, 600));
-
-      // Show success feedback
-      showFeedback("You're subscribed! Watch your inbox for updates.", true);
-      input.value = '';
-      if (input) input.style.borderColor = '';
-
-      if (submitBtn) {
-        submitBtn.textContent = 'Subscribed ✓';
-      }
-
-      setTimeout(() => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = origBtnText;
-        }
-      }, 3500);
+      window.location.href = '404.html';
     });
   });
 })();
 
 /* ══════════════════════════════════════════════════════
-   7C. CONTACT PAGE FORM — VALIDATION & SUBMISSION
+   7C. CONTACT PAGE FORM — SUBMISSION NAVIGATES TO 404
    ══════════════════════════════════════════════════════ */
 (function initContactForm() {
   const form = $('#contact-form');
   if (!form) return;
 
-  const submitBtn = $('#contact-submit-btn');
-  const toast = $('#contact-toast');
-
-  const fields = [
-    {
-      id: 'contact-name',
-      validate: (v) => v.trim().length >= 2 ? null : 'Please enter your full name.'
-    },
-    {
-      id: 'contact-business',
-      validate: (v) => v.trim().length >= 2 ? null : 'Please enter your business name.'
-    },
-    {
-      id: 'contact-email',
-      validate: (v) => {
-        if (!v.trim()) return 'Please enter your email address.';
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(v.trim()) ? null : 'Please enter a valid email address.';
-      }
-    },
-    {
-      id: 'contact-phone',
-      validate: (v) => v.trim().length >= 6 ? null : 'Please enter your work phone number.'
-    }
-  ];
-
-  const validateField = ({ id, validate }) => {
-    const input = $(`#${id}`);
-    if (!input) return true;
-    const err = validate(input.value);
-    if (err) {
-      input.classList.add('error');
-      input.setAttribute('aria-invalid', 'true');
-      return false;
-    } else {
-      input.classList.remove('error');
-      input.removeAttribute('aria-invalid');
-      return true;
-    }
-  };
-
-  fields.forEach(f => {
-    const input = $(`#${f.id}`);
-    if (!input) return;
-    input.addEventListener('blur', () => validateField(f));
-    input.addEventListener('input', () => {
-      if (input.classList.contains('error')) validateField(f);
-    });
-  });
-
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    e.stopPropagation();
-
-    const allValid = fields.every(f => validateField(f));
-    if (!allValid) {
-      const firstInvalid = form.querySelector('[aria-invalid="true"]');
-      if (firstInvalid) firstInvalid.focus();
-      return;
-    }
-
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting...';
-    }
-
-    if (typeof triggerGravityParticles === 'function' && submitBtn) {
-      try { triggerGravityParticles(submitBtn); } catch (err) {}
-    }
-
-    await new Promise(r => setTimeout(r, 700));
-
-    form.reset();
-    fields.forEach(f => {
-      const inp = $(`#${f.id}`);
-      if (inp) {
-        inp.classList.remove('error');
-        inp.removeAttribute('aria-invalid');
-      }
-    });
-
-    if (toast) {
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 5000);
-    }
-
-    if (submitBtn) {
-      submitBtn.textContent = 'Quote Requested ✓';
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Get My Quote';
-      }, 3500);
-    }
+    window.location.href = '404.html';
   });
 })();
 
 /* ══════════════════════════════════════════════════════
-   7D. BLOG SEARCH SYSTEM — CLIENT-SIDE REALTIME FILTER
+   7D. BLOG SEARCH FORM — SUBMISSION NAVIGATES TO 404
    ══════════════════════════════════════════════════════ */
 (function initBlogSearch() {
   const form = $('#blog-search-form');
-  const input = $('#blog-search-input');
-  const submitBtn = $('#blog-search-btn');
-  const feedback = $('#blog-search-feedback');
-
-  if (!form || !input) return;
-
-  const showFeedback = (msg, type = 'info', showReset = false) => {
-    if (!feedback) return;
-    feedback.innerHTML = msg;
-    if (showReset) {
-      const resetBtn = document.createElement('button');
-      resetBtn.type = 'button';
-      resetBtn.className = 'blog-search-reset-btn';
-      resetBtn.textContent = 'Show All Articles';
-      resetBtn.addEventListener('click', resetSearch);
-      feedback.appendChild(resetBtn);
-    }
-    feedback.className = `blog-search__feedback show is-${type}`;
-  };
-
-  const clearFeedback = () => {
-    if (!feedback) return;
-    feedback.textContent = '';
-    feedback.className = 'blog-search__feedback';
-  };
-
-  const resetSearch = () => {
-    if (input) input.value = '';
-    clearFeedback();
-    const cards = $$('.blog-featured-card, .blog-card');
-    cards.forEach(card => {
-      card.classList.remove('blog-card--hidden', 'blog-featured-card--hidden');
-    });
-  };
-
-  const executeSearch = async () => {
-    const query = input.value.trim().toLowerCase();
-
-    if (!query) {
-      showFeedback('Please enter a search term.', 'error');
-      input.focus();
-      return;
-    }
-
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Searching...';
-    }
-
-    await new Promise(r => setTimeout(r, 350));
-
-    const featuredCards = $$('.blog-featured-card');
-    const standardCards = $$('.blog-card');
-    let matchCount = 0;
-
-    featuredCards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      if (text.includes(query)) {
-        card.classList.remove('blog-featured-card--hidden');
-        matchCount++;
-      } else {
-        card.classList.add('blog-featured-card--hidden');
-      }
-    });
-
-    standardCards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      if (text.includes(query)) {
-        card.classList.remove('blog-card--hidden');
-        matchCount++;
-      } else {
-        card.classList.add('blog-card--hidden');
-      }
-    });
-
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Search';
-    }
-
-    if (matchCount > 0) {
-      showFeedback(`Found ${matchCount} article${matchCount === 1 ? '' : 's'} matching "${input.value.trim()}".`, 'success', true);
-      const targetSection = document.getElementById('featured-articles') || document.getElementById('latest-articles');
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    } else {
-      // Unhide all cards and show friendly no-results message
-      featuredCards.forEach(c => c.classList.remove('blog-featured-card--hidden'));
-      standardCards.forEach(c => c.classList.remove('blog-card--hidden'));
-      showFeedback(`No results found for "${input.value.trim()}". Try searching for terms like "risk", "liability", "cyber", "property", or "policy".`, 'info');
-    }
-  };
+  if (!form) return;
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    e.stopPropagation();
-    executeSearch();
-  });
-
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      executeSearch();
-    }
-  });
-
-  input.addEventListener('input', () => {
-    if (input.value.trim() === '') {
-      resetSearch();
-    } else if (feedback && feedback.classList.contains('is-error')) {
-      clearFeedback();
-    }
+    window.location.href = '404.html';
   });
 })();
 
