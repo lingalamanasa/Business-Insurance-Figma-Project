@@ -133,8 +133,8 @@ body.auth-split-body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.35;
-  filter: saturate(1.15) contrast(1.05);
+  opacity: 0.55;
+  filter: saturate(1.2) contrast(1.1);
   transform: scale(1.04);
   transition: transform 12s ease;
 }
@@ -151,9 +151,9 @@ body.auth-split-body {
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(11, 17, 26, 0.7) 0%,
-    rgba(11, 17, 26, 0.85) 55%,
-    rgba(11, 17, 26, 0.98) 100%
+    rgba(11, 17, 26, 0.4) 0%,
+    rgba(11, 17, 26, 0.65) 50%,
+    rgba(11, 17, 26, 0.92) 100%
   );
   z-index: 1;
 }
