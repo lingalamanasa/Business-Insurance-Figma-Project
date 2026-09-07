@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Stackly — Get a Commercial Insurance Quote</title>
+  <meta name="description" content="Send Us a Message. Have a question or need assistance? Fill out the form and a member of the Stackly underwriting team will get back to you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="components.css" />
+  <link rel="stylesheet" href="contact.css" />
+</head>
+<body class="contact-page">
+
+  <!-- ═══ STACKLY LUXURY PRELOADER ═══ -->
+  <div class="stackly-preloader" id="stackly-preloader" aria-hidden="false">
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--top"></div>
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--bottom"></div>
+    <div class="stackly-preloader__content">
+      <div class="stackly-preloader__logo-wrap">
+        <div class="stackly-preloader__icon-ring">
+          <svg class="stackly-preloader__ring-svg" viewBox="0 0 100 100">
+            <circle class="stackly-preloader__ring-bg" cx="50" cy="50" r="44"></circle>
+            <circle class="stackly-preloader__ring-bar" id="preloader-ring-bar" cx="50" cy="50" r="44"></circle>
+          </svg>
+          <img src="assets/stackly-icon-white.webp" alt="Stackly" class="stackly-preloader__icon" />
+        </div>
+        <div class="stackly-preloader__brand">
+          <span class="stackly-preloader__wordmark">STACKLY</span>
+          <span class="stackly-preloader__tagline">STACKLY CONTACT</span>
+        </div>
+      </div>
+      <div class="stackly-preloader__progress-box">
+        <div class="stackly-preloader__bar">
+          <div class="stackly-preloader__fill" id="preloader-fill"></div>
+        </div>
+        <div class="stackly-preloader__counter">
+          <span id="preloader-percent">0</span>%
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DARK HEADER (MATCHING FIGMA) ═══ -->
+  <header class="header header--contact" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo" aria-label="Stackly Home">
+        <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="nav__logo-img" />
+      </a>
+      <ul class="nav__links" id="nav-links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+        <li><a href="services.html" class="nav__link">Services</a></li>
+        <li><a href="blog.html" class="nav__link">Blog</a></li>
+        <li><a href="contact.html" class="nav__link nav__link--active">Contact</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="#contact-form" class="nav__login">Log in</a>
+        <a href="#contact-form" class="btn nav__cta">Get Started</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false" style="color:var(--white);">
+        <span class="nav__hamburger-bar" style="background:var(--white);"></span>
+        <span class="nav__hamburger-bar" style="background:var(--white);"></span>
+        <span class="nav__hamburger-bar" style="background:var(--white);"></span>
+      </button>
+    </nav>
+    <div class="nav__mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+    <div class="nav__mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+      <button class="nav__mobile-close" id="mobile-close-btn" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <ul class="nav__mobile-links" role="list">
+        <li><a href="index.html" class="nav__mobile-link">Home</a></li>
+        <li><a href="about.html" class="nav__mobile-link">About</a></li>
+        <li><a href="services.html" class="nav__mobile-link">Services</a></li>
+        <li><a href="blog.html" class="nav__mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="nav__mobile-link">Contact</a></li>
+      </ul>
+      <div class="nav__mobile-actions">
+        <a href="#contact-form" class="nav__login">Log in</a>
+        <a href="#contact-form" class="btn btn--dark">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ 1. CONTACT HERO SECTION (EXACT FIGMA SPLIT) ═══ -->
+    <section class="contact-hero" id="contact-hero" aria-labelledby="contact-title">
+      <div class="container contact-hero__container">
+        <!-- LEFT: FORM -->
+        <div class="contact-hero__left" data-aos="fade-right">
+          <h1 class="contact-hero__title" id="contact-title">Send Us a Message</h1>
+          <p class="contact-hero__sub">
+            Have a question or need assistance? Fill out the form below and a member of our team will get back to you.
+          </p>
+
+          <form class="contact-form" id="contact-form" novalidate aria-label="Quote request and contact form">
+            <div class="contact-form__field">
+              <label for="contact-name" class="sr-only">Full Name</label>
+              <input type="text" id="contact-name" name="fullName" class="contact-form__input" placeholder="Full Name" required />
+            </div>
+
+            <div class="contact-form__field">
+              <label for="contact-business" class="sr-only">Business Name</label>
+              <input type="text" id="contact-business" name="businessName" class="contact-form__input" placeholder="Business Name" required />
+            </div>
+
+            <div class="contact-form__field">
+              <label for="contact-email" class="sr-only">Email Address</label>
+              <input type="email" id="contact-email" name="emailAddress" class="contact-form__input" placeholder="Email Address" required />
+            </div>
+
+            <div class="contact-form__field">
+              <label for="contact-phone" class="sr-only">WorkPhone Number email</label>
+              <input type="text" id="contact-phone" name="workPhone" class="contact-form__input" placeholder="WorkPhone Number email" required />
+            </div>
+
+            <div class="contact-form__field">
+              <label for="contact-message" class="sr-only">How Can We Help?</label>
+              <input type="text" id="contact-message" name="message" class="contact-form__input" placeholder="How Can We Help?" />
+            </div>
+
+            <button type="submit" class="contact-form__submit" id="contact-submit-btn">
+              Get My Quote
+            </button>
+          </form>
+        </div>
+
+        <!-- RIGHT: SKATEBOARDER ARTWORK -->
+        <div class="contact-hero__visual" data-aos="fade-left" data-aos-delay="100">
+          <div class="contact-hero__img-card">
+            <img src="assets/contact-skater.webp" alt="Dynamic yellow and black skateboarder illustration" class="contact-hero__img" id="contact-skater-img" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2. QUICK CONTACT DETAILS STRIP (4-COLUMNS) ═══ -->
+    <section class="contact-details-strip" id="details-strip" aria-label="Quick contact details">
+      <div class="container">
+        <div class="contact-details-strip__grid">
+          <!-- Item 1: Office Address -->
+          <div class="contact-detail-item" data-aos="fade-up" data-aos-delay="50">
+            <div class="contact-detail-item__icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="contact-detail-item__content">
+              <span class="contact-detail-item__label">Office Address</span>
+              <span class="contact-detail-item__value">Stackly, Hyderabad</span>
+            </div>
+            <div class="contact-detail-item__thumb">
+              <img src="assets/policy-side-office-thumb.webp" alt="Map thumbnail" />
+            </div>
+          </div>
+
+          <!-- Item 2: Phone Number -->
+          <div class="contact-detail-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="contact-detail-item__icon"><i class="fa-solid fa-phone"></i></div>
+            <div class="contact-detail-item__content">
+              <span class="contact-detail-item__label">Phone Number</span>
+              <span class="contact-detail-item__value">
+                <a href="tel:18001801551">1800 180 1551</a><br>
+                <span style="font-size:0.75rem;color:#64748B;">Toll-Free</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Item 3: Email Address -->
+          <div class="contact-detail-item" data-aos="fade-up" data-aos-delay="150">
+            <div class="contact-detail-item__icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="contact-detail-item__content">
+              <span class="contact-detail-item__label">Email Address</span>
+              <span class="contact-detail-item__value">
+                <a href="mailto:Hello@Company.Com">Hello@Company.Com</a>
+              </span>
+            </div>
+          </div>
+
+          <!-- Item 4: Office Hours -->
+          <div class="contact-detail-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="contact-detail-item__icon"><i class="fa-solid fa-clock"></i></div>
+            <div class="contact-detail-item__content">
+              <span class="contact-detail-item__label">Office Hours</span>
+              <span class="contact-detail-item__value">
+                Monday – Friday<br>
+                9:00 AM – 5:30 PM
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3. DEPARTMENT DIRECTORY (GRAVITY CARD DROP ANIMATION) ═══ -->
+    <section class="dept-directory-section" id="dept-directory" aria-labelledby="dept-directory-title">
+      <div class="container">
+        <div class="dept-directory__header" data-aos="fade-up">
+          <div class="dept-directory__header-top">
+            <div class="dept-gravity-badge" id="deptGravityBadge">
+              <span class="dept-gravity-dot"></span>
+              <span>Zero-Latency Routing • Dynamic Desk Allocation</span>
+            </div>
+            <button type="button" class="dept-gravity-btn" id="btnGravityDrop">
+              <i class="fa-solid fa-arrows-down-to-line"></i> Drop Cards
+            </button>
+          </div>
+          <h2 class="dept-directory__title" id="dept-directory-title">Connect Directly With Our Core Desks</h2>
+          <p class="dept-directory__sub">
+            Skip generic phone menus and lengthy switchboards. Reach specialized underwriting officers, certified claims adjusters, and policy operations directly.
+          </p>
+        </div>
+
+        <div class="dept-directory__grid" id="deptGrid">
+          <!-- Department Card 1: Commercial Underwriting -->
+          <div class="dept-card dept-gravity-card" id="cardDept1">
+            <div class="dept-card__top">
+              <div class="dept-card__icon-wrap">
+                <i class="fa-solid fa-file-shield"></i>
+              </div>
+              <div class="dept-card__badge-status dept-card__badge-status--live">
+                <span class="dept-card__pulse-dot"></span> Live Desk
+              </div>
+            </div>
+            <div class="dept-card__body">
+              <h3 class="dept-card__title">Commercial Underwriting</h3>
+              <p class="dept-card__desc">New policy binding, bespoke endorsements, risk assessments, and multi-location commercial portfolios.</p>
+              <div class="dept-card__sla">
+                <i class="fa-solid fa-bolt"></i> SLA: <strong>&lt; 4 Hours Response</strong>
+              </div>
+              <div class="dept-card__tags">
+                <span class="dept-card__tag">General Liability</span>
+                <span class="dept-card__tag">BOP</span>
+                <span class="dept-card__tag">Cyber</span>
+                <span class="dept-card__tag">Workers' Comp</span>
+              </div>
+            </div>
+            <div class="dept-card__contacts">
+              <a href="tel:18001801551" class="dept-contact-link">
+                <i class="fa-solid fa-phone"></i>
+                <div class="dept-contact-link__info">
+                  <span class="dept-contact-link__lbl">Direct Line</span>
+                  <span class="dept-contact-link__val">1800 180 1551 (Ext. 101)</span>
+                </div>
+              </a>
+              <a href="mailto:underwriting@stackly.com" class="dept-contact-link">
+                <i class="fa-solid fa-envelope"></i>
+                <div class="dept-contact-link__info">
+                  <span class="dept-contact-link__lbl">Direct Email</span>
+                  <span class="dept-contact-link__val">underwriting@stackly.com</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Department Card 2: Claims & Incident Desk -->
+          <div class="dept-card dept-card--priority dept-gravity-card" id="cardDept2">
+            <div class="dept-card__top">
+              <div class="dept-card__icon-wrap">
+                <i class="fa-solid fa-shield-heart"></i>
+              </div>
+              <div class="dept-card__badge-status dept-card__badge-status--priority">
+                <span class="dept-card__pulse-dot"></span> 24/7/365 On-Call
+              </div>
+            </div>
+            <div class="dept-card__body">
+              <h3 class="dept-card__title">Claims &amp; Incident Desk</h3>
+              <p class="dept-card__desc">First notice of loss (FNOL), critical property dispatch, business interruption claims, and rapid settlement assistance.</p>
+              <div class="dept-card__sla dept-card__sla--priority">
+                <i class="fa-solid fa-clock-rotate-left"></i> SLA: <strong>Immediate Emergency Dispatch</strong>
+              </div>
+              <div class="dept-card__tags">
+                <span class="dept-card__tag">Emergency FNOL</span>
+                <span class="dept-card__tag">Named Adjuster</span>
+                <span class="dept-card__tag">Rapid Payout</span>
+              </div>
+            </div>
+            <div class="dept-card__contacts">
+              <a href="tel:18001801551" class="dept-contact-link">
+                <i class="fa-solid fa-phone-volume"></i>
+                <div class="dept-contact-link__info">
+                  <span class="dept-contact-link__lbl">Emergency Line (24/7)</span>
+                  <span class="dept-contact-link__val">1800 180 1551 (Opt. 9)</span>
+                </div>
+              </a>
+              <a href="mailto:claims@stackly.com" class="dept-contact-link">
+                <i class="fa-solid fa-envelope"></i>
+                <div class="dept-contact-link__info">
+                  <span class="dept-contact-link__lbl">Claims Email</span>
+                  <span class="dept-contact-link__val">claims@stackly.com</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Department Card 3: Certificate & Policy Servicing -->
+          <div class="dept-card dept-gravity-card" id="cardDept3">
+            <div class="dept-card__top">
+              <div class="dept-card__icon-wrap">
+                <i class="fa-solid fa-certificate"></i>
+              </div>
+              <div class="dept-card__badge-status dept-card__badge-status--live">
+                <span class="dept-card__pulse-dot"></span> Live Desk
+              </div>
+            </div>
+            <div class="dept-card__body">
+              <h3 class="dept-card__title">Certificates &amp; Servicing</h3>
+              <p class="dept-card__desc">Instant Certificate of Insurance (COI) issuance, additional insured endorsements, address changes, and renewals.</p>
+              <div class="dept-card__sla">
+                <i class="fa-solid fa-bolt"></i> SLA: <strong>&lt; 60 Min Delivery</strong>
+              </div>
+              <div class="dept-card__tags">
+                <span class="dept-card__tag">Instant COI</span>
+                <span class="dept-card__tag">Endorsements</span>
+                <span class="dept-card__tag">Policy Audits</span>
+              </div>
+            </div>
+            <div class="dept-card__contacts">
+              <a href="tel:18001801551" class="dept-contact-link">
+                <i class="fa-solid fa-phone"></i>
+                <div class="dept-contact-link__info">
+                  <span class="dept-contact-link__lbl">Direct Line</span>
+                  <span class="dept-contact-link__val">1800 180 1551 (Ext. 204)</span>
+                </div>
+              </a>
+              <a href="mailto:certificates@stackly.com" class="dept-contact-link">
+                <i class="fa-solid fa-envelope"></i>
+                <div class="dept-contact-link__info">
+                  <span class="dept-contact-link__lbl">Certificates Email</span>
+                  <span class="dept-contact-link__val">certificates@stackly.com</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Department Card 4: Premium Accounting & Billing -->
+          <div class="dept-card dept-gravity-card" id="cardDept4">
+            <div class="dept-card__top">
+              <div class="dept-card__icon-wrap">
+                <i class="fa-solid fa-receipt"></i>
+              </div>
+              <div class="dept-card__badge-status dept-card__badge-status--live">
+                <span class="dept-card__pulse-dot"></span> Live Desk
+              </div>
+            </div>
+            <div class="dept-card__body">
+              <h3 class="dept-card__title">Premium Accounting &amp; Billing</h3>
+              <p class="dept-card__desc">Flexible invoice schedules, automated ACH setup, payroll audits, and broker commission statements.</p>
+              <div class="dept-card__sla">
+                <i class="fa-solid fa-bolt"></i> SLA: <strong>Same-Day Response</strong>
+              </div>
+              <div class="dept-card__tags">
+                <span class="dept-card__tag">Invoicing</span>
+                <span class="dept-card__tag">Payroll Sync</span>
+                <span class="dept-card__tag">Broker Accounts</span>
+              </div>
+            </div>
+            <div class="dept-card__contacts">
+              <a href="tel:18001801551" class="dept-contact-link">
+                <i class="fa-solid fa-phone"></i>
+                <div class="dept-contact-link__info">
+                  <span class="dept-contact-link__lbl">Direct Line</span>
+                  <span class="dept-contact-link__val">1800 180 1551 (Ext. 308)</span>
+                </div>
+              </a>
+              <a href="mailto:billing@stackly.com" class="dept-contact-link">
+                <i class="fa-solid fa-envelope"></i>
+                <div class="dept-contact-link__info">
+                  <span class="dept-contact-link__lbl">Accounting Email</span>
+                  <span class="dept-contact-link__val">billing@stackly.com</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4. STACKLY MAP SECTION (STANDALONE MAP) ═══ -->
+    <section class="salem-section" id="salem-location" aria-labelledby="salem-title">
+      <div class="container">
+        <div class="salem-section__header" data-aos="fade-up">
+          <div class="salem-section__eyebrow">
+            <i class="fa-solid fa-map-location-dot"></i> Regional Hub &amp; Underwriting Center
+          </div>
+          <h2 class="salem-section__title" id="salem-title">Stackly Map</h2>
+          <p class="salem-section__sub">MMR Complex, Periyakollappatty, Chinna Thirupathi (near Chinna Muniyappan Kovil), Salem, Tamil Nadu 636008, India</p>
+        </div>
+
+        <!-- Standalone Interactive Stackly Google Map -->
+        <div class="salem-map-container salem-map-container--standalone" data-aos="fade-up" data-aos-delay="100">
+          <a href="https://www.google.com/maps/search/?api=1&query=Stackly+MMR+Complex+Periyakollappatty+Chinna+Thirupathi+Salem+Tamil+Nadu+636008" target="_blank" rel="noopener noreferrer" class="salem-map-link" aria-label="Open Stackly Salem on Google Maps">
+            <img src="assets/stackly-google-map.webp" alt="Stackly Map at MMR Complex, Chinna Thirupathi, Salem" class="salem-map-img" />
+            <div class="salem-map-overlay-card">
+              <div class="salem-map-pulse"></div>
+              <div>
+                <div class="salem-map-overlay-title">Stackly • 4.7 ★ (58 Reviews)</div>
+                <div class="salem-map-overlay-sub">Click to open live in Google Maps <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:4px;"></i></div>
+              </div>
+            </div>
+            <div class="salem-map-bottom-cta">
+              <span class="salem-map-btn"><i class="fa-solid fa-diamond-turn-right"></i> Get Directions to Salem Hub</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5. UNDERWRITING RESPONSE GUARANTEES (WITH CARD IMAGES) ═══ -->
+    <section class="guarantees-section" id="response-guarantees" aria-labelledby="guarantees-title">
+      <div class="container">
+        <div class="guarantees-section__header" data-aos="fade-up">
+          <div class="guarantees-section__eyebrow">Service Level Standards</div>
+          <h2 class="guarantees-section__title" id="guarantees-title">What to Expect When You Contact Us</h2>
+        </div>
+
+        <div class="guarantees-grid">
+          <!-- Card 1 -->
+          <div class="guarantee-card" data-aos="fade-up" data-aos-delay="50">
+            <div class="guarantee-card__img-wrap">
+              <div class="guarantee-card__curtain"></div>
+              <img src="assets/contact-underwriter-consult.webp" alt="Underwriter reviewing commercial insurance request" class="guarantee-card__img" loading="lazy" />
+              <div class="guarantee-card__badge-icon"><i class="fa-solid fa-bolt"></i></div>
+            </div>
+            <div class="guarantee-card__content">
+              <h3 class="guarantee-card__title">4-Hour Response SLA</h3>
+              <p class="guarantee-card__desc">A licensed human underwriter reviews your business profile and replies within 4 business hours guaranteed.</p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="guarantee-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="guarantee-card__img-wrap">
+              <div class="guarantee-card__curtain"></div>
+              <img src="assets/about-team-sarah.webp" alt="Senior insurance underwriting specialist" class="guarantee-card__img" loading="lazy" />
+              <div class="guarantee-card__badge-icon"><i class="fa-solid fa-user-shield"></i></div>
+            </div>
+            <div class="guarantee-card__content">
+              <h3 class="guarantee-card__title">Zero Automated Phone Trees</h3>
+              <p class="guarantee-card__desc">When you call our desks in Salem or Hyderabad, a named representative answers directly — no robot loops.</p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="guarantee-card" data-aos="fade-up" data-aos-delay="150">
+            <div class="guarantee-card__img-wrap">
+              <div class="guarantee-card__curtain"></div>
+              <img src="assets/policy-side-office.webp" alt="Signing and reviewing commercial policy contract" class="guarantee-card__img" loading="lazy" />
+              <div class="guarantee-card__badge-icon"><i class="fa-solid fa-file-contract"></i></div>
+            </div>
+            <div class="guarantee-card__content">
+              <h3 class="guarantee-card__title">Pre-Bind Walkthrough</h3>
+              <p class="guarantee-card__desc">We review every line item, exclusion, and deductible with you line by line before any payment or bind commitment.</p>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="guarantee-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="guarantee-card__img-wrap">
+              <div class="guarantee-card__curtain"></div>
+              <img src="assets/services-cyber-lock.webp" alt="Instant certificate of insurance issuance" class="guarantee-card__img" loading="lazy" />
+              <div class="guarantee-card__badge-icon"><i class="fa-solid fa-certificate"></i></div>
+            </div>
+            <div class="guarantee-card__content">
+              <h3 class="guarantee-card__title">Instant COI Portal</h3>
+              <p class="guarantee-card__desc">Generate compliant Certificates of Insurance for new commercial landlords or vendors in under 60 seconds.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 6. FREQUENTLY ASKED QUESTIONS (ACCORDION) ═══ -->
+    <section class="faq-section" id="faq-section" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="faq-section__header" data-aos="fade-up">
+          <h2 class="faq-section__title" id="faq-title">Frequently Asked Questions</h2>
+          <p class="faq-section__sub">Clear answers on how we underwrite, bind, and service commercial accounts.</p>
+        </div>
+
+        <div class="faq-container" data-aos="fade-up" data-aos-delay="80">
+          <!-- FAQ 1 -->
+          <div class="faq-item active">
+            <button class="faq-question" type="button" aria-expanded="true">
+              <span>How quickly can Stackly bind our commercial policy?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>For standard trade and commercial risks, quotes can be generated and bound on the same business day once baseline operations and payroll figures are confirmed.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>Can we meet in person at the Salem or Hyderabad hubs?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! Our Salem underwriting center at MMR Complex (Chinna Thirupathi) and Hyderabad office welcome scheduled client visits for physical policy consultations, risk audits, and lease review meetings.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>What information do I need ready for a fast quote?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Having your estimated annual revenue, total full-time headcount, physical address, and any existing policy declarations page will allow us to produce an exact itemized binding quote within hours.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>How are emergency claims handled after business hours?</span>
+              <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Stackly maintains a 24/7 priority emergency dispatch line (1800 180 1551). For active property damage or critical incidents, an emergency adjuster is assigned immediately.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       STACKLY FOOTER SECTION
+  ═══════════════════════════════════════════ -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <!-- Col 1: Brand & Socials -->
+      <div class="footer__brand" data-aos="fade-up">
+        <a href="index.html" class="footer__logo" aria-label="Stackly Home">
+          <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="footer__logo-img" />
+        </a>
+        <p class="footer__brand-desc">
+          Empowering outdoor enthusiasts and adventurers with premium gear, alpine expeditions, and trail solutions.
+        </p>
+        <div class="footer__socials">
+          <a href="404.html" class="footer__social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="100">
+        <h4 class="footer__heading">Quick Links</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="index.html" class="footer__link">Home</a></li>
+          <li><a href="about.html" class="footer__link">About</a></li>
+          <li><a href="services.html" class="footer__link">Services</a></li>
+          <li><a href="blog.html" class="footer__link">Blog</a></li>
+          <li><a href="contact.html" class="footer__link footer__link--active">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Gear & Expeditions -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="200">
+        <h4 class="footer__heading">Gear &amp; Expeditions</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="404.html" class="footer__link">Tents &amp; Shelters</a></li>
+          <li><a href="404.html" class="footer__link">Alpine Backpacks</a></li>
+          <li><a href="404.html" class="footer__link">Trail Footwear</a></li>
+          <li><a href="404.html" class="footer__link">Expedition Logistics</a></li>
+          <li><a href="404.html" class="footer__link">Gear Repair Depot</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Stay Updated -->
+      <div class="footer__col footer__col--newsletter" data-aos="fade-up" data-aos-delay="300">
+        <h4 class="footer__heading">Stay Updated</h4>
+        <p class="footer__newsletter-text">
+          Get weekly trail guides, gear discounts &amp; wilderness expedition reports.
+        </p>
+        <form class="footer__newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Stackly updates!');">
+          <div class="footer__newsletter-pill">
+            <input type="email" class="footer__newsletter-input" placeholder="Enter your email" required aria-label="Enter your email for updates" />
+            <button type="submit" class="footer__newsletter-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__copyright">&copy; 2026 <strong>Stackly</strong> Outdoor Store. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="404.html" class="footer__legal-link">GitHub Repository</a>
+          <a href="404.html" class="footer__legal-link">Privacy Policy</a>
+          <a href="404.html" class="footer__legal-link">Terms of Service</a>
+          <a href="404.html" class="footer__legal-link">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="contact-toast" id="contact-toast" role="alert" aria-live="assertive">
+    <i class="fa-solid fa-circle-check" style="font-size:1.25rem;"></i>
+    <span>Quote request submitted! A Stackly underwriter will reach out within 4 hours.</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="animations.js"></script>
+  <script src="script.js"></script>
+
+  <!-- ═══════════════════════════════════════════
+       GRAVITY CARD DROP ANIMATION CONTROLLER
+  ═══════════════════════════════════════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const deptSection = document.getElementById('dept-directory');
+      const deptCards = document.querySelectorAll('.dept-gravity-card');
+      const dropBtn = document.getElementById('btnGravityDrop');
+
+      const cardRotations = [-3.5, 2.2, -2.0, 3.2];
+
+      function runGravityCardDrop() {
+        if (!deptCards.length) return;
+
+        if (typeof gsap !== 'undefined') {
+          const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+
+          deptCards.forEach((card, idx) => {
+            const rot = cardRotations[idx % cardRotations.length];
+            // Set initial falling position above
+            gsap.set(card, { y: -160, opacity: 0, rotation: rot, scale: 0.94 });
+
+            // Heavy gravity fall with bouncy ground settlement
+            tl.to(card, {
+              y: 0,
+              opacity: 1,
+              rotation: 0,
+              scale: 1,
+              duration: 0.85,
+              ease: 'bounce.out',
+              clearProps: 'rotation'
+            }, idx * 0.12);
+          });
+        } else {
+          deptCards.forEach((card, idx) => {
+            card.classList.remove('gravity-dropped');
+            void card.offsetWidth;
+            setTimeout(() => {
+              card.classList.add('gravity-dropped');
+            }, idx * 120);
+          });
+        }
+      }
+
+      // Replay Gravity Drop on Button Click
+      if (dropBtn) {
+        dropBtn.addEventListener('click', runGravityCardDrop);
+      }
+
+      // Trigger on Scroll Into View
+      if (deptSection && typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.create({
+          trigger: deptSection,
+          start: 'top 75%',
+          once: true,
+          onEnter: runGravityCardDrop
+        });
+      } else if (deptSection && 'IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              runGravityCardDrop();
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.15 });
+        obs.observe(deptSection);
+      }
+    });
+  </script>
+</body>
+</html>

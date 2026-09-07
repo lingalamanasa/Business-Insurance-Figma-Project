@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | Stackly</title>
+  <meta name="description" content="The page you are looking for does not exist or has been moved. Return to Stackly home or explore our coverage solutions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="components.css" />
+  <style>
+    /* ─── 404 CLEAN FULLSCREEN PAGE STYLES ─── */
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .error-page-main {
+      min-height: 100vh;
+      background: #000000;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .error-page-main::before {
+      content: '';
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(74, 222, 128, 0.14) 0%, rgba(244, 211, 94, 0.05) 40%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .error-card {
+      max-width: 620px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      background: rgba(16, 16, 16, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 28px;
+      padding: 4rem 2.75rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(74, 222, 128, 0.1);
+    }
+
+    .error-badge-404 {
+      display: inline-block;
+      font-size: clamp(5rem, 14vw, 8rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, #4ADE80 0%, #D4FC79 50%, #FFFFFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 40px rgba(74, 222, 128, 0.35);
+    }
+
+    .error-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #4ADE80;
+      background: rgba(74, 222, 128, 0.1);
+      padding: 0.4rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(74, 222, 128, 0.25);
+      margin-bottom: 1.5rem;
+    }
+
+    .error-title {
+      font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #FFFFFF;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .error-desc {
+      font-size: 1.05rem;
+      color: #94A3B8;
+      line-height: 1.65;
+      margin: 0 auto 2.5rem;
+      max-width: 480px;
+    }
+
+    .error-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 0;
+    }
+
+    .error-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #4ADE80;
+      color: #06140d;
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 0.9rem 1.85rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(74, 222, 128, 0.3);
+    }
+
+    .error-btn-primary:hover {
+      background: #3ecf75;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(74, 222, 128, 0.45);
+    }
+
+    .error-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.06);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.9rem 1.85rem;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .error-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 540px) {
+      .error-card {
+        padding: 3rem 1.5rem;
+      }
+      .error-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .error-btn-primary,
+      .error-btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ STACKLY LUXURY PRELOADER ═══ -->
+  <div class="stackly-preloader" id="stackly-preloader" aria-hidden="false">
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--top"></div>
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--bottom"></div>
+    <div class="stackly-preloader__content">
+      <div class="stackly-preloader__logo-wrap">
+        <div class="stackly-preloader__icon-ring">
+          <svg class="stackly-preloader__ring-svg" viewBox="0 0 100 100">
+            <circle class="stackly-preloader__ring-bg" cx="50" cy="50" r="44"></circle>
+            <circle class="stackly-preloader__ring-bar" id="preloader-ring-bar" cx="50" cy="50" r="44"></circle>
+          </svg>
+          <img src="assets/stackly-icon-white.webp" alt="Stackly" class="stackly-preloader__icon" />
+        </div>
+        <div class="stackly-preloader__brand">
+          <span class="stackly-preloader__wordmark">STACKLY</span>
+          <span class="stackly-preloader__tagline">PAGE NOT FOUND</span>
+        </div>
+      </div>
+      <div class="stackly-preloader__progress-box">
+        <div class="stackly-preloader__bar">
+          <div class="stackly-preloader__fill" id="preloader-fill"></div>
+        </div>
+        <div class="stackly-preloader__counter">
+          <span id="preloader-percent">0</span>%
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       404 ERROR CONTENT (CLEAN CENTERED VIEW)
+  ═══════════════════════════════════════════ -->
+  <main class="error-page-main">
+    <div class="error-card" data-aos="zoom-in">
+      <div class="error-badge-404">404</div>
+      <div>
+        <span class="error-tagline">
+          <i class="fa-solid fa-compass"></i> Trail Off Route
+        </span>
+      </div>
+      <h1 class="error-title">Page Not Found</h1>
+      <p class="error-desc">
+        The expedition or resource you are looking for has been relocated, archived, or is currently unavailable.
+      </p>
+
+      <div class="error-actions">
+        <a href="index.html" class="error-btn-primary">
+          <i class="fa-solid fa-house"></i> Return to Home
+        </a>
+        <button type="button" onclick="history.back()" class="error-btn-secondary" aria-label="Go back to previous page">
+          <i class="fa-solid fa-arrow-left"></i> Go Back
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="animations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

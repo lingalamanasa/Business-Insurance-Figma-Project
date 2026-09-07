@@ -1,0 +1,1480 @@
+/* ══════════════════════════════════════════════════════
+   STACKLY — SERVICES PAGE SPECIFIC STYLES
+   Exact 1:1 Recreation of Figma Services Design
+   ══════════════════════════════════════════════════════ */
+
+/* ─── 1. SERVICES HERO SECTION ──────────────────────── */
+.srv-hero {
+  position: relative;
+  background: var(--white);
+  padding-top: 110px;
+  padding-bottom: 5.5rem;
+  overflow: hidden;
+}
+
+.srv-hero__container {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  align-items: center;
+  gap: 4rem;
+}
+
+.srv-hero__content {
+  max-width: 680px;
+}
+
+.srv-hero__headline {
+  font-size: clamp(2.6rem, 4.8vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: #0F172A;
+  margin-bottom: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.28em;
+  row-gap: 0.05em;
+  perspective: 1000px;
+}
+
+.gsap-word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 4px;
+}
+
+.gsap-word {
+  display: inline-block;
+  will-change: transform, opacity;
+  transition: transform 0.25s ease, color 0.25s ease;
+  cursor: default;
+}
+
+.gsap-word:hover {
+  transform: translateY(-3px) scale(1.04);
+  color: #0F5132;
+}
+
+.srv-hero__sub {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: #334155;
+  margin-bottom: 0;
+  max-width: 580px;
+  font-weight: 450;
+  will-change: transform, opacity;
+}
+
+.srv-hero__visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.srv-hero__img-wrap {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* ─── TRIANGLE SQUAD ANIMATION CONTAINER ─────────────── */
+.triangle-squad {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tri-squad-item {
+  position: absolute;
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Background Wireframe Triangle Mesh */
+.tri-squad-item--mesh {
+  top: 50%;
+  left: 50%;
+  width: 380px;
+  height: 380px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(244, 211, 94, 0.18) 0%, rgba(15, 81, 50, 0.06) 45%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+  animation: squadAuraPulse 4.5s ease-in-out infinite alternate;
+}
+
+/* Top-Left Floating Gold Triangle */
+.tri-squad-item--tl {
+  top: 4%;
+  left: 2%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 22px 38px 22px;
+  border-color: transparent transparent #F4D35E transparent;
+  filter: drop-shadow(0 6px 14px rgba(244, 211, 94, 0.55));
+  opacity: 0.9;
+  animation: squadTriangleSpin var(--rot-speed, 18s) linear infinite, squadFloat var(--float-speed, 5s) ease-in-out infinite alternate;
+}
+
+/* Top-Right Emerald Triangle */
+.tri-squad-item--tr {
+  top: 8%;
+  right: 4%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 30px 52px 30px;
+  border-color: transparent transparent rgba(15, 81, 50, 0.35) transparent;
+  filter: drop-shadow(0 8px 18px rgba(15, 81, 50, 0.2));
+  animation: squadTriangleSpinReverse var(--rot-speed, 24s) linear infinite, squadFloat var(--float-speed, 7s) ease-in-out infinite alternate;
+}
+
+/* Bottom-Left Forest Green Triangle */
+.tri-squad-item--bl {
+  bottom: 6%;
+  left: 4%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 28px 48px 28px;
+  border-color: transparent transparent rgba(11, 37, 24, 0.45) transparent;
+  filter: drop-shadow(0 6px 16px rgba(11, 37, 24, 0.25));
+  animation: squadTriangleSpin var(--rot-speed, 16s) linear infinite, squadFloat var(--float-speed, 6s) ease-in-out infinite alternate;
+}
+
+/* Bottom-Right Golden Accent Triangle */
+.tri-squad-item--br {
+  bottom: 8%;
+  right: 2%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 24px 42px 24px;
+  border-color: transparent transparent rgba(244, 211, 94, 0.75) transparent;
+  filter: drop-shadow(0 6px 15px rgba(244, 211, 94, 0.45));
+  animation: squadTriangleSpinReverse var(--rot-speed, 22s) linear infinite, squadFloat var(--float-speed, 8s) ease-in-out infinite alternate;
+}
+
+/* Top Mini Triangle */
+.tri-squad-item--top {
+  top: -8%;
+  left: 48%;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 14px 25px 14px;
+  border-color: transparent transparent rgba(15, 81, 50, 0.4) transparent;
+  animation: squadTriangleSpin var(--rot-speed, 20s) linear infinite, squadFloat var(--float-speed, 6.5s) ease-in-out infinite alternate;
+}
+
+/* Orbital Dashed Ring */
+.tri-squad-item--ring {
+  top: 50%;
+  left: 50%;
+  width: 340px;
+  height: 340px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.5px dashed rgba(244, 211, 94, 0.4);
+  animation: squadRingSpin 24s linear infinite;
+}
+
+/* Floating Geometric Accent Dots */
+.tri-squad-item--dot1 {
+  top: 25%;
+  left: -5%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #F4D35E;
+  box-shadow: 0 0 12px #F4D35E;
+  animation: squadFloat 4s ease-in-out infinite alternate;
+}
+
+.tri-squad-item--dot2 {
+  bottom: 25%;
+  right: -5%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #0F5132;
+  box-shadow: 0 0 12px rgba(15, 81, 50, 0.5);
+  animation: squadFloat 5.5s ease-in-out infinite alternate;
+}
+
+/* Squad Keyframes */
+@keyframes squadTriangleSpin {
+  0% { transform: rotate(0deg) translateY(0px); }
+  50% { transform: rotate(180deg) translateY(-14px); }
+  100% { transform: rotate(360deg) translateY(0px); }
+}
+
+@keyframes squadTriangleSpinReverse {
+  0% { transform: rotate(360deg) translateY(0px); }
+  50% { transform: rotate(180deg) translateY(-16px); }
+  100% { transform: rotate(0deg) translateY(0px); }
+}
+
+@keyframes squadRingSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes squadFloat {
+  0% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-12px) translateX(6px); }
+  100% { transform: translateY(0px) translateX(0px); }
+}
+
+@keyframes squadAuraPulse {
+  0% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.95; }
+}
+
+/* Hover Reactions on Hardhat & Triangle Squad */
+.srv-hero__img-wrap:hover .tri-squad-item--tl {
+  transform: translate(-10px, -10px) scale(1.2) rotate(45deg);
+}
+
+.srv-hero__img-wrap:hover .tri-squad-item--tr {
+  transform: translate(12px, -12px) scale(1.2) rotate(-45deg);
+}
+
+.srv-hero__img-wrap:hover .tri-squad-item--bl {
+  transform: translate(-10px, 10px) scale(1.2) rotate(45deg);
+}
+
+.srv-hero__img-wrap:hover .tri-squad-item--br {
+  transform: translate(12px, 12px) scale(1.2) rotate(-45deg);
+}
+
+.srv-hero__img {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.12));
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.srv-hero__img:hover {
+  transform: translateY(-8px) rotate(2deg) scale(1.04);
+}
+
+/* ─── 2. WHAT'S ACTUALLY IN EACH POLICY (SLIDE IN FROM SIDES) ─── */
+.srv-breakdown {
+  padding: 5.5rem 0 6.5rem;
+  background: var(--white);
+  overflow: hidden;
+  position: relative;
+}
+
+.srv-breakdown__title {
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 3.5rem;
+}
+
+.srv-breakdown__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+.srv-policy-row {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  align-items: center;
+  gap: 4.5rem;
+  overflow: hidden;
+}
+
+.srv-policy-row__img-wrap {
+  width: 100%;
+  height: 250px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  background: #E2E8F0;
+  will-change: transform, opacity;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.srv-policy-row__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.srv-policy-row:hover .srv-policy-row__img {
+  transform: scale(1.04);
+}
+
+.srv-policy-row__content {
+  display: flex;
+  flex-direction: column;
+  will-change: transform, opacity;
+}
+
+.srv-policy-row__heading {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #0F172A;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+}
+
+.srv-policy-row__sub {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748B;
+  margin-bottom: 1.25rem;
+}
+
+.srv-policy-row__points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.srv-policy-row__point {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: #334155;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.srv-policy-row__point::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #64748B;
+  font-size: 1.1rem;
+}
+
+/* ─── 3. FULL-WIDTH SOLID YELLOW RIDERS (GSAP LINE ANIMATION) ── */
+.srv-riders {
+  background: #F4D35E;
+  padding: 6rem 0 6.5rem;
+  color: #0F172A;
+  position: relative;
+  overflow: hidden;
+}
+
+.srv-riders__header {
+  margin-bottom: 3.5rem;
+  max-width: 720px;
+}
+
+.srv-riders__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  color: #0F172A;
+  font-size: 0.8125rem;
+  font-weight: 900;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  margin-bottom: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.srv-riders__badge i {
+  color: #B45309;
+}
+
+.srv-riders__title {
+  font-size: clamp(2.1rem, 3.4vw, 2.75rem);
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  line-height: 1.15;
+}
+
+/* GSAP Header Draw Line Bar */
+.srv-riders__line-bar {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  height: 4px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.12);
+}
+
+.srv-riders__line-track {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+}
+
+.srv-riders__line-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #0F172A;
+  border-radius: 999px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+.srv-riders__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.5rem 3.25rem;
+}
+
+.srv-rider-item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 1.75rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.srv-rider-item:hover {
+  transform: translateY(-4px);
+}
+
+/* GSAP Animated Top Accent Line for each Rider Card */
+.srv-rider-item__line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(15, 23, 42, 0.2);
+  border-radius: 999px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+  overflow: hidden;
+}
+
+.srv-rider-item__line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #0F172A;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.srv-rider-item:hover .srv-rider-item__line::after {
+  transform: scaleX(1);
+}
+
+.srv-rider-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+}
+
+.srv-rider-item__num {
+  font-size: 0.8125rem;
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.srv-rider-item:hover .srv-rider-item__num {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.srv-rider-item__indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0F172A;
+  opacity: 0.35;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.srv-rider-item:hover .srv-rider-item__indicator {
+  opacity: 1;
+  transform: scale(1.6);
+  background: #B45309;
+}
+
+.srv-rider-item__title {
+  font-size: 1.1875rem;
+  font-weight: 900;
+  color: #0F172A;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+}
+
+.srv-rider-item:hover .srv-rider-item__title {
+  color: #111111;
+}
+
+.srv-rider-item__desc {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #1E293B;
+  opacity: 0.88;
+}
+
+/* ─── 4. HOW A CLAIM ACTUALLY MOVES ─────────────────── */
+.srv-claims {
+  padding: 6rem 0 6.5rem;
+  background: var(--white);
+  position: relative;
+}
+
+.srv-claims__header {
+  margin-bottom: 3.5rem;
+  max-width: 640px;
+}
+
+.srv-claims__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  color: #0F172A;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.srv-claims__badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #16A34A;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+  display: inline-block;
+  animation: pulseGreenBadge 2s infinite ease-in-out;
+}
+
+@keyframes pulseGreenBadge {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.65; }
+}
+
+.srv-claims__title {
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+
+.srv-claims__sub {
+  font-size: 0.9375rem;
+  color: #64748B;
+  line-height: 1.6;
+}
+
+.srv-claims__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem 2rem;
+}
+
+.srv-claim-card {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.srv-claim-card:hover {
+  transform: translateY(-4px);
+}
+
+.srv-claim-card__img-wrap {
+  width: 100%;
+  height: 210px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+  margin-bottom: 1.25rem;
+  background: #0B2518;
+  position: relative;
+}
+
+/* Staggered Venetian Blind Slats Overlay */
+.blinds-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.blind-slat {
+  flex: 1;
+  height: 100%;
+  background: linear-gradient(180deg, #0B2518 0%, #153E2B 100%);
+  transform-origin: top center;
+  transform: scaleY(1);
+  transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+  transition-delay: calc(var(--slat-i, 0) * 0.08s);
+  border-right: 1px solid rgba(244, 211, 94, 0.15);
+  box-sizing: border-box;
+}
+
+.blind-slat:last-child {
+  border-right: none;
+}
+
+/* When card is revealed by ScrollTrigger / IntersectionObserver */
+.srv-claim-card.is-revealed .blind-slat,
+.blinds-overlay.is-revealed .blind-slat {
+  transform: scaleY(0);
+}
+
+/* Alternate slat direction for even cards for dynamic visual flow */
+.srv-claim-card:nth-child(even) .blind-slat {
+  transform-origin: bottom center;
+}
+
+/* Step Number Pill */
+.srv-claim-card__num {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 4;
+  background: rgba(11, 37, 24, 0.9);
+  backdrop-filter: blur(8px);
+  color: #F4D35E;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(244, 211, 94, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.45s;
+}
+
+.srv-claim-card.is-revealed .srv-claim-card__num {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.srv-claim-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  filter: saturate(1.05);
+}
+
+.srv-claim-card:hover .srv-claim-card__img {
+  transform: scale(1.08);
+}
+
+.srv-claim-card__title {
+  font-size: 1.0625rem;
+  font-weight: 900;
+  color: #0F172A;
+  margin-bottom: 0.45rem;
+  letter-spacing: -0.015em;
+  transition: color 0.2s ease;
+}
+
+.srv-claim-card:hover .srv-claim-card__title {
+  color: #B45309;
+}
+
+.srv-claim-card__desc {
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+/* ─── 5. THREE STARTING PACKAGES (STACKED CARD FAN ANIMATION) ── */
+.srv-matrix {
+  padding: 6.5rem 0 7.5rem;
+  background: #FCFDFC;
+  position: relative;
+  overflow: hidden;
+}
+
+.srv-matrix__header {
+  margin-bottom: 3.5rem;
+}
+
+.srv-matrix__header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.srv-matrix__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.srv-matrix__badge i {
+  color: #D97706;
+}
+
+/* Fan View Interactive Mode Toggle */
+.srv-matrix__view-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: #F1F5F9;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid #E2E8F0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.srv-matrix__toggle-btn {
+  border: none;
+  background: transparent;
+  color: #64748B;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.srv-matrix__toggle-btn.active {
+  background: #111111;
+  color: #F4D35E;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.srv-matrix__toggle-btn:hover:not(.active) {
+  color: #0F172A;
+}
+
+.srv-matrix__title {
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+}
+
+.srv-matrix__subtitle {
+  font-size: 0.9375rem;
+  color: #64748B;
+  margin-bottom: 0;
+}
+
+/* 3D Perspective Card Fan Wrapper */
+.srv-matrix-card {
+  background: #FFFDF7;
+  border-radius: 28px;
+  border: 1px solid #EFE4C8;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.06);
+  display: grid;
+  grid-template-columns: 240px 1fr 1.08fr 1fr;
+  position: relative;
+  align-items: stretch;
+  perspective: 1600px;
+  transform-style: preserve-3d;
+  transition: all 0.55s cubic-bezier(0.34, 1.25, 0.64, 1);
+}
+
+/* Features Column (Left) */
+.srv-matrix__features-col {
+  padding: 1.75rem 1.25rem 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.srv-matrix__features-badge {
+  background: #111111;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.srv-matrix__feature-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.srv-matrix__feature-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.srv-matrix__feature-row.is-active {
+  background: rgba(244, 211, 94, 0.18);
+  transform: translateX(4px);
+}
+
+.srv-matrix__feature-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #F4D35E;
+  color: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(244, 211, 94, 0.4);
+}
+
+.srv-matrix__feature-label {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+/* Plan Card Columns (Fannable Deck items) */
+.srv-matrix__plan-col {
+  padding: 1.75rem 1.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-left: 1px solid #EFE4C8;
+  position: relative;
+  border-radius: 20px;
+  transform-origin: 50% 90%;
+  transition: transform 0.45s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.35s ease, z-index 0.1s, filter 0.3s ease;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.srv-fan-card__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.srv-matrix__plan-header {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.srv-matrix__plan-icon {
+  font-size: 1.75rem;
+  color: #B45309;
+  margin-bottom: 0.5rem;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.srv-matrix__plan-col:hover .srv-matrix__plan-icon {
+  transform: scale(1.22) rotate(-6deg);
+}
+
+.srv-matrix__plan-name {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #0F172A;
+  margin-bottom: 0.2rem;
+}
+
+.srv-matrix__plan-sub {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748B;
+}
+
+.srv-matrix__plan-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  flex: 1;
+  justify-content: space-around;
+}
+
+.srv-matrix__cell {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #334155;
+  border-radius: 6px;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.srv-matrix__cell.is-active {
+  background: rgba(244, 211, 94, 0.25);
+  font-weight: 800;
+}
+
+.srv-matrix__cell--included {
+  color: #15803D;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.srv-matrix__cell--addon {
+  color: #B45309;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.srv-matrix__cell--dash {
+  color: #94A3B8;
+  font-weight: 900;
+}
+
+/* Featured Growth Column (Highlighted in Pure Yellow) */
+.srv-matrix__plan-col--growth {
+  background: #F4D35E;
+  border-radius: 24px;
+  margin: -16px 0;
+  box-shadow: 0 16px 40px rgba(244, 211, 94, 0.4);
+  border: 1px solid #E2BC4B;
+  z-index: 2;
+  padding: 2.25rem 1.25rem 2.5rem;
+}
+
+.srv-matrix__plan-col--growth .srv-matrix__plan-icon {
+  color: #111111;
+}
+
+.srv-matrix__plan-col--growth .srv-matrix__plan-name {
+  color: #111111;
+}
+
+.srv-matrix__plan-col--growth .srv-matrix__plan-sub {
+  color: #334155;
+}
+
+.srv-matrix__plan-col--growth .srv-matrix__cell {
+  color: #111111;
+}
+
+.srv-matrix__plan-col--growth .srv-matrix__cell--included {
+  color: #111111;
+}
+
+.srv-matrix__plan-col--growth .srv-matrix__cell--addon {
+  color: #111111;
+}
+
+/* ══════════════════════════════════════════════════════
+   CARD FAN HOVER PHYSICS & STATES
+   ══════════════════════════════════════════════════════ */
+
+/* Hovering Starter in Grid mode */
+.srv-matrix-card:not(.mode-stack) .srv-fan-card#planStarter:hover {
+  transform: translateY(-16px) rotate(-2deg) scale(1.02);
+  z-index: 8;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+  background: #FFFFFF;
+}
+
+.srv-matrix-card:not(.mode-stack):has(#planStarter:hover) #planGrowth {
+  transform: rotate(2deg) translateX(8px);
+}
+
+.srv-matrix-card:not(.mode-stack):has(#planStarter:hover) #planEnterprise {
+  transform: rotate(3.5deg) translateX(14px);
+}
+
+/* Hovering Growth in Grid mode */
+.srv-matrix-card:not(.mode-stack) .srv-fan-card#planGrowth:hover {
+  transform: translateY(-20px) scale(1.035);
+  z-index: 8;
+  box-shadow: 0 28px 55px rgba(244, 211, 94, 0.55);
+}
+
+.srv-matrix-card:not(.mode-stack):has(#planGrowth:hover) #planStarter {
+  transform: rotate(-2.5deg) translateX(-8px);
+}
+
+.srv-matrix-card:not(.mode-stack):has(#planGrowth:hover) #planEnterprise {
+  transform: rotate(2.5deg) translateX(8px);
+}
+
+/* Hovering Enterprise in Grid mode */
+.srv-matrix-card:not(.mode-stack) .srv-fan-card#planEnterprise:hover {
+  transform: translateY(-16px) rotate(2deg) scale(1.02);
+  z-index: 8;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+  background: #FFFFFF;
+}
+
+.srv-matrix-card:not(.mode-stack):has(#planEnterprise:hover) #planGrowth {
+  transform: rotate(-2deg) translateX(-8px);
+}
+
+.srv-matrix-card:not(.mode-stack):has(#planEnterprise:hover) #planStarter {
+  transform: rotate(-3.5deg) translateX(-14px);
+}
+
+/* ══════════════════════════════════════════════════════
+   STACKED DECK MODE (FANNED PLAYING CARD DECK)
+   ══════════════════════════════════════════════════════ */
+.srv-matrix-card.mode-stack {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 520px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 2rem 0;
+  position: relative;
+}
+
+.srv-matrix-card.mode-stack #matrixFeaturesCol {
+  display: none;
+}
+
+.srv-matrix-card.mode-stack .srv-fan-card {
+  position: absolute;
+  width: 320px;
+  background: #FFFDF7;
+  border: 1.5px solid #EFE4C8;
+  border-radius: 26px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+  margin: 0;
+  padding: 2.25rem 1.75rem 2.5rem;
+}
+
+/* Stack Positions & Fan Rotations */
+.srv-matrix-card.mode-stack #planStarter {
+  transform: translateX(-160px) rotate(-8deg) scale(0.95);
+  z-index: 2;
+}
+
+.srv-matrix-card.mode-stack #planGrowth {
+  transform: translateX(0) translateY(-10px) rotate(0deg) scale(1.02);
+  z-index: 4;
+}
+
+.srv-matrix-card.mode-stack #planEnterprise {
+  transform: translateX(160px) rotate(8deg) scale(0.95);
+  z-index: 2;
+}
+
+/* Stack Hover Elevate Spotlight */
+.srv-matrix-card.mode-stack #planStarter:hover {
+  transform: translateX(-160px) translateY(-24px) rotate(-4deg) scale(1.05);
+  z-index: 10;
+  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.22);
+}
+
+.srv-matrix-card.mode-stack #planGrowth:hover {
+  transform: translateX(0) translateY(-30px) rotate(0deg) scale(1.07);
+  z-index: 10;
+  box-shadow: 0 35px 70px rgba(244, 211, 94, 0.6);
+}
+
+.srv-matrix-card.mode-stack #planEnterprise:hover {
+  transform: translateX(160px) translateY(-24px) rotate(4deg) scale(1.05);
+  z-index: 10;
+  box-shadow: 0 30px 65px rgba(0, 0, 0, 0.22);
+}
+
+/* ─── 6. WHAT YOU GET BETWEEN RENEWALS (3D CURSOR HOVER) ── */
+.srv-renewals {
+  padding: 6rem 0 6.5rem;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.srv-renewals__container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 4.5rem;
+}
+
+.srv-renewals__content {
+  max-width: 580px;
+}
+
+.srv-renewals__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FEF9C3;
+  color: #854D0E;
+  border: 1px solid #FDE047;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.srv-renewals__badge i {
+  color: #CA8A04;
+  font-size: 0.85rem;
+}
+
+.srv-renewals__title {
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+}
+
+.srv-renewals__body {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 0;
+}
+
+.srv-renewals__visual {
+  display: flex;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.srv-renewals__card-3d {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  cursor: crosshair;
+}
+
+.srv-renewals__img-wrap {
+  position: relative;
+  width: 100%;
+  height: 330px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
+  background: #F8FAFC;
+  border: 1px solid #F1F5F9;
+  transform: translateZ(0);
+}
+
+.srv-renewals__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+/* Dynamic Interactive Glare / Lighting Highlight */
+.srv-renewals__glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  background: radial-gradient(circle 260px at 50% 50%, rgba(255, 255, 255, 0.45) 0%, rgba(244, 211, 94, 0.15) 30%, transparent 70%);
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+  will-change: background, opacity;
+}
+
+/* Floating Dynamic Cursor Follower Badge */
+.srv-renewals__cursor-follower {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition: opacity 0.25s ease, transform 0.12s ease-out;
+  will-change: transform, opacity;
+}
+
+.srv-renewals__cursor-text {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(11, 37, 24, 0.92);
+  backdrop-filter: blur(10px);
+  color: #F4D35E;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(244, 211, 94, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+/* Ambient glow backdrop behind the 3D card */
+.srv-renewals__glow-backdrop {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle, rgba(244, 211, 94, 0.2) 0%, rgba(22, 163, 74, 0.08) 50%, transparent 80%);
+  filter: blur(20px);
+  z-index: -1;
+  opacity: 0.5;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+  border-radius: 36px;
+}
+
+.srv-renewals__card-3d:hover .srv-renewals__glow-backdrop {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* ─── 7. UNIFIED DARK CTA + FOOTER SECTION ──────────── */
+.srv-dark-footer-wrap {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 7rem 0 5rem;
+}
+
+.srv-cta-block {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 3.5rem;
+  padding-bottom: 7.5rem;
+}
+
+.srv-cta-block__left {
+  max-width: 580px;
+}
+
+.srv-cta-block__title {
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #FFFFFF;
+  margin-bottom: 1.25rem;
+}
+
+.srv-cta-block__sub {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: #94A3B8;
+  margin-bottom: 0;
+}
+
+.srv-cta-block__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.srv-btn-quote {
+  background: #F4D35E;
+  color: #000000;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  padding: 0.9rem 1.85rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.srv-btn-quote:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(244, 211, 94, 0.3);
+}
+
+.srv-btn-badge {
+  background: transparent;
+  color: #F4D35E;
+  border: 1.5px solid #F4D35E;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Footer bottom grid */
+.srv-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.srv-footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.srv-footer-logo-img {
+  width: 140px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.srv-footer-brand-text {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #64748B;
+  max-width: 280px;
+}
+
+.srv-footer-col h4 {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.srv-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.srv-footer-links a {
+  color: #94A3B8;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.srv-footer-links a:hover {
+  color: #F4D35E;
+}
+
+/* ─── RESPONSIVE BREAKPOINTS ────────────────────────── */
+@media (max-width: 1100px) {
+  .srv-matrix-card {
+    grid-template-columns: 1fr;
+    overflow: hidden;
+  }
+  .srv-matrix__plan-col {
+    border-left: none;
+    border-top: 1px solid #EFE4C8;
+  }
+  .srv-matrix__plan-col--growth {
+    margin: 0;
+    border-radius: 0;
+  }
+  .srv-cta-block {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .srv-cta-block__actions {
+    justify-content: flex-start;
+  }
+  .srv-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .srv-hero__container,
+  .srv-renewals__container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .srv-policy-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .srv-policy-row__img-wrap {
+    height: 220px;
+  }
+  .srv-riders__grid,
+  .srv-claims__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .srv-riders__grid,
+  .srv-claims__grid,
+  .srv-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}

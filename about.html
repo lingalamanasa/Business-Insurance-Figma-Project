@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Stackly Commercial Insurance</title>
+  <meta name="description" content="A commercial insurer that still underwrites by hand. Founded in 1912, insuring businesses with dedicated named agents across 37 states." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="components.css" />
+  <link rel="stylesheet" href="about.css" />
+</head>
+<body>
+
+  <!-- ═══ STACKLY LUXURY PRELOADER ═══ -->
+  <div class="stackly-preloader" id="stackly-preloader" aria-hidden="false">
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--top"></div>
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--bottom"></div>
+    <div class="stackly-preloader__content">
+      <div class="stackly-preloader__logo-wrap">
+        <div class="stackly-preloader__icon-ring">
+          <svg class="stackly-preloader__ring-svg" viewBox="0 0 100 100">
+            <circle class="stackly-preloader__ring-bg" cx="50" cy="50" r="44"></circle>
+            <circle class="stackly-preloader__ring-bar" id="preloader-ring-bar" cx="50" cy="50" r="44"></circle>
+          </svg>
+          <img src="assets/stackly-icon-white.webp" alt="Stackly" class="stackly-preloader__icon" />
+        </div>
+        <div class="stackly-preloader__brand">
+          <span class="stackly-preloader__wordmark">STACKLY</span>
+          <span class="stackly-preloader__tagline">STACKLY ABOUT</span>
+        </div>
+      </div>
+      <div class="stackly-preloader__progress-box">
+        <div class="stackly-preloader__bar">
+          <div class="stackly-preloader__fill" id="preloader-fill"></div>
+        </div>
+        <div class="stackly-preloader__counter">
+          <span id="preloader-percent">0</span>%
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       SHARED NAVIGATION HEADER
+  ═══════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo" id="logo-link" aria-label="Stackly Home">
+        <img src="assets/stackly-logo-black.webp" alt="STACKLY" class="nav__logo-img" />
+      </a>
+      <ul class="nav__links" id="nav-links" role="list">
+        <li><a href="index.html" class="nav__link" id="nav-home">Home</a></li>
+        <li><a href="about.html" class="nav__link nav__link--active" id="nav-about">About</a></li>
+        <li><a href="services.html" class="nav__link" id="nav-services">Services</a></li>
+        <li><a href="blog.html" class="nav__link" id="nav-blog">Blog</a></li>
+        <li><a href="contact.html" class="nav__link" id="nav-contact">Contact</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="contact.html" class="nav__login" id="nav-login">Log in</a>
+        <a href="contact.html" class="btn btn--dark nav__cta" id="nav-get-started">Get Started</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+      </button>
+    </nav>
+    <div class="nav__mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+    <div class="nav__mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+      <button class="nav__mobile-close" id="mobile-close-btn" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <ul class="nav__mobile-links" role="list">
+        <li><a href="index.html" class="nav__mobile-link">Home</a></li>
+        <li><a href="about.html" class="nav__mobile-link">About</a></li>
+        <li><a href="services.html" class="nav__mobile-link">Services</a></li>
+        <li><a href="blog.html" class="nav__mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="nav__mobile-link">Contact</a></li>
+      </ul>
+      <div class="nav__mobile-actions">
+        <a href="contact.html" class="nav__login">Log in</a>
+        <a href="contact.html" class="btn btn--dark">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 1: ABOUT HERO (GSAP SLIDE IN FROM SIDES)
+    ═══════════════════════════════════════════ -->
+    <section class="about-hero" id="about-hero" aria-labelledby="about-headline">
+      <div class="about-hero__shape" id="heroShape" aria-hidden="true"></div>
+      <div class="container about-hero__container">
+        <div class="about-hero__left" id="heroLeft">
+          <p class="about-hero__eyebrow">Cover the</p>
+          <h1 class="about-hero__headline" id="about-headline">
+            A commercial insurer that still underwrites by hand
+          </h1>
+          <p class="about-hero__body">
+            We're not the biggest carrier in the market, and we've stopped trying to be. Meridian stays small enough that a person not an algorithm reads your file before your rate is set.
+          </p>
+        </div>
+        <div class="about-hero__right" id="heroRight">
+          <div class="about-hero__year" id="hero-founding-year" data-target="1912">1912</div>
+          <p class="about-hero__year-caption">
+            Founded in Chicago, insuring a single machine shop on the South Side
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 2: 4 DECISIONS TIMELINE
+    ═══════════════════════════════════════════ -->
+    <section class="about-timeline" id="about-timeline" aria-labelledby="timeline-title">
+      <div class="container">
+        <div class="about-timeline__heading" data-aos="fade-up">
+          <h2 class="about-timeline__title" id="timeline-title">
+            <span class="about-timeline__title-outline">4 decisions</span> that shaped the company
+          </h2>
+        </div>
+
+        <div class="about-timeline__wrap">
+          <div class="about-timeline__line" id="timeline-line">
+            <div class="about-timeline__line-progress" id="timeline-progress"></div>
+          </div>
+
+          <!-- Timeline Item 1: 1912 (Right side) -->
+          <div class="about-timeline__item" data-aos="fade-up" data-aos-delay="100">
+            <div></div>
+            <div class="about-timeline__badge-col">
+              <div class="about-timeline__badge">1912</div>
+            </div>
+            <div class="about-timeline__content about-timeline__content--right">
+              <h3 class="about-timeline__item-title">A single-line start</h3>
+              <p class="about-timeline__item-text">
+                Meridian opened writing one product — fire coverage for machine shops — because the founders refused to underwrite a trade they hadn't walked the floor of.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 2: 1968 (Left side) -->
+          <div class="about-timeline__item" data-aos="fade-up" data-aos-delay="150">
+            <div class="about-timeline__content about-timeline__content--left">
+              <h3 class="about-timeline__item-title">Kept claims in-house</h3>
+              <p class="about-timeline__item-text">
+                While competitors began outsourcing claims to third-party administrators, Meridian built its own claims desk and never closed it — a decision that still shapes hiring today.
+              </p>
+            </div>
+            <div class="about-timeline__badge-col">
+              <div class="about-timeline__badge">1968</div>
+            </div>
+            <div></div>
+          </div>
+
+          <!-- Timeline Item 3: 1997 (Right side) -->
+          <div class="about-timeline__item" data-aos="fade-up" data-aos-delay="200">
+            <div></div>
+            <div class="about-timeline__badge-col">
+              <div class="about-timeline__badge">1997</div>
+            </div>
+            <div class="about-timeline__content about-timeline__content--right">
+              <h3 class="about-timeline__item-title">Named agents, not call queues</h3>
+              <p class="about-timeline__item-text">
+                Every policyholder was assigned one agent for the life of their account, replacing the rotating-representative model most of the industry still uses.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 4: 2019 (Left side) -->
+          <div class="about-timeline__item" data-aos="fade-up" data-aos-delay="250">
+            <div class="about-timeline__content about-timeline__content--left">
+              <h3 class="about-timeline__item-title">Cyber added as a core line</h3>
+              <p class="about-timeline__item-text">
+                Meridian began underwriting cyber liability in-house rather than reselling a third-party facility, after seeing how often claims fell into coverage gaps between policies.
+              </p>
+            </div>
+            <div class="about-timeline__badge-col">
+              <div class="about-timeline__badge">2019</div>
+            </div>
+            <div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 3: FULL-WIDTH TEAMWORK / SOLIDARITY IMAGE
+    ═══════════════════════════════════════════ -->
+    <section class="about-hero-image" id="about-solidarity" aria-label="Our team solidarity">
+      <div class="container">
+        <div class="about-hero-image__frame" data-aos="zoom-in" data-aos-duration="1000">
+          <img
+            class="about-hero-image__img"
+            src="assets/about-solidarity-hands.webp"
+            alt="Four hands holding wrists in cross-pattern, symbolizing teamwork, trust, and underwriting solidarity"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 4: FOUR RULES OUR UNDERWRITERS DON'T BEND (2x2 GRID)
+    ═══════════════════════════════════════════ -->
+    <section class="about-rules" id="about-rules" aria-labelledby="rules-title">
+      <div class="container">
+        <div class="about-rules__header" data-aos="fade-up">
+          <h2 class="about-rules__title" id="rules-title">
+            Four rules our underwriters don't bend
+          </h2>
+          <p class="about-rules__subtitle">
+            These aren't values on a wall poster — they're written into how policies actually get priced and approved.
+          </p>
+        </div>
+
+        <div class="about-rules__grid" data-aos="fade-up" data-aos-delay="100">
+          <!-- Rule 1: Top Left -->
+          <div class="about-rule-card" id="rule-plain-language">
+            <h3 class="about-rule-card__title">Plain language, always</h3>
+            <p class="about-rule-card__text">
+              If a clause needs a lawyer to explain it to you, we rewrite the clause — not just the summary.
+            </p>
+          </div>
+
+          <!-- Rule 2: Top Right -->
+          <div class="about-rule-card" id="rule-no-surprises">
+            <h3 class="about-rule-card__title">No surprise exclusions</h3>
+            <p class="about-rule-card__text">
+              Every exclusion is disclosed at quote stage. None are discovered for the first time during a claim.
+            </p>
+          </div>
+
+          <!-- Rule 3: Bottom Left -->
+          <div class="about-rule-card" id="rule-visit-trade">
+            <h3 class="about-rule-card__title">Underwriters visit the trade</h3>
+            <p class="about-rule-card__text">
+              Before we write a new industry class, someone from Meridian spends a day on-site to understand the actual risk.
+            </p>
+          </div>
+
+          <!-- Rule 4: Bottom Right -->
+          <div class="about-rule-card" id="rule-pay-first">
+            <h3 class="about-rule-card__title">Pay first, dispute later</h3>
+            <p class="about-rule-card__text">
+              Where a claim is ambiguous, we pay the undisputed portion immediately rather than holding the full amount hostage to review.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 5: THE PEOPLE WHO SIGN OFF ON YOUR POLICY
+    ═══════════════════════════════════════════ -->
+    <section class="about-team" id="about-team" aria-labelledby="team-title">
+      <div class="container">
+        <h2 class="about-team__title" id="team-title">
+          The people who sign off on your policy
+        </h2>
+
+        <div class="about-team__grid">
+          <!-- Person 1: Marcus Holt -->
+          <div class="about-team-card" id="team-marcus">
+            <div class="about-team-card__img-wrap">
+              <div class="about-team-card__curtain"></div>
+              <img
+                class="about-team-card__img"
+                src="assets/about-team-marcus.webp"
+                alt="Marcus Holt, Chief Underwriting Officer"
+                loading="lazy"
+              />
+            </div>
+            <h3 class="about-team-card__name">Marcus Holt</h3>
+            <p class="about-team-card__role">Chief Underwriting Officer</p>
+            <p class="about-team-card__bio">
+              Twenty-two years pricing property and casualty risk, eleven of them at Meridian.
+            </p>
+          </div>
+
+          <!-- Person 2: Sarah Achebe -->
+          <div class="about-team-card" id="team-sarah">
+            <div class="about-team-card__img-wrap">
+              <div class="about-team-card__curtain"></div>
+              <img
+                class="about-team-card__img"
+                src="assets/about-team-sarah.webp"
+                alt="Sarah Achebe, Head of Claims"
+                loading="lazy"
+              />
+            </div>
+            <h3 class="about-team-card__name">Sarah Achebe</h3>
+            <p class="about-team-card__role">Head of Claims</p>
+            <p class="about-team-card__bio">
+              Built the in-house claims desk model now used across every Meridian region.
+            </p>
+          </div>
+
+          <!-- Person 3: Teo Lindqvist -->
+          <div class="about-team-card" id="team-teo">
+            <div class="about-team-card__img-wrap">
+              <div class="about-team-card__curtain"></div>
+              <img
+                class="about-team-card__img"
+                src="assets/about-team-teo.webp"
+                alt="Teo Lindqvist, Head of Cyber & Emerging Risk"
+                loading="lazy"
+              />
+            </div>
+            <h3 class="about-team-card__name">Teo Lindqvist</h3>
+            <p class="about-team-card__role">Head of Cyber &amp; Emerging Risk</p>
+            <p class="about-team-card__bio">
+              Joined from a data-security consultancy to launch Meridian's in-house cyber line.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 6: KEY STATS BANNER (4 ANIMATED CIRCLES)
+    ═══════════════════════════════════════════ -->
+    <section class="about-stats-banner" id="about-stats-banner" aria-label="Company Statistics">
+      <div class="container">
+        <div class="about-stats-banner__grid">
+          <!-- Stat 1: 340 -->
+          <div class="about-stat-col" data-aos="fade-up" data-aos-delay="100">
+            <div class="about-stat-circle-wrap">
+              <div class="about-stat-halo"></div>
+              <svg class="about-stat-svg" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="about-stat-svg__track" cx="60" cy="60" r="54" />
+                <circle class="about-stat-svg__bar" cx="60" cy="60" r="54" style="--percent: 92;" />
+              </svg>
+              <div class="about-stat-radar"></div>
+              <div class="about-stat-circle">
+                <span class="stat-counter" data-target="340">340</span>
+              </div>
+            </div>
+            <p class="about-stat-desc">
+              underwriters, agents, and claims staff no outsourced desks
+            </p>
+          </div>
+
+          <!-- Stat 2: 6 -->
+          <div class="about-stat-col" data-aos="fade-up" data-aos-delay="200">
+            <div class="about-stat-circle-wrap">
+              <div class="about-stat-halo"></div>
+              <svg class="about-stat-svg" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="about-stat-svg__track" cx="60" cy="60" r="54" />
+                <circle class="about-stat-svg__bar" cx="60" cy="60" r="54" style="--percent: 75;" />
+              </svg>
+              <div class="about-stat-radar"></div>
+              <div class="about-stat-circle">
+                <span class="stat-counter" data-target="6">6</span>
+              </div>
+            </div>
+            <p class="about-stat-desc">
+              regional offices, each staffed with local underwriting authority
+            </p>
+          </div>
+
+          <!-- Stat 3: 11yrs -->
+          <div class="about-stat-col" data-aos="fade-up" data-aos-delay="300">
+            <div class="about-stat-circle-wrap">
+              <div class="about-stat-halo"></div>
+              <svg class="about-stat-svg" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="about-stat-svg__track" cx="60" cy="60" r="54" />
+                <circle class="about-stat-svg__bar" cx="60" cy="60" r="54" style="--percent: 88;" />
+              </svg>
+              <div class="about-stat-radar"></div>
+              <div class="about-stat-circle">
+                <span class="stat-counter" data-target="11">11</span><span class="stat-suffix">yrs</span>
+              </div>
+            </div>
+            <p class="about-stat-desc">
+              average tenure of a Meridian claims adjuster
+            </p>
+          </div>
+
+          <!-- Stat 4: 3.2% -->
+          <div class="about-stat-col" data-aos="fade-up" data-aos-delay="400">
+            <div class="about-stat-circle-wrap">
+              <div class="about-stat-halo"></div>
+              <svg class="about-stat-svg" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="about-stat-svg__track" cx="60" cy="60" r="54" />
+                <circle class="about-stat-svg__bar" cx="60" cy="60" r="54" style="--percent: 68;" />
+              </svg>
+              <div class="about-stat-radar"></div>
+              <div class="about-stat-circle">
+                <span class="stat-counter" data-target="3.2" data-decimals="1">3.2</span><span class="stat-suffix">%</span>
+              </div>
+            </div>
+            <p class="about-stat-desc">
+              of premium reinvested in policyholder risk-prevention programs
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 7: WHERE THE PREMIUM GOES WHEN THERE'S NO CLAIM
+    ═══════════════════════════════════════════ -->
+    <section class="about-premium" id="about-premium" aria-labelledby="premium-title">
+      <!-- Interactive Magnetic Section Cursor Follower -->
+      <div class="premium-cursor" id="premiumCursor" aria-hidden="true">
+        <div class="premium-cursor__dot"></div>
+        <div class="premium-cursor__ring"></div>
+        <span class="premium-cursor__label" id="premiumCursorLabel">Impact</span>
+      </div>
+
+      <div class="container">
+        <div class="about-premium__grid">
+          <!-- Left Column: Content -->
+          <div class="about-premium__left" data-aos="fade-right">
+            <div class="premium-badge-pill" data-aos="fade-up" data-aos-delay="50">
+              <span class="premium-badge-pulse"></span>
+              <span class="premium-badge-text">Transparent Reinvestment Model</span>
+            </div>
+
+            <h2 class="about-premium__title" id="premium-title" aria-label="Where the premium goes when there's no claim">
+              <span class="anim-word-wrap"><span class="anim-word">Where</span></span>
+              <span class="anim-word-wrap"><span class="anim-word">the</span></span>
+              <span class="anim-word-wrap"><span class="anim-word anim-word--gold">premium</span></span>
+              <span class="anim-word-wrap"><span class="anim-word">goes</span></span>
+              <span class="anim-word-wrap"><span class="anim-word">when</span></span>
+              <span class="anim-word-wrap"><span class="anim-word">there's</span></span>
+              <span class="anim-word-wrap"><span class="anim-word">no</span></span>
+              <span class="anim-word-wrap"><span class="anim-word anim-word--gold">claim</span></span>
+            </h2>
+
+            <div class="about-premium__list">
+              <!-- Item 1 -->
+              <div class="about-premium__item" data-cursor-text="Safety First" data-aos="fade-up" data-aos-delay="150">
+                <div class="about-premium__item-num">
+                  <span>01</span>
+                </div>
+                <div class="about-premium__item-body">
+                  <h3 class="about-premium__item-title">
+                    <span class="hover-word">Free</span>
+                    <span class="hover-word">safety</span>
+                    <span class="hover-word">audits</span>
+                    <span class="hover-word">for</span>
+                    <span class="hover-word">policyholders</span>
+                  </h3>
+                  <p class="about-premium__item-text">
+                    Any active policyholder can request an on-site risk walkthrough at no charge, once a year.
+                  </p>
+                </div>
+                <div class="about-premium__item-arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="about-premium__item" data-cursor-text="Grants" data-aos="fade-up" data-aos-delay="250">
+                <div class="about-premium__item-num">
+                  <span>02</span>
+                </div>
+                <div class="about-premium__item-body">
+                  <h3 class="about-premium__item-title">
+                    <span class="hover-word">Small-business</span>
+                    <span class="hover-word">grants</span>
+                    <span class="hover-word">after</span>
+                    <span class="hover-word">disasters</span>
+                  </h3>
+                  <p class="about-premium__item-text">
+                    Emergency grants for policyholders rebuilding after a covered loss, ahead of the claim payout arriving.
+                  </p>
+                </div>
+                <div class="about-premium__item-arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="about-premium__item" data-cursor-text="Training" data-aos="fade-up" data-aos-delay="350">
+                <div class="about-premium__item-num">
+                  <span>03</span>
+                </div>
+                <div class="about-premium__item-body">
+                  <h3 class="about-premium__item-title">
+                    <span class="hover-word">Local</span>
+                    <span class="hover-word">underwriting</span>
+                    <span class="hover-word">apprenticeships</span>
+                  </h3>
+                  <p class="about-premium__item-text">
+                    Each regional office trains two apprentice underwriters a year, hired from the community it serves.
+                  </p>
+                </div>
+                <div class="about-premium__item-arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive 3D Parallax & Cursor Spotlight Image -->
+          <div class="about-premium__right" data-aos="fade-left" data-aos-delay="150">
+            <div class="about-premium__img-card" id="premium3dCard">
+              <div class="about-premium__img-wrap">
+                <div class="about-premium__glare" id="premiumCardGlare" aria-hidden="true"></div>
+                <img
+                  class="about-premium__img"
+                  id="premiumImg"
+                  src="assets/about-premium-calculator.webp"
+                  alt="Hands using a calculator with financial paperwork on wooden table, representing policyholder premium reinvestment"
+                  loading="lazy"
+                />
+                <!-- Interactive Floating Stats Badge -->
+                <div class="about-premium__float-badge">
+                  <div class="about-premium__float-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  </div>
+                  <div>
+                    <strong class="about-premium__float-title">100% In-House Stewardship</strong>
+                    <span class="about-premium__float-sub">Zero Third-Party Broker Leakage</span>
+                  </div>
+                </div>
+                <!-- Floating Cursor Follower Pill Badge -->
+                <div class="about-premium__cursor-pill" id="aboutPremiumCursorPill" aria-hidden="true">
+                  <span>✦ 100% In-House</span>
+                </div>
+              </div>
+              <!-- Ambient Glow Backdrop -->
+              <div class="about-premium__glow-backdrop" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       STACKLY FOOTER SECTION
+  ═══════════════════════════════════════════ -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <!-- Col 1: Brand & Socials -->
+      <div class="footer__brand" data-aos="fade-up">
+        <a href="index.html" class="footer__logo" aria-label="Stackly Home">
+          <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="footer__logo-img" />
+        </a>
+        <p class="footer__brand-desc">
+          Empowering outdoor enthusiasts and adventurers with premium gear, alpine expeditions, and trail solutions.
+        </p>
+        <div class="footer__socials">
+          <a href="404.html" class="footer__social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="100">
+        <h4 class="footer__heading">Quick Links</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="index.html" class="footer__link">Home</a></li>
+          <li><a href="about.html" class="footer__link footer__link--active">About</a></li>
+          <li><a href="services.html" class="footer__link">Services</a></li>
+          <li><a href="blog.html" class="footer__link">Blog</a></li>
+          <li><a href="contact.html" class="footer__link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Gear & Expeditions -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="200">
+        <h4 class="footer__heading">Gear &amp; Expeditions</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="404.html" class="footer__link">Tents &amp; Shelters</a></li>
+          <li><a href="404.html" class="footer__link">Alpine Backpacks</a></li>
+          <li><a href="404.html" class="footer__link">Trail Footwear</a></li>
+          <li><a href="404.html" class="footer__link">Expedition Logistics</a></li>
+          <li><a href="404.html" class="footer__link">Gear Repair Depot</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Stay Updated -->
+      <div class="footer__col footer__col--newsletter" data-aos="fade-up" data-aos-delay="300">
+        <h4 class="footer__heading">Stay Updated</h4>
+        <p class="footer__newsletter-text">
+          Get weekly trail guides, gear discounts &amp; wilderness expedition reports.
+        </p>
+        <form class="footer__newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Stackly updates!');">
+          <div class="footer__newsletter-pill">
+            <input type="email" class="footer__newsletter-input" placeholder="Enter your email" required aria-label="Enter your email for updates" />
+            <button type="submit" class="footer__newsletter-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__copyright">&copy; 2026 <strong>Stackly</strong> Outdoor Store. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="404.html" class="footer__legal-link">GitHub Repository</a>
+          <a href="404.html" class="footer__legal-link">Privacy Policy</a>
+          <a href="404.html" class="footer__legal-link">Terms of Service</a>
+          <a href="404.html" class="footer__legal-link">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Animation & Framework Libraries -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script src="animations.js"></script>
+
+  <!-- About Page Dedicated GSAP Animations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize AOS
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          easing: 'ease-out-cubic',
+          once: true,
+          offset: 60
+        });
+      }
+
+      // 2. GSAP Animations & Hero Slide In From Sides
+      if (typeof gsap !== 'undefined') {
+        if (typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+        }
+
+        // Hero Slide In From Sides Timeline
+        const heroShape = document.getElementById('heroShape');
+        const heroLeft = document.getElementById('heroLeft');
+        const heroRight = document.getElementById('heroRight');
+        const yearEl = document.getElementById('hero-founding-year');
+
+        if (heroLeft && heroRight) {
+          const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+          // Set initial hidden positions
+          if (heroShape) gsap.set(heroShape, { xPercent: -105 });
+          gsap.set(heroLeft, { x: -80, opacity: 0 });
+          gsap.set(heroRight, { x: 80, opacity: 0 });
+          if (yearEl) gsap.set(yearEl, { scale: 0.75, opacity: 0 });
+
+          // Slide In From Left (Shape + Left Content)
+          if (heroShape) {
+            heroTl.to(heroShape, {
+              xPercent: 0,
+              duration: 1.15,
+              ease: 'power3.out'
+            }, 0.1);
+          }
+
+          heroTl.to(heroLeft, {
+            x: 0,
+            opacity: 1,
+            duration: 1.1,
+            ease: 'power4.out'
+          }, 0.2);
+
+          // Slide In From Right (Right Column & 1912)
+          heroTl.to(heroRight, {
+            x: 0,
+            opacity: 1,
+            duration: 1.1,
+            ease: 'power4.out'
+          }, 0.25);
+
+          if (yearEl) {
+            heroTl.to(yearEl, {
+              scale: 1,
+              opacity: 1,
+              duration: 0.85,
+              ease: 'back.out(1.7)'
+            }, 0.45);
+
+            // Counter roll up to 1912
+            heroTl.fromTo({ val: 1840 }, {
+              val: 1912,
+              duration: 1.4,
+              ease: 'power2.out',
+              onUpdate: function () {
+                yearEl.textContent = Math.round(this.targets()[0].val);
+              }
+            }, 0.45);
+          }
+        }
+
+        // Timeline Progress Line ScrollTrigger
+        const timelineWrap = document.querySelector('.about-timeline__wrap');
+        const progressBar = document.getElementById('timeline-progress');
+        if (timelineWrap && progressBar) {
+          ScrollTrigger.create({
+            trigger: timelineWrap,
+            start: 'top 70%',
+            end: 'bottom 80%',
+            scrub: 1,
+            onUpdate: self => {
+              progressBar.style.height = (self.progress * 100) + '%';
+            }
+          });
+        }
+
+        // Timeline Milestone Badges Pop-in
+        gsap.utils.toArray('.about-timeline__badge').forEach((badge) => {
+          gsap.fromTo(badge, 
+            { scale: 0.3, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.6,
+              ease: 'back.out(2)',
+              scrollTrigger: {
+                trigger: badge,
+                start: 'top 85%',
+                once: true
+              }
+            }
+          );
+        });
+
+        // 4 Stat Circles Reliable Counter & Metric Gauge Animation
+        function startStatCounting() {
+          const banner = document.getElementById('about-stats-banner');
+          const counters = document.querySelectorAll('.stat-counter[data-target]');
+          const svgs = document.querySelectorAll('.about-stat-svg');
+          if (!counters.length) return;
+
+          let hasRun = false;
+
+          function runCount() {
+            if (hasRun) return;
+            hasRun = true;
+
+            // Trigger SVG gauge progress fill
+            svgs.forEach((svg, idx) => {
+              setTimeout(() => svg.classList.add('animated'), idx * 80);
+            });
+
+            counters.forEach((el, idx) => {
+              const target = parseFloat(el.dataset.target);
+              const isDecimal = el.dataset.decimals === '1';
+              const duration = 1800; // 1.8 seconds
+
+              // Set to 0 at the moment counting begins
+              el.textContent = isDecimal ? '0.0' : '0';
+
+              setTimeout(() => {
+                const startTime = performance.now();
+                function step(now) {
+                  const elapsed = now - startTime;
+                  const progress = Math.min(elapsed / duration, 1);
+                  // Smooth ease-out cubic
+                  const easeOut = 1 - Math.pow(1 - progress, 3);
+                  const current = easeOut * target;
+
+                  el.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+
+                  if (progress < 1) {
+                    requestAnimationFrame(step);
+                  } else {
+                    el.textContent = isDecimal ? target.toFixed(1) : target;
+                  }
+                }
+                requestAnimationFrame(step);
+              }, idx * 100);
+            });
+          }
+
+          if (banner && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  runCount();
+                  observer.disconnect();
+                }
+              });
+            }, { threshold: 0.15 });
+            observer.observe(banner);
+          } else {
+            runCount();
+          }
+        }
+
+        startStatCounting();
+
+        // ═══════════════════════════════════════════
+        // SECTION 7: WORD ANIMATION & CARD CURSOR HOVER EFFECT
+        // ═══════════════════════════════════════════
+        const premiumSection = document.getElementById('about-premium');
+        const premiumCursor = document.getElementById('premiumCursor');
+        const cursorLabel = document.getElementById('premiumCursorLabel');
+        const card3d = document.getElementById('premium3dCard');
+        const cardGlare = document.getElementById('premiumCardGlare');
+        const cardImg = document.getElementById('premiumImg');
+        const cardPill = document.getElementById('aboutPremiumCursorPill');
+
+        if (premiumSection && premiumCursor) {
+          let mouseX = 0, mouseY = 0;
+          let currentX = 0, currentY = 0;
+          let isInside = false;
+
+          premiumSection.addEventListener('mouseenter', () => {
+            isInside = true;
+            premiumCursor.classList.add('active');
+          });
+
+          premiumSection.addEventListener('mouseleave', () => {
+            isInside = false;
+            premiumCursor.classList.remove('active', 'hovering');
+          });
+
+          premiumSection.addEventListener('mousemove', (e) => {
+            const rect = premiumSection.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+          });
+
+          // Smooth Cursor Interpolation (LERP)
+          function renderCursor() {
+            if (isInside) {
+              currentX += (mouseX - currentX) * 0.18;
+              currentY += (mouseY - currentY) * 0.18;
+              premiumCursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+            }
+            requestAnimationFrame(renderCursor);
+          }
+          requestAnimationFrame(renderCursor);
+
+          // Interactive Hover Targets for Custom Cursor
+          const cursorTargets = premiumSection.querySelectorAll('[data-cursor-text]');
+          cursorTargets.forEach(target => {
+            target.addEventListener('mouseenter', () => {
+              const label = target.getAttribute('data-cursor-text');
+              if (label && cursorLabel) {
+                cursorLabel.textContent = label;
+              }
+              premiumCursor.classList.add('hovering');
+            });
+            target.addEventListener('mouseleave', () => {
+              if (cursorLabel) cursorLabel.textContent = 'Impact';
+              premiumCursor.classList.remove('hovering');
+            });
+          });
+        }
+
+        // 3D Card Parallax Magnetic Tilt & Specular Cursor Glare & Follower Pill
+        if (card3d) {
+          let cardTargetX = 0, cardTargetY = 0;
+          let cardCurRotX = 0, cardCurRotY = 0;
+          let pillX = 0, pillY = 0;
+          let pillCurX = 0, pillCurY = 0;
+          let isCardHovered = false;
+
+          card3d.addEventListener('mouseenter', () => {
+            isCardHovered = true;
+            if (cardPill) cardPill.classList.add('active');
+            if (cardGlare) cardGlare.style.opacity = '1';
+          });
+
+          card3d.addEventListener('mousemove', (e) => {
+            const rect = card3d.getBoundingClientRect();
+            const relX = e.clientX - rect.left;
+            const relY = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            // Normalized tilt angles (-10 to 10 deg)
+            cardTargetX = ((relY - centerY) / centerY) * -10;
+            cardTargetY = ((relX - centerX) / centerX) * 10;
+
+            // Pill Target coords
+            pillX = relX;
+            pillY = relY;
+
+            // Update specular spotlight gradient
+            if (cardGlare) {
+              const glarePercentX = (relX / rect.width) * 100;
+              const glarePercentY = (relY / rect.height) * 100;
+              cardGlare.style.background = `radial-gradient(circle 220px at ${glarePercentX}% ${glarePercentY}%, rgba(255, 255, 255, 0.42) 0%, rgba(244, 211, 94, 0.12) 40%, rgba(255, 255, 255, 0) 70%)`;
+            }
+          });
+
+          card3d.addEventListener('mouseleave', () => {
+            isCardHovered = false;
+            cardTargetX = 0;
+            cardTargetY = 0;
+            if (cardPill) cardPill.classList.remove('active');
+            if (cardGlare) cardGlare.style.opacity = '0';
+            if (cardImg) cardImg.style.transform = 'scale(1) translate3d(0, 0, 0)';
+          });
+
+          function animateCardPhysics() {
+            // Smooth Damped Tilt
+            cardCurRotX += (cardTargetX - cardCurRotX) * 0.14;
+            cardCurRotY += (cardTargetY - cardCurRotY) * 0.14;
+
+            if (isCardHovered) {
+              const scale = 1.03;
+              card3d.style.transform = `perspective(1200px) rotateX(${cardCurRotX.toFixed(2)}deg) rotateY(${cardCurRotY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale})`;
+
+              // Counter parallax on inner image for deep 3D sense
+              if (cardImg) {
+                const imgShiftX = (cardCurRotY * -0.6).toFixed(2);
+                const imgShiftY = (cardCurRotX * 0.6).toFixed(2);
+                cardImg.style.transform = `scale(1.08) translate3d(${imgShiftX}px, ${imgShiftY}px, 0)`;
+              }
+
+              // Pill smooth follower
+              if (cardPill) {
+                pillCurX += (pillX - pillCurX) * 0.2;
+                pillCurY += (pillY - pillCurY) * 0.2;
+                cardPill.style.left = `${pillCurX.toFixed(1)}px`;
+                cardPill.style.top = `${pillCurY.toFixed(1)}px`;
+              }
+            } else if (Math.abs(cardCurRotX) > 0.05 || Math.abs(cardCurRotY) > 0.05) {
+              card3d.style.transform = `perspective(1200px) rotateX(${cardCurRotX.toFixed(2)}deg) rotateY(${cardCurRotY.toFixed(2)}deg) scale3d(1, 1, 1)`;
+            } else {
+              card3d.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            }
+
+            requestAnimationFrame(animateCardPhysics);
+          }
+          requestAnimationFrame(animateCardPhysics);
+        }
+
+        // Word-by-Word Reveal Stagger Animation
+        const animWords = document.querySelectorAll('.anim-word');
+        if (animWords.length && premiumSection) {
+          const wordObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                animWords.forEach((word, index) => {
+                  setTimeout(() => {
+                    word.classList.add('revealed');
+                  }, index * 65);
+                });
+                wordObserver.disconnect();
+              }
+            });
+          }, { threshold: 0.2 });
+          wordObserver.observe(premiumSection);
+        }
+
+        // Parallax effect on images
+        gsap.to('.about-hero-image__img', {
+          yPercent: 8,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.about-hero-image',
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.5
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

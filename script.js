@@ -1,0 +1,553 @@
+/**
+ * Stackly — Business Insurance Website
+ * JavaScript: Animations, Interactions, Form Validation
+ */
+
+'use strict';
+
+/* ══════════════════════════════════════════════════════
+   UTILITY HELPERS
+   ══════════════════════════════════════════════════════ */
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+/* ══════════════════════════════════════════════════════
+   1. HEADER SCROLL BEHAVIOUR
+   ══════════════════════════════════════════════════════ */
+(function initHeaderScroll() {
+  const header = $('#header');
+  if (!header) return;
+
+  const onScroll = () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ══════════════════════════════════════════════════════
+   2. MOBILE NAVIGATION
+   ══════════════════════════════════════════════════════ */
+(function initMobileNav() {
+  const hamburger = $('#hamburger-btn');
+  const mobileMenu = $('#mobile-menu');
+  const mobileOverlay = $('#mobile-overlay');
+  const mobileClose = $('#mobile-close-btn');
+  const mobileLinks = $$('.nav__mobile-link, .nav__mobile-actions a');
+
+  if (!hamburger || !mobileMenu) return;
+
+  const openMenu = () => {
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    mobileMenu.classList.add('open');
+    mobileMenu.removeAttribute('aria-hidden');
+    mobileOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('open');
+    isOpen ? closeMenu() : openMenu();
+  });
+
+  if (mobileClose) mobileClose.addEventListener('click', closeMenu);
+  mobileOverlay.addEventListener('click', closeMenu);
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  // Escape key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+      closeMenu();
+      hamburger.focus();
+    }
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   3. SCROLL-TRIGGERED ANIMATIONS (Intersection Observer)
+   ══════════════════════════════════════════════════════ */
+(function initScrollAnimations() {
+  const animatedEls = $$([
+    '.animate-fade-up',
+    '.animate-fade-left',
+    '.animate-fade-right',
+    '.animate-scale-in',
+    '.animate-on-scroll'
+  ].join(','));
+
+  if (!animatedEls.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  animatedEls.forEach(el => observer.observe(el));
+})();
+
+/* ══════════════════════════════════════════════════════
+   4. ANIMATED NUMBER COUNTERS
+   ══════════════════════════════════════════════════════ */
+(function initCounters() {
+  const counters = $$('.stats__number[data-target]');
+  if (!counters.length) return;
+
+  const animateCounter = (el) => {
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const startTime = performance.now();
+    const startVal = 0;
+
+    // Easing: ease-out cubic
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+    const tick = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOut(progress);
+      const current = Math.round(startVal + (target - startVal) * eased);
+      el.textContent = current.toLocaleString() + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = target.toLocaleString() + suffix;
+      }
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  counters.forEach(el => observer.observe(el));
+})();
+
+/* ══════════════════════════════════════════════════════
+   5. ACTIVE NAV LINK ON SCROLL (Highlight)
+   ══════════════════════════════════════════════════════ */
+(function initActiveNav() {
+  const sections = $$('section[id], div[id="workflow"]');
+  const navLinks = $$('.nav__link');
+
+  if (!sections.length || !navLinks.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${entry.target.id}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    },
+    { rootMargin: '-30% 0px -60% 0px' }
+  );
+
+  sections.forEach(s => observer.observe(s));
+})();
+
+/* ══════════════════════════════════════════════════════
+   6. SMOOTH SCROLL FOR ANCHOR LINKS
+   ══════════════════════════════════════════════════════ */
+(function initSmoothScroll() {
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href === '#') return;
+
+    const target = $(href);
+    if (!target) return;
+
+    e.preventDefault();
+    const headerH = 72;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerH;
+
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   7. QUOTE FORM — VALIDATION & SUBMISSION
+   ══════════════════════════════════════════════════════ */
+(function initQuoteForm() {
+  const form = $('#quote-form');
+  if (!form) return;
+
+  const submitBtn = $('#get-quote-btn');
+  const successMsg = $('#quote-success');
+
+  // Field configs
+  const fields = [
+    {
+      id: 'business-name',
+      errorId: 'business-name-error',
+      validate: (v) => v.trim().length >= 2 ? null : 'Please enter your business name (at least 2 characters).'
+    },
+    {
+      id: 'industry',
+      errorId: 'industry-error',
+      validate: (v) => v.trim().length >= 2 ? null : 'Please enter your industry.'
+    },
+    {
+      id: 'employees',
+      errorId: 'employees-error',
+      validate: (v) => {
+        const n = parseInt(v, 10);
+        if (!v.trim()) return 'Please enter the number of employees.';
+        if (isNaN(n) || n < 1) return 'Please enter a valid number (minimum 1).';
+        return null;
+      }
+    },
+    {
+      id: 'work-email',
+      errorId: 'email-error',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter your work email.';
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(v) ? null : 'Please enter a valid email address.';
+      }
+    }
+  ];
+
+  // Validate single field
+  const validateField = ({ id, errorId, validate }) => {
+    const input = $(`#${id}`);
+    const errorEl = $(`#${errorId}`);
+    if (!input || !errorEl) return true;
+
+    const error = validate(input.value);
+    if (error) {
+      input.classList.add('error');
+      errorEl.textContent = error;
+      input.setAttribute('aria-invalid', 'true');
+      return false;
+    } else {
+      input.classList.remove('error');
+      errorEl.textContent = '';
+      input.removeAttribute('aria-invalid');
+      return true;
+    }
+  };
+
+  // Live validation on blur
+  fields.forEach(field => {
+    const input = $(`#${field.id}`);
+    if (!input) return;
+
+    input.addEventListener('blur', () => validateField(field));
+    input.addEventListener('input', () => {
+      if (input.classList.contains('error')) validateField(field);
+    });
+  });
+
+  // Form submit
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const allValid = fields.every(f => validateField(f));
+    if (!allValid) {
+      // Focus first invalid
+      const firstInvalid = form.querySelector('[aria-invalid="true"]');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    // Show loading state
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    try {
+      // Simulate API call (1.5s)
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Show success
+      form.querySelector('.form-group') && (() => {
+        // Hide form fields (smooth)
+        $$('.form-group', form).forEach(fg => {
+          fg.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          fg.style.opacity = '0';
+          fg.style.transform = 'translateY(-10px)';
+          setTimeout(() => { fg.style.display = 'none'; }, 400);
+        });
+        submitBtn.style.transition = 'opacity 0.4s ease';
+        submitBtn.style.opacity = '0';
+        setTimeout(() => { submitBtn.style.display = 'none'; }, 400);
+      })();
+
+      setTimeout(() => {
+        successMsg.removeAttribute('hidden');
+        successMsg.style.opacity = '0';
+        successMsg.style.transform = 'translateY(10px)';
+        requestAnimationFrame(() => {
+          successMsg.style.transition = 'all 0.5s ease';
+          successMsg.style.opacity = '1';
+          successMsg.style.transform = 'translateY(0)';
+        });
+      }, 500);
+
+    } catch (err) {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+      console.error('Form submission error:', err);
+    }
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   8. INDUSTRY CARD PARALLAX ON MOUSE MOVE
+   ══════════════════════════════════════════════════════ */
+(function initCardParallax() {
+  const cards = $$('.industry__card');
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.5s ease';
+      setTimeout(() => { card.style.transition = ''; }, 500);
+    });
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   9. POLICY ITEMS HOVER RIPPLE EFFECT
+   ══════════════════════════════════════════════════════ */
+(function initRipple() {
+  $$('.policy__item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      const ripple = document.createElement('span');
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+
+      ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${e.clientX - rect.left - size / 2}px;
+        top: ${e.clientY - rect.top - size / 2}px;
+        background: rgba(244,211,94,0.3);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: rippleAnim 0.6s ease-out;
+        pointer-events: none;
+      `;
+
+      this.style.position = 'relative';
+      this.style.overflow = 'hidden';
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
+    });
+  });
+
+  // Inject ripple keyframe
+  const styleEl = document.createElement('style');
+  styleEl.textContent = `
+    @keyframes rippleAnim {
+      to { transform: scale(2.5); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(styleEl);
+})();
+
+/* ══════════════════════════════════════════════════════
+   10. HERO: TILT EFFECT ON PHONE MOCKUP
+   ══════════════════════════════════════════════════════ */
+(function initHeroTilt() {
+  const visual = $('.hero__phone-mockup');
+  const hero = $('.hero');
+  if (!visual || !hero) return;
+
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    visual.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 4}deg) translateY(${Math.sin(Date.now() / 2000) * 12}px)`;
+    visual.style.transition = 'transform 0.15s ease';
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    visual.style.transform = '';
+    visual.style.transition = 'transform 0.7s ease';
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   11. STATISTICS SECTION: STAGGERED ENTRANCE
+   ══════════════════════════════════════════════════════ */
+(function initStatsStagger() {
+  const statsSection = $('.stats');
+  if (!statsSection) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        const items = $$('.stats__item', statsSection);
+        items.forEach((item, i) => {
+          item.style.transitionDelay = `${i * 0.12}s`;
+        });
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.1 }
+  );
+
+  observer.observe(statsSection);
+})();
+
+/* ══════════════════════════════════════════════════════
+   12. TESTIMONIAL AUTO-SCROLL INDICATOR
+   ══════════════════════════════════════════════════════ */
+(function initTestimonialEffect() {
+  const card = $('.testimonial__card');
+  if (!card) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        // Animate the room SVG elements with staggered delays
+        const svgParts = $$('line, path, rect, ellipse, circle', card);
+        svgParts.forEach((part, i) => {
+          part.style.opacity = '0';
+          part.style.transition = `opacity 0.5s ease ${0.1 + i * 0.03}s`;
+          requestAnimationFrame(() => {
+            part.style.opacity = '1';
+          });
+        });
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.3 }
+  );
+
+  observer.observe(card);
+})();
+
+/* ══════════════════════════════════════════════════════
+   13. SCROLL PROGRESS INDICATOR (thin top bar)
+   ══════════════════════════════════════════════════════ */
+(function initScrollProgress() {
+  const bar = document.createElement('div');
+  bar.id = 'scroll-progress-bar';
+  bar.setAttribute('aria-hidden', 'true');
+  bar.style.cssText = `
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #F4D35E, #E6C245);
+    z-index: 2000;
+    width: 0%;
+    transition: width 0.1s linear;
+    pointer-events: none;
+  `;
+  document.body.prepend(bar);
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+    bar.style.width = `${pct}%`;
+  }, { passive: true });
+})();
+
+/* ══════════════════════════════════════════════════════
+   14. WORKFLOW STEPS SEQUENTIAL ANIMATION
+   ══════════════════════════════════════════════════════ */
+(function initWorkflowSteps() {
+  const steps = $$('.workflow__step');
+  if (!steps.length) return;
+
+  steps.forEach((step, i) => {
+    step.style.setProperty('--delay', `${0.1 + i * 0.15}s`);
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   15. BUTTON MAGNETIC HOVER EFFECT
+   ══════════════════════════════════════════════════════ */
+(function initMagneticButtons() {
+  const buttons = $$('.btn--dark, .btn--outline');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const strength = 0.25;
+
+      btn.style.transform = `translate(${x * strength}px, ${y * strength}px) translateY(-1px)`;
+      btn.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease';
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+      btn.style.transition = 'transform 0.4s ease, box-shadow 0.3s ease';
+    });
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   16. INITIALISE ON DOM READY
+   ══════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Add active class to CSS nav links
+  const style = document.createElement('style');
+  style.textContent = `
+    .nav__link.active::after { right: 0; }
+    .nav__link.active { font-weight: 600; }
+  `;
+  document.head.appendChild(style);
+
+  // Ensure body scroll position is at top on load
+  if (window.location.hash === '') {
+    window.scrollTo(0, 0);
+  }
+
+  console.info('%cStackly Business Insurance — Loaded', 'color: #F4D35E; font-weight: bold; font-size: 14px;');
+});

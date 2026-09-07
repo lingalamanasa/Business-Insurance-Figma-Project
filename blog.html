@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Insurance Blog — Stackly Insights</title>
+  <meta name="description" content="Understanding Business Insurance Before You Need It. Practical insurance guidance and business protection insights from Stackly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="components.css" />
+  <link rel="stylesheet" href="blog.css" />
+</head>
+<body>
+
+  <!-- ═══ STACKLY LUXURY PRELOADER ═══ -->
+  <div class="stackly-preloader" id="stackly-preloader" aria-hidden="false">
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--top"></div>
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--bottom"></div>
+    <div class="stackly-preloader__content">
+      <div class="stackly-preloader__logo-wrap">
+        <div class="stackly-preloader__icon-ring">
+          <svg class="stackly-preloader__ring-svg" viewBox="0 0 100 100">
+            <circle class="stackly-preloader__ring-bg" cx="50" cy="50" r="44"></circle>
+            <circle class="stackly-preloader__ring-bar" id="preloader-ring-bar" cx="50" cy="50" r="44"></circle>
+          </svg>
+          <img src="assets/stackly-icon-white.webp" alt="Stackly" class="stackly-preloader__icon" />
+        </div>
+        <div class="stackly-preloader__brand">
+          <span class="stackly-preloader__wordmark">STACKLY</span>
+          <span class="stackly-preloader__tagline">STACKLY BLOG</span>
+        </div>
+      </div>
+      <div class="stackly-preloader__progress-box">
+        <div class="stackly-preloader__bar">
+          <div class="stackly-preloader__fill" id="preloader-fill"></div>
+        </div>
+        <div class="stackly-preloader__counter">
+          <span id="preloader-percent">0</span>%
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DARK HEADER (MATCHING HERO) ═══ -->
+  <header class="header header--blog" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo" aria-label="Stackly Home">
+        <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="nav__logo-img" />
+      </a>
+      <ul class="nav__links" id="nav-links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+        <li><a href="services.html" class="nav__link">Services</a></li>
+        <li><a href="blog.html" class="nav__link nav__link--active">Blog</a></li>
+        <li><a href="contact.html" class="nav__link">Contact</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="contact.html" class="nav__login">Log in</a>
+        <a href="contact.html" class="btn nav__cta">Get Started</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false" style="color:var(--white);">
+        <span class="nav__hamburger-bar" style="background:var(--white);"></span>
+        <span class="nav__hamburger-bar" style="background:var(--white);"></span>
+        <span class="nav__hamburger-bar" style="background:var(--white);"></span>
+      </button>
+    </nav>
+    <div class="nav__mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+    <div class="nav__mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+      <button class="nav__mobile-close" id="mobile-close-btn" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <ul class="nav__mobile-links" role="list">
+        <li><a href="index.html" class="nav__mobile-link">Home</a></li>
+        <li><a href="about.html" class="nav__mobile-link">About</a></li>
+        <li><a href="services.html" class="nav__mobile-link">Services</a></li>
+        <li><a href="blog.html" class="nav__mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="nav__mobile-link">Contact</a></li>
+      </ul>
+      <div class="nav__mobile-actions">
+        <a href="contact.html" class="nav__login">Log in</a>
+        <a href="contact.html" class="btn btn--dark">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ 1. DARK BLOG HERO SECTION ═══ -->
+    <section class="blog-dark-hero" id="blog-hero" aria-labelledby="blog-hero-title">
+      <!-- Section-Scoped Dynamic Cursor Follower -->
+      <div class="blog-hero-cursor" id="blogHeroCursor" aria-hidden="true">
+        <div class="blog-hero-cursor__ring"></div>
+        <div class="blog-hero-cursor__dot"></div>
+        <span class="blog-hero-cursor__label" id="blogHeroCursorLabel">Read</span>
+      </div>
+
+      <div class="container blog-dark-hero__container">
+        <div class="blog-dark-hero__content">
+          <div class="blog-dark-hero__pill" id="blogHeroPill" data-cursor-text="Stackly" data-aos="fade-down">Business Insurance</div>
+          <h1 class="blog-dark-hero__title" id="blog-hero-title" aria-label="Understanding Business Insurance Before You Need It">
+            <span class="blog-char-line highlight-yellow" data-char-anim="true">Understanding</span>
+            <span class="blog-char-line highlight-yellow" data-char-anim="true">Business</span>
+            <span class="blog-char-line highlight-white" data-char-anim="true">Insurance Before</span>
+            <span class="blog-char-line highlight-white" data-char-anim="true">You Need It</span>
+          </h1>
+          <p class="blog-dark-hero__sub" data-aos="fade-up" data-aos-delay="200">
+            The best time to understand your insurance is before an unexpected event puts your business under pressure. Learn how the right coverage can help protect your operations, people, property, and financial stability.
+          </p>
+          <a href="#featured-articles" class="btn btn--yellow" id="blog-hero-cta" data-cursor-text="Read" data-aos="fade-up" data-aos-delay="250">Read the Article</a>
+        </div>
+        <div class="blog-dark-hero__visual" data-aos="fade-left" data-aos-delay="100">
+          <div class="blog-dark-hero__card-holder" id="blogHeroCard" data-cursor-text="Explore">
+            <div class="blog-dark-hero__glow-bg" aria-hidden="true"></div>
+            <div class="blog-dark-hero__img-wrap">
+              <div class="blog-dark-hero__glare" id="blogHeroGlare" aria-hidden="true"></div>
+              <img src="assets/blog-hero-skyscraper.webp" alt="Looking up at glass skyscrapers reaching into the sky" class="blog-dark-hero__img" id="blog-sky-img" />
+              <!-- Floating Cursor Follower Pill Inside Card -->
+              <div class="blog-dark-hero__card-pill" id="blogHeroCardPill" aria-hidden="true">
+                <span>✦ Read Story</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 4 Carousel Dots -->
+      <div class="blog-dark-hero__dots" aria-hidden="true" data-aos="fade-up" data-aos-delay="300">
+        <span class="blog-dark-hero__dot active" data-cursor-text="Slide 1"></span>
+        <span class="blog-dark-hero__dot" data-cursor-text="Slide 2"></span>
+        <span class="blog-dark-hero__dot" data-cursor-text="Slide 3"></span>
+        <span class="blog-dark-hero__dot" data-cursor-text="Slide 4"></span>
+      </div>
+    </section>
+
+    <!-- ═══ 2. WHAT'S ACTUALLY IN EACH POLICY (2 FEATURED CARDS) ═══ -->
+    <section class="blog-featured" id="featured-articles" aria-labelledby="featured-heading">
+      <div class="container">
+        <h2 class="blog-featured__title" id="featured-heading" data-aos="fade-up">What's actually in each policy</h2>
+
+        <div class="blog-featured__grid">
+          <!-- Card 1 -->
+          <article class="blog-featured-card" data-aos="fade-up" data-aos-delay="50">
+            <div class="blog-featured-card__img-wrap">
+              <img src="assets/services-bandage.webp" alt="Athletes supporting injured teammate's leg" class="blog-featured-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-featured-card__title">Is Your Coverage Still Right for Your Business?</h3>
+            <p class="blog-featured-card__desc">As businesses grow, change locations, hire employees, or invest in new equipment, their insurance needs can change too. A regular review helps identify gaps before they become costly problems.</p>
+            <a href="contact.html" class="btn btn--yellow">Read the Article</a>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="blog-featured-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="blog-featured-card__img-wrap">
+              <img src="assets/blog-risk-magnifier.webp" alt="Wooden blocks spelling RISK with magnifying glass" class="blog-featured-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-featured-card__title">Why Risk Planning Matters More Than Ever</h3>
+            <p class="blog-featured-card__desc">Insurance is one part of a broader risk strategy. Understanding potential challenges and preparing ahead can help your business respond with greater confidence when something unexpected happens.</p>
+            <a href="contact.html" class="btn btn--yellow">Read the Article</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3. LATEST ARTICLES (8-CARD 4x2 GRID) ═══ -->
+    <section class="blog-latest" id="latest-articles" aria-labelledby="latest-heading">
+      <div class="container">
+        <h2 class="blog-latest__title" id="latest-heading" data-aos="fade-up">Latest Articles</h2>
+
+        <div class="blog-latest__grid">
+          <!-- Card 1 -->
+          <article class="blog-card" data-aos="fade-up" data-aos-delay="50">
+            <div class="blog-card__img-wrap">
+              <img src="assets/blog-1-risk.webp" alt="Business team reviewing financial risk analytics" class="blog-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-card__title">Choosing the Right Level of Liability Protection</h3>
+            <p class="blog-card__desc">A closer look at how liability coverage can support businesses facing customer claims, accidents, and unexpected legal costs.</p>
+            <a href="contact.html" class="blog-card__link">Read More</a>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="blog-card__img-wrap">
+              <img src="assets/policy-side-office.webp" alt="Hands writing in open notebook planner" class="blog-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-card__title">When Should You Update Your Business Policy?</h3>
+            <p class="blog-card__desc">From opening a new location to expanding your team, certain changes mean it is time to review your existing protection.</p>
+            <a href="contact.html" class="blog-card__link">Read More</a>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="blog-card" data-aos="fade-up" data-aos-delay="150">
+            <div class="blog-card__img-wrap">
+              <img src="assets/blog-house-model.webp" alt="Professional holding wooden model house with calculator" class="blog-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-card__title">Property Insurance: What Business Owners Should Know</h3>
+            <p class="blog-card__desc">Understand the role property coverage can play in protecting the physical assets your business relies on every day.</p>
+            <a href="contact.html" class="blog-card__link">Read More</a>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="blog-card__img-wrap">
+              <img src="assets/policy-office-exterior.webp" alt="Illuminated modern glass architectural building at twilight" class="blog-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-card__title">Making Sense of Commercial Insurance Options</h3>
+            <p class="blog-card__desc">Different businesses face different risks. Explore the factors that can influence which types of coverage may be appropriate.</p>
+            <a href="contact.html" class="blog-card__link">Read More</a>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="blog-card" data-aos="fade-up" data-aos-delay="250">
+            <div class="blog-card__img-wrap">
+              <img src="assets/diff-agent-warehouse.webp" alt="Desk with calendar schedule and jar" class="blog-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-card__title">A Practical Guide to Managing Business Risk</h3>
+            <p class="blog-card__desc">Learn about the everyday decisions that can help strengthen your business and support long-term stability.</p>
+            <a href="contact.html" class="blog-card__link">Read More</a>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="blog-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="blog-card__img-wrap">
+              <img src="assets/about-team-sarah.webp" alt="Businesswoman in blazer standing confidently with team" class="blog-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-card__title">Confidence Comes From Being Prepared</h3>
+            <p class="blog-card__desc">Running a business involves making important decisions every day. You can take steps to prepare for the risks.</p>
+            <a href="contact.html" class="blog-card__link">Read More</a>
+          </article>
+
+          <!-- Card 7 -->
+          <article class="blog-card" data-aos="fade-up" data-aos-delay="350">
+            <div class="blog-card__img-wrap">
+              <img src="assets/policy-side-woman.webp" alt="Two executives collaborating at laptop" class="blog-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-card__title">What to Consider When Reviewing Your Insurance</h3>
+            <p class="blog-card__desc">Look beyond the policy itself. Consider how your business has changed, what assets you now own, who you employ.</p>
+            <a href="contact.html" class="blog-card__link">Read More</a>
+          </article>
+
+          <!-- Card 8 -->
+          <article class="blog-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="blog-card__img-wrap">
+              <img src="assets/blog-wooden-stairs.webp" alt="Ascending staircase wooden blocks with hand placing final block" class="blog-card__img" loading="lazy" />
+            </div>
+            <h3 class="blog-card__title">How Growth Changes Your Insurance Needs</h3>
+            <p class="blog-card__desc">As your business expands, your risks can change too. Regular reviews help keep your coverage aligned with your operations.</p>
+            <a href="contact.html" class="blog-card__link">Read More</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4. INSURANCE THAT SUPPORTS YOUR BUSINESS ═══ -->
+    <section class="blog-support" id="support-section" aria-labelledby="support-heading">
+      <div class="container">
+        <div class="blog-support__card" data-aos="zoom-in">
+          <div class="blog-support__content">
+            <h2 class="blog-support__title" id="support-heading">Insurance That Supports Your Business</h2>
+            <p class="blog-support__desc">
+              Running a business comes with unexpected risks. The right insurance coverage can help protect your operations, assets, and people when challenges arise.
+            </p>
+            <p class="blog-support__desc">
+              As your business changes, your insurance needs may change too. Reviewing your coverage regularly helps ensure your protection stays aligned with your business.
+            </p>
+            <p class="blog-support__desc">
+              With the right support in place, you can spend less time worrying about unexpected events and more time focusing on what comes next.
+            </p>
+          </div>
+          <div class="blog-support__visual">
+            <img src="assets/blog-team-support.webp" alt="Smiling businesswoman in glasses with corporate team" class="blog-support__img" loading="lazy" />
+            <div class="blog-support__caption">
+              <div class="blog-support__caption-title">Business Insurance</div>
+              <div class="blog-support__caption-sub">Protection That Grows With You</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5. SEARCH YOUR QUARY SECTION ═══ -->
+    <section class="blog-search" id="search-section" aria-labelledby="search-heading">
+      <div class="container">
+        <h2 class="blog-search__title" id="search-heading" data-aos="fade-up">Search Your Quary</h2>
+
+        <form class="blog-search__box" id="blog-search-form" data-aos="fade-up" data-aos-delay="100" onsubmit="event.preventDefault();">
+          <label for="blog-search-input" class="sr-only">Search</label>
+          <input type="text" id="blog-search-input" class="blog-search__input" placeholder="Search..." />
+          <button type="submit" class="blog-search__btn" id="blog-search-btn">Search</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       STACKLY FOOTER SECTION
+  ═══════════════════════════════════════════ -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <!-- Col 1: Brand & Socials -->
+      <div class="footer__brand" data-aos="fade-up">
+        <a href="index.html" class="footer__logo" aria-label="Stackly Home">
+          <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="footer__logo-img" />
+        </a>
+        <p class="footer__brand-desc">
+          Empowering outdoor enthusiasts and adventurers with premium gear, alpine expeditions, and trail solutions.
+        </p>
+        <div class="footer__socials">
+          <a href="404.html" class="footer__social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="100">
+        <h4 class="footer__heading">Quick Links</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="index.html" class="footer__link">Home</a></li>
+          <li><a href="about.html" class="footer__link">About</a></li>
+          <li><a href="services.html" class="footer__link">Services</a></li>
+          <li><a href="blog.html" class="footer__link footer__link--active">Blog</a></li>
+          <li><a href="contact.html" class="footer__link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Gear & Expeditions -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="200">
+        <h4 class="footer__heading">Gear &amp; Expeditions</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="404.html" class="footer__link">Tents &amp; Shelters</a></li>
+          <li><a href="404.html" class="footer__link">Alpine Backpacks</a></li>
+          <li><a href="404.html" class="footer__link">Trail Footwear</a></li>
+          <li><a href="404.html" class="footer__link">Expedition Logistics</a></li>
+          <li><a href="404.html" class="footer__link">Gear Repair Depot</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Stay Updated -->
+      <div class="footer__col footer__col--newsletter" data-aos="fade-up" data-aos-delay="300">
+        <h4 class="footer__heading">Stay Updated</h4>
+        <p class="footer__newsletter-text">
+          Get weekly trail guides, gear discounts &amp; wilderness expedition reports.
+        </p>
+        <form class="footer__newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Stackly updates!');">
+          <div class="footer__newsletter-pill">
+            <input type="email" class="footer__newsletter-input" placeholder="Enter your email" required aria-label="Enter your email for updates" />
+            <button type="submit" class="footer__newsletter-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__copyright">&copy; 2026 <strong>Stackly</strong> Outdoor Store. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="404.html" class="footer__legal-link">GitHub Repository</a>
+          <a href="404.html" class="footer__legal-link">Privacy Policy</a>
+          <a href="404.html" class="footer__legal-link">Terms of Service</a>
+          <a href="404.html" class="footer__legal-link">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="animations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

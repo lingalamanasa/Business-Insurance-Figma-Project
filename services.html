@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Insurance Services — Stackly</title>
+  <meta name="description" content="Every service tied to your policy, not just the policy itself. Explore Stackly's comprehensive commercial insurance footprint and claims process." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="components.css" />
+  <link rel="stylesheet" href="services.css" />
+</head>
+<body>
+
+  <!-- ═══ STACKLY LUXURY PRELOADER ═══ -->
+  <div class="stackly-preloader" id="stackly-preloader" aria-hidden="false">
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--top"></div>
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--bottom"></div>
+    <div class="stackly-preloader__content">
+      <div class="stackly-preloader__logo-wrap">
+        <div class="stackly-preloader__icon-ring">
+          <svg class="stackly-preloader__ring-svg" viewBox="0 0 100 100">
+            <circle class="stackly-preloader__ring-bg" cx="50" cy="50" r="44"></circle>
+            <circle class="stackly-preloader__ring-bar" id="preloader-ring-bar" cx="50" cy="50" r="44"></circle>
+          </svg>
+          <img src="assets/stackly-icon-white.webp" alt="Stackly" class="stackly-preloader__icon" />
+        </div>
+        <div class="stackly-preloader__brand">
+          <span class="stackly-preloader__wordmark">STACKLY</span>
+          <span class="stackly-preloader__tagline">STACKLY SERVICES</span>
+        </div>
+      </div>
+      <div class="stackly-preloader__progress-box">
+        <div class="stackly-preloader__bar">
+          <div class="stackly-preloader__fill" id="preloader-fill"></div>
+        </div>
+        <div class="stackly-preloader__counter">
+          <span id="preloader-percent">0</span>%
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MASTER HEADER ═══ -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo" aria-label="Stackly Home">
+        <img src="assets/stackly-logo-black.webp" alt="STACKLY" class="nav__logo-img" />
+      </a>
+      <ul class="nav__links" id="nav-links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="about.html" class="nav__link">About</a></li>
+        <li><a href="services.html" class="nav__link nav__link--active" style="color:var(--yellow);font-weight:700;">Services</a></li>
+        <li><a href="blog.html" class="nav__link">Blog</a></li>
+        <li><a href="contact.html" class="nav__link">Contact</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="contact.html" class="nav__login">Log in</a>
+        <a href="contact.html" class="btn btn--dark nav__cta">Get Started</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+      </button>
+    </nav>
+    <div class="nav__mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+    <div class="nav__mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+      <button class="nav__mobile-close" id="mobile-close-btn" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <ul class="nav__mobile-links" role="list">
+        <li><a href="index.html" class="nav__mobile-link">Home</a></li>
+        <li><a href="about.html" class="nav__mobile-link">About</a></li>
+        <li><a href="services.html" class="nav__mobile-link">Services</a></li>
+        <li><a href="blog.html" class="nav__mobile-link">Blog</a></li>
+        <li><a href="contact.html" class="nav__mobile-link">Contact</a></li>
+      </ul>
+      <div class="nav__mobile-actions">
+        <a href="contact.html" class="nav__login">Log in</a>
+        <a href="contact.html" class="btn btn--dark">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ 1. SERVICES HERO ═══ -->
+    <section class="srv-hero" id="srv-hero" aria-labelledby="srv-hero-title">
+      <div class="container srv-hero__container">
+        <div class="srv-hero__content">
+          <h1 class="srv-hero__headline" id="srv-hero-title" aria-label="Every service tied to your policy, not just the policy itself">
+            <span class="gsap-word-wrap"><span class="gsap-word">Every</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">service</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">tied</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">to</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">your</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">policy,</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">not</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">just</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">the</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">policy</span></span>
+            <span class="gsap-word-wrap"><span class="gsap-word">itself</span></span>
+          </h1>
+          <p class="srv-hero__sub">
+            Coverage is the start of the relationship, not the whole of it. Here's what's actually included once you're a Meridian policyholder — the footprint, the claims process, and the support in between.
+          </p>
+        </div>
+        <div class="srv-hero__visual" data-aos="fade-left" data-aos-delay="100">
+          <div class="srv-hero__img-wrap" id="srvHeroVisualWrap">
+            <!-- Animated Geometric Triangle Squad Surround -->
+            <div class="triangle-squad" id="triangleSquad" aria-hidden="true">
+              <!-- Central Wireframe Triangle Shield Mesh -->
+              <div class="tri-squad-item tri-squad-item--mesh"></div>
+              
+              <!-- Floating Dynamic Triangles Squad -->
+              <div class="tri-squad-item tri-squad-item--tl" style="--rot-speed: 18s; --float-speed: 5s;"></div>
+              <div class="tri-squad-item tri-squad-item--tr" style="--rot-speed: 24s; --float-speed: 7s;"></div>
+              <div class="tri-squad-item tri-squad-item--bl" style="--rot-speed: 16s; --float-speed: 6s;"></div>
+              <div class="tri-squad-item tri-squad-item--br" style="--rot-speed: 22s; --float-speed: 8s;"></div>
+              <div class="tri-squad-item tri-squad-item--top" style="--rot-speed: 20s; --float-speed: 6.5s;"></div>
+
+              <!-- Rotating Accents & Glowing Orbital Rings -->
+              <div class="tri-squad-item tri-squad-item--ring"></div>
+              <div class="tri-squad-item tri-squad-item--dot1"></div>
+              <div class="tri-squad-item tri-squad-item--dot2"></div>
+            </div>
+
+            <div class="srv-hero__img-backdrop"></div>
+            <img src="assets/services-hardhat.webp" alt="Yellow safety hardhat and rolled blueprint" class="srv-hero__img" id="srv-hardhat-img" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2. WHAT'S ACTUALLY IN EACH POLICY (SLIDE IN FROM SIDES) ═══ -->
+    <section class="srv-breakdown" id="breakdown-section" aria-labelledby="breakdown-heading">
+      <div class="container">
+        <h2 class="srv-breakdown__title" id="breakdown-heading" data-aos="fade-up">What's actually in each policy</h2>
+
+        <div class="srv-breakdown__list">
+          <!-- Policy 1: General liability -->
+          <article class="srv-policy-row" id="policy-general">
+            <div class="srv-policy-row__img-wrap" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="140">
+              <img src="assets/services-bandage.webp" alt="Teammates holding leg in athletic injury support" class="srv-policy-row__img" loading="lazy" />
+            </div>
+            <div class="srv-policy-row__content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="100" data-aos-offset="140">
+              <h3 class="srv-policy-row__heading">General liability</h3>
+              <div class="srv-policy-row__sub">Bodily injury &amp; property damage</div>
+              <ul class="srv-policy-row__points">
+                <li class="srv-policy-row__point">Defends you from customer slip-and-fall claims, property damage on client premises, and advertising injury up to your policy limit.</li>
+                <li class="srv-policy-row__point">Defense costs outside the policy limit on most plans.</li>
+                <li class="srv-policy-row__point">No extra surcharge on sub-contractor claims up to $250,000.</li>
+                <li class="srv-policy-row__point">Claims hotline 24/7 with assigned named adjuster.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Policy 2: Professional liability -->
+          <article class="srv-policy-row" id="policy-professional">
+            <div class="srv-policy-row__img-wrap" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="140">
+              <img src="assets/services-piggybank.webp" alt="Pink piggy bank with golden coin" class="srv-policy-row__img" loading="lazy" />
+            </div>
+            <div class="srv-policy-row__content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="100" data-aos-offset="140">
+              <h3 class="srv-policy-row__heading">Professional liability</h3>
+              <div class="srv-policy-row__sub">Errors, omissions &amp; disputed work</div>
+              <ul class="srv-policy-row__points">
+                <li class="srv-policy-row__point">Covers customer loss claims alleging negligence, errors in delivered plans, missed deadlines, or advice that caused a client financial loss.</li>
+                <li class="srv-policy-row__point">Prior acts coverage for work completed before the policy started.</li>
+                <li class="srv-policy-row__point">Contract dispute defense, including fee disputes that escalate.</li>
+                <li class="srv-policy-row__point">Dedicated professional liability adjuster assigned for every file.</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Policy 3: Commercial property -->
+          <article class="srv-policy-row" id="policy-property">
+            <div class="srv-policy-row__img-wrap" data-aos="fade-right" data-aos-duration="1000" data-aos-offset="140">
+              <img src="assets/policy-office-exterior.webp" alt="Modern commercial glass architectural building" class="srv-policy-row__img" loading="lazy" />
+            </div>
+            <div class="srv-policy-row__content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="100" data-aos-offset="140">
+              <h3 class="srv-policy-row__heading">Commercial property</h3>
+              <div class="srv-policy-row__sub">Building, equipment &amp; inventory</div>
+              <ul class="srv-policy-row__points">
+                <li class="srv-policy-row__point">Rebuilds or repairs your physical space and replaces what's inside it after a covered loss — fire, storm, theft, or vandalism.</li>
+                <li class="srv-policy-row__point">Replacement cost valuation, not depreciated value, as standard.</li>
+                <li class="srv-policy-row__point">Business income coverage for the period you can't operate.</li>
+                <li class="srv-policy-row__point">Equipment breakdown add-on available at bind.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3. RIDERS YOU CAN ADD TO ANY CORE POLICY (GSAP LINE ANIMATION) ═══ -->
+    <section class="srv-riders" id="riders-section" aria-labelledby="riders-heading">
+      <div class="container">
+        <div class="srv-riders__header" data-aos="fade-up">
+          <div class="srv-riders__badge">
+            <i class="fa-solid fa-plus-circle"></i> Policy Add-On Enhancements
+          </div>
+          <h2 class="srv-riders__title" id="riders-heading">Riders you can add to any core policy</h2>
+          <div class="srv-riders__line-bar">
+            <span class="srv-riders__line-track"></span>
+            <span class="srv-riders__line-fill gsap-header-line"></span>
+            <span class="srv-riders__line-glow"></span>
+          </div>
+        </div>
+
+        <div class="srv-riders__grid" id="ridersGrid">
+          <!-- Rider 1 -->
+          <div class="srv-rider-item" data-aos="fade-up" data-aos-delay="50">
+            <div class="srv-rider-item__line gsap-item-line"></div>
+            <div class="srv-rider-item__meta">
+              <span class="srv-rider-item__num">01</span>
+              <span class="srv-rider-item__indicator"></span>
+            </div>
+            <h3 class="srv-rider-item__title">Hired &amp; non-owned auto</h3>
+            <p class="srv-rider-item__desc">Covers employee-owned or rented vehicles used on company errands.</p>
+          </div>
+
+          <!-- Rider 2 -->
+          <div class="srv-rider-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="srv-rider-item__line gsap-item-line"></div>
+            <div class="srv-rider-item__meta">
+              <span class="srv-rider-item__num">02</span>
+              <span class="srv-rider-item__indicator"></span>
+            </div>
+            <h3 class="srv-rider-item__title">Employment practices</h3>
+            <p class="srv-rider-item__desc">Defends against wrongful termination, discrimination, or harassment claims.</p>
+          </div>
+
+          <!-- Rider 3 -->
+          <div class="srv-rider-item" data-aos="fade-up" data-aos-delay="150">
+            <div class="srv-rider-item__line gsap-item-line"></div>
+            <div class="srv-rider-item__meta">
+              <span class="srv-rider-item__num">03</span>
+              <span class="srv-rider-item__indicator"></span>
+            </div>
+            <h3 class="srv-rider-item__title">The paper trail gap</h3>
+            <p class="srv-rider-item__desc">Prior acts coverage for work completed on old projects if you switched.</p>
+          </div>
+
+          <!-- Rider 4 -->
+          <div class="srv-rider-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="srv-rider-item__line gsap-item-line"></div>
+            <div class="srv-rider-item__meta">
+              <span class="srv-rider-item__num">04</span>
+              <span class="srv-rider-item__indicator"></span>
+            </div>
+            <h3 class="srv-rider-item__title">Umbrella liability</h3>
+            <p class="srv-rider-item__desc">Extends limits above your general and auto liability policies.</p>
+          </div>
+
+          <!-- Rider 5 -->
+          <div class="srv-rider-item" data-aos="fade-up" data-aos-delay="250">
+            <div class="srv-rider-item__line gsap-item-line"></div>
+            <div class="srv-rider-item__meta">
+              <span class="srv-rider-item__num">05</span>
+              <span class="srv-rider-item__indicator"></span>
+            </div>
+            <h3 class="srv-rider-item__title">Business interruption extension</h3>
+            <p class="srv-rider-item__desc">Extends income replacement beyond the standard recovery period.</p>
+          </div>
+
+          <!-- Rider 6 -->
+          <div class="srv-rider-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="srv-rider-item__line gsap-item-line"></div>
+            <div class="srv-rider-item__meta">
+              <span class="srv-rider-item__num">06</span>
+              <span class="srv-rider-item__indicator"></span>
+            </div>
+            <h3 class="srv-rider-item__title">Spoilage coverage</h3>
+            <p class="srv-rider-item__desc">Replaces refrigerated inventory lost to an equipment or power failure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4. HOW A CLAIM ACTUALLY MOVES (STAGGERED BLINDS REVEAL) ═══ -->
+    <section class="srv-claims" id="claims-section" aria-labelledby="claims-heading">
+      <div class="container">
+        <div class="srv-claims__header" data-aos="fade-up">
+          <div class="srv-claims__badge">
+            <span class="srv-claims__badge-dot"></span> End-to-End Resolution Workflow
+          </div>
+          <h2 class="srv-claims__title" id="claims-heading">How a claim actually moves</h2>
+          <p class="srv-claims__sub">The claim process is the same process for every loss — the only thing that changes is which specialist picks it up.</p>
+        </div>
+
+        <div class="srv-claims__grid" id="claimsGrid">
+          <!-- Step 1 -->
+          <article class="srv-claim-card" data-aos="fade-up" data-aos-delay="50">
+            <div class="srv-claim-card__img-wrap">
+              <!-- Staggered Venetian Blind Slats Overlay -->
+              <div class="blinds-overlay" aria-hidden="true">
+                <span class="blind-slat" style="--slat-i: 0;"></span>
+                <span class="blind-slat" style="--slat-i: 1;"></span>
+                <span class="blind-slat" style="--slat-i: 2;"></span>
+                <span class="blind-slat" style="--slat-i: 3;"></span>
+                <span class="blind-slat" style="--slat-i: 4;"></span>
+              </div>
+              <div class="srv-claim-card__num">01</div>
+              <img src="assets/diff-agent-warehouse.webp" alt="Manager in yellow shirt filing report" class="srv-claim-card__img" loading="lazy" />
+            </div>
+            <h3 class="srv-claim-card__title">Report it any way that's fastest</h3>
+            <p class="srv-claim-card__desc">File via your named agent directly, our 24-hour claims line, or the online portal. No form PDFs to print.</p>
+          </article>
+
+          <!-- Step 2 -->
+          <article class="srv-claim-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="srv-claim-card__img-wrap">
+              <div class="blinds-overlay" aria-hidden="true">
+                <span class="blind-slat" style="--slat-i: 0;"></span>
+                <span class="blind-slat" style="--slat-i: 1;"></span>
+                <span class="blind-slat" style="--slat-i: 2;"></span>
+                <span class="blind-slat" style="--slat-i: 3;"></span>
+                <span class="blind-slat" style="--slat-i: 4;"></span>
+              </div>
+              <div class="srv-claim-card__num">02</div>
+              <img src="assets/policy-side-woman.webp" alt="Adjuster consulting directly with client" class="srv-claim-card__img" loading="lazy" />
+            </div>
+            <h3 class="srv-claim-card__title">An adjuster is assigned</h3>
+            <p class="srv-claim-card__desc">You get a name, a direct line, and a first assessment of what's covered before the day ends.</p>
+          </article>
+
+          <!-- Step 3 -->
+          <article class="srv-claim-card" data-aos="fade-up" data-aos-delay="150">
+            <div class="srv-claim-card__img-wrap">
+              <div class="blinds-overlay" aria-hidden="true">
+                <span class="blind-slat" style="--slat-i: 0;"></span>
+                <span class="blind-slat" style="--slat-i: 1;"></span>
+                <span class="blind-slat" style="--slat-i: 2;"></span>
+                <span class="blind-slat" style="--slat-i: 3;"></span>
+                <span class="blind-slat" style="--slat-i: 4;"></span>
+              </div>
+              <div class="srv-claim-card__num">03</div>
+              <img src="assets/policy-side-office.webp" alt="Two specialists reviewing documentation" class="srv-claim-card__img" loading="lazy" />
+            </div>
+            <h3 class="srv-claim-card__title">Investigation and documentation</h3>
+            <p class="srv-claim-card__desc">Your adjuster gathers estimates, inspects damage, and flags anything that needs a specialist.</p>
+          </article>
+
+          <!-- Step 4 -->
+          <article class="srv-claim-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="srv-claim-card__img-wrap">
+              <div class="blinds-overlay" aria-hidden="true">
+                <span class="blind-slat" style="--slat-i: 0;"></span>
+                <span class="blind-slat" style="--slat-i: 1;"></span>
+                <span class="blind-slat" style="--slat-i: 2;"></span>
+                <span class="blind-slat" style="--slat-i: 3;"></span>
+                <span class="blind-slat" style="--slat-i: 4;"></span>
+              </div>
+              <div class="srv-claim-card__num">04</div>
+              <img src="assets/services-handshake.webp" alt="Handshake settlement agreement" class="srv-claim-card__img" loading="lazy" />
+            </div>
+            <h3 class="srv-claim-card__title">Fast-track on the undisputed amount</h3>
+            <p class="srv-claim-card__desc">Where part of the claim is clear-cut, that portion pays out before the full claim closes.</p>
+          </article>
+
+          <!-- Step 5 -->
+          <article class="srv-claim-card" data-aos="fade-up" data-aos-delay="250">
+            <div class="srv-claim-card__img-wrap">
+              <div class="blinds-overlay" aria-hidden="true">
+                <span class="blind-slat" style="--slat-i: 0;"></span>
+                <span class="blind-slat" style="--slat-i: 1;"></span>
+                <span class="blind-slat" style="--slat-i: 2;"></span>
+                <span class="blind-slat" style="--slat-i: 3;"></span>
+                <span class="blind-slat" style="--slat-i: 4;"></span>
+              </div>
+              <div class="srv-claim-card__num">05</div>
+              <img src="assets/about-team-teo.webp" alt="Team meeting reaching full claim resolution" class="srv-claim-card__img" loading="lazy" />
+            </div>
+            <h3 class="srv-claim-card__title">Full resolution</h3>
+            <p class="srv-claim-card__desc">96% of claims are fully resolved within ten days of being reported.</p>
+          </article>
+
+          <!-- Step 6 -->
+          <article class="srv-claim-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="srv-claim-card__img-wrap">
+              <div class="blinds-overlay" aria-hidden="true">
+                <span class="blind-slat" style="--slat-i: 0;"></span>
+                <span class="blind-slat" style="--slat-i: 1;"></span>
+                <span class="blind-slat" style="--slat-i: 2;"></span>
+                <span class="blind-slat" style="--slat-i: 3;"></span>
+                <span class="blind-slat" style="--slat-i: 4;"></span>
+              </div>
+              <div class="srv-claim-card__num">06</div>
+              <img src="assets/services-step-prevention.webp" alt="Client giving confident thumbs up after resolution" class="srv-claim-card__img" loading="lazy" />
+            </div>
+            <h3 class="srv-claim-card__title">Prevention</h3>
+            <p class="srv-claim-card__desc">Your adjuster reviews post-claim safety measures to protect renewal pricing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5. THREE STARTING PACKAGES (STACKED CARD FAN ANIMATION) ═══ -->
+    <section class="srv-matrix" id="pricing-matrix" aria-labelledby="matrix-heading">
+      <div class="container">
+        <div class="srv-matrix__header" data-aos="fade-up">
+          <div class="srv-matrix__header-top">
+            <div class="srv-matrix__badge">
+              <i class="fa-solid fa-layer-group"></i> Flexible Coverage Architecture
+            </div>
+            <!-- Fan Animation Interactive Mode Switch -->
+            <div class="srv-matrix__view-toggle" id="matrixViewToggle" aria-label="Toggle card presentation mode">
+              <button type="button" class="srv-matrix__toggle-btn active" id="btnFannedGrid" data-view="grid">
+                <i class="fa-solid fa-table-columns"></i> Fanned Grid
+              </button>
+              <button type="button" class="srv-matrix__toggle-btn" id="btnStackedDeck" data-view="stack">
+                <i class="fa-solid fa-clone"></i> Stacked Fan Deck
+              </button>
+            </div>
+          </div>
+          <h2 class="srv-matrix__title" id="matrix-heading">Three starting packages, fully adjustable</h2>
+          <p class="srv-matrix__subtitle">Hover or interact with each card to fan through tiers and compare coverage levels.</p>
+        </div>
+
+        <div class="srv-matrix-card" id="srvMatrixCard" data-aos="fade-up" data-aos-delay="100">
+          <!-- Col 1: FEATURES -->
+          <div class="srv-matrix__features-col" id="matrixFeaturesCol">
+            <div class="srv-matrix__features-badge">FEATURES</div>
+            <div class="srv-matrix__feature-rows">
+              <div class="srv-matrix__feature-row" data-row="1">
+                <div class="srv-matrix__feature-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                <span class="srv-matrix__feature-label">Feature 1</span>
+              </div>
+              <div class="srv-matrix__feature-row" data-row="2">
+                <div class="srv-matrix__feature-icon"><i class="fa-solid fa-file-shield"></i></div>
+                <span class="srv-matrix__feature-label">Feature 2</span>
+              </div>
+              <div class="srv-matrix__feature-row" data-row="3">
+                <div class="srv-matrix__feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <span class="srv-matrix__feature-label">Feature 3</span>
+              </div>
+              <div class="srv-matrix__feature-row" data-row="4">
+                <div class="srv-matrix__feature-icon"><i class="fa-solid fa-users"></i></div>
+                <span class="srv-matrix__feature-label">Feature 4</span>
+              </div>
+              <div class="srv-matrix__feature-row" data-row="5">
+                <div class="srv-matrix__feature-icon"><i class="fa-solid fa-comments"></i></div>
+                <span class="srv-matrix__feature-label">Feature 5</span>
+              </div>
+              <div class="srv-matrix__feature-row" data-row="6">
+                <div class="srv-matrix__feature-icon"><i class="fa-solid fa-clock"></i></div>
+                <span class="srv-matrix__feature-label">Feature 6</span>
+              </div>
+              <div class="srv-matrix__feature-row" data-row="7">
+                <div class="srv-matrix__feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                <span class="srv-matrix__feature-label">Feature 7</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 2: Starter Plan Card -->
+          <div class="srv-matrix__plan-col srv-fan-card" id="planStarter" data-plan="starter">
+            <div class="srv-fan-card__inner">
+              <div class="srv-matrix__plan-header">
+                <i class="fa-solid fa-rocket srv-matrix__plan-icon"></i>
+                <h3 class="srv-matrix__plan-name">Starter</h3>
+                <div class="srv-matrix__plan-sub">UNDER 10 EMPLOYEES</div>
+              </div>
+              <div class="srv-matrix__plan-rows">
+                <div class="srv-matrix__cell" data-row="1"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="2"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="3"><span class="srv-matrix__cell--addon"><i class="fa-solid fa-circle-plus"></i> Add-on</span></div>
+                <div class="srv-matrix__cell" data-row="4"><span class="srv-matrix__cell--addon"><i class="fa-solid fa-circle-plus"></i> Add-on</span></div>
+                <div class="srv-matrix__cell srv-matrix__cell--dash" data-row="5">—</div>
+                <div class="srv-matrix__cell srv-matrix__cell--dash" data-row="6">—</div>
+                <div class="srv-matrix__cell" data-row="7">Next business day</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 3: Growth Plan Card (Featured in solid Yellow) -->
+          <div class="srv-matrix__plan-col srv-matrix__plan-col--growth srv-fan-card" id="planGrowth" data-plan="growth">
+            <div class="srv-fan-card__inner">
+              <div class="srv-matrix__plan-header">
+                <i class="fa-solid fa-chart-column srv-matrix__plan-icon"></i>
+                <h3 class="srv-matrix__plan-name">Growth</h3>
+                <div class="srv-matrix__plan-sub">10–75 EMPLOYEES</div>
+              </div>
+              <div class="srv-matrix__plan-rows">
+                <div class="srv-matrix__cell" data-row="1"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="2"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="3"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="4"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="5"><span class="srv-matrix__cell--addon"><i class="fa-solid fa-circle-plus"></i> Add-on</span></div>
+                <div class="srv-matrix__cell" data-row="6">Quarterly</div>
+                <div class="srv-matrix__cell" data-row="7">Same day</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 4: Enterprise Plan Card -->
+          <div class="srv-matrix__plan-col srv-fan-card" id="planEnterprise" data-plan="enterprise">
+            <div class="srv-fan-card__inner">
+              <div class="srv-matrix__plan-header">
+                <i class="fa-solid fa-building srv-matrix__plan-icon"></i>
+                <h3 class="srv-matrix__plan-name">Enterprise</h3>
+                <div class="srv-matrix__plan-sub">75+ EMPLOYEES</div>
+              </div>
+              <div class="srv-matrix__plan-rows">
+                <div class="srv-matrix__cell" data-row="1"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="2"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="3"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="4"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="5"><span class="srv-matrix__cell--included"><i class="fa-solid fa-circle-check"></i> Included</span></div>
+                <div class="srv-matrix__cell" data-row="6">Ongoing</div>
+                <div class="srv-matrix__cell" data-row="7">Within the hour</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 6. WHAT YOU GET BETWEEN RENEWALS (INTERACTIVE 3D CURSOR HOVER) ═══ -->
+    <section class="srv-renewals" id="renewals-section" aria-labelledby="renewals-heading">
+      <div class="container srv-renewals__container">
+        <div class="srv-renewals__content" data-aos="fade-right">
+          <div class="srv-renewals__badge">
+            <i class="fa-solid fa-arrows-spin"></i> Active Continuous Protection
+          </div>
+          <h2 class="srv-renewals__title" id="renewals-heading">What you get between renewals</h2>
+          <p class="srv-renewals__body">
+            Coverage is not an annual transaction, it's an ongoing relationship. Throughout the year, we audit your risk profile, update asset values, and provide advice on contract terms before you sign new business. Our dedicated underwriters are always on hand to discuss modifications as your business evolves, ensuring your protection never lags behind your real-world operations.
+          </p>
+        </div>
+        <div class="srv-renewals__visual" id="srvRenewalsVisualWrap" data-aos="fade-left" data-aos-delay="100">
+          <div class="srv-renewals__card-3d" id="srvRenewalsCard">
+            <div class="srv-renewals__img-wrap">
+              <img src="assets/services-renewals-coasters.webp" alt="Round woven coasters and stone tokens" class="srv-renewals__img" id="srvRenewalsImg" loading="lazy" />
+              <!-- Specular Light Glare Follower -->
+              <div class="srv-renewals__glare" id="srvRenewalsGlare" aria-hidden="true"></div>
+              <!-- Floating Cursor Follower Pill Badge -->
+              <div class="srv-renewals__cursor-follower" id="srvRenewalsCursor" aria-hidden="true">
+                <span class="srv-renewals__cursor-text">✦ 365 Active Audit</span>
+              </div>
+            </div>
+            <!-- Glow Ambient Backdrop -->
+            <div class="srv-renewals__glow-backdrop" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ READY TO SEE WHICH PACKAGE FITS CTA ═══ -->
+    <section class="srv-cta-section" style="background:#000000; padding: 6rem 0 4rem;" aria-labelledby="srv-cta-title">
+      <div class="container">
+        <div class="srv-cta-block" data-aos="fade-up" style="padding-bottom: 0;">
+          <div class="srv-cta-block__left">
+            <h2 class="srv-cta-block__title" id="srv-cta-title">Ready to see which package fits?</h2>
+            <p class="srv-cta-block__sub">Tell us your industry and headcount, and we'll recommend a starting package before you speak to anyone.</p>
+          </div>
+          <div class="srv-cta-block__actions">
+            <a href="contact.html" class="srv-btn-quote" id="srv-footer-cta-btn">Start your quote</a>
+            <span class="srv-btn-badge">Most quotes ready in 24 hours</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       STACKLY FOOTER SECTION
+  ═══════════════════════════════════════════ -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <!-- Col 1: Brand & Socials -->
+      <div class="footer__brand" data-aos="fade-up">
+        <a href="index.html" class="footer__logo" aria-label="Stackly Home">
+          <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="footer__logo-img" />
+        </a>
+        <p class="footer__brand-desc">
+          Empowering outdoor enthusiasts and adventurers with premium gear, alpine expeditions, and trail solutions.
+        </p>
+        <div class="footer__socials">
+          <a href="404.html" class="footer__social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="100">
+        <h4 class="footer__heading">Quick Links</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="index.html" class="footer__link">Home</a></li>
+          <li><a href="about.html" class="footer__link">About</a></li>
+          <li><a href="services.html" class="footer__link footer__link--active">Services</a></li>
+          <li><a href="blog.html" class="footer__link">Blog</a></li>
+          <li><a href="contact.html" class="footer__link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Gear & Expeditions -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="200">
+        <h4 class="footer__heading">Gear &amp; Expeditions</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="404.html" class="footer__link">Tents &amp; Shelters</a></li>
+          <li><a href="404.html" class="footer__link">Alpine Backpacks</a></li>
+          <li><a href="404.html" class="footer__link">Trail Footwear</a></li>
+          <li><a href="404.html" class="footer__link">Expedition Logistics</a></li>
+          <li><a href="404.html" class="footer__link">Gear Repair Depot</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Stay Updated -->
+      <div class="footer__col footer__col--newsletter" data-aos="fade-up" data-aos-delay="300">
+        <h4 class="footer__heading">Stay Updated</h4>
+        <p class="footer__newsletter-text">
+          Get weekly trail guides, gear discounts &amp; wilderness expedition reports.
+        </p>
+        <form class="footer__newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Stackly updates!');">
+          <div class="footer__newsletter-pill">
+            <input type="email" class="footer__newsletter-input" placeholder="Enter your email" required aria-label="Enter your email for updates" />
+            <button type="submit" class="footer__newsletter-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__copyright">&copy; 2026 <strong>Stackly</strong> Outdoor Store. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="404.html" class="footer__legal-link">GitHub Repository</a>
+          <a href="404.html" class="footer__legal-link">Privacy Policy</a>
+          <a href="404.html" class="footer__legal-link">Terms of Service</a>
+          <a href="404.html" class="footer__legal-link">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="animations.js"></script>
+  <script src="script.js"></script>
+
+  <!-- ═══════════════════════════════════════════
+       GSAP WORD ANIMATION & TRIANGLE SQUAD CONTROLLER
+  ═══════════════════════════════════════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. GSAP Staggered Word Animation
+      const heroWords = document.querySelectorAll('.srv-hero__headline .gsap-word');
+      const heroSub = document.querySelector('.srv-hero__sub');
+
+      if (heroWords.length && typeof gsap !== 'undefined') {
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+        // Set initial positions
+        gsap.set(heroWords, { yPercent: 120, opacity: 0, rotateX: -40, transformOrigin: '0% 50% -30' });
+        if (heroSub) gsap.set(heroSub, { y: 25, opacity: 0 });
+
+        // Smooth GSAP staggered word entrance
+        tl.to(heroWords, {
+          yPercent: 0,
+          opacity: 1,
+          rotateX: 0,
+          duration: 1.05,
+          stagger: 0.055,
+          delay: 0.15
+        });
+
+        if (heroSub) {
+          tl.to(heroSub, {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            ease: 'power3.out'
+          }, '-=0.65');
+        }
+      }
+
+      // 2. Interactive Triangle Squad Parallax around Hardhat
+      const visualWrap = document.getElementById('srvHeroVisualWrap');
+      const squadTriangles = document.querySelectorAll('.tri-squad-item');
+
+      if (visualWrap && squadTriangles.length) {
+        let mouseX = 0, mouseY = 0;
+        let curX = 0, curY = 0;
+
+        visualWrap.addEventListener('mousemove', (e) => {
+          const rect = visualWrap.getBoundingClientRect();
+          mouseX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+          mouseY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+        });
+
+        visualWrap.addEventListener('mouseleave', () => {
+          mouseX = 0;
+          mouseY = 0;
+        });
+
+        function renderTriangleSquad() {
+          curX += (mouseX - curX) * 0.1;
+          curY += (mouseY - curY) * 0.1;
+
+          squadTriangles.forEach((item, idx) => {
+            if (item.classList.contains('tri-squad-item--mesh')) return;
+            const factor = ((idx % 3) + 1) * 8;
+            const dir = (idx % 2 === 0 ? 1 : -1);
+            item.style.transform = `translate3d(${(curX * factor * dir).toFixed(2)}px, ${(curY * factor * dir).toFixed(2)}px, 0)`;
+          });
+
+          requestAnimationFrame(renderTriangleSquad);
+        }
+        requestAnimationFrame(renderTriangleSquad);
+      }
+
+      // 2.5. GSAP Line Animation on Riders Section
+      const ridersSection = document.getElementById('riders-section');
+      const headerLine = document.querySelector('.gsap-header-line');
+      const itemLines = document.querySelectorAll('.gsap-item-line');
+
+      if (ridersSection && typeof gsap !== 'undefined') {
+        // Use ScrollTrigger or fallback to IntersectionObserver
+        if (typeof ScrollTrigger !== 'undefined') {
+          const lineTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: ridersSection,
+              start: 'top 75%',
+              once: true
+            }
+          });
+
+          if (headerLine) {
+            lineTl.fromTo(headerLine, 
+              { scaleX: 0, transformOrigin: 'left center' },
+              { scaleX: 1, duration: 0.85, ease: 'power3.inOut' }
+            );
+          }
+
+          if (itemLines.length) {
+            lineTl.fromTo(itemLines,
+              { scaleX: 0, transformOrigin: 'left center' },
+              { scaleX: 1, duration: 0.75, stagger: 0.12, ease: 'power3.out' },
+              '-=0.45'
+            );
+          }
+        } else {
+          const ridersObs = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                if (headerLine) gsap.to(headerLine, { scaleX: 1, duration: 0.85, ease: 'power3.inOut' });
+                if (itemLines.length) gsap.to(itemLines, { scaleX: 1, duration: 0.75, stagger: 0.12, ease: 'power3.out' });
+                obs.disconnect();
+              }
+            });
+          }, { threshold: 0.2 });
+          ridersObs.observe(ridersSection);
+        }
+      }
+
+      // 3. Staggered Venetian Blinds Reveal on Claims Section
+      const claimCards = document.querySelectorAll('.srv-claim-card');
+      if (claimCards.length) {
+        const claimsObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Stagger each card's reveal slightly
+              claimCards.forEach((card, idx) => {
+                setTimeout(() => {
+                  card.classList.add('is-revealed');
+                }, idx * 160);
+              });
+              observer.disconnect();
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -50px 0px'
+        });
+
+        const claimsSection = document.getElementById('claims-section');
+        if (claimsSection) {
+          claimsObserver.observe(claimsSection);
+        } else {
+          claimCards.forEach(card => card.classList.add('is-revealed'));
+        }
+      }
+
+      // 4. Interactive 3D Cursor Hover & Glare Controller (Renewals Section)
+      const renewalsCard = document.getElementById('srvRenewalsCard');
+      const renewalsImg = document.getElementById('srvRenewalsImg');
+      const renewalsGlare = document.getElementById('srvRenewalsGlare');
+      const renewalsCursor = document.getElementById('srvRenewalsCursor');
+
+      if (renewalsCard && renewalsImg) {
+        let cardTargetRotX = 0, cardTargetRotY = 0;
+        let cardCurRotX = 0, cardCurRotY = 0;
+        let imgTargetX = 0, imgTargetY = 0;
+        let imgCurX = 0, imgCurY = 0;
+        let mouseInside = false;
+
+        renewalsCard.addEventListener('mouseenter', () => {
+          mouseInside = true;
+          if (renewalsGlare) renewalsGlare.style.opacity = '1';
+          if (renewalsCursor) {
+            renewalsCursor.style.opacity = '1';
+            renewalsCursor.style.transform = 'translate(-50%, -50%) scale(1)';
+          }
+        });
+
+        renewalsCard.addEventListener('mousemove', (e) => {
+          const rect = renewalsCard.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Normalized coordinates (-1 to 1)
+          const normX = (x / rect.width) * 2 - 1;
+          const normY = (y / rect.height) * 2 - 1;
+
+          // 3D rotation angles
+          cardTargetRotY = normX * 12; // tilt max 12deg
+          cardTargetRotX = -normY * 12;
+
+          // Image parallax counter-shift
+          imgTargetX = -normX * 10;
+          imgTargetY = -normY * 10;
+
+          // Glare spotlight position
+          if (renewalsGlare) {
+            const pctX = ((x / rect.width) * 100).toFixed(1);
+            const pctY = ((y / rect.height) * 100).toFixed(1);
+            renewalsGlare.style.background = `radial-gradient(circle 280px at ${pctX}% ${pctY}%, rgba(255, 255, 255, 0.5) 0%, rgba(244, 211, 94, 0.22) 35%, transparent 70%)`;
+          }
+
+          // Move cursor follower pill
+          if (renewalsCursor) {
+            renewalsCursor.style.left = `${x}px`;
+            renewalsCursor.style.top = `${y}px`;
+          }
+        });
+
+        renewalsCard.addEventListener('mouseleave', () => {
+          mouseInside = false;
+          cardTargetRotX = 0;
+          cardTargetRotY = 0;
+          imgTargetX = 0;
+          imgTargetY = 0;
+          if (renewalsGlare) renewalsGlare.style.opacity = '0';
+          if (renewalsCursor) {
+            renewalsCursor.style.opacity = '0';
+            renewalsCursor.style.transform = 'translate(-50%, -50%) scale(0.6)';
+          }
+        });
+
+        function animateRenewalsCard() {
+          const ease = mouseInside ? 0.12 : 0.08;
+          cardCurRotX += (cardTargetRotX - cardCurRotX) * ease;
+          cardCurRotY += (cardTargetRotY - cardCurRotY) * ease;
+          imgCurX += (imgTargetX - imgCurX) * ease;
+          imgCurY += (imgTargetY - imgCurY) * ease;
+
+          const scale = mouseInside ? 1.03 : 1;
+          renewalsCard.style.transform = `perspective(1000px) rotateX(${cardCurRotX.toFixed(2)}deg) rotateY(${cardCurRotY.toFixed(2)}deg) scale3d(${scale}, ${scale}, ${scale})`;
+          renewalsImg.style.transform = `scale(1.08) translate3d(${imgCurX.toFixed(2)}px, ${imgCurY.toFixed(2)}px, 0)`;
+
+          requestAnimationFrame(animateRenewalsCard);
+        }
+        requestAnimationFrame(animateRenewalsCard);
+      }
+
+      // 5. Stacked Card Fan Controller (Pricing Matrix Section)
+      const matrixCard = document.getElementById('srvMatrixCard');
+      const btnGrid = document.getElementById('btnFannedGrid');
+      const btnStack = document.getElementById('btnStackedDeck');
+      const toggleBtns = document.querySelectorAll('.srv-matrix__toggle-btn');
+
+      if (matrixCard && toggleBtns.length) {
+        toggleBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            toggleBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const view = btn.getAttribute('data-view');
+
+            if (view === 'stack') {
+              matrixCard.classList.add('mode-stack');
+            } else {
+              matrixCard.classList.remove('mode-stack');
+            }
+          });
+        });
+
+        // Synchronized Row Highlighting across Matrix
+        const featureRows = document.querySelectorAll('.srv-matrix__feature-row');
+        const matrixCells = document.querySelectorAll('.srv-matrix__cell[data-row]');
+
+        function highlightRow(rowId) {
+          featureRows.forEach(row => {
+            if (row.getAttribute('data-row') === rowId) row.classList.add('is-active');
+            else row.classList.remove('is-active');
+          });
+          matrixCells.forEach(cell => {
+            if (cell.getAttribute('data-row') === rowId) cell.classList.add('is-active');
+            else cell.classList.remove('is-active');
+          });
+        }
+
+        function clearRowHighlight() {
+          featureRows.forEach(row => row.classList.remove('is-active'));
+          matrixCells.forEach(cell => cell.classList.remove('is-active'));
+        }
+
+        featureRows.forEach(row => {
+          const rId = row.getAttribute('data-row');
+          row.addEventListener('mouseenter', () => highlightRow(rId));
+          row.addEventListener('mouseleave', clearRowHighlight);
+        });
+
+        matrixCells.forEach(cell => {
+          const rId = cell.getAttribute('data-row');
+          cell.addEventListener('mouseenter', () => highlightRow(rId));
+          cell.addEventListener('mouseleave', clearRowHighlight);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

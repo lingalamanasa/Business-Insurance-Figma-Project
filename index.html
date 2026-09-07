@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stackly — Commercial Business Insurance, Underwritten Plainly</title>
+  <meta name="description" content="Meridian writes commercial business insurance policies around your real operations, not a generic template. General liability, professional liability, cyber, workers' comp & more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="components.css" />
+</head>
+<body>
+
+  <!-- ═══ STACKLY LUXURY PRELOADER ═══ -->
+  <div class="stackly-preloader" id="stackly-preloader" aria-hidden="false">
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--top"></div>
+    <div class="stackly-preloader__curtain stackly-preloader__curtain--bottom"></div>
+    <div class="stackly-preloader__content">
+      <div class="stackly-preloader__logo-wrap">
+        <div class="stackly-preloader__icon-ring">
+          <svg class="stackly-preloader__ring-svg" viewBox="0 0 100 100">
+            <circle class="stackly-preloader__ring-bg" cx="50" cy="50" r="44"></circle>
+            <circle class="stackly-preloader__ring-bar" id="preloader-ring-bar" cx="50" cy="50" r="44"></circle>
+          </svg>
+          <img src="assets/stackly-icon-white.webp" alt="Stackly" class="stackly-preloader__icon" />
+        </div>
+        <div class="stackly-preloader__brand">
+          <span class="stackly-preloader__wordmark">STACKLY</span>
+          <span class="stackly-preloader__tagline">COMMERCIAL UNDERWRITING</span>
+        </div>
+      </div>
+      <div class="stackly-preloader__progress-box">
+        <div class="stackly-preloader__bar">
+          <div class="stackly-preloader__fill" id="preloader-fill"></div>
+        </div>
+        <div class="stackly-preloader__counter">
+          <span id="preloader-percent">0</span>%
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo" id="logo-link" aria-label="Stackly Home">
+        <img src="assets/stackly-logo-black.webp" alt="STACKLY" class="nav__logo-img" />
+      </a>
+
+      <ul class="nav__links" id="nav-links" role="list">
+        <li><a href="index.html" class="nav__link nav__link--active" id="nav-home">Home</a></li>
+        <li><a href="about.html" class="nav__link" id="nav-about">About</a></li>
+        <li><a href="services.html" class="nav__link" id="nav-services">Services</a></li>
+        <li><a href="blog.html" class="nav__link" id="nav-blog">Blog</a></li>
+        <li><a href="contact.html" class="nav__link" id="nav-contact">Contact</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <a href="contact.html" class="nav__login" id="nav-login">Log in</a>
+        <a href="contact.html" class="btn btn--dark nav__cta" id="nav-get-started">Get Started</a>
+      </div>
+
+      <button class="nav__hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+        <span class="nav__hamburger-bar"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="nav__mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+    <div class="nav__mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+      <button class="nav__mobile-close" id="mobile-close-btn" aria-label="Close menu">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <ul class="nav__mobile-links" role="list">
+        <li><a href="index.html" class="nav__mobile-link" id="mnav-home">Home</a></li>
+        <li><a href="about.html" class="nav__mobile-link" id="mnav-about">About</a></li>
+        <li><a href="services.html" class="nav__mobile-link" id="mnav-services">Services</a></li>
+        <li><a href="blog.html" class="nav__mobile-link" id="mnav-blog">Blog</a></li>
+        <li><a href="contact.html" class="nav__mobile-link" id="mnav-contact">Contact</a></li>
+      </ul>
+      <div class="nav__mobile-actions">
+        <a href="contact.html" class="nav__login" id="mnav-login">Log in</a>
+        <a href="contact.html" class="btn btn--dark" id="mnav-get-started">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         HERO SECTION
+    ═══════════════════════════════════════════ -->
+    <section class="hero" id="home" aria-labelledby="hero-heading">
+      <div class="hero__bg-glow" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <div class="hero__badge animate-fade-up" style="--delay: 0.1s">
+            <i class="fa-solid fa-shield-halved hero__badge-icon" aria-hidden="true"></i>
+            <span>Commercial insurance, underwritten plainly</span>
+          </div>
+          <h1 class="hero__heading animate-fade-up" id="hero-heading" style="--delay: 0.2s">
+            <span class="hero__heading-yellow">Cover the<br>business you've</span>
+            <span class="hero__heading-black">actually built</span>
+          </h1>
+          <p class="hero__body animate-fade-up" style="--delay: 0.35s">
+            Meridian writes policies around your real operations&nbsp; not a generic template. Tell us what you do, and we'll tell you exactly what's covered, in language you can read once and understand.
+          </p>
+          <div class="hero__buttons animate-fade-up" style="--delay: 0.5s">
+            <a href="#contact" class="btn btn--dark hero__btn-primary" id="hero-quote-btn">Start your quote</a>
+            <a href="#services" class="btn btn--outline hero__btn-secondary" id="hero-secondary-btn">Most quotes ready in 24 hours</a>
+          </div>
+        </div>
+
+        <div class="hero__visual animate-float" aria-hidden="true">
+          <div class="hero__phone-mockup">
+            <div class="hero__phone-frame">
+              <div class="hero__phone-notch"></div>
+              <div class="hero__phone-screen">
+                <div class="hero__app-header">
+                  <div class="hero__app-logo" style="display:flex;align-items:center;">
+                    <img src="assets/stackly-logo-black.webp" alt="STACKLY" style="height: 16px; width: auto; object-fit: contain;" />
+                  </div>
+                  <div class="hero__app-nav-icons">
+                    <i class="fa-solid fa-magnifying-glass" style="font-size:10px;color:#333"></i>
+                    <div class="hero__app-menu-btn"></div>
+                  </div>
+                </div>
+                <div class="hero__app-badge">
+                  <i class="fa-solid fa-circle-dot" style="color:#F4D35E;font-size:7px"></i>
+                  <span>Trusted • Transparent • Timely</span>
+                </div>
+                <div class="hero__app-hero">
+                  <div class="hero__app-hero-text">
+                    <h3>Business Compliance, <em>Made Simple.</em></h3>
+                    <p>Stay compliant, stay confident. We handle the regulations, so you can focus on growth.</p>
+                    <button class="hero__app-cta">Get Started <i class="fa-solid fa-arrow-right" style="font-size:8px"></i></button>
+                  </div>
+                  <div class="hero__app-hero-img">
+                    <div class="hero__app-building-visual"></div>
+                  </div>
+                </div>
+                <div class="hero__app-icons">
+                  <div class="hero__app-icon-item">
+                    <div class="hero__app-icon-circle"><i class="fa-solid fa-building-columns" style="font-size:9px;color:#F4D35E"></i></div>
+                    <span>Company Registration</span>
+                  </div>
+                  <div class="hero__app-icon-item">
+                    <div class="hero__app-icon-circle"><i class="fa-solid fa-file-lines" style="font-size:9px;color:#F4D35E"></i></div>
+                    <span>Regulatory Filings</span>
+                  </div>
+                  <div class="hero__app-icon-item">
+                    <div class="hero__app-icon-circle"><i class="fa-solid fa-id-card" style="font-size:9px;color:#F4D35E"></i></div>
+                    <span>Licenses & Permits</span>
+                  </div>
+                  <div class="hero__app-icon-item">
+                    <div class="hero__app-icon-circle"><i class="fa-solid fa-globe" style="font-size:9px;color:#F4D35E"></i></div>
+                    <span>Advisory Services</span>
+                  </div>
+                </div>
+                <div class="hero__app-card">
+                  <div class="hero__app-card-img"></div>
+                  <div class="hero__app-card-content">
+                    <strong>Build Your Business the Right Way</strong>
+                    <p>Expert guidance for every stage of your journey.</p>
+                    <a href="#" class="hero__app-learn">Learn More <i class="fa-solid fa-arrow-right" style="font-size:7px"></i></a>
+                  </div>
+                </div>
+                <div class="hero__app-dots">
+                  <span class="active"></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         STATISTICS BANNER
+    ═══════════════════════════════════════════ -->
+    <section class="stats" id="about" aria-labelledby="stats-heading">
+      <div class="container">
+        <h2 class="stats__heading animate-on-scroll" id="stats-heading">The numbers new policyholders<br>ask us about most</h2>
+        <div class="stats__grid" role="list">
+          <div class="stats__item animate-on-scroll" style="--delay: 0.05s" role="listitem">
+            <div class="stats__number" data-target="37" data-suffix="">37</div>
+            <p class="stats__label">states licensed to underwrite</p>
+          </div>
+          <div class="stats__divider" aria-hidden="true"></div>
+          <div class="stats__item animate-on-scroll" style="--delay: 0.1s" role="listitem">
+            <div class="stats__number stats__number--text">1 day</div>
+            <p class="stats__label">average turnaround on a certificate of insurance</p>
+          </div>
+          <div class="stats__divider" aria-hidden="true"></div>
+          <div class="stats__item animate-on-scroll" style="--delay: 0.15s" role="listitem">
+            <div class="stats__number" data-target="210" data-suffix="+">210+</div>
+            <p class="stats__label">industry classes we write policies for</p>
+          </div>
+          <div class="stats__divider" aria-hidden="true"></div>
+          <div class="stats__item animate-on-scroll" style="--delay: 0.2s" role="listitem">
+            <div class="stats__number" data-target="0" data-suffix="">0</div>
+            <p class="stats__label">call centers, every account has a named agent</p>
+          </div>
+          <div class="stats__divider" aria-hidden="true"></div>
+          <div class="stats__item animate-on-scroll" style="--delay: 0.25s" role="listitem">
+            <div class="stats__number stats__number--text">1912</div>
+            <p class="stats__label">the year Meridian first insured a Chicago machine shop</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         POLICIES / SERVICES SECTION
+    ═══════════════════════════════════════════ -->
+    <section class="policies" id="services" aria-labelledby="policies-heading">
+      <div class="container">
+
+        <!-- Architecture Hero Image -->
+        <div class="policies__hero-img animate-scale-in">
+          <img
+            src="assets/policy-office-exterior.webp"
+            alt="Modern skyscraper looking up from ground level, representing commercial real estate coverage"
+            class="policies__hero-photo"
+            loading="lazy"
+          />
+          <div class="policies__hero-badge" aria-hidden="true">
+            <div class="policies__hero-badge-inner"></div>
+          </div>
+        </div>
+
+        <div class="policies__content">
+          <div class="policies__header animate-fade-left">
+            <h2 class="policies__heading" id="policies-heading">Six policies, built to work together</h2>
+          </div>
+          <p class="policies__subtext animate-fade-right">
+            Most businesses combine three or four of these. Your agent will tell you which ones your operations actually need and which ones you can skip.
+          </p>
+        </div>
+
+        <div class="policies__grid">
+          <div class="policies__list">
+            <div class="policy__item animate-on-scroll" style="--delay: 0.05s" id="policy-general">
+              <div class="policy__icon" aria-hidden="true">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <div class="policy__text">
+                <h3 class="policy__name">General liability</h3>
+                <p class="policy__desc">Covers third-party bodily injury, property damage, and legal defense if a customer or visitor is hurt on your watch.</p>
+              </div>
+            </div>
+            <div class="policy__item animate-on-scroll" style="--delay: 0.1s" id="policy-professional">
+              <div class="policy__icon" aria-hidden="true">
+                <i class="fa-solid fa-file-contract"></i>
+              </div>
+              <div class="policy__text">
+                <h3 class="policy__name">Professional liability</h3>
+                <p class="policy__desc">Protects against claims of negligence, missed deadlines, or errors in the advice or service you deliver.</p>
+              </div>
+            </div>
+            <div class="policy__item animate-on-scroll" style="--delay: 0.15s" id="policy-property">
+              <div class="policy__icon" aria-hidden="true">
+                <i class="fa-solid fa-building"></i>
+              </div>
+              <div class="policy__text">
+                <h3 class="policy__name">Commercial property</h3>
+                <p class="policy__desc">Repairs or replaces your building, equipment, and inventory after fire, storm, theft, or vandalism.</p>
+              </div>
+            </div>
+            <div class="policy__item animate-on-scroll" style="--delay: 0.2s" id="policy-cyber">
+              <div class="policy__icon" aria-hidden="true">
+                <i class="fa-solid fa-lock"></i>
+              </div>
+              <div class="policy__text">
+                <h3 class="policy__name">Cyber liability</h3>
+                <p class="policy__desc">Covers breach notification, data recovery, and the legal costs that follow a ransomware or data-loss event.</p>
+              </div>
+            </div>
+            <div class="policy__item animate-on-scroll" style="--delay: 0.25s" id="policy-workers">
+              <div class="policy__icon" aria-hidden="true">
+                <i class="fa-solid fa-briefcase-medical"></i>
+              </div>
+              <div class="policy__text">
+                <h3 class="policy__name">Workers' compensation</h3>
+                <p class="policy__desc">Pays medical costs and lost wages for employees injured on the job, and satisfies state coverage law.</p>
+              </div>
+            </div>
+            <div class="policy__item animate-on-scroll" style="--delay: 0.3s" id="policy-auto">
+              <div class="policy__icon" aria-hidden="true">
+                <i class="fa-solid fa-car"></i>
+              </div>
+              <div class="policy__text">
+                <h3 class="policy__name">Commercial auto</h3>
+                <p class="policy__desc">Covers vehicles used for business &nbsp;delivery, fieldwork, or transport&nbsp; beyond what a personal policy allows.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Side images stack -->
+          <div class="policies__side-images">
+            <div class="policies__side-img animate-fade-right" style="--delay: 0.1s">
+              <img
+                src="assets/policy-side-office.webp"
+                alt="Modern office interior with glass partitions"
+                loading="lazy"
+              />
+            </div>
+            <div class="policies__side-img animate-fade-right" style="--delay: 0.2s">
+              <img
+                src="assets/policy-side-cyber.webp"
+                alt="Keyboard with security padlock representing cyber protection"
+                loading="lazy"
+              />
+            </div>
+            <div class="policies__side-img animate-fade-right" style="--delay: 0.3s">
+              <img
+                src="assets/policy-side-woman.webp"
+                alt="Professional businesswoman smiling"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         DARK WORKFLOW SECTION – FOUR STEPS
+    ═══════════════════════════════════════════ -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0 0 C360 80 1080 0 1440 80 L1440 80 L0 80 Z" fill="#F4D35E"/>
+        <path d="M0 20 C240 80 480 10 720 50 C960 90 1200 20 1440 60 L1440 80 L0 80 Z" fill="#111111"/>
+      </svg>
+    </div>
+
+    <section class="workflow" id="workflow" aria-labelledby="workflow-heading">
+      <div class="container workflow__inner">
+        <div class="workflow__visual animate-fade-right">
+          <img
+            src="assets/diff-agent-warehouse.webp"
+            alt="Professional businesswoman reviewing documents at her desk with laptop and coffee"
+            class="workflow__person-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="workflow__content animate-fade-left">
+          <h2 class="workflow__heading" id="workflow-heading">
+            From <span class="workflow__yellow-italic">first</span><br>
+            <span class="workflow__yellow">question</span><br>
+            to <span class="workflow__white">signed</span><br>
+            <span class="workflow__white">policy</span>,<br>
+            <span class="workflow__yellow">four steps</span>
+          </h2>
+          <div class="workflow__steps">
+            <div class="workflow__step animate-on-scroll" style="--delay: 0.1s" id="step-1">
+              <div class="workflow__step-num">01</div>
+              <div class="workflow__step-content">
+                <h3>Tell us about your business</h3>
+                <p>Answer a short set of questions about what you do, your team size, and your assets.</p>
+              </div>
+            </div>
+            <div class="workflow__step animate-on-scroll" style="--delay: 0.2s" id="step-2">
+              <div class="workflow__step-num">02</div>
+              <div class="workflow__step-content">
+                <h3>Review your custom quote</h3>
+                <p>We generate a quote built around your actual operations — not a one-size policy.</p>
+              </div>
+            </div>
+            <div class="workflow__step animate-on-scroll" style="--delay: 0.3s" id="step-3">
+              <div class="workflow__step-num">03</div>
+              <div class="workflow__step-content">
+                <h3>Speak with your named agent</h3>
+                <p>One person, dedicated to your account. They explain every line before you sign.</p>
+              </div>
+            </div>
+            <div class="workflow__step animate-on-scroll" style="--delay: 0.4s" id="step-4">
+              <div class="workflow__step-num">04</div>
+              <div class="workflow__step-content">
+                <h3>Sign and you're covered</h3>
+                <p>Policies are issued same day. Certificate of insurance delivered within 24 hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         KEY DIFFERENTIATORS SECTION
+    ═══════════════════════════════════════════ -->
+    <section class="differentiators" id="differentiators" aria-labelledby="diff-heading">
+      <div class="sr-only" id="diff-heading">Our Key Differentiators</div>
+
+      <!-- Card 1: One Named Agent -->
+      <div class="diff__card diff__card--light">
+        <div class="diff__card-inner container">
+          <div class="diff__card-text animate-fade-left">
+            <p class="diff__card-eyebrow">An agent who already knows your file</p>
+            <h2 class="diff__card-heading">One named agent, not a queue</h2>
+            <p class="diff__card-body">The person who wrote your policy is who picks up when you call about a claim. You never explain your situation twice.</p>
+          </div>
+          <div class="diff__card-visual animate-fade-right">
+            <div class="diff__grid-overlay" aria-hidden="true"></div>
+            <div class="diff__illustration diff__illustration--gift" aria-hidden="true">
+              <div class="gift-box">
+                <div class="gift-box__lid">
+                  <div class="gift-box__ribbon-v"></div>
+                  <div class="gift-box__ribbon-h"></div>
+                  <div class="gift-box__bow">
+                    <div class="gift-box__bow-left"></div>
+                    <div class="gift-box__bow-right"></div>
+                  </div>
+                </div>
+                <div class="gift-box__body">
+                  <div class="gift-box__ribbon-body-v"></div>
+                  <div class="gift-box__glow"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Rates Reward Clean Claims -->
+      <div class="diff__card diff__card--light">
+        <div class="diff__card-inner diff__card-inner--reverse container">
+          <div class="diff__card-visual animate-fade-left">
+            <div class="diff__grid-overlay" aria-hidden="true"></div>
+            <div class="diff__illustration diff__illustration--shield" aria-hidden="true">
+              <div class="shield-icon">
+                <div class="shield-icon__body">
+                  <i class="fa-solid fa-check shield-icon__check" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="diff__card-text animate-fade-right">
+            <h2 class="diff__card-heading">Rates that reward a clean claims history</h2>
+            <p class="diff__card-body">Fewer claims lower your renewal automatically — you don't have to negotiate for it. Our underwriting model rewards businesses that manage risk well.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Coverage Moves With You -->
+      <div class="diff__card diff__card--light">
+        <div class="diff__card-inner container">
+          <div class="diff__card-text animate-fade-left">
+            <h2 class="diff__card-heading">Coverage that moves when you do</h2>
+            <p class="diff__card-body">Open a second location or add a vehicle mid-term, and the policy updates same week. No waiting until renewal to expand your coverage.</p>
+          </div>
+          <div class="diff__card-visual animate-fade-right">
+            <div class="diff__grid-overlay" aria-hidden="true"></div>
+            <div class="diff__illustration diff__illustration--growth" aria-hidden="true">
+              <div class="growth-steps">
+                <div class="growth-steps__step growth-steps__step--1"></div>
+                <div class="growth-steps__step growth-steps__step--2"></div>
+                <div class="growth-steps__step growth-steps__step--3"></div>
+                <div class="growth-steps__step growth-steps__step--4 growth-steps__step--yellow"></div>
+                <div class="growth-steps__plant">
+                  <div class="growth-steps__soil"></div>
+                  <div class="growth-steps__stem"></div>
+                  <div class="growth-steps__leaf growth-steps__leaf--left"></div>
+                  <div class="growth-steps__leaf growth-steps__leaf--right"></div>
+                  <div class="growth-steps__leaf growth-steps__leaf--top"></div>
+                </div>
+              </div>
+              <p class="diff__illustration-caption">Open a second location or add a vehicle mid-term, and the policy updates same week.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         INDUSTRIES SECTION
+    ═══════════════════════════════════════════ -->
+    <section class="industries" id="industries" aria-labelledby="industries-heading">
+      <div class="container">
+        <div class="industries__header">
+          <div class="animate-fade-left">
+            <h2 class="industries__heading" id="industries-heading">Industries we underwrite<br>every day</h2>
+            <p class="industries__subtext">Generic policies miss the risks specific to your trade. These are ones we write most — each with its own set of standard exclusions and add-ons.</p>
+          </div>
+        </div>
+
+        <div class="industries__grid">
+          <article class="industry__card" id="industry-construction">
+            <div class="industry__img-wrap">
+              <img
+                src="assets/industry-construction.webp"
+                alt="Construction site with cranes and high-rise buildings under construction"
+                loading="lazy"
+              />
+              <div class="industry__overlay">
+                <h3>Construction &amp; Trades</h3>
+                <p>Job-site liability, tools, and equipment breakdown</p>
+              </div>
+            </div>
+          </article>
+          <article class="industry__card" id="industry-freight">
+            <div class="industry__img-wrap">
+              <img
+                src="assets/industry-freight.webp"
+                alt="Shipping containers at freight logistics yard with forklift"
+                loading="lazy"
+              />
+              <div class="industry__overlay">
+                <h3>Freight &amp; Logistics</h3>
+                <p>Cargo, fleet, and warehouse liability coverage</p>
+              </div>
+            </div>
+          </article>
+          <article class="industry__card" id="industry-healthcare">
+            <div class="industry__img-wrap">
+              <img
+                src="assets/industry-healthcare.webp"
+                alt="Healthcare professional in white coat holding stethoscope"
+                loading="lazy"
+              />
+              <div class="industry__overlay">
+                <h3>Healthcare &amp; Medical</h3>
+                <p>Malpractice, premises, and regulatory protection</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TESTIMONIAL SECTION
+    ═══════════════════════════════════════════ -->
+    <section class="testimonial" id="testimonial" aria-labelledby="testimonial-heading">
+      <div class="container">
+        <div class="testimonial__card animate-scale-in">
+          <!-- Line art interior illustration -->
+          <div class="testimonial__illustration" aria-hidden="true">
+            <svg class="testimonial__room-svg" viewBox="0 0 480 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Grid background -->
+              <defs>
+                <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+                  <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#CCCCCC" stroke-width="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="480" height="220" fill="url(#grid)"/>
+              <!-- Lamp group with pendant cord, fixture, and shade -->
+              <g id="svg-lamp" style="transform-origin: 240px 0px;">
+                <line x1="240" y1="0" x2="240" y2="55" stroke="#111" stroke-width="1.5"/>
+                <rect x="230" y="10" width="20" height="4" rx="2" fill="#111"/>
+                <path d="M220 55 L260 55 L252 90 L228 90 Z" fill="#111"/>
+              </g>
+              <!-- Light glow (animates and pulses with GSAP) -->
+              <g id="svg-lamp-glow" style="transform-origin: 240px 95px;">
+                <ellipse cx="240" cy="95" rx="55" ry="25" fill="#F4D35E" opacity="0.6"/>
+                <ellipse cx="240" cy="95" rx="35" ry="15" fill="#F4D35E" opacity="0.75"/>
+              </g>
+              <!-- Chair -->
+              <g id="svg-chair">
+                <rect x="290" y="140" width="60" height="5" rx="3" fill="#111"/> <!-- seat -->
+                <rect x="295" y="100" width="50" height="42" rx="4" fill="none" stroke="#111" stroke-width="2"/> <!-- back -->
+                <line x1="295" y1="145" x2="287" y2="175" stroke="#111" stroke-width="2"/> <!-- leg L -->
+                <line x1="350" y1="145" x2="358" y2="175" stroke="#111" stroke-width="2"/> <!-- leg R -->
+                <line x1="300" y1="155" x2="345" y2="155" stroke="#111" stroke-width="1.5"/> <!-- crossbar -->
+              </g>
+              <!-- Tall plant / spoon left -->
+              <g id="svg-tall-item" style="transform-origin: 152px 170px;">
+                <rect x="148" y="80" width="8" height="90" rx="2" fill="#111"/>
+                <rect x="140" y="168" width="24" height="8" rx="2" fill="#111"/>
+                <ellipse cx="152" cy="75" rx="12" ry="20" fill="#111" transform="rotate(-20 152 75)"/>
+                <ellipse cx="148" cy="70" rx="10" ry="18" fill="#111" transform="rotate(15 148 70)"/>
+                <ellipse cx="158" cy="65" rx="10" ry="16" fill="#111" transform="rotate(-35 158 65)"/>
+              </g>
+              <!-- Small cooking pot with floating steam -->
+              <g id="svg-pot">
+                <ellipse cx="210" cy="185" rx="18" ry="8" fill="#111" opacity="0.1"/>
+                <path d="M196 185 Q196 200 210 200 Q224 200 224 185 Z" fill="#111"/>
+                <path class="steam-line" d="M205 180 Q203 170 207 160 Q211 150 207 140" stroke="#111" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+                <path class="steam-line" d="M213 180 Q216 170 212 160 Q208 150 214 140" stroke="#111" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+              </g>
+            </svg>
+          </div>
+
+          <blockquote class="testimonial__quote" id="testimonial-heading">
+            <p>"We filed one claim in nine years a kitchen fire and had a check before the contractor finished the estimate."</p>
+          </blockquote>
+          <cite class="testimonial__cite">
+            <strong>-Dana Reyes</strong><br>
+            Owner, three-location restaurant group
+          </cite>
+
+          <hr class="testimonial__divider" aria-hidden="true" />
+
+          <div class="testimonial__logos" aria-label="Client companies">
+            <span class="testimonial__logo-name">Harbor &amp; Vine</span>
+            <span class="testimonial__logo-sep" aria-hidden="true">·</span>
+            <span class="testimonial__logo-name">Fixture Works Co.</span>
+            <span class="testimonial__logo-sep" aria-hidden="true">·</span>
+            <span class="testimonial__logo-name">Northline Logistics</span>
+            <span class="testimonial__logo-sep" aria-hidden="true">·</span>
+            <span class="testimonial__logo-name">Cobalt Studio</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         QUOTE / CONTACT FORM SECTION
+    ═══════════════════════════════════════════ -->
+    <section class="quote-section" id="contact" aria-labelledby="quote-heading">
+      <div class="container quote-section__inner">
+        <div class="quote-section__text animate-fade-left">
+          <h2 class="quote-section__heading" id="quote-heading">See your rate before you talk to anyone</h2>
+          <p class="quote-section__subtext">No sales call required to get a number. Fill in the basics and your quote is ready to review — adjust it or bind it whenever you're ready.</p>
+        </div>
+
+        <div class="quote-section__form-wrap animate-fade-right">
+          <form class="quote-form" id="quote-form" novalidate aria-label="Get a quote form">
+            <h3 class="quote-form__title">Start a quote</h3>
+
+            <div class="form-group" id="fg-business-name">
+              <label for="business-name" class="form-label">Business name</label>
+              <input
+                type="text"
+                id="business-name"
+                name="businessName"
+                class="form-input"
+                placeholder=" "
+                autocomplete="organization"
+                required
+                aria-required="true"
+              />
+              <span class="form-error" id="business-name-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group" id="fg-industry">
+              <label for="industry" class="form-label">Industry</label>
+              <input
+                type="text"
+                id="industry"
+                name="industry"
+                class="form-input"
+                placeholder=" "
+                required
+                aria-required="true"
+              />
+              <span class="form-error" id="industry-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group" id="fg-employees">
+              <label for="employees" class="form-label">Number of employees</label>
+              <input
+                type="number"
+                id="employees"
+                name="employees"
+                class="form-input"
+                placeholder=" "
+                min="1"
+                required
+                aria-required="true"
+              />
+              <span class="form-error" id="employees-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group" id="fg-email">
+              <label for="work-email" class="form-label">Work email</label>
+              <input
+                type="email"
+                id="work-email"
+                name="workEmail"
+                class="form-input"
+                placeholder=" "
+                autocomplete="email"
+                required
+                aria-required="true"
+              />
+              <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <button type="submit" class="btn btn--dark quote-form__submit" id="get-quote-btn">
+              <span class="quote-form__submit-text">Get My Quote</span>
+              <span class="quote-form__submit-loader" aria-hidden="true"></span>
+            </button>
+
+            <div class="quote-form__success" id="quote-success" role="status" aria-live="polite" hidden>
+              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+              <span>Your quote request has been received! Your agent will reach out within 24 hours.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       STACKLY FOOTER SECTION
+  ═══════════════════════════════════════════ -->
+  <footer class="footer" id="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <!-- Col 1: Brand & Socials -->
+      <div class="footer__brand" data-aos="fade-up">
+        <a href="index.html" class="footer__logo" aria-label="Stackly Home">
+          <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="footer__logo-img" />
+        </a>
+        <p class="footer__brand-desc">
+          Empowering outdoor enthusiasts and adventurers with premium gear, alpine expeditions, and trail solutions.
+        </p>
+        <div class="footer__socials">
+          <a href="404.html" class="footer__social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="404.html" class="footer__social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="100">
+        <h4 class="footer__heading">Quick Links</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="index.html" class="footer__link footer__link--active">Home</a></li>
+          <li><a href="about.html" class="footer__link">About</a></li>
+          <li><a href="services.html" class="footer__link">Services</a></li>
+          <li><a href="blog.html" class="footer__link">Blog</a></li>
+          <li><a href="contact.html" class="footer__link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Gear & Expeditions -->
+      <div class="footer__col" data-aos="fade-up" data-aos-delay="200">
+        <h4 class="footer__heading">Gear &amp; Expeditions</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="404.html" class="footer__link">Tents &amp; Shelters</a></li>
+          <li><a href="404.html" class="footer__link">Alpine Backpacks</a></li>
+          <li><a href="404.html" class="footer__link">Trail Footwear</a></li>
+          <li><a href="404.html" class="footer__link">Expedition Logistics</a></li>
+          <li><a href="404.html" class="footer__link">Gear Repair Depot</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Stay Updated -->
+      <div class="footer__col footer__col--newsletter" data-aos="fade-up" data-aos-delay="300">
+        <h4 class="footer__heading">Stay Updated</h4>
+        <p class="footer__newsletter-text">
+          Get weekly trail guides, gear discounts &amp; wilderness expedition reports.
+        </p>
+        <form class="footer__newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Stackly updates!');">
+          <div class="footer__newsletter-pill">
+            <input type="email" class="footer__newsletter-input" placeholder="Enter your email" required aria-label="Enter your email for updates" />
+            <button type="submit" class="footer__newsletter-btn">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p class="footer__copyright">&copy; 2026 <strong>Stackly</strong> Outdoor Store. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="404.html" class="footer__legal-link">GitHub Repository</a>
+          <a href="404.html" class="footer__legal-link">Privacy Policy</a>
+          <a href="404.html" class="footer__legal-link">Terms of Service</a>
+          <a href="404.html" class="footer__legal-link">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script src="animations.js"></script>
+</body>
+</html>

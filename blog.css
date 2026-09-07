@@ -1,0 +1,752 @@
+/* ══════════════════════════════════════════════════════
+   STACKLY — BLOG PAGE SPECIFIC STYLES
+   Exact 1:1 Recreation of Figma Blog Design Frame
+   ══════════════════════════════════════════════════════ */
+
+/* ─── DARK HEADER OVERRIDE FOR BLOG ──────────────────── */
+.header--blog {
+  background: #000000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header--blog .nav__link {
+  color: #FFFFFF;
+}
+
+.header--blog .nav__link:hover,
+.header--blog .nav__link--active {
+  color: #F4D35E !important;
+}
+
+.header--blog .nav__login {
+  color: #FFFFFF;
+}
+
+.header--blog .nav__cta {
+  background: #FFFFFF;
+  color: #000000;
+  font-weight: 800;
+  border-radius: 6px;
+}
+
+.header--blog .nav__cta:hover {
+  background: #F4D35E;
+  color: #000000;
+}
+
+/* ─── 1. DARK BLOG HERO SECTION ──────────────────────── */
+.blog-dark-hero {
+  background: #000000;
+  color: #FFFFFF;
+  padding-top: 120px;
+  padding-bottom: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-dark-hero__container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 4.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.blog-dark-hero__content {
+  max-width: 600px;
+}
+
+.blog-dark-hero__pill {
+  display: inline-block;
+  background: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+  cursor: pointer;
+}
+
+.blog-dark-hero__pill:hover {
+  transform: translateY(-2px);
+  border-color: #F4D35E;
+  background: rgba(244, 211, 94, 0.1);
+  color: #F4D35E;
+}
+
+/* Character Kinetic Typography */
+.blog-dark-hero__title {
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.5rem;
+  perspective: 1000px;
+}
+
+.blog-char-line {
+  display: block;
+  overflow: visible;
+  padding-bottom: 4px;
+}
+
+.blog-char-word {
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 0.26em;
+  transform-style: preserve-3d;
+}
+
+.blog-char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, color;
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease, text-shadow 0.2s ease;
+  cursor: default;
+}
+
+.blog-char:hover {
+  transform: translateY(-8px) scale(1.18) rotate(3deg) !important;
+  color: #F4D35E !important;
+  text-shadow: 0 0 22px rgba(244, 211, 94, 0.85);
+}
+
+.highlight-yellow {
+  color: #F4D35E;
+}
+
+.highlight-white {
+  color: #FFFFFF;
+}
+
+.highlight-white .blog-char:hover {
+  color: #FFFFFF !important;
+  text-shadow: 0 0 22px rgba(255, 255, 255, 0.9);
+}
+
+.blog-dark-hero__sub {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #94A3B8;
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+
+.blog-dark-hero .btn--yellow {
+  background: #F4D35E;
+  color: #000000;
+  font-weight: 800;
+  padding: 0.85rem 1.85rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.blog-dark-hero .btn--yellow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(244, 211, 94, 0.35);
+}
+
+/* Custom Cursor inside Blog Hero */
+.blog-hero-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  will-change: transform, left, top;
+}
+
+.blog-hero-cursor.active {
+  opacity: 1;
+}
+
+.blog-hero-cursor__dot {
+  width: 8px;
+  height: 8px;
+  background: #F4D35E;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 12px #F4D35E;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.blog-hero-cursor__ring {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(244, 211, 94, 0.6);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.blog-hero-cursor.hovering .blog-hero-cursor__ring {
+  width: 64px;
+  height: 64px;
+  border-color: rgba(244, 211, 94, 0.9);
+  background: rgba(244, 211, 94, 0.12);
+  backdrop-filter: blur(2px);
+}
+
+.blog-hero-cursor.hovering .blog-hero-cursor__dot {
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.blog-hero-cursor__label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #000000;
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.blog-hero-cursor.hovering--btn .blog-hero-cursor__ring {
+  width: 68px;
+  height: 68px;
+  background: #F4D35E;
+  border-color: #F4D35E;
+}
+
+.blog-hero-cursor.hovering--btn .blog-hero-cursor__label {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.blog-hero-cursor.hovering--btn .blog-hero-cursor__dot {
+  opacity: 0;
+}
+
+/* 3D Parallax Card & Specular Glare */
+.blog-dark-hero__visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.blog-dark-hero__card-holder {
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  cursor: pointer;
+}
+
+.blog-dark-hero__glow-bg {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  border-radius: 30px;
+  background: radial-gradient(circle, rgba(244, 211, 94, 0.25) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 75%);
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: scale(0.95);
+}
+
+.blog-dark-hero__card-holder:hover .blog-dark-hero__glow-bg {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.blog-dark-hero__img-wrap {
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: #111111;
+  position: relative;
+  z-index: 1;
+}
+
+.blog-dark-hero__glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: overlay;
+}
+
+.blog-dark-hero__img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Floating Follower Pill Badge */
+.blog-dark-hero__card-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.65);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, left, top;
+}
+
+.blog-dark-hero__card-pill.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.blog-dark-hero__card-pill span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #F4D35E;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(244, 211, 94, 0.55);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(244, 211, 94, 0.3);
+  backdrop-filter: blur(12px);
+  white-space: nowrap;
+}
+
+.blog-dark-hero__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.blog-dark-hero__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.blog-dark-hero__dot.active {
+  background: #F4D35E;
+}
+
+/* ─── 2. WHAT'S ACTUALLY IN EACH POLICY (FEATURED) ──── */
+.blog-featured {
+  padding: 5.5rem 0 5rem;
+  background: #FFFFFF;
+}
+
+.blog-featured__title {
+  font-size: clamp(1.85rem, 3vw, 2.4rem);
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 2.5rem;
+}
+
+.blog-featured__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.blog-featured-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-featured-card__img-wrap {
+  width: 100%;
+  height: 280px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.5rem;
+  background: #E2E8F0;
+}
+
+.blog-featured-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.blog-featured-card:hover .blog-featured-card__img {
+  transform: scale(1.04);
+}
+
+.blog-featured-card__title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1.35;
+  color: #0F172A;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.blog-featured-card__desc {
+  font-size: 0.9375rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.blog-featured-card .btn--yellow {
+  align-self: flex-start;
+  background: #F4D35E;
+  color: #000000;
+  font-weight: 800;
+  font-size: 0.875rem;
+  padding: 0.75rem 1.65rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-featured-card .btn--yellow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(244, 211, 94, 0.3);
+}
+
+/* ─── 3. LATEST ARTICLES (8-CARD 4x2 GRID) ───────────── */
+.blog-latest {
+  padding: 4rem 0 6rem;
+  background: #FFFFFF;
+}
+
+.blog-latest__title {
+  font-size: clamp(1.85rem, 3vw, 2.4rem);
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 2.5rem;
+}
+
+.blog-latest__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem 1.5rem;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card__img-wrap {
+  width: 100%;
+  height: 170px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+  background: #E2E8F0;
+}
+
+.blog-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-card__img {
+  transform: scale(1.08);
+}
+
+.blog-card__title {
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.35;
+  color: #0F172A;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.015em;
+}
+
+.blog-card__desc {
+  font-size: 0.8125rem;
+  color: #475569;
+  line-height: 1.55;
+  margin-bottom: 0.85rem;
+  flex: 1;
+}
+
+.blog-card__link {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #0F172A;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.blog-card__link:hover {
+  color: #B45309;
+}
+
+/* ─── 4. INSURANCE THAT SUPPORTS YOUR BUSINESS ──────── */
+.blog-support {
+  padding: 5rem 0 6rem;
+  background: #FFFFFF;
+}
+
+.blog-support__card {
+  background: #FEFBF2;
+  border-radius: 28px;
+  padding: 4rem 4.5rem;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  align-items: center;
+  gap: 4rem;
+  border: 1px solid #F6E6BC;
+}
+
+.blog-support__title {
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.blog-support__desc {
+  font-size: 0.9375rem;
+  color: #334155;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.blog-support__desc:last-of-type {
+  margin-bottom: 0;
+}
+
+.blog-support__visual {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+}
+
+.blog-support__img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.blog-support__caption {
+  background: #F4D35E;
+  color: #000000;
+  padding: 0.9rem 1.25rem;
+  text-align: center;
+}
+
+.blog-support__caption-title {
+  font-size: 0.9375rem;
+  font-weight: 900;
+}
+
+.blog-support__caption-sub {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+/* ─── 5. SEARCH YOUR QUARY SECTION ──────────────────── */
+.blog-search {
+  padding: 4rem 0 6.5rem;
+  background: #FFFFFF;
+  text-align: center;
+}
+
+.blog-search__title {
+  font-size: clamp(1.85rem, 3vw, 2.4rem);
+  font-weight: 900;
+  color: #0F172A;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+}
+
+.blog-search__box {
+  max-width: 580px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.blog-search__input {
+  flex: 1;
+  background: #EBF3FC;
+  border: 1px solid #D6E4F5;
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  color: #0F172A;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.blog-search__input:focus {
+  background: #FFFFFF;
+  border-color: #F4D35E;
+  box-shadow: 0 0 0 3px rgba(244, 211, 94, 0.3);
+}
+
+.blog-search__btn {
+  background: #F4D35E;
+  color: #000000;
+  font-weight: 900;
+  font-size: 0.9375rem;
+  padding: 0.85rem 2.25rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-search__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(244, 211, 94, 0.3);
+}
+
+/* ─── 6. MASTER DARK FOOTER ─────────────────────────── */
+.blog-dark-footer {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 5.5rem 0 4.5rem;
+}
+
+.blog-footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.blog-footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-footer-logo-img {
+  width: 140px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.blog-footer-brand-text {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #64748B;
+  max-width: 280px;
+}
+
+.blog-footer-col h4 {
+  font-size: 0.9375rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.blog-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.blog-footer-links a {
+  color: #94A3B8;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.blog-footer-links a:hover {
+  color: #F4D35E;
+}
+
+/* ─── RESPONSIVE BREAKPOINTS ────────────────────────── */
+@media (max-width: 1024px) {
+  .blog-dark-hero__container,
+  .blog-support__card {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .blog-latest__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .blog-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-featured__grid {
+    grid-template-columns: 1fr;
+  }
+  .blog-latest__grid {
+    grid-template-columns: 1fr;
+  }
+  .blog-support__card {
+    padding: 2.5rem 1.75rem;
+  }
+  .blog-search__box {
+    flex-direction: column;
+  }
+  .blog-search__btn {
+    width: 100%;
+  }
+  .blog-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
