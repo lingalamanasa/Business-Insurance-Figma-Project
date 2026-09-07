@@ -567,8 +567,8 @@
 }
 
 .salem-section__header {
-  margin-bottom: 3.5rem;
-  max-width: 640px;
+  margin-bottom: 3rem;
+  max-width: 680px;
 }
 
 .salem-section__eyebrow {
@@ -597,255 +597,175 @@
   line-height: 1.6;
 }
 
-.salem-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 3.5rem;
-  align-items: stretch;
-}
-
-.salem-card {
+/* ─── STANDALONE MAP CARD ────────────────────────────── */
+.salem-map-card {
+  max-width: 1080px;
+  margin: 0 auto;
   background: #111111;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
   overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(244, 211, 94, 0.08);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
 }
 
-.salem-card__hero-img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  display: block;
-}
-
-.salem-card__body {
-  padding: 2rem 2.25rem 2.25rem;
+/* Map Card Top Header */
+.salem-map-card__top {
+  padding: 1.25rem 1.75rem;
+  background: rgba(18, 18, 18, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
-  flex-direction: column;
-  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
 }
 
-.salem-card__badge {
-  align-self: flex-start;
-  background: rgba(244, 211, 94, 0.15);
-  color: #F4D35E;
-  border: 1px solid rgba(244, 211, 94, 0.3);
-  font-size: 0.75rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 0.3rem 0.75rem;
-  border-radius: 20px;
-  margin-bottom: 1rem;
-}
-
-.salem-card__name {
-  font-size: 1.35rem;
-  font-weight: 900;
-  color: #FFFFFF;
-  margin-bottom: 1.25rem;
-  letter-spacing: -0.02em;
-}
-
-.salem-card__info-list {
+.salem-map-card__info {
   display: flex;
-  flex-direction: column;
-  gap: 1.15rem;
-  margin-bottom: 2rem;
-}
-
-.salem-card__info-item {
-  display: flex;
+  align-items: center;
   gap: 1rem;
-  align-items: flex-start;
+  min-width: 0;
 }
 
-.salem-card__info-icon {
+.salem-map-card__pin-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(244, 211, 94, 0.12);
+  border: 1px solid rgba(244, 211, 94, 0.35);
   color: #F4D35E;
-  font-size: 1.1rem;
-  margin-top: 0.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
   flex-shrink: 0;
 }
 
-.salem-card__info-text h4 {
-  font-size: 0.8125rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #64748B;
-  letter-spacing: 0.06em;
-  margin-bottom: 0.2rem;
-}
-
-.salem-card__info-text p,
-.salem-card__info-text a {
-  font-size: 0.9375rem;
-  color: #FFFFFF;
-  line-height: 1.5;
-  text-decoration: none;
-}
-
-.salem-card__info-text a:hover {
-  color: #F4D35E;
-}
-
-.salem-card__actions {
+.salem-map-card__details {
   display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.salem-map-card__name {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: auto;
 }
 
-.salem-btn-directions {
-  background: #F4D35E;
-  color: #000000;
-  font-weight: 800;
-  font-size: 0.875rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.salem-btn-directions:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(244, 211, 94, 0.35);
-}
-
-.salem-btn-schedule {
-  background: transparent;
-  color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+.salem-map-card__rating {
+  font-size: 0.78rem;
   font-weight: 700;
-  font-size: 0.875rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
-}
-
-.salem-btn-schedule:hover {
-  border-color: #F4D35E;
   color: #F4D35E;
-}
-
-/* Map Display Container */
-.salem-map-container {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-  height: 100%;
-  min-height: 480px;
-  background: #111111;
-}
-
-.salem-map-container--standalone {
-  max-width: 1040px;
-  margin: 0 auto;
-  min-height: auto;
-  height: auto;
-  border-radius: 24px;
-}
-
-.salem-map-link {
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  position: relative;
-}
-
-.salem-map-img {
-  width: 100%;
-  height: auto;
-  max-height: 580px;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.salem-map-container:hover .salem-map-img {
-  transform: scale(1.03);
-}
-
-.salem-map-bottom-cta {
-  position: absolute;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 3;
-}
-
-.salem-map-btn {
-  background: #F4D35E;
-  color: #000000;
-  font-weight: 800;
-  font-size: 0.875rem;
-  padding: 0.85rem 1.6rem;
-  border-radius: 10px;
+  background: rgba(244, 211, 94, 0.12);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(244, 211, 94, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 0.25rem;
 }
 
-.salem-map-container:hover .salem-map-btn {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(244, 211, 94, 0.7);
+.salem-map-card__rating small {
+  color: #94A3B8;
+  font-weight: 500;
 }
 
-.salem-map-overlay-card {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  background: rgba(17, 17, 17, 0.92);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(244, 211, 94, 0.35);
-  padding: 1rem 1.25rem;
-  border-radius: 12px;
-  color: #FFFFFF;
+.salem-map-card__address {
+  font-size: 0.85rem;
+  color: #94A3B8;
+  line-height: 1.4;
+}
+
+.salem-map-card__actions {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
-.salem-map-pulse {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.salem-map-card__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background: #F4D35E;
-  box-shadow: 0 0 0 0 rgba(244, 211, 94, 0.7);
-  animation: pulse-gold 2s infinite;
-}
-
-@keyframes pulse-gold {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 211, 94, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(244, 211, 94, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(244, 211, 94, 0); }
-}
-
-.salem-map-overlay-title {
+  color: #000000;
   font-size: 0.875rem;
   font-weight: 800;
-  color: #FFFFFF;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(244, 211, 94, 0.3);
+  white-space: nowrap;
 }
 
-.salem-map-overlay-sub {
-  font-size: 0.75rem;
-  color: #F4D35E;
+.salem-map-card__btn-primary:hover {
+  background: #fcd968;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(244, 211, 94, 0.5);
+}
+
+/* Map Card Viewport with Live Iframe */
+.salem-map-card__viewport {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  background: #181818;
+  overflow: hidden;
+}
+
+.salem-map-card__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Map Card Bottom Bar */
+.salem-map-card__bottom {
+  padding: 1rem 1.75rem;
+  background: rgba(14, 14, 14, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.salem-map-card__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
   font-weight: 600;
+  color: #94A3B8;
+}
+
+.salem-map-card__meta-item i {
+  color: #F4D35E;
+  font-size: 0.95rem;
+}
+
+.salem-map-card__meta-item--link a {
+  color: #F4D35E;
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s ease;
+}
+
+.salem-map-card__meta-item--link a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
 }
 
 /* ─── 5. UNDERWRITING SLA GUARANTEES (4-CARD IMAGE GRID) ─ */
@@ -1498,7 +1418,42 @@
   .contact-footer-grid {
     grid-template-columns: 1fr;
   }
-  .salem-map-container {
-    min-height: 340px;
+  .salem-map-card {
+    border-radius: 18px;
+  }
+  .salem-map-card__top {
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .salem-map-card__actions {
+    width: 100%;
+  }
+  .salem-map-card__btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.25rem;
+  }
+  .salem-map-card__viewport {
+    height: 350px;
+  }
+  .salem-map-card__bottom {
+    padding: 1.15rem 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .salem-map-card__viewport {
+    height: 310px;
+  }
+  .salem-map-card__name {
+    font-size: 0.95rem;
+  }
+  .salem-map-card__address {
+    font-size: 0.78rem;
   }
 }

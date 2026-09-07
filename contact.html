@@ -382,7 +382,7 @@
       </div>
     </section>
 
-    <!-- ═══ 4. STACKLY MAP SECTION (STANDALONE MAP) ═══ -->
+    <!-- ═══ 4. STACKLY MAP SECTION (CLEAR & INTERACTIVE) ═══ -->
     <section class="salem-section" id="salem-location" aria-labelledby="salem-title">
       <div class="container">
         <div class="salem-section__header" data-aos="fade-up">
@@ -393,21 +393,60 @@
           <p class="salem-section__sub">MMR Complex, Periyakollappatty, Chinna Thirupathi (near Chinna Muniyappan Kovil), Salem, Tamil Nadu 636008, India</p>
         </div>
 
-        <!-- Standalone Interactive Stackly Google Map -->
-        <div class="salem-map-container salem-map-container--standalone" data-aos="fade-up" data-aos-delay="100">
-          <a href="https://www.google.com/maps/search/?api=1&query=Stackly+MMR+Complex+Periyakollappatty+Chinna+Thirupathi+Salem+Tamil+Nadu+636008" target="_blank" rel="noopener noreferrer" class="salem-map-link" aria-label="Open Stackly Salem on Google Maps">
-            <img src="assets/stackly-google-map.webp" alt="Stackly Map at MMR Complex, Chinna Thirupathi, Salem" class="salem-map-img" />
-            <div class="salem-map-overlay-card">
-              <div class="salem-map-pulse"></div>
-              <div>
-                <div class="salem-map-overlay-title">Stackly • 4.7 ★ (58 Reviews)</div>
-                <div class="salem-map-overlay-sub">Click to open live in Google Maps <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left:4px;"></i></div>
+        <!-- Standalone Interactive Stackly Google Map Card -->
+        <div class="salem-map-card" data-aos="fade-up" data-aos-delay="100">
+          <!-- Top Info Header -->
+          <div class="salem-map-card__top">
+            <div class="salem-map-card__info">
+              <div class="salem-map-card__pin-wrap">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="salem-map-card__details">
+                <div class="salem-map-card__name">
+                  <span>Stackly Salem Hub</span>
+                  <span class="salem-map-card__rating"><i class="fa-solid fa-star"></i> 4.7 <small>(58 Reviews)</small></span>
+                </div>
+                <div class="salem-map-card__address">
+                  MMR Complex, Chinna Thirupathi, Salem, TN 636008
+                </div>
               </div>
             </div>
-            <div class="salem-map-bottom-cta">
-              <span class="salem-map-btn"><i class="fa-solid fa-diamond-turn-right"></i> Get Directions to Salem Hub</span>
+            <div class="salem-map-card__actions">
+              <a href="https://www.google.com/maps/dir/?api=1&destination=MMR+Complex+Periyakollappatty+Chinna+Thirupathi+Salem+Tamil+Nadu+636008" target="_blank" rel="noopener noreferrer" class="salem-map-card__btn-primary">
+                <i class="fa-solid fa-diamond-turn-right"></i>
+                <span>Get Directions</span>
+              </a>
             </div>
-          </a>
+          </div>
+
+          <!-- Live Interactive Map Viewport -->
+          <div class="salem-map-card__viewport">
+            <iframe
+              src="https://maps.google.com/maps?q=MMR+Complex,+Periyakollappatty,+Chinna+Thirupathi,+Salem,+Tamil+Nadu+636008&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              class="salem-map-card__iframe"
+              title="Stackly Regional Hub at MMR Complex, Salem"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <!-- Bottom Meta Features Bar -->
+          <div class="salem-map-card__bottom">
+            <div class="salem-map-card__meta-item">
+              <i class="fa-solid fa-square-parking"></i>
+              <span>Free Dedicated Client Parking</span>
+            </div>
+            <div class="salem-map-card__meta-item">
+              <i class="fa-solid fa-door-open"></i>
+              <span>Open Mon – Fri: 8:30 AM – 6:00 PM IST</span>
+            </div>
+            <div class="salem-map-card__meta-item salem-map-card__meta-item--link">
+              <a href="https://www.google.com/maps/search/?api=1&query=MMR+Complex+Periyakollappatty+Chinna+Thirupathi+Salem+Tamil+Nadu+636008" target="_blank" rel="noopener noreferrer">
+                <span>Open in Google Maps</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
