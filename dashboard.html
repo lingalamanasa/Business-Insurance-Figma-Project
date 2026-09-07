@@ -29,6 +29,15 @@
       </button>
     </div>
 
+    <!-- Active User Profile Card in Sidebar -->
+    <div class="dash-sidebar__user-card" id="sidebarUserCard">
+      <div class="dash-user-avatar" id="sidebarUserAvatar">SJ</div>
+      <div class="dash-sidebar__user-details">
+        <strong id="sidebarUserName">Sarah Jenkins</strong>
+        <span id="sidebarUserRoleText">Commercial Policyholder</span>
+      </div>
+    </div>
+
     <nav class="dash-sidebar__nav" id="sidebarNav">
       <a href="#overview" class="dash-nav-item active" data-tab="overview">
         <i class="fa-solid fa-chart-pie"></i>
@@ -929,9 +938,18 @@
       }
     }
 
+    const sidebarUserAvatar = document.getElementById('sidebarUserAvatar');
+    const sidebarUserName = document.getElementById('sidebarUserName');
+    const sidebarUserRoleText = document.getElementById('sidebarUserRoleText');
+
     function updateAllUserDisplays() {
       if (userName) userName.textContent = activeUserName;
       if (userAvatar) userAvatar.textContent = getInitials(activeUserName);
+      if (sidebarUserName) sidebarUserName.textContent = activeUserName;
+      if (sidebarUserAvatar) sidebarUserAvatar.textContent = getInitials(activeUserName);
+      if (sidebarUserRoleText) {
+        sidebarUserRoleText.textContent = currentRole === 'admin' ? 'Administrative Supervisor' : 'Commercial Policyholder';
+      }
       if (settingsContactName && document.activeElement !== settingsContactName) {
         settingsContactName.value = activeUserName;
       }

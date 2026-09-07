@@ -115,6 +115,38 @@ body.sidebar-open {
   color: var(--dash-gold);
 }
 
+.dash-sidebar__user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--dash-border);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  margin: 0.85rem 1.25rem 0.25rem;
+}
+
+.dash-sidebar__user-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.dash-sidebar__user-details strong {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-sidebar__user-details span {
+  font-size: 0.72rem;
+  color: var(--dash-text-muted);
+}
+
 .dash-sidebar__nav {
   padding: 1.5rem 1rem;
   display: flex;
