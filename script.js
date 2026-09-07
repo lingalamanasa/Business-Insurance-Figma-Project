@@ -570,3 +570,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.info('%cStackly Business Insurance — Loaded', 'color: #F4D35E; font-weight: bold; font-size: 14px;');
 });
+
+/* ══════════════════════════════════════════════════════
+   17. BLOG — READ THE ARTICLE & READ MORE → 404
+   ══════════════════════════════════════════════════════ */
+(function initBlogArticleButtons() {
+  // Targets: .open-article-btn (all "Read the Article" and "Read More" buttons on blog.html)
+  const articleBtns = document.querySelectorAll('.open-article-btn');
+  articleBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '404.html';
+    });
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   18. CONTACT PAGE — DETAIL STRIP, SLA BADGES & DESK
+       CONTACT LINKS → 404
+   ══════════════════════════════════════════════════════ */
+(function initContactPageButtons() {
+  // 1. Contact detail strip items (Office Address, Phone, Email, Office Hours)
+  const detailItems = document.querySelectorAll('.contact-detail-item');
+  detailItems.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '404.html';
+    });
+  });
+
+  // 2. SLA badges on each dept card
+  const slaBadges = document.querySelectorAll('.dept-card__sla');
+  slaBadges.forEach((badge) => {
+    badge.style.cursor = 'pointer';
+    badge.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '404.html';
+    });
+  });
+
+  // 3. Dept card Direct Line & Email contact links
+  const deptContactLinks = document.querySelectorAll('.dept-contact-link');
+  deptContactLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '404.html';
+    });
+  });
+})();
