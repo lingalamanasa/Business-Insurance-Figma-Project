@@ -97,7 +97,6 @@
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
-  margin-right: 0.26em;
   padding-bottom: 0.12em;
 }
 
@@ -105,10 +104,6 @@
   display: inline-block;
   will-change: transform, opacity;
   transform-origin: 50% 100%;
-}
-
-.split-text-word-wrap--outline {
-  margin-right: 0.28em;
 }
 
 .split-text-word-wrap--outline .split-text-word {
