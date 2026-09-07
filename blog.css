@@ -895,6 +895,67 @@
   box-shadow: 0 8px 20px rgba(244, 211, 94, 0.3);
 }
 
+.blog-search__feedback {
+  max-width: 580px;
+  margin: 1.25rem auto 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  padding: 0.85rem 1.25rem;
+  border-radius: 8px;
+  display: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.blog-search__feedback.show {
+  display: block;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.blog-search__feedback.is-error {
+  background: rgba(239, 68, 68, 0.08);
+  color: #DC2626;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  font-weight: 500;
+}
+
+.blog-search__feedback.is-info {
+  background: rgba(59, 130, 246, 0.08);
+  color: #1E40AF;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+}
+
+.blog-search__feedback.is-success {
+  background: rgba(16, 185, 129, 0.08);
+  color: #065F46;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  font-weight: 500;
+}
+
+.blog-search-reset-btn {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.3rem 0.75rem;
+  background: #0F172A;
+  color: #FFFFFF;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.blog-search-reset-btn:hover {
+  background: #F4D35E;
+  color: #000000;
+}
+
+.blog-card--hidden,
+.blog-featured-card--hidden {
+  display: none !important;
+}
+
 /* ─── 6. MASTER DARK FOOTER ─────────────────────────── */
 .blog-dark-footer {
   background: #000000;

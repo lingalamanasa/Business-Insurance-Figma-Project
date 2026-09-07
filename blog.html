@@ -315,11 +315,12 @@
       <div class="container">
         <h2 class="blog-search__title" id="search-heading" data-aos="fade-up">Search Your Quary</h2>
 
-        <form class="blog-search__box" id="blog-search-form" data-aos="fade-up" data-aos-delay="100" onsubmit="event.preventDefault();">
+        <form class="blog-search__box" id="blog-search-form" data-aos="fade-up" data-aos-delay="100">
           <label for="blog-search-input" class="sr-only">Search</label>
-          <input type="text" id="blog-search-input" class="blog-search__input" placeholder="Search..." />
+          <input type="text" id="blog-search-input" class="blog-search__input" placeholder="Search..." autocomplete="off" />
           <button type="submit" class="blog-search__btn" id="blog-search-btn">Search</button>
         </form>
+        <div class="blog-search__feedback" id="blog-search-feedback" role="status" aria-live="polite"></div>
       </div>
     </section>
 

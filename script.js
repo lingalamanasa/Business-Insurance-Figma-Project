@@ -304,6 +304,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   if (!form) return;
 
   const submitBtn = $('#get-quote-btn');
+  const submitText = submitBtn ? submitBtn.querySelector('.quote-form__submit-text') : null;
   const successMsg = $('#quote-success');
 
   // Field configs
@@ -387,6 +388,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     if (submitBtn) {
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
+      if (submitText) submitText.textContent = 'Submitting...';
     }
 
     // Trigger gravity particles if available
@@ -424,15 +426,22 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
         });
       }
 
-      // Re-enable submit button
+      // Update submit button to Quote Requested state
       if (submitBtn) {
         submitBtn.classList.remove('loading');
-        submitBtn.disabled = false;
+        if (submitText) submitText.textContent = 'Quote Requested ✓';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          if (submitText) submitText.textContent = 'Get My Quote';
+          submitBtn.disabled = false;
+        }, 4000);
       }
 
     } catch (err) {
       if (submitBtn) {
         submitBtn.classList.remove('loading');
+        if (submitText) submitText.textContent = 'Get My Quote';
         submitBtn.disabled = false;
       }
       console.error('Form submission error:', err);
@@ -450,7 +459,6 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   forms.forEach(form => {
-    // Remove inline onsubmit
     form.removeAttribute('onsubmit');
 
     const input = $('.footer__newsletter-input', form);
@@ -474,6 +482,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     const clearFeedback = () => {
       feedback.textContent = '';
       feedback.className = 'footer__newsletter-feedback';
+      if (input) input.style.borderColor = '';
     };
 
     if (input) {
@@ -484,7 +493,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
       });
     }
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       e.stopPropagation();
 
@@ -493,25 +502,42 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
       if (!email || !emailRegex.test(email)) {
         showFeedback('Please enter a valid email address.', false);
-        input.focus();
+        if (input) {
+          input.style.borderColor = '#F87171';
+          input.focus();
+        }
         return;
       }
 
-      // Valid email: show success state without page reload
+      // Valid email: show loading state
+      const origBtnText = submitBtn ? submitBtn.textContent : 'Subscribe';
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.style.opacity = '0.7';
+        submitBtn.textContent = 'Subscribing...';
       }
 
-      showFeedback("You're subscribed successfully!", true);
+      // Trigger gravity particles if available
+      if (typeof triggerGravityParticles === 'function' && submitBtn) {
+        try { triggerGravityParticles(submitBtn); } catch (err) {}
+      }
+
+      await new Promise(r => setTimeout(r, 600));
+
+      // Show success feedback
+      showFeedback("You're subscribed! Watch your inbox for updates.", true);
       input.value = '';
+      if (input) input.style.borderColor = '';
+
+      if (submitBtn) {
+        submitBtn.textContent = 'Subscribed ✓';
+      }
 
       setTimeout(() => {
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.style.opacity = '';
+          submitBtn.textContent = origBtnText;
         }
-      }, 1500);
+      }, 3500);
     });
   });
 })();
@@ -586,7 +612,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting Request...';
+      submitBtn.textContent = 'Submitting...';
     }
 
     if (typeof triggerGravityParticles === 'function' && submitBtn) {
@@ -598,7 +624,10 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     form.reset();
     fields.forEach(f => {
       const inp = $(`#${f.id}`);
-      if (inp) inp.classList.remove('error');
+      if (inp) {
+        inp.classList.remove('error');
+        inp.removeAttribute('aria-invalid');
+      }
     });
 
     if (toast) {
@@ -609,25 +638,132 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     }
 
     if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Get My Quote';
+      submitBtn.textContent = 'Quote Requested ✓';
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Get My Quote';
+      }, 3500);
     }
   });
 })();
 
 /* ══════════════════════════════════════════════════════
-   7D. BLOG SEARCH FORM
+   7D. BLOG SEARCH SYSTEM — CLIENT-SIDE REALTIME FILTER
    ══════════════════════════════════════════════════════ */
 (function initBlogSearch() {
   const form = $('#blog-search-form');
-  if (!form) return;
+  const input = $('#blog-search-input');
+  const submitBtn = $('#blog-search-btn');
+  const feedback = $('#blog-search-feedback');
+
+  if (!form || !input) return;
+
+  const showFeedback = (msg, type = 'info', showReset = false) => {
+    if (!feedback) return;
+    feedback.innerHTML = msg;
+    if (showReset) {
+      const resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'blog-search-reset-btn';
+      resetBtn.textContent = 'Show All Articles';
+      resetBtn.addEventListener('click', resetSearch);
+      feedback.appendChild(resetBtn);
+    }
+    feedback.className = `blog-search__feedback show is-${type}`;
+  };
+
+  const clearFeedback = () => {
+    if (!feedback) return;
+    feedback.textContent = '';
+    feedback.className = 'blog-search__feedback';
+  };
+
+  const resetSearch = () => {
+    if (input) input.value = '';
+    clearFeedback();
+    const cards = $$('.blog-featured-card, .blog-card');
+    cards.forEach(card => {
+      card.classList.remove('blog-card--hidden', 'blog-featured-card--hidden');
+    });
+  };
+
+  const executeSearch = async () => {
+    const query = input.value.trim().toLowerCase();
+
+    if (!query) {
+      showFeedback('Please enter a search term.', 'error');
+      input.focus();
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Searching...';
+    }
+
+    await new Promise(r => setTimeout(r, 350));
+
+    const featuredCards = $$('.blog-featured-card');
+    const standardCards = $$('.blog-card');
+    let matchCount = 0;
+
+    featuredCards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(query)) {
+        card.classList.remove('blog-featured-card--hidden');
+        matchCount++;
+      } else {
+        card.classList.add('blog-featured-card--hidden');
+      }
+    });
+
+    standardCards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(query)) {
+        card.classList.remove('blog-card--hidden');
+        matchCount++;
+      } else {
+        card.classList.add('blog-card--hidden');
+      }
+    });
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Search';
+    }
+
+    if (matchCount > 0) {
+      showFeedback(`Found ${matchCount} article${matchCount === 1 ? '' : 's'} matching "${input.value.trim()}".`, 'success', true);
+      const targetSection = document.getElementById('featured-articles') || document.getElementById('latest-articles');
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      // Unhide all cards and show friendly no-results message
+      featuredCards.forEach(c => c.classList.remove('blog-featured-card--hidden'));
+      standardCards.forEach(c => c.classList.remove('blog-card--hidden'));
+      showFeedback(`No results found for "${input.value.trim()}". Try searching for terms like "risk", "liability", "cyber", "property", or "policy".`, 'info');
+    }
+  };
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const input = $('#blog-search-input', form);
-    if (input && !input.value.trim()) {
-      input.focus();
+    executeSearch();
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      executeSearch();
+    }
+  });
+
+  input.addEventListener('input', () => {
+    if (input.value.trim() === '') {
+      resetSearch();
+    } else if (feedback && feedback.classList.contains('is-error')) {
+      clearFeedback();
     }
   });
 })();
