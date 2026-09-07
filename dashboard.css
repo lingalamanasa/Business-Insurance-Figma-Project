@@ -353,6 +353,14 @@ body.sidebar-open {
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.dash-header__mobile-brand:hover {
+  opacity: 0.85;
 }
 
 .dash-header__mobile-logo {
