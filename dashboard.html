@@ -23,7 +23,7 @@
       </a>
     </div>
 
-    <nav class="dash-sidebar__nav">
+    <nav class="dash-sidebar__nav" id="sidebarNav">
       <a class="dash-nav-item active" data-tab="overview">
         <i class="fa-solid fa-chart-pie"></i>
         <span>Overview</span>
@@ -93,311 +93,666 @@
     <!-- Dashboard Container -->
     <div class="dash-container">
       
-      <!-- ─── 1. COUNT UP STATS CARDS ─── -->
-      <section class="dash-stats-grid" aria-label="Key Performance Metrics">
+      <!-- ═══════════════════════════════════════════
+           TAB 1: OVERVIEW VIEW
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content active" id="view-overview">
         
-        <!-- Card 1 -->
-        <article class="dash-stat-card">
-          <div class="dash-stat-top">
-            <span class="dash-stat-label" id="statLabel1">Total Protected Value</span>
-            <div class="dash-stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
-          </div>
-          <div class="dash-stat-value">
-            <span>$</span><span class="count-up" id="statVal1" data-target="1420000" data-format="currency">0</span>
-          </div>
-          <div class="dash-stat-trend up">
-            <i class="fa-solid fa-arrow-trend-up"></i>
-            <span>+14.8% vs previous term</span>
-          </div>
-        </article>
+        <!-- 4 Count Up Stat Cards -->
+        <div class="dash-stats-grid" aria-label="Key Performance Metrics">
+          <article class="dash-stat-card">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label" id="statLabel1">Total Protected Value</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span>$</span><span class="count-up" id="statVal1" data-target="1420000" data-format="currency">0</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              <span>+14.8% vs previous term</span>
+            </div>
+          </article>
 
-        <!-- Card 2 -->
-        <article class="dash-stat-card dash-stat-card--emerald">
-          <div class="dash-stat-top">
-            <span class="dash-stat-label" id="statLabel2">Claim Payout Velocity</span>
-            <div class="dash-stat-icon"><i class="fa-solid fa-bolt"></i></div>
-          </div>
-          <div class="dash-stat-value">
-            <span class="count-up" id="statVal2" data-target="99.8" data-decimals="1">0</span><span>%</span>
-          </div>
-          <div class="dash-stat-trend up">
-            <i class="fa-solid fa-clock"></i>
-            <span>48hr direct settlement guarantee</span>
-          </div>
-        </article>
+          <article class="dash-stat-card dash-stat-card--emerald">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label" id="statLabel2">Claim Payout Velocity</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-bolt"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span class="count-up" id="statVal2" data-target="99.8" data-decimals="1">0</span><span>%</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-clock"></i>
+              <span>48hr direct settlement guarantee</span>
+            </div>
+          </article>
 
-        <!-- Card 3 -->
-        <article class="dash-stat-card dash-stat-card--blue">
-          <div class="dash-stat-top">
-            <span class="dash-stat-label" id="statLabel3">Active Policies</span>
-            <div class="dash-stat-icon"><i class="fa-solid fa-file-contract"></i></div>
-          </div>
-          <div class="dash-stat-value">
-            <span class="count-up" id="statVal3" data-target="18">0</span><span> policies</span>
-          </div>
-          <div class="dash-stat-trend up">
-            <i class="fa-solid fa-check"></i>
-            <span>100% compliant across 4 regions</span>
-          </div>
-        </article>
+          <article class="dash-stat-card dash-stat-card--blue">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label" id="statLabel3">Active Policies</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-file-contract"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span class="count-up" id="statVal3" data-target="18">0</span><span> policies</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-check"></i>
+              <span>100% compliant across 4 regions</span>
+            </div>
+          </article>
 
-        <!-- Card 4 -->
-        <article class="dash-stat-card dash-stat-card--purple">
-          <div class="dash-stat-top">
-            <span class="dash-stat-label" id="statLabel4">Risk Audit Score</span>
-            <div class="dash-stat-icon"><i class="fa-solid fa-award"></i></div>
-          </div>
-          <div class="dash-stat-value">
-            <span class="count-up" id="statVal4" data-target="96" data-decimals="0">0</span><span> / 100</span>
-          </div>
-          <div class="dash-stat-trend up">
-            <i class="fa-solid fa-arrow-trend-up"></i>
-            <span>Tier-1 safety premium discount</span>
-          </div>
-        </article>
+          <article class="dash-stat-card dash-stat-card--purple">
+            <div class="dash-stat-top">
+              <span class="dash-stat-label" id="statLabel4">Risk Audit Score</span>
+              <div class="dash-stat-icon"><i class="fa-solid fa-award"></i></div>
+            </div>
+            <div class="dash-stat-value">
+              <span class="count-up" id="statVal4" data-target="96" data-decimals="0">0</span><span> / 100</span>
+            </div>
+            <div class="dash-stat-trend up">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              <span>Tier-1 safety premium discount</span>
+            </div>
+          </article>
+        </div>
 
+        <!-- 2-Col: Line Chart & Circular Progress Rings -->
+        <div class="dash-charts-grid">
+          <!-- Left: Animated Multi-Point SVG Line Trend Chart -->
+          <article class="dash-chart-card">
+            <div class="dash-card-head">
+              <div>
+                <h2 class="dash-card-title">Underwriting &amp; Premium Trajectory</h2>
+                <p class="dash-card-subtitle">Real-time risk curve and claim reserve allocation</p>
+              </div>
+              <div class="dash-filter-pills">
+                <button type="button" class="dash-filter-btn" data-period="1M">1M</button>
+                <button type="button" class="dash-filter-btn" data-period="6M">6M</button>
+                <button type="button" class="dash-filter-btn active" data-period="1Y">1Y</button>
+                <button type="button" class="dash-filter-btn" data-period="ALL">ALL</button>
+              </div>
+            </div>
+
+            <div class="dash-line-chart-wrap">
+              <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="chartGoldGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#F4D35E" stop-opacity="0.45" />
+                    <stop offset="100%" stop-color="#F4D35E" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+                <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+                <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+                <path class="chart-area-path" id="chartAreaPath" d="M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35 L 580 190 L 20 190 Z"></path>
+                <path class="chart-line-path" id="chartLinePath" d="M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35"></path>
+                <circle cx="20" cy="160" class="chart-data-point" />
+                <circle cx="150" cy="130" class="chart-data-point" />
+                <circle cx="270" cy="85" class="chart-data-point" />
+                <circle cx="390" cy="100" class="chart-data-point" />
+                <circle cx="510" cy="45" class="chart-data-point" />
+                <circle cx="580" cy="35" class="chart-data-point" />
+              </svg>
+              <div class="dash-chart-x-labels">
+                <span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span><span>Dec</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Right: Circular Progress Rings (4 Gauges) -->
+          <article class="dash-chart-card">
+            <div class="dash-card-head">
+              <div>
+                <h2 class="dash-card-title">Portfolio Health Rings</h2>
+                <p class="dash-card-subtitle">Real-time risk compliance gauges</p>
+              </div>
+            </div>
+
+            <div class="dash-rings-grid">
+              <div class="dash-ring-box">
+                <div class="dash-ring-svg-wrap">
+                  <svg class="dash-ring-svg" viewBox="0 0 96 96">
+                    <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
+                    <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--gold" id="ringCircle1" data-percent="92" />
+                  </svg>
+                  <div class="dash-ring-value" id="ringVal1">0%</div>
+                </div>
+                <strong class="dash-ring-title">Coverage Health</strong>
+                <span class="dash-ring-desc">92% Optimal Scope</span>
+              </div>
+
+              <div class="dash-ring-box">
+                <div class="dash-ring-svg-wrap">
+                  <svg class="dash-ring-svg" viewBox="0 0 96 96">
+                    <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
+                    <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--emerald" id="ringCircle2" data-percent="88" />
+                  </svg>
+                  <div class="dash-ring-value" id="ringVal2">0%</div>
+                </div>
+                <strong class="dash-ring-title">Renewal Rate</strong>
+                <span class="dash-ring-desc">88% Auto-Approved</span>
+              </div>
+
+              <div class="dash-ring-box">
+                <div class="dash-ring-svg-wrap">
+                  <svg class="dash-ring-svg" viewBox="0 0 96 96">
+                    <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
+                    <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--blue" id="ringCircle3" data-percent="95" />
+                  </svg>
+                  <div class="dash-ring-value" id="ringVal3">0%</div>
+                </div>
+                <strong class="dash-ring-title">Loss Prevention</strong>
+                <span class="dash-ring-desc">95% Zero Incident</span>
+              </div>
+
+              <div class="dash-ring-box">
+                <div class="dash-ring-svg-wrap">
+                  <svg class="dash-ring-svg" viewBox="0 0 96 96">
+                    <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
+                    <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--purple" id="ringCircle4" data-percent="100" />
+                  </svg>
+                  <div class="dash-ring-value" id="ringVal4">0%</div>
+                </div>
+                <strong class="dash-ring-title">Stewardship</strong>
+                <span class="dash-ring-desc">100% In-House</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Bottom: Animated Bar Chart & Recent Policies Table -->
+        <div class="dash-bottom-grid">
+          <article class="dash-chart-card">
+            <div class="dash-card-head">
+              <div>
+                <h2 class="dash-card-title">Policy Distribution by Sector</h2>
+                <p class="dash-card-subtitle">Allocation across commercial lines</p>
+              </div>
+            </div>
+            <div class="dash-bars-wrap" id="dashBarsContainer">
+              <div class="dash-bar-col" data-height="85%">
+                <div class="dash-bar-fill" style="height: 0%;"><span class="dash-bar-val-tag">$420k</span></div>
+                <span class="dash-bar-label">General</span>
+              </div>
+              <div class="dash-bar-col" data-height="65%">
+                <div class="dash-bar-fill" style="height: 0%;"><span class="dash-bar-val-tag">$310k</span></div>
+                <span class="dash-bar-label">Cyber</span>
+              </div>
+              <div class="dash-bar-col" data-height="95%">
+                <div class="dash-bar-fill" style="height: 0%;"><span class="dash-bar-val-tag">$520k</span></div>
+                <span class="dash-bar-label">Property</span>
+              </div>
+              <div class="dash-bar-col" data-height="45%">
+                <div class="dash-bar-fill" style="height: 0%;"><span class="dash-bar-val-tag">$180k</span></div>
+                <span class="dash-bar-label">Workers</span>
+              </div>
+              <div class="dash-bar-col" data-height="75%">
+                <div class="dash-bar-fill" style="height: 0%;"><span class="dash-bar-val-tag">$360k</span></div>
+                <span class="dash-bar-label">Freight</span>
+              </div>
+              <div class="dash-bar-col" data-height="90%">
+                <div class="dash-bar-fill" style="height: 0%;"><span class="dash-bar-val-tag">$480k</span></div>
+                <span class="dash-bar-label">Health</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="dash-table-card">
+            <div class="dash-card-head">
+              <div>
+                <h2 class="dash-card-title">Recent Commercial Policies</h2>
+                <p class="dash-card-subtitle">Active insured contracts and renewal dates</p>
+              </div>
+            </div>
+            <div style="overflow-x: auto;">
+              <table class="dash-policy-table">
+                <thead>
+                  <tr>
+                    <th>Policy Name</th>
+                    <th>Coverage Limit</th>
+                    <th>Renewal</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Commercial General Liability</strong><br><small style="color:var(--dash-text-muted);">#POL-88219-GL</small></td>
+                    <td>$2,000,000</td>
+                    <td>Oct 15, 2026</td>
+                    <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Enterprise Cyber Defense &amp; Extortion</strong><br><small style="color:var(--dash-text-muted);">#POL-94112-CY</small></td>
+                    <td>$5,000,000</td>
+                    <td>Nov 01, 2026</td>
+                    <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Commercial Property &amp; Business Interruption</strong><br><small style="color:var(--dash-text-muted);">#POL-31049-CP</small></td>
+                    <td>$3,500,000</td>
+                    <td>Dec 22, 2026</td>
+                    <td><span class="dash-status-pill pending"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Review</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
       </section>
 
-      <!-- ─── 2. CHARTS GRID (ANIMATED SVG LINE & CIRCULAR RINGS) ─── -->
-      <section class="dash-charts-grid">
-        
-        <!-- Left: Animated Multi-Point SVG Line Trend Chart -->
-        <article class="dash-chart-card">
-          <div class="dash-card-head">
+      <!-- ═══════════════════════════════════════════
+           TAB 2: ACTIVE POLICIES VIEW
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-policies">
+        <div class="dash-policies-header">
+          <div>
+            <h2 class="dash-card-title" style="font-size: 1.4rem;">Commercial Policy Portfolio</h2>
+            <p class="dash-card-subtitle">Manage, renew, and download official Certificates of Insurance (COI)</p>
+          </div>
+          <button type="button" class="dash-action-btn" onclick="alert('Downloading Certificate of Insurance (COI) package...');">
+            <i class="fa-solid fa-file-arrow-down"></i>
+            <span>Download All COI (ZIP)</span>
+          </button>
+        </div>
+
+        <div class="dash-policies-grid">
+          <!-- Policy Card 1 -->
+          <article class="dash-policy-card">
             <div>
-              <h2 class="dash-card-title" id="lineChartTitle">Underwriting &amp; Premium Trajectory</h2>
-              <p class="dash-card-subtitle">Real-time risk curve and claim reserve allocation</p>
+              <div class="dash-policy-card__top">
+                <div class="dash-policy-card__icon"><i class="fa-solid fa-building-shield"></i></div>
+                <span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span>
+              </div>
+              <h3 class="dash-policy-card__name">Commercial General Liability</h3>
+              <span class="dash-policy-card__id">#POL-88219-GL</span>
+              
+              <div class="dash-policy-card__stats">
+                <div class="dash-policy-stat-row">
+                  <span>Coverage Limit</span>
+                  <span>$2,000,000</span>
+                </div>
+                <div class="dash-policy-stat-row">
+                  <span>Deductible</span>
+                  <span>$5,000</span>
+                </div>
+                <div class="dash-policy-stat-row">
+                  <span>Renewal Date</span>
+                  <span style="color:var(--dash-gold);">Oct 15, 2026</span>
+                </div>
+              </div>
             </div>
-            <div class="dash-filter-pills">
-              <button type="button" class="dash-filter-btn" data-period="1M">1M</button>
-              <button type="button" class="dash-filter-btn" data-period="6M">6M</button>
-              <button type="button" class="dash-filter-btn active" data-period="1Y">1Y</button>
-              <button type="button" class="dash-filter-btn" data-period="ALL">ALL</button>
+            <div class="dash-policy-card__actions">
+              <button type="button" class="dash-policy-btn" onclick="alert('Viewing Schedule for #POL-88219-GL');"><i class="fa-solid fa-eye"></i> View</button>
+              <button type="button" class="dash-policy-btn" onclick="alert('Generated COI for Commercial General Liability');"><i class="fa-solid fa-download"></i> COI</button>
             </div>
-          </div>
+          </article>
 
-          <!-- Animated SVG Line Chart Canvas -->
-          <div class="dash-line-chart-wrap">
-            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="chartGoldGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#F4D35E" stop-opacity="0.45" />
-                  <stop offset="100%" stop-color="#F4D35E" stop-opacity="0" />
-                </linearGradient>
-              </defs>
-
-              <!-- Grid Horizontal Lines -->
-              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
-              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
-              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
-
-              <!-- Fill Area Gradient -->
-              <path class="chart-area-path" id="chartAreaPath" d="M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35 L 580 190 L 20 190 Z"></path>
-
-              <!-- Main Animated Line Path -->
-              <path class="chart-line-path" id="chartLinePath" d="M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35"></path>
-
-              <!-- Data Coordinate Points -->
-              <circle cx="20" cy="160" class="chart-data-point" data-tip="Jan: $120k" />
-              <circle cx="150" cy="130" class="chart-data-point" data-tip="Mar: $185k" />
-              <circle cx="270" cy="85" class="chart-data-point" data-tip="Jun: $310k" />
-              <circle cx="390" cy="100" class="chart-data-point" data-tip="Sep: $290k" />
-              <circle cx="510" cy="45" class="chart-data-point" data-tip="Nov: $460k" />
-              <circle cx="580" cy="35" class="chart-data-point" data-tip="Dec: $520k" />
-            </svg>
-            <div class="dash-chart-x-labels">
-              <span>Jan</span>
-              <span>Mar</span>
-              <span>May</span>
-              <span>Jul</span>
-              <span>Sep</span>
-              <span>Nov</span>
-              <span>Dec</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Right: Circular Progress Rings (4 Gauges) -->
-        <article class="dash-chart-card">
-          <div class="dash-card-head">
+          <!-- Policy Card 2 -->
+          <article class="dash-policy-card">
             <div>
-              <h2 class="dash-card-title">Portfolio Health Rings</h2>
-              <p class="dash-card-subtitle">Real-time risk compliance gauges</p>
-            </div>
-          </div>
-
-          <div class="dash-rings-grid">
-            
-            <!-- Ring 1: Coverage Integrity -->
-            <div class="dash-ring-box">
-              <div class="dash-ring-svg-wrap">
-                <svg class="dash-ring-svg" viewBox="0 0 96 96">
-                  <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
-                  <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--gold" id="ringCircle1" data-percent="92" />
-                </svg>
-                <div class="dash-ring-value" id="ringVal1">0%</div>
+              <div class="dash-policy-card__top">
+                <div class="dash-policy-card__icon" style="background:rgba(56,189,248,0.1); color:var(--dash-blue);"><i class="fa-solid fa-network-wired"></i></div>
+                <span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span>
               </div>
-              <strong class="dash-ring-title">Coverage Health</strong>
-              <span class="dash-ring-desc">92% Optimal Scope</span>
-            </div>
-
-            <!-- Ring 2: Renewal Readiness -->
-            <div class="dash-ring-box">
-              <div class="dash-ring-svg-wrap">
-                <svg class="dash-ring-svg" viewBox="0 0 96 96">
-                  <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
-                  <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--emerald" id="ringCircle2" data-percent="88" />
-                </svg>
-                <div class="dash-ring-value" id="ringVal2">0%</div>
+              <h3 class="dash-policy-card__name">Cyber Defense &amp; Extortion</h3>
+              <span class="dash-policy-card__id">#POL-94112-CY</span>
+              
+              <div class="dash-policy-card__stats">
+                <div class="dash-policy-stat-row">
+                  <span>Coverage Limit</span>
+                  <span>$5,000,000</span>
+                </div>
+                <div class="dash-policy-stat-row">
+                  <span>Deductible</span>
+                  <span>$10,000</span>
+                </div>
+                <div class="dash-policy-stat-row">
+                  <span>Renewal Date</span>
+                  <span style="color:var(--dash-gold);">Nov 01, 2026</span>
+                </div>
               </div>
-              <strong class="dash-ring-title">Renewal Rate</strong>
-              <span class="dash-ring-desc">88% Auto-Approved</span>
             </div>
+            <div class="dash-policy-card__actions">
+              <button type="button" class="dash-policy-btn" onclick="alert('Viewing Schedule for #POL-94112-CY');"><i class="fa-solid fa-eye"></i> View</button>
+              <button type="button" class="dash-policy-btn" onclick="alert('Generated COI for Cyber Defense');"><i class="fa-solid fa-download"></i> COI</button>
+            </div>
+          </article>
 
-            <!-- Ring 3: Loss Prevention -->
-            <div class="dash-ring-box">
-              <div class="dash-ring-svg-wrap">
-                <svg class="dash-ring-svg" viewBox="0 0 96 96">
-                  <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
-                  <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--blue" id="ringCircle3" data-percent="95" />
-                </svg>
-                <div class="dash-ring-value" id="ringVal3">0%</div>
+          <!-- Policy Card 3 -->
+          <article class="dash-policy-card">
+            <div>
+              <div class="dash-policy-card__top">
+                <div class="dash-policy-card__icon" style="background:rgba(16,185,129,0.1); color:var(--dash-emerald);"><i class="fa-solid fa-warehouse"></i></div>
+                <span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span>
               </div>
-              <strong class="dash-ring-title">Loss Prevention</strong>
-              <span class="dash-ring-desc">95% Zero Incident</span>
-            </div>
-
-            <!-- Ring 4: Audit Clearance -->
-            <div class="dash-ring-box">
-              <div class="dash-ring-svg-wrap">
-                <svg class="dash-ring-svg" viewBox="0 0 96 96">
-                  <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
-                  <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--purple" id="ringCircle4" data-percent="100" />
-                </svg>
-                <div class="dash-ring-value" id="ringVal4">0%</div>
+              <h3 class="dash-policy-card__name">Commercial Property</h3>
+              <span class="dash-policy-card__id">#POL-31049-CP</span>
+              
+              <div class="dash-policy-card__stats">
+                <div class="dash-policy-stat-row">
+                  <span>Coverage Limit</span>
+                  <span>$3,500,000</span>
+                </div>
+                <div class="dash-policy-stat-row">
+                  <span>Deductible</span>
+                  <span>$7,500</span>
+                </div>
+                <div class="dash-policy-stat-row">
+                  <span>Renewal Date</span>
+                  <span style="color:var(--dash-gold);">Dec 22, 2026</span>
+                </div>
               </div>
-              <strong class="dash-ring-title">Stewardship</strong>
-              <span class="dash-ring-desc">100% In-House</span>
             </div>
-
-          </div>
-        </article>
-
+            <div class="dash-policy-card__actions">
+              <button type="button" class="dash-policy-btn" onclick="alert('Viewing Schedule for #POL-31049-CP');"><i class="fa-solid fa-eye"></i> View</button>
+              <button type="button" class="dash-policy-btn" onclick="alert('Generated COI for Commercial Property');"><i class="fa-solid fa-download"></i> COI</button>
+            </div>
+          </article>
+        </div>
       </section>
 
-      <!-- ─── 3. BOTTOM ROW (ANIMATED BAR CHART & RECENT POLICIES) ─── -->
-      <section class="dash-bottom-grid">
-        
-        <!-- Left: Interactive Animated Bar Chart -->
-        <article class="dash-chart-card">
+      <!-- ═══════════════════════════════════════════
+           TAB 3: CLAIMS CENTER VIEW
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-claims">
+        <div class="dash-policies-header">
+          <div>
+            <h2 class="dash-card-title" style="font-size: 1.4rem;">Direct Claims Resolution Center</h2>
+            <p class="dash-card-subtitle">Zero third-party broker friction. Guaranteed 48-hour assessment pipeline.</p>
+          </div>
+          <button type="button" class="dash-action-btn" onclick="alert('Opening claim incident intake form...');">
+            <i class="fa-solid fa-plus"></i>
+            <span>File New Claim</span>
+          </button>
+        </div>
+
+        <!-- Interactive Animated Pipeline Stepper -->
+        <article class="dash-pipeline-card">
           <div class="dash-card-head">
             <div>
-              <h2 class="dash-card-title">Policy Distribution by Sector</h2>
-              <p class="dash-card-subtitle">Allocation across commercial lines</p>
+              <strong style="font-size: 1.1rem;">Active Claim Pipeline #CLM-2026-081</strong>
+              <p class="dash-card-subtitle">Incident: Minor Water Ingress at Headquarters Facility</p>
             </div>
+            <span class="dash-status-pill active" style="background:rgba(244,211,94,0.15); color:var(--dash-gold);">Step 3 of 4: Direct Wire Settlement</span>
           </div>
 
-          <div class="dash-bars-wrap" id="dashBarsContainer">
-            <!-- Bar 1 -->
-            <div class="dash-bar-col" data-height="85%" data-val="$420k">
-              <div class="dash-bar-fill" style="height: 0%;">
-                <span class="dash-bar-val-tag">$420k</span>
-              </div>
-              <span class="dash-bar-label">General</span>
+          <div class="dash-pipeline-steps">
+            <div class="dash-pipeline-step completed">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-check"></i></div>
+              <strong class="dash-pipeline-label">1. Incident Filed</strong>
+              <span class="dash-pipeline-sub">Sep 02, 2026 - 10:14 AM</span>
             </div>
-            <!-- Bar 2 -->
-            <div class="dash-bar-col" data-height="65%" data-val="$310k">
-              <div class="dash-bar-fill" style="height: 0%;">
-                <span class="dash-bar-val-tag">$310k</span>
-              </div>
-              <span class="dash-bar-label">Cyber</span>
+            <div class="dash-pipeline-step completed">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-check"></i></div>
+              <strong class="dash-pipeline-label">2. In-House Underwriting</strong>
+              <span class="dash-pipeline-sub">Assigned to Marcus Vance</span>
             </div>
-            <!-- Bar 3 -->
-            <div class="dash-bar-col" data-height="95%" data-val="$520k">
-              <div class="dash-bar-fill" style="height: 0%;">
-                <span class="dash-bar-val-tag">$520k</span>
-              </div>
-              <span class="dash-bar-label">Property</span>
+            <div class="dash-pipeline-step active">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-magnifying-glass-dollar"></i></div>
+              <strong class="dash-pipeline-label">3. Settlement Approved</strong>
+              <span class="dash-pipeline-sub">$18,450 Direct Wire</span>
             </div>
-            <!-- Bar 4 -->
-            <div class="dash-bar-col" data-height="45%" data-val="$180k">
-              <div class="dash-bar-fill" style="height: 0%;">
-                <span class="dash-bar-val-tag">$180k</span>
-              </div>
-              <span class="dash-bar-label">Workers</span>
-            </div>
-            <!-- Bar 5 -->
-            <div class="dash-bar-col" data-height="75%" data-val="$360k">
-              <div class="dash-bar-fill" style="height: 0%;">
-                <span class="dash-bar-val-tag">$360k</span>
-              </div>
-              <span class="dash-bar-label">Freight</span>
-            </div>
-            <!-- Bar 6 -->
-            <div class="dash-bar-col" data-height="90%" data-val="$480k">
-              <div class="dash-bar-fill" style="height: 0%;">
-                <span class="dash-bar-val-tag">$480k</span>
-              </div>
-              <span class="dash-bar-label">Health</span>
+            <div class="dash-pipeline-step">
+              <div class="dash-pipeline-dot"><i class="fa-solid fa-flag-checkered"></i></div>
+              <strong class="dash-pipeline-label">4. Case Closed</strong>
+              <span class="dash-pipeline-sub">Estimated Today 5:00 PM</span>
             </div>
           </div>
         </article>
 
-        <!-- Right: Recent Active Policies Table -->
+        <!-- Claims History Table -->
         <article class="dash-table-card">
           <div class="dash-card-head">
-            <div>
-              <h2 class="dash-card-title">Recent Commercial Policies</h2>
-              <p class="dash-card-subtitle">Active insured contracts and renewal dates</p>
-            </div>
+            <h3 class="dash-card-title">Claims History (Past 12 Months)</h3>
           </div>
+          <table class="dash-policy-table">
+            <thead>
+              <tr>
+                <th>Claim ID</th>
+                <th>Incident Type</th>
+                <th>Date Filed</th>
+                <th>Settlement Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#CLM-2026-081</strong></td>
+                <td>Facility Water Leakage</td>
+                <td>Sep 02, 2026</td>
+                <td>$18,450</td>
+                <td><span class="dash-status-pill pending">Settlement Ready</span></td>
+              </tr>
+              <tr>
+                <td><strong>#CLM-2026-014</strong></td>
+                <td>Client Equipment Power Surge</td>
+                <td>May 18, 2026</td>
+                <td>$6,200</td>
+                <td><span class="dash-status-pill active">Direct Paid</span></td>
+              </tr>
+              <tr>
+                <td><strong>#CLM-2025-992</strong></td>
+                <td>Cargo Damage in Transit</td>
+                <td>Nov 11, 2025</td>
+                <td>$34,000</td>
+                <td><span class="dash-status-pill active">Direct Paid</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
 
-          <div style="overflow-x: auto;">
-            <table class="dash-policy-table">
-              <thead>
-                <tr>
-                  <th>Policy Name</th>
-                  <th>Coverage Limit</th>
-                  <th>Renewal</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="dashPolicyTbody">
-                <tr>
-                  <td><strong>Commercial General Liability</strong><br><small style="color:var(--dash-text-muted);">#POL-88219-GL</small></td>
-                  <td>$2,000,000</td>
-                  <td>Oct 15, 2026</td>
-                  <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
-                </tr>
-                <tr>
-                  <td><strong>Enterprise Cyber Defense &amp; Extortion</strong><br><small style="color:var(--dash-text-muted);">#POL-94112-CY</small></td>
-                  <td>$5,000,000</td>
-                  <td>Nov 01, 2026</td>
-                  <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
-                </tr>
-                <tr>
-                  <td><strong>Commercial Property &amp; Business Interruption</strong><br><small style="color:var(--dash-text-muted);">#POL-31049-CP</small></td>
-                  <td>$3,500,000</td>
-                  <td>Dec 22, 2026</td>
-                  <td><span class="dash-status-pill pending"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Review</span></td>
-                </tr>
-                <tr>
-                  <td><strong>Workers' Compensation Statutory</strong><br><small style="color:var(--dash-text-muted);">#POL-55201-WC</small></td>
-                  <td>$1,000,000</td>
-                  <td>Jan 10, 2027</td>
-                  <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
-                </tr>
-              </tbody>
-            </table>
+      <!-- ═══════════════════════════════════════════
+           TAB 4: RISK ANALYTICS VIEW
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-analytics">
+        <div class="dash-policies-header">
+          <div>
+            <h2 class="dash-card-title" style="font-size: 1.4rem;">Risk Intelligence &amp; Audit Benchmarks</h2>
+            <p class="dash-card-subtitle">AI-assisted loss prevention and annual policyholder safety scoring</p>
           </div>
+        </div>
+
+        <div class="dash-risk-grid">
+          <!-- Left: Safety Benchmark Scores -->
+          <article class="dash-chart-card">
+            <div class="dash-card-head">
+              <h3 class="dash-card-title">Operational Safety Benchmarks</h3>
+              <span style="font-size: 0.85rem; font-weight:800; color:var(--dash-gold);">Overall: 96 / 100</span>
+            </div>
+
+            <div class="dash-benchmark-bar">
+              <div class="dash-benchmark-top">
+                <span>Workplace Safety &amp; Ergonomics</span>
+                <span style="color:var(--dash-emerald);">98%</span>
+              </div>
+              <div class="dash-benchmark-track">
+                <div class="dash-benchmark-fill" style="width: 98%; background: var(--dash-emerald);"></div>
+              </div>
+            </div>
+
+            <div class="dash-benchmark-bar">
+              <div class="dash-benchmark-top">
+                <span>Cyber Endpoint &amp; Ransomware Defense</span>
+                <span style="color:var(--dash-blue);">94%</span>
+              </div>
+              <div class="dash-benchmark-track">
+                <div class="dash-benchmark-fill" style="width: 94%; background: var(--dash-blue);"></div>
+              </div>
+            </div>
+
+            <div class="dash-benchmark-bar">
+              <div class="dash-benchmark-top">
+                <span>Property Fire &amp; Hazard Containment</span>
+                <span style="color:var(--dash-gold);">97%</span>
+              </div>
+              <div class="dash-benchmark-track">
+                <div class="dash-benchmark-fill" style="width: 97%; background: var(--dash-gold);"></div>
+              </div>
+            </div>
+
+            <div class="dash-benchmark-bar">
+              <div class="dash-benchmark-top">
+                <span>Supply Chain &amp; Freight Reliability</span>
+                <span style="color:var(--dash-purple);">91%</span>
+              </div>
+              <div class="dash-benchmark-track">
+                <div class="dash-benchmark-fill" style="width: 91%; background: var(--dash-purple);"></div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Right: Underwriter Safety Recommendations -->
+          <article class="dash-chart-card">
+            <div class="dash-card-head">
+              <h3 class="dash-card-title">In-House Underwriter Recommendations</h3>
+            </div>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem;">
+              <li style="display: flex; gap: 12px; font-size: 0.88rem; color: #CBD5E1;">
+                <span style="color:var(--dash-emerald); font-size: 1.1rem;"><i class="fa-solid fa-circle-check"></i></span>
+                <div>
+                  <strong>Annual Free Safety Audit Completed</strong>
+                  <p style="color:var(--dash-text-muted); font-size: 0.8rem; margin-top: 2px;">Earned 15% discount on General Liability annual renewal.</p>
+                </div>
+              </li>
+              <li style="display: flex; gap: 12px; font-size: 0.88rem; color: #CBD5E1;">
+                <span style="color:var(--dash-gold); font-size: 1.1rem;"><i class="fa-solid fa-shield-cat"></i></span>
+                <div>
+                  <strong>Enable 2FA for Remote Access Portals</strong>
+                  <p style="color:var(--dash-text-muted); font-size: 0.8rem; margin-top: 2px;">Qualifies for $500k additional cyber ransom indemnity rider.</p>
+                </div>
+              </li>
+              <li style="display: flex; gap: 12px; font-size: 0.88rem; color: #CBD5E1;">
+                <span style="color:var(--dash-blue); font-size: 1.1rem;"><i class="fa-solid fa-truck-ramp-box"></i></span>
+                <div>
+                  <strong>Warehouse Pallet Buffer Distance</strong>
+                  <p style="color:var(--dash-text-muted); font-size: 0.8rem; margin-top: 2px;">Sprinkler clearance verified 100% compliant with NFPA guidelines.</p>
+                </div>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 5: BILLING & PREMIUM VIEW
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-billing">
+        <div class="dash-policies-header">
+          <div>
+            <h2 class="dash-card-title" style="font-size: 1.4rem;">Billing, Invoices &amp; Premium Stewardship</h2>
+            <p class="dash-card-subtitle">Zero third-party broker commissions. 100% direct policyholder value.</p>
+          </div>
+        </div>
+
+        <!-- Premium Banner -->
+        <article class="dash-billing-banner">
+          <div>
+            <span style="font-size: 0.85rem; color: #94A3B8; font-weight: 700; text-transform: uppercase;">Next Scheduled Autopay</span>
+            <div class="dash-billing-amount">$4,850.00</div>
+            <p style="font-size: 0.85rem; color: #CBD5E1; margin-top: 4px;">Due on <strong style="color:#FFFFFF;">November 01, 2026</strong> • Linked to Corporate ACH (•••• 8912)</p>
+          </div>
+          <button type="button" class="dash-action-btn" onclick="alert('Processing early payment of $4,850.00...');">
+            <i class="fa-solid fa-credit-card"></i>
+            <span>Pay Premium Early</span>
+          </button>
         </article>
 
+        <!-- Invoices Table -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <h3 class="dash-card-title">Recent Invoices &amp; Receipts</h3>
+          </div>
+          <table class="dash-policy-table">
+            <thead>
+              <tr>
+                <th>Invoice #</th>
+                <th>Billing Period</th>
+                <th>Amount</th>
+                <th>Payment Method</th>
+                <th>Invoice Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#INV-2026-10</strong></td>
+                <td>Oct 01 - Oct 31, 2026</td>
+                <td>$4,850.00</td>
+                <td>Corporate ACH (•••• 8912)</td>
+                <td><button type="button" class="dash-policy-btn" style="max-width:140px;" onclick="alert('Downloading PDF Invoice #INV-2026-10');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
+              </tr>
+              <tr>
+                <td><strong>#INV-2026-09</strong></td>
+                <td>Sep 01 - Sep 30, 2026</td>
+                <td>$4,850.00</td>
+                <td>Corporate ACH (•••• 8912)</td>
+                <td><button type="button" class="dash-policy-btn" style="max-width:140px;" onclick="alert('Downloading PDF Invoice #INV-2026-09');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
+              </tr>
+              <tr>
+                <td><strong>#INV-2026-08</strong></td>
+                <td>Aug 01 - Aug 31, 2026</td>
+                <td>$4,850.00</td>
+                <td>Corporate ACH (•••• 8912)</td>
+                <td><button type="button" class="dash-policy-btn" style="max-width:140px;" onclick="alert('Downloading PDF Invoice #INV-2026-08');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           TAB 6: SETTINGS VIEW
+      ═══════════════════════════════════════════ -->
+      <section class="dash-view-content" id="view-settings">
+        <div class="dash-policies-header">
+          <div>
+            <h2 class="dash-card-title" style="font-size: 1.4rem;">Account &amp; Security Settings</h2>
+            <p class="dash-card-subtitle">Manage corporate underwriting profile, security credentials, and alert preferences</p>
+          </div>
+        </div>
+
+        <div class="dash-settings-grid">
+          <article class="dash-chart-card">
+            <h3 class="dash-card-title" style="margin-bottom: 1.25rem;">Company Profile</h3>
+            <div class="dash-form-field">
+              <label class="dash-form-label">Insured Entity Name</label>
+              <input type="text" class="dash-form-input" value="Apex Dynamics Corporation" />
+            </div>
+            <div class="dash-form-field">
+              <label class="dash-form-label">Primary Policyholder Contact</label>
+              <input type="text" class="dash-form-input" value="Sarah Jenkins" />
+            </div>
+            <div class="dash-form-field">
+              <label class="dash-form-label">Corporate Email Address</label>
+              <input type="email" class="dash-form-input" value="s.jenkins@apexdynamics.com" />
+            </div>
+            <button type="button" class="dash-action-btn" style="align-self: flex-start; margin-top: 0.5rem;" onclick="alert('Profile details updated successfully!');">Save Changes</button>
+          </article>
+
+          <article class="dash-chart-card">
+            <h3 class="dash-card-title" style="margin-bottom: 1.25rem;">Security &amp; Notifications</h3>
+            <div class="dash-form-field">
+              <label class="dash-form-label">Two-Factor Authentication (2FA)</label>
+              <input type="text" class="dash-form-input" value="Enabled (Authenticator App)" readonly />
+            </div>
+            <div class="dash-form-field">
+              <label class="dash-form-label">Instant Claim Wire SMS Alerts</label>
+              <input type="text" class="dash-form-input" value="+1 (555) 942-8819 (Active)" />
+            </div>
+            <div class="dash-form-field">
+              <label class="dash-form-label">Underwriter Direct Line</label>
+              <input type="text" class="dash-form-input" value="Marcus Vance • Ext 402" readonly />
+            </div>
+            <button type="button" class="dash-action-btn" style="align-self: flex-start; margin-top: 0.5rem;" onclick="alert('Security preferences saved!');">Update Security</button>
+          </article>
+        </div>
       </section>
 
     </div>
   </main>
 
-  <!-- Scripts: GSAP for high-end Count-ups, Bar animations, and Ring gauges -->
+  <!-- Scripts: GSAP for Counters, Bar animations, and Ring gauges -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script>
     // ═══ 1. COUNT UP NUMERICAL ANIMATIONS ═══
@@ -469,7 +824,34 @@
       });
     }
 
-    // ═══ 4. DYNAMIC LINE CHART PERIOD SWITCHER ═══
+    // ═══ 4. TAB SWITCHING SYSTEM (ALL 6 MARKED VIEWS) ═══
+    const navItems = document.querySelectorAll('.dash-nav-item');
+    const viewSections = document.querySelectorAll('.dash-view-content');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const tab = item.getAttribute('data-tab');
+        if (!tab) return;
+
+        navItems.forEach(n => n.classList.remove('active'));
+        item.classList.add('active');
+
+        viewSections.forEach(v => v.classList.remove('active'));
+        const targetView = document.getElementById(`view-${tab}`);
+        if (targetView) {
+          targetView.classList.add('active');
+        }
+
+        // Re-trigger animations if returning to Overview
+        if (tab === 'overview') {
+          animateCounters();
+          animateProgressRings();
+          animateBarChart();
+        }
+      });
+    });
+
+    // ═══ 5. DYNAMIC LINE CHART PERIOD SWITCHER ═══
     const periodButtons = document.querySelectorAll('.dash-filter-btn');
     const chartLinePath = document.getElementById('chartLinePath');
     const chartAreaPath = document.getElementById('chartAreaPath');
@@ -503,14 +885,14 @@
           chartAreaPath.style.animation = 'none';
           chartLinePath.setAttribute('d', chartCurves[period].line);
           chartAreaPath.setAttribute('d', chartCurves[period].area);
-          void chartLinePath.offsetWidth; // Trigger reflow
+          void chartLinePath.offsetWidth;
           chartLinePath.style.animation = 'drawLine 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards';
           chartAreaPath.style.animation = 'fadeInArea 0.8s ease 0.6s forwards';
         }
       });
     });
 
-    // ═══ 5. ROLE SWITCHER (USER VS ADMIN VIEW) ═══
+    // ═══ 6. ROLE SWITCHER (USER VS ADMIN VIEW) ═══
     const modeUserBtn = document.getElementById('modeUserBtn');
     const modeAdminBtn = document.getElementById('modeAdminBtn');
     const sidebarRoleLabel = document.getElementById('sidebarRoleLabel');
@@ -546,7 +928,6 @@
     modeUserBtn.addEventListener('click', () => applyRole('user'));
     modeAdminBtn.addEventListener('click', () => applyRole('admin'));
 
-    // Check URL query parameters for initial role (?role=admin or ?role=user)
     const urlParams = new URLSearchParams(window.location.search);
     const initialRole = urlParams.get('role');
     if (initialRole === 'admin') {
