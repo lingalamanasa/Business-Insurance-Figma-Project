@@ -132,8 +132,8 @@ body.auth-split-body {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  opacity: 0.62;
-  filter: saturate(1.2) contrast(1.1);
+  opacity: 0.95;
+  filter: saturate(1.12) contrast(1.05);
   transform: scale(1.03);
   transition: transform 12s ease;
 }
@@ -150,9 +150,9 @@ body.auth-split-body {
   height: 100%;
   background: linear-gradient(
     180deg,
-    rgba(11, 17, 26, 0.35) 0%,
-    rgba(11, 17, 26, 0.55) 45%,
-    rgba(11, 17, 26, 0.92) 100%
+    rgba(11, 17, 26, 0.2) 0%,
+    rgba(11, 17, 26, 0.35) 45%,
+    rgba(11, 17, 26, 0.85) 100%
   );
   z-index: 1;
 }
@@ -172,6 +172,7 @@ body.auth-split-body {
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
   transition: transform 0.25s ease;
 }
 
@@ -189,7 +190,7 @@ body.auth-split-body {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.55);
   color: #FFFFFF;
   text-decoration: none;
   font-size: 0.84rem;
@@ -198,14 +199,14 @@ body.auth-split-body {
   border-radius: 9999px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .auth-split-visual__home-btn:hover {
-  background: rgba(255, 255, 255, 0.24);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(15, 23, 42, 0.75);
+  border-color: rgba(255, 255, 255, 0.45);
   color: #FFFFFF;
   transform: translateX(-3px);
 }
@@ -222,16 +223,18 @@ body.auth-split-body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(244, 211, 94, 0.15);
+  background: rgba(15, 23, 42, 0.65);
   color: #F4D35E;
-  border: 1px solid rgba(244, 211, 94, 0.45);
+  border: 1px solid rgba(244, 211, 94, 0.55);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   padding: 0.42rem 0.95rem;
   border-radius: 9999px;
   margin-bottom: 1.25rem;
-  box-shadow: 0 4px 15px rgba(244, 211, 94, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .auth-split-visual__title {
@@ -241,14 +244,16 @@ body.auth-split-body {
   letter-spacing: -0.035em;
   color: #FFFFFF;
   margin-bottom: 1rem;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.75);
 }
 
 .auth-split-visual__desc {
   font-size: 0.92rem;
   line-height: 1.62;
-  color: #CBD5E1;
+  color: #E2E8F0;
   margin-bottom: 1.75rem;
   max-width: 440px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
 }
 
 .auth-split-features {
@@ -264,7 +269,8 @@ body.auth-split-body {
   gap: 12px;
   font-size: 0.88rem;
   font-weight: 600;
-  color: #F1F5F9;
+  color: #FFFFFF;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
 }
 
 .auth-split-feature__icon {
