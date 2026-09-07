@@ -1,0 +1,730 @@
+/* ══════════════════════════════════════════════════════
+   STACKLY — ENTERPRISE INSURANCE DASHBOARD
+   Animated Charts, Circular Rings, Count-ups & Line Curves
+   ══════════════════════════════════════════════════════ */
+
+:root {
+  --dash-bg: #090E14;
+  --dash-surface: #111923;
+  --dash-surface-hover: #182332;
+  --dash-card: #151F2C;
+  --dash-border: rgba(255, 255, 255, 0.08);
+  --dash-border-active: rgba(244, 211, 94, 0.4);
+  --dash-gold: #F4D35E;
+  --dash-gold-glow: rgba(244, 211, 94, 0.25);
+  --dash-emerald: #10B981;
+  --dash-blue: #38BDF8;
+  --dash-purple: #A855F7;
+  --dash-text-main: #FFFFFF;
+  --dash-text-muted: #94A3B8;
+  --dash-sidebar-w: 260px;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.dash-body {
+  font-family: var(--font-family);
+  background-color: var(--dash-bg);
+  color: var(--dash-text-main);
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+}
+
+/* ─── SIDEBAR NAVIGATION ─────────────────────────────── */
+.dash-sidebar {
+  width: var(--dash-sidebar-w);
+  background: var(--dash-surface);
+  border-right: 1px solid var(--dash-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  transition: transform 0.3s ease;
+}
+
+.dash-sidebar__brand {
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.dash-sidebar__logo {
+  height: 26px;
+  width: auto;
+}
+
+.dash-sidebar__nav {
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.dash-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.75rem 1rem;
+  color: var(--dash-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.dash-nav-item:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dash-nav-item.active {
+  color: var(--dash-gold);
+  background: rgba(244, 211, 94, 0.1);
+  border-color: rgba(244, 211, 94, 0.25);
+}
+
+.dash-nav-item i {
+  width: 20px;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+.dash-sidebar__footer {
+  padding: 1.25rem;
+  border-top: 1px solid var(--dash-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dash-role-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--dash-border);
+  font-size: 0.8rem;
+}
+
+.dash-role-badge-pill span.role-tag {
+  color: var(--dash-gold);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dash-back-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.65rem;
+  background: transparent;
+  color: var(--dash-text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid var(--dash-border);
+  transition: all 0.2s ease;
+}
+
+.dash-back-link:hover {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #FFFFFF;
+}
+
+/* ─── MAIN CONTENT AREA ──────────────────────────────── */
+.dash-main {
+  margin-left: var(--dash-sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--dash-bg);
+}
+
+/* Header */
+.dash-header {
+  height: 75px;
+  padding: 0 2rem;
+  border-bottom: 1px solid var(--dash-border);
+  background: rgba(17, 25, 35, 0.75);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dash-header__welcome h1 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.dash-header__welcome p {
+  font-size: 0.82rem;
+  color: var(--dash-text-muted);
+}
+
+.dash-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Mode Switch Tabs */
+.dash-mode-switch {
+  display: flex;
+  background: var(--dash-card);
+  padding: 3px;
+  border-radius: 9999px;
+  border: 1px solid var(--dash-border);
+}
+
+.dash-mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--dash-text-muted);
+  font-family: var(--font-family);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dash-mode-btn.active {
+  background: var(--dash-gold);
+  color: #000000;
+  box-shadow: 0 2px 8px var(--dash-gold-glow);
+}
+
+.dash-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--dash-card);
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid var(--dash-border);
+}
+
+.dash-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--dash-gold), #DEB528);
+  color: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.dash-user-info span {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+/* ─── DASHBOARD CONTAINER & STATS GRID ────────────────── */
+.dash-container {
+  padding: 2rem;
+  max-width: 1400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* 4 Quick Stat Cards with Count Up Numbers */
+.dash-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.dash-stat-card {
+  background: var(--dash-card);
+  border: 1px solid var(--dash-border);
+  border-radius: 18px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.dash-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dash-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--dash-gold), transparent);
+}
+
+.dash-stat-card--blue::before {
+  background: linear-gradient(90deg, var(--dash-blue), transparent);
+}
+
+.dash-stat-card--emerald::before {
+  background: linear-gradient(90deg, var(--dash-emerald), transparent);
+}
+
+.dash-stat-card--purple::before {
+  background: linear-gradient(90deg, var(--dash-purple), transparent);
+}
+
+.dash-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.dash-stat-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--dash-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.dash-stat-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(244, 211, 94, 0.1);
+  color: var(--dash-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.dash-stat-card--blue .dash-stat-icon {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--dash-blue);
+}
+
+.dash-stat-card--emerald .dash-stat-icon {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--dash-emerald);
+}
+
+.dash-stat-card--purple .dash-stat-icon {
+  background: rgba(168, 85, 247, 0.1);
+  color: var(--dash-purple);
+}
+
+.dash-stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: baseline;
+}
+
+.dash-stat-trend {
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dash-stat-trend.up {
+  color: var(--dash-emerald);
+}
+
+.dash-stat-trend.down {
+  color: #EF4444;
+}
+
+/* ─── CHARTS SECTION (2-COL: LINE CHART & CIRCULAR RINGS) */
+.dash-charts-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 1.5rem;
+}
+
+.dash-chart-card {
+  background: var(--dash-card);
+  border: 1px solid var(--dash-border);
+  border-radius: 20px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.dash-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.dash-card-subtitle {
+  font-size: 0.8rem;
+  color: var(--dash-text-muted);
+  margin-top: 2px;
+}
+
+.dash-filter-pills {
+  display: flex;
+  gap: 6px;
+  background: var(--dash-surface);
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.dash-filter-btn {
+  background: transparent;
+  border: none;
+  color: var(--dash-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dash-filter-btn.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+/* ─── ANIMATED SVG LINE CHART ────────────────────────── */
+.dash-line-chart-wrap {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  margin-top: auto;
+}
+
+.dash-svg-line-chart {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chart-grid-line {
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-dasharray: 4, 4;
+}
+
+.chart-line-path {
+  fill: none;
+  stroke: var(--dash-gold);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.chart-area-path {
+  fill: url(#chartGoldGrad);
+  opacity: 0;
+  animation: fadeInArea 1s ease 1s forwards;
+}
+
+.chart-data-point {
+  fill: var(--dash-gold);
+  stroke: var(--dash-surface);
+  stroke-width: 3;
+  r: 5;
+  transition: r 0.2s ease, fill 0.2s ease;
+  cursor: pointer;
+}
+
+.chart-data-point:hover {
+  r: 8;
+  fill: #FFFFFF;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeInArea {
+  to {
+    opacity: 0.28;
+  }
+}
+
+.dash-chart-x-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0.5rem 0;
+  color: var(--dash-text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ─── CIRCULAR PROGRESS RINGS ────────────────────────── */
+.dash-rings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: auto;
+}
+
+.dash-ring-box {
+  background: var(--dash-surface);
+  border: 1px solid var(--dash-border);
+  border-radius: 14px;
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.dash-ring-svg-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 0.75rem;
+}
+
+.dash-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.dash-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 8;
+}
+
+.dash-ring-circle {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 251.2; /* 2 * PI * 40 */
+  stroke-dashoffset: 251.2;
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dash-ring-circle--gold { stroke: var(--dash-gold); filter: drop-shadow(0 0 6px var(--dash-gold-glow)); }
+.dash-ring-circle--emerald { stroke: var(--dash-emerald); filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.3)); }
+.dash-ring-circle--blue { stroke: var(--dash-blue); filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.3)); }
+.dash-ring-circle--purple { stroke: var(--dash-purple); filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.3)); }
+
+.dash-ring-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.dash-ring-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.dash-ring-desc {
+  font-size: 0.72rem;
+  color: var(--dash-text-muted);
+}
+
+/* ─── ANIMATED BAR CHART & RECENT POLICIES ────────────── */
+.dash-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 1.5rem;
+}
+
+/* Interactive Animated Bar Chart */
+.dash-bars-wrap {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  height: 200px;
+  padding: 1rem 0.5rem 0.5rem;
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.dash-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.dash-bar-fill {
+  width: 100%;
+  max-width: 28px;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(180deg, var(--dash-gold) 0%, rgba(244, 211, 94, 0.3) 100%);
+  height: 0%;
+  transition: height 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease, background 0.2s ease;
+  position: relative;
+}
+
+.dash-bar-col:hover .dash-bar-fill {
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--dash-gold) 100%);
+  transform: scaleY(1.04);
+}
+
+.dash-bar-val-tag {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.dash-bar-col:hover .dash-bar-val-tag {
+  opacity: 1;
+}
+
+.dash-bar-label {
+  margin-top: 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--dash-text-muted);
+}
+
+/* Recent Policies Table */
+.dash-table-card {
+  background: var(--dash-card);
+  border: 1px solid var(--dash-border);
+  border-radius: 20px;
+  padding: 1.75rem;
+}
+
+.dash-policy-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.dash-policy-table th {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--dash-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--dash-border);
+}
+
+.dash-policy-table td {
+  padding: 1rem;
+  font-size: 0.86rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.dash-policy-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.dash-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.dash-status-pill.active {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--dash-emerald);
+}
+
+.dash-status-pill.pending {
+  background: rgba(244, 211, 94, 0.12);
+  color: var(--dash-gold);
+}
+
+/* ─── RESPONSIVE BREAKPOINTS ─────────────────────────── */
+@media (max-width: 1200px) {
+  .dash-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dash-charts-grid {
+    grid-template-columns: 1fr;
+  }
+  .dash-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dash-sidebar {
+    transform: translateX(-100%);
+  }
+  .dash-main {
+    margin-left: 0;
+  }
+  .dash-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .dash-container {
+    padding: 1.25rem;
+  }
+  .dash-rings-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Stackly Commercial Insurance</title>
+  <meta name="description" content="Stackly Enterprise Insurance Dashboard. Real-time coverage analytics, claims velocity, underwriting monitors, and risk scores." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="dash-body">
+
+  <!-- ═══════════════════════════════════════════
+       SIDEBAR NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar__brand">
+      <a href="index.html" aria-label="Stackly Home">
+        <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="dash-sidebar__logo" />
+      </a>
+    </div>
+
+    <nav class="dash-sidebar__nav">
+      <a class="dash-nav-item active" data-tab="overview">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Overview</span>
+      </a>
+      <a class="dash-nav-item" data-tab="policies">
+        <i class="fa-solid fa-file-shield"></i>
+        <span>Active Policies</span>
+      </a>
+      <a class="dash-nav-item" data-tab="claims">
+        <i class="fa-solid fa-bolt-lightning"></i>
+        <span>Claims Center</span>
+      </a>
+      <a class="dash-nav-item" data-tab="analytics">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Risk Analytics</span>
+      </a>
+      <a class="dash-nav-item" data-tab="billing">
+        <i class="fa-solid fa-wallet"></i>
+        <span>Billing &amp; Premium</span>
+      </a>
+      <a class="dash-nav-item" data-tab="settings">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar__footer">
+      <div class="dash-role-badge-pill">
+        <span>Current Mode:</span>
+        <span class="role-tag" id="sidebarRoleLabel">USER</span>
+      </div>
+      <a href="index.html" class="dash-back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back to Website</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN DASHBOARD WORKSPACE
+  ═══════════════════════════════════════════ -->
+  <main class="dash-main">
+    
+    <!-- Top Dashboard Header -->
+    <header class="dash-header">
+      <div class="dash-header__welcome">
+        <h1 id="dashWelcomeHeading">Welcome back, Sarah</h1>
+        <p id="dashWelcomeSub">Here is your live commercial coverage performance overview.</p>
+      </div>
+
+      <div class="dash-header__actions">
+        <!-- Interactive Role Switcher: User vs Admin -->
+        <div class="dash-mode-switch" role="tablist">
+          <button type="button" class="dash-mode-btn active" id="modeUserBtn" data-role="user">User View</button>
+          <button type="button" class="dash-mode-btn" id="modeAdminBtn" data-role="admin">Admin View</button>
+        </div>
+
+        <div class="dash-user-profile">
+          <div class="dash-user-avatar" id="userAvatar">SJ</div>
+          <div class="dash-user-info">
+            <span id="userName">Sarah Jenkins</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dash-container">
+      
+      <!-- ─── 1. COUNT UP STATS CARDS ─── -->
+      <section class="dash-stats-grid" aria-label="Key Performance Metrics">
+        
+        <!-- Card 1 -->
+        <article class="dash-stat-card">
+          <div class="dash-stat-top">
+            <span class="dash-stat-label" id="statLabel1">Total Protected Value</span>
+            <div class="dash-stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          </div>
+          <div class="dash-stat-value">
+            <span>$</span><span class="count-up" id="statVal1" data-target="1420000" data-format="currency">0</span>
+          </div>
+          <div class="dash-stat-trend up">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+            <span>+14.8% vs previous term</span>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="dash-stat-card dash-stat-card--emerald">
+          <div class="dash-stat-top">
+            <span class="dash-stat-label" id="statLabel2">Claim Payout Velocity</span>
+            <div class="dash-stat-icon"><i class="fa-solid fa-bolt"></i></div>
+          </div>
+          <div class="dash-stat-value">
+            <span class="count-up" id="statVal2" data-target="99.8" data-decimals="1">0</span><span>%</span>
+          </div>
+          <div class="dash-stat-trend up">
+            <i class="fa-solid fa-clock"></i>
+            <span>48hr direct settlement guarantee</span>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="dash-stat-card dash-stat-card--blue">
+          <div class="dash-stat-top">
+            <span class="dash-stat-label" id="statLabel3">Active Policies</span>
+            <div class="dash-stat-icon"><i class="fa-solid fa-file-contract"></i></div>
+          </div>
+          <div class="dash-stat-value">
+            <span class="count-up" id="statVal3" data-target="18">0</span><span> policies</span>
+          </div>
+          <div class="dash-stat-trend up">
+            <i class="fa-solid fa-check"></i>
+            <span>100% compliant across 4 regions</span>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="dash-stat-card dash-stat-card--purple">
+          <div class="dash-stat-top">
+            <span class="dash-stat-label" id="statLabel4">Risk Audit Score</span>
+            <div class="dash-stat-icon"><i class="fa-solid fa-award"></i></div>
+          </div>
+          <div class="dash-stat-value">
+            <span class="count-up" id="statVal4" data-target="96" data-decimals="0">0</span><span> / 100</span>
+          </div>
+          <div class="dash-stat-trend up">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+            <span>Tier-1 safety premium discount</span>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ─── 2. CHARTS GRID (ANIMATED SVG LINE & CIRCULAR RINGS) ─── -->
+      <section class="dash-charts-grid">
+        
+        <!-- Left: Animated Multi-Point SVG Line Trend Chart -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title" id="lineChartTitle">Underwriting &amp; Premium Trajectory</h2>
+              <p class="dash-card-subtitle">Real-time risk curve and claim reserve allocation</p>
+            </div>
+            <div class="dash-filter-pills">
+              <button type="button" class="dash-filter-btn" data-period="1M">1M</button>
+              <button type="button" class="dash-filter-btn" data-period="6M">6M</button>
+              <button type="button" class="dash-filter-btn active" data-period="1Y">1Y</button>
+              <button type="button" class="dash-filter-btn" data-period="ALL">ALL</button>
+            </div>
+          </div>
+
+          <!-- Animated SVG Line Chart Canvas -->
+          <div class="dash-line-chart-wrap">
+            <svg class="dash-svg-line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="chartGoldGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#F4D35E" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="#F4D35E" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+
+              <!-- Grid Horizontal Lines -->
+              <line x1="0" y1="40" x2="600" y2="40" class="chart-grid-line" />
+              <line x1="0" y1="90" x2="600" y2="90" class="chart-grid-line" />
+              <line x1="0" y1="140" x2="600" y2="140" class="chart-grid-line" />
+
+              <!-- Fill Area Gradient -->
+              <path class="chart-area-path" id="chartAreaPath" d="M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35 L 580 190 L 20 190 Z"></path>
+
+              <!-- Main Animated Line Path -->
+              <path class="chart-line-path" id="chartLinePath" d="M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35"></path>
+
+              <!-- Data Coordinate Points -->
+              <circle cx="20" cy="160" class="chart-data-point" data-tip="Jan: $120k" />
+              <circle cx="150" cy="130" class="chart-data-point" data-tip="Mar: $185k" />
+              <circle cx="270" cy="85" class="chart-data-point" data-tip="Jun: $310k" />
+              <circle cx="390" cy="100" class="chart-data-point" data-tip="Sep: $290k" />
+              <circle cx="510" cy="45" class="chart-data-point" data-tip="Nov: $460k" />
+              <circle cx="580" cy="35" class="chart-data-point" data-tip="Dec: $520k" />
+            </svg>
+            <div class="dash-chart-x-labels">
+              <span>Jan</span>
+              <span>Mar</span>
+              <span>May</span>
+              <span>Jul</span>
+              <span>Sep</span>
+              <span>Nov</span>
+              <span>Dec</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Right: Circular Progress Rings (4 Gauges) -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Portfolio Health Rings</h2>
+              <p class="dash-card-subtitle">Real-time risk compliance gauges</p>
+            </div>
+          </div>
+
+          <div class="dash-rings-grid">
+            
+            <!-- Ring 1: Coverage Integrity -->
+            <div class="dash-ring-box">
+              <div class="dash-ring-svg-wrap">
+                <svg class="dash-ring-svg" viewBox="0 0 96 96">
+                  <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
+                  <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--gold" id="ringCircle1" data-percent="92" />
+                </svg>
+                <div class="dash-ring-value" id="ringVal1">0%</div>
+              </div>
+              <strong class="dash-ring-title">Coverage Health</strong>
+              <span class="dash-ring-desc">92% Optimal Scope</span>
+            </div>
+
+            <!-- Ring 2: Renewal Readiness -->
+            <div class="dash-ring-box">
+              <div class="dash-ring-svg-wrap">
+                <svg class="dash-ring-svg" viewBox="0 0 96 96">
+                  <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
+                  <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--emerald" id="ringCircle2" data-percent="88" />
+                </svg>
+                <div class="dash-ring-value" id="ringVal2">0%</div>
+              </div>
+              <strong class="dash-ring-title">Renewal Rate</strong>
+              <span class="dash-ring-desc">88% Auto-Approved</span>
+            </div>
+
+            <!-- Ring 3: Loss Prevention -->
+            <div class="dash-ring-box">
+              <div class="dash-ring-svg-wrap">
+                <svg class="dash-ring-svg" viewBox="0 0 96 96">
+                  <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
+                  <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--blue" id="ringCircle3" data-percent="95" />
+                </svg>
+                <div class="dash-ring-value" id="ringVal3">0%</div>
+              </div>
+              <strong class="dash-ring-title">Loss Prevention</strong>
+              <span class="dash-ring-desc">95% Zero Incident</span>
+            </div>
+
+            <!-- Ring 4: Audit Clearance -->
+            <div class="dash-ring-box">
+              <div class="dash-ring-svg-wrap">
+                <svg class="dash-ring-svg" viewBox="0 0 96 96">
+                  <circle cx="48" cy="48" r="40" class="dash-ring-bg" />
+                  <circle cx="48" cy="48" r="40" class="dash-ring-circle dash-ring-circle--purple" id="ringCircle4" data-percent="100" />
+                </svg>
+                <div class="dash-ring-value" id="ringVal4">0%</div>
+              </div>
+              <strong class="dash-ring-title">Stewardship</strong>
+              <span class="dash-ring-desc">100% In-House</span>
+            </div>
+
+          </div>
+        </article>
+
+      </section>
+
+      <!-- ─── 3. BOTTOM ROW (ANIMATED BAR CHART & RECENT POLICIES) ─── -->
+      <section class="dash-bottom-grid">
+        
+        <!-- Left: Interactive Animated Bar Chart -->
+        <article class="dash-chart-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Policy Distribution by Sector</h2>
+              <p class="dash-card-subtitle">Allocation across commercial lines</p>
+            </div>
+          </div>
+
+          <div class="dash-bars-wrap" id="dashBarsContainer">
+            <!-- Bar 1 -->
+            <div class="dash-bar-col" data-height="85%" data-val="$420k">
+              <div class="dash-bar-fill" style="height: 0%;">
+                <span class="dash-bar-val-tag">$420k</span>
+              </div>
+              <span class="dash-bar-label">General</span>
+            </div>
+            <!-- Bar 2 -->
+            <div class="dash-bar-col" data-height="65%" data-val="$310k">
+              <div class="dash-bar-fill" style="height: 0%;">
+                <span class="dash-bar-val-tag">$310k</span>
+              </div>
+              <span class="dash-bar-label">Cyber</span>
+            </div>
+            <!-- Bar 3 -->
+            <div class="dash-bar-col" data-height="95%" data-val="$520k">
+              <div class="dash-bar-fill" style="height: 0%;">
+                <span class="dash-bar-val-tag">$520k</span>
+              </div>
+              <span class="dash-bar-label">Property</span>
+            </div>
+            <!-- Bar 4 -->
+            <div class="dash-bar-col" data-height="45%" data-val="$180k">
+              <div class="dash-bar-fill" style="height: 0%;">
+                <span class="dash-bar-val-tag">$180k</span>
+              </div>
+              <span class="dash-bar-label">Workers</span>
+            </div>
+            <!-- Bar 5 -->
+            <div class="dash-bar-col" data-height="75%" data-val="$360k">
+              <div class="dash-bar-fill" style="height: 0%;">
+                <span class="dash-bar-val-tag">$360k</span>
+              </div>
+              <span class="dash-bar-label">Freight</span>
+            </div>
+            <!-- Bar 6 -->
+            <div class="dash-bar-col" data-height="90%" data-val="$480k">
+              <div class="dash-bar-fill" style="height: 0%;">
+                <span class="dash-bar-val-tag">$480k</span>
+              </div>
+              <span class="dash-bar-label">Health</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Right: Recent Active Policies Table -->
+        <article class="dash-table-card">
+          <div class="dash-card-head">
+            <div>
+              <h2 class="dash-card-title">Recent Commercial Policies</h2>
+              <p class="dash-card-subtitle">Active insured contracts and renewal dates</p>
+            </div>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="dash-policy-table">
+              <thead>
+                <tr>
+                  <th>Policy Name</th>
+                  <th>Coverage Limit</th>
+                  <th>Renewal</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="dashPolicyTbody">
+                <tr>
+                  <td><strong>Commercial General Liability</strong><br><small style="color:var(--dash-text-muted);">#POL-88219-GL</small></td>
+                  <td>$2,000,000</td>
+                  <td>Oct 15, 2026</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Enterprise Cyber Defense &amp; Extortion</strong><br><small style="color:var(--dash-text-muted);">#POL-94112-CY</small></td>
+                  <td>$5,000,000</td>
+                  <td>Nov 01, 2026</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Commercial Property &amp; Business Interruption</strong><br><small style="color:var(--dash-text-muted);">#POL-31049-CP</small></td>
+                  <td>$3,500,000</td>
+                  <td>Dec 22, 2026</td>
+                  <td><span class="dash-status-pill pending"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Review</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Workers' Compensation Statutory</strong><br><small style="color:var(--dash-text-muted);">#POL-55201-WC</small></td>
+                  <td>$1,000,000</td>
+                  <td>Jan 10, 2027</td>
+                  <td><span class="dash-status-pill active"><i class="fa-solid fa-circle" style="font-size: 6px;"></i> Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Scripts: GSAP for high-end Count-ups, Bar animations, and Ring gauges -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    // ═══ 1. COUNT UP NUMERICAL ANIMATIONS ═══
+    function animateCounters() {
+      const counters = document.querySelectorAll('.count-up');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target')) || 0;
+        const decimals = parseInt(counter.getAttribute('data-decimals')) || 0;
+        const isCurrency = counter.getAttribute('data-format') === 'currency';
+
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 1.8,
+          ease: 'power2.out',
+          onUpdate: () => {
+            if (isCurrency) {
+              counter.textContent = Math.round(obj.val).toLocaleString('en-US');
+            } else {
+              counter.textContent = obj.val.toFixed(decimals);
+            }
+          }
+        });
+      });
+    }
+
+    // ═══ 2. CIRCULAR PROGRESS RING ANIMATIONS ═══
+    function animateProgressRings() {
+      const rings = [
+        { id: 'ringCircle1', valId: 'ringVal1', percent: 92 },
+        { id: 'ringCircle2', valId: 'ringVal2', percent: 88 },
+        { id: 'ringCircle3', valId: 'ringVal3', percent: 95 },
+        { id: 'ringCircle4', valId: 'ringVal4', percent: 100 }
+      ];
+
+      const circumference = 2 * Math.PI * 40; // 251.32
+
+      rings.forEach(ring => {
+        const circle = document.getElementById(ring.id);
+        const valEl = document.getElementById(ring.valId);
+        if (!circle || !valEl) return;
+
+        const offset = circumference - (ring.percent / 100) * circumference;
+        circle.style.strokeDashoffset = offset;
+
+        const obj = { p: 0 };
+        gsap.to(obj, {
+          p: ring.percent,
+          duration: 1.8,
+          ease: 'power2.out',
+          onUpdate: () => {
+            valEl.textContent = Math.round(obj.p) + '%';
+          }
+        });
+      });
+    }
+
+    // ═══ 3. ANIMATED BAR CHART HEIGHTS ═══
+    function animateBarChart() {
+      const barCols = document.querySelectorAll('.dash-bar-col');
+      barCols.forEach((col, i) => {
+        const fill = col.querySelector('.dash-bar-fill');
+        const targetH = col.getAttribute('data-height') || '50%';
+        if (fill) {
+          setTimeout(() => {
+            fill.style.height = targetH;
+          }, i * 120 + 200);
+        }
+      });
+    }
+
+    // ═══ 4. DYNAMIC LINE CHART PERIOD SWITCHER ═══
+    const periodButtons = document.querySelectorAll('.dash-filter-btn');
+    const chartLinePath = document.getElementById('chartLinePath');
+    const chartAreaPath = document.getElementById('chartAreaPath');
+
+    const chartCurves = {
+      '1M': {
+        line: 'M 20 140 Q 100 110 180 150 T 320 70 T 450 90 T 580 40',
+        area: 'M 20 140 Q 100 110 180 150 T 320 70 T 450 90 T 580 40 L 580 190 L 20 190 Z'
+      },
+      '6M': {
+        line: 'M 20 170 Q 120 140 220 100 T 380 110 T 500 60 L 580 30',
+        area: 'M 20 170 Q 120 140 220 100 T 380 110 T 500 60 L 580 30 L 580 190 L 20 190 Z'
+      },
+      '1Y': {
+        line: 'M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35',
+        area: 'M 20 160 Q 90 120 150 130 T 270 85 T 390 100 T 510 45 L 580 35 L 580 190 L 20 190 Z'
+      },
+      'ALL': {
+        line: 'M 20 180 Q 80 160 160 130 T 300 90 T 420 70 T 580 20',
+        area: 'M 20 180 Q 80 160 160 130 T 300 90 T 420 70 T 580 20 L 580 190 L 20 190 Z'
+      }
+    };
+
+    periodButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        periodButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const period = btn.getAttribute('data-period');
+        if (chartCurves[period] && chartLinePath && chartAreaPath) {
+          chartLinePath.style.animation = 'none';
+          chartAreaPath.style.animation = 'none';
+          chartLinePath.setAttribute('d', chartCurves[period].line);
+          chartAreaPath.setAttribute('d', chartCurves[period].area);
+          void chartLinePath.offsetWidth; // Trigger reflow
+          chartLinePath.style.animation = 'drawLine 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+          chartAreaPath.style.animation = 'fadeInArea 0.8s ease 0.6s forwards';
+        }
+      });
+    });
+
+    // ═══ 5. ROLE SWITCHER (USER VS ADMIN VIEW) ═══
+    const modeUserBtn = document.getElementById('modeUserBtn');
+    const modeAdminBtn = document.getElementById('modeAdminBtn');
+    const sidebarRoleLabel = document.getElementById('sidebarRoleLabel');
+    const dashWelcomeHeading = document.getElementById('dashWelcomeHeading');
+    const dashWelcomeSub = document.getElementById('dashWelcomeSub');
+    const userAvatar = document.getElementById('userAvatar');
+    const userName = document.getElementById('userName');
+
+    function applyRole(role) {
+      if (role === 'admin') {
+        modeAdminBtn.classList.add('active');
+        modeUserBtn.classList.remove('active');
+        sidebarRoleLabel.textContent = 'ADMIN';
+        sidebarRoleLabel.style.color = '#38BDF8';
+        dashWelcomeHeading.textContent = 'Admin Command Portal';
+        dashWelcomeSub.textContent = 'Underwriting queue, regional portfolio metrics & claim approvals.';
+        userAvatar.textContent = 'AD';
+        userAvatar.style.background = 'linear-gradient(135deg, #38BDF8, #0284C7)';
+        userName.textContent = 'Admin Supervisor';
+      } else {
+        modeUserBtn.classList.add('active');
+        modeAdminBtn.classList.remove('active');
+        sidebarRoleLabel.textContent = 'USER';
+        sidebarRoleLabel.style.color = 'var(--dash-gold)';
+        dashWelcomeHeading.textContent = 'Welcome back, Sarah';
+        dashWelcomeSub.textContent = 'Here is your live commercial coverage performance overview.';
+        userAvatar.textContent = 'SJ';
+        userAvatar.style.background = 'linear-gradient(135deg, var(--dash-gold), #DEB528)';
+        userName.textContent = 'Sarah Jenkins';
+      }
+    }
+
+    modeUserBtn.addEventListener('click', () => applyRole('user'));
+    modeAdminBtn.addEventListener('click', () => applyRole('admin'));
+
+    // Check URL query parameters for initial role (?role=admin or ?role=user)
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialRole = urlParams.get('role');
+    if (initialRole === 'admin') {
+      applyRole('admin');
+    } else {
+      applyRole('user');
+    }
+
+    // ═══ INITIALIZE ON LOAD ═══
+    window.addEventListener('DOMContentLoaded', () => {
+      animateCounters();
+      animateProgressRings();
+      animateBarChart();
+    });
+  </script>
+</body>
+</html>

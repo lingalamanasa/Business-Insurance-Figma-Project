@@ -225,9 +225,9 @@
       setTimeout(() => {
         showAlert(`Welcome back! Authenticated as ${role.toUpperCase()}. Redirecting to dashboard...`, true);
         setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 1200);
-      }, 800);
+          window.location.href = `dashboard.html?role=${encodeURIComponent(role)}`;
+        }, 1100);
+      }, 700);
     });
 
     // Forgot Password
