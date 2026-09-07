@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up — Stackly Commercial Insurance</title>
+  <meta name="description" content="Create your Stackly account or book a commercial insurance consultation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body class="auth-body">
+
+  <!-- Organic Background Shapes -->
+  <div class="auth-bg-shapes" aria-hidden="true">
+    <div class="auth-bg-shape auth-bg-shape--1"></div>
+    <div class="auth-bg-shape auth-bg-shape--2"></div>
+    <div class="auth-bg-shape auth-bg-shape--3"></div>
+    <div class="auth-bg-curve-left"></div>
+    <div class="auth-bg-curve-right"></div>
+  </div>
+
+  <!-- Top Header Bar: Logo & Back to Home (No Navbar/Footer) -->
+  <header class="auth-top-bar">
+    <a href="index.html" class="auth-brand" aria-label="Stackly Home">
+      <img src="assets/stackly-logo-black.webp" alt="STACKLY" class="auth-brand__logo" />
+    </a>
+    <a href="index.html" class="auth-back-btn" id="backToHomeBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Back to Home</span>
+    </a>
+  </header>
+
+  <!-- Main Sign Up Card -->
+  <main class="auth-main">
+    <div class="auth-card">
+      
+      <!-- Role Selector: User vs Admin -->
+      <div class="auth-role-switch-wrap" role="tablist" aria-label="Account Role">
+        <button type="button" class="auth-role-btn active" id="roleUserBtn" role="tab" aria-selected="true" data-role="user">
+          <i class="fa-solid fa-user"></i>
+          <span>User Portal</span>
+        </button>
+        <button type="button" class="auth-role-btn" id="roleAdminBtn" role="tab" aria-selected="false" data-role="admin">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Admin Portal</span>
+          <span class="auth-role-badge">Admin</span>
+        </button>
+      </div>
+
+      <h1 class="auth-title" id="signupTitle">Sign Up</h1>
+      <p class="auth-subtitle" id="signupSubtitle">book a consultation</p>
+
+      <!-- Alert Notification -->
+      <div class="auth-alert" id="authAlert" role="alert"></div>
+
+      <!-- Sign Up Form -->
+      <form class="auth-form" id="signupForm" novalidate>
+        <input type="hidden" id="selectedRole" name="role" value="user" />
+
+        <!-- Name Field -->
+        <div class="auth-field">
+          <input
+            type="text"
+            class="auth-input"
+            id="signupName"
+            name="name"
+            placeholder="Name"
+            required
+            autocomplete="name"
+            aria-label="Full Name"
+          />
+          <div class="auth-field-line"></div>
+        </div>
+
+        <!-- Email Field -->
+        <div class="auth-field">
+          <input
+            type="email"
+            class="auth-input"
+            id="signupEmail"
+            name="email"
+            placeholder="Email Address"
+            required
+            autocomplete="email"
+            aria-label="Email Address"
+          />
+          <div class="auth-field-line"></div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="auth-field">
+          <input
+            type="password"
+            class="auth-input"
+            id="signupPassword"
+            name="password"
+            placeholder="Password"
+            required
+            autocomplete="new-password"
+            aria-label="Password"
+          />
+          <div class="auth-field-line"></div>
+          <button type="button" class="auth-password-toggle" id="togglePasswordBtn1" aria-label="Show password">
+            <i class="fa-regular fa-eye" id="togglePasswordIcon1"></i>
+          </button>
+        </div>
+
+        <!-- Reenter Password Field -->
+        <div class="auth-field">
+          <input
+            type="password"
+            class="auth-input"
+            id="signupConfirmPassword"
+            name="confirm_password"
+            placeholder="Reenter Password"
+            required
+            autocomplete="new-password"
+            aria-label="Reenter Password"
+          />
+          <div class="auth-field-line"></div>
+          <button type="button" class="auth-password-toggle" id="togglePasswordBtn2" aria-label="Show confirm password">
+            <i class="fa-regular fa-eye" id="togglePasswordIcon2"></i>
+          </button>
+        </div>
+
+        <!-- Meta Row: Or continue with -->
+        <div class="auth-meta-row" style="margin-bottom: 1.25rem;">
+          <span class="auth-continue-text">Or continue with</span>
+        </div>
+
+        <!-- Google Social Sign Up Button -->
+        <button type="button" class="auth-social-btn" id="googleSignupBtn">
+          <svg class="auth-google-icon" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Google</span>
+        </button>
+
+        <!-- Primary CTA Submit Button -->
+        <button type="submit" class="auth-submit-btn" id="signupSubmitBtn">
+          <span>Get My Quote</span>
+        </button>
+
+        <!-- Switch to Login -->
+        <div class="auth-switch">
+          <a href="login.html" class="auth-switch-link" id="goToLoginLink">Login</a>
+        </div>
+      </form>
+
+    </div>
+  </main>
+
+  <script>
+    // ═══ ROLE TOGGLE (USER / ADMIN) ═══
+    const roleUserBtn = document.getElementById('roleUserBtn');
+    const roleAdminBtn = document.getElementById('roleAdminBtn');
+    const selectedRoleInput = document.getElementById('selectedRole');
+    const signupSubtitle = document.getElementById('signupSubtitle');
+    const signupSubmitBtn = document.getElementById('signupSubmitBtn');
+
+    function setRole(role) {
+      if (role === 'admin') {
+        roleAdminBtn.classList.add('active');
+        roleAdminBtn.setAttribute('aria-selected', 'true');
+        roleUserBtn.classList.remove('active');
+        roleUserBtn.setAttribute('aria-selected', 'false');
+        selectedRoleInput.value = 'admin';
+        signupSubtitle.textContent = 'register new administrative authority';
+        signupSubmitBtn.querySelector('span').textContent = 'Request Admin Account';
+      } else {
+        roleUserBtn.classList.add('active');
+        roleUserBtn.setAttribute('aria-selected', 'true');
+        roleAdminBtn.classList.remove('active');
+        roleAdminBtn.setAttribute('aria-selected', 'false');
+        selectedRoleInput.value = 'user';
+        signupSubtitle.textContent = 'book a consultation';
+        signupSubmitBtn.querySelector('span').textContent = 'Get My Quote';
+      }
+    }
+
+    roleUserBtn.addEventListener('click', () => setRole('user'));
+    roleAdminBtn.addEventListener('click', () => setRole('admin'));
+
+    // ═══ PASSWORD SHOW / HIDE TOGGLES ═══
+    const togglePasswordBtn1 = document.getElementById('togglePasswordBtn1');
+    const signupPassword = document.getElementById('signupPassword');
+    const togglePasswordIcon1 = document.getElementById('togglePasswordIcon1');
+
+    togglePasswordBtn1.addEventListener('click', () => {
+      const isPassword = signupPassword.type === 'password';
+      signupPassword.type = isPassword ? 'text' : 'password';
+      togglePasswordIcon1.className = isPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+    });
+
+    const togglePasswordBtn2 = document.getElementById('togglePasswordBtn2');
+    const signupConfirmPassword = document.getElementById('signupConfirmPassword');
+    const togglePasswordIcon2 = document.getElementById('togglePasswordIcon2');
+
+    togglePasswordBtn2.addEventListener('click', () => {
+      const isPassword = signupConfirmPassword.type === 'password';
+      signupConfirmPassword.type = isPassword ? 'text' : 'password';
+      togglePasswordIcon2.className = isPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+    });
+
+    // ═══ FORM SUBMISSION & VALIDATION ═══
+    const signupForm = document.getElementById('signupForm');
+    const authAlert = document.getElementById('authAlert');
+    const signupName = document.getElementById('signupName');
+    const signupEmail = document.getElementById('signupEmail');
+
+    function showAlert(msg, isSuccess = false) {
+      authAlert.textContent = msg;
+      authAlert.className = `auth-alert show ${isSuccess ? 'auth-alert--success' : 'auth-alert--error'}`;
+      setTimeout(() => {
+        authAlert.classList.remove('show');
+      }, 4500);
+    }
+
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = signupName.value.trim();
+      const email = signupEmail.value.trim();
+      const pass1 = signupPassword.value.trim();
+      const pass2 = signupConfirmPassword.value.trim();
+      const role = selectedRoleInput.value;
+
+      if (!name) {
+        showAlert('Please enter your full name.');
+        signupName.focus();
+        return;
+      }
+      if (!email) {
+        showAlert('Please enter your email address.');
+        signupEmail.focus();
+        return;
+      }
+      if (!pass1) {
+        showAlert('Please enter a password.');
+        signupPassword.focus();
+        return;
+      }
+      if (pass1.length < 6) {
+        showAlert('Password must be at least 6 characters long.');
+        signupPassword.focus();
+        return;
+      }
+      if (pass1 !== pass2) {
+        showAlert('Passwords do not match. Please re-enter your password.');
+        signupConfirmPassword.focus();
+        return;
+      }
+
+      signupSubmitBtn.disabled = true;
+      signupSubmitBtn.querySelector('span').textContent = 'Creating Account...';
+
+      setTimeout(() => {
+        showAlert(`Congratulations ${name}! Your ${role.toUpperCase()} account has been created. Redirecting to login...`, true);
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1500);
+      }, 1000);
+    });
+
+    // Google Social Auth
+    document.getElementById('googleSignupBtn').addEventListener('click', () => {
+      showAlert('Connecting to Google Single Sign-On...', true);
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1400);
+    });
+  </script>
+</body>
+</html>
