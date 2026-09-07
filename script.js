@@ -334,7 +334,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
       validate: (v) => {
         if (!v.trim()) return 'Please enter your work email.';
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(v) ? null : 'Please enter a valid email address.';
+        return re.test(v.trim()) ? null : 'Please enter a valid email address.';
       }
     }
   ];
@@ -343,23 +343,23 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   const validateField = ({ id, errorId, validate }) => {
     const input = $(`#${id}`);
     const errorEl = $(`#${errorId}`);
-    if (!input || !errorEl) return true;
+    if (!input) return true;
 
     const error = validate(input.value);
     if (error) {
       input.classList.add('error');
-      errorEl.textContent = error;
+      if (errorEl) errorEl.textContent = error;
       input.setAttribute('aria-invalid', 'true');
       return false;
     } else {
       input.classList.remove('error');
-      errorEl.textContent = '';
+      if (errorEl) errorEl.textContent = '';
       input.removeAttribute('aria-invalid');
       return true;
     }
   };
 
-  // Live validation on blur
+  // Live validation on blur & input
   fields.forEach(field => {
     const input = $(`#${field.id}`);
     if (!input) return;
@@ -373,6 +373,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
   // Form submit
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const allValid = fields.every(f => validateField(f));
     if (!allValid) {
@@ -382,43 +383,251 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
       return;
     }
 
-    // Show loading state
-    submitBtn.classList.add('loading');
-    submitBtn.disabled = true;
+    // Show loading state on button
+    if (submitBtn) {
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+    }
+
+    // Trigger gravity particles if available
+    if (typeof triggerGravityParticles === 'function' && submitBtn) {
+      try { triggerGravityParticles(submitBtn); } catch (e) {}
+    }
 
     try {
-      // Simulate API call (1.5s)
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Simulate API call (750ms)
+      await new Promise(resolve => setTimeout(resolve, 750));
 
-      // Show success
-      form.querySelector('.form-group') && (() => {
-        // Hide form fields (smooth)
-        $$('.form-group', form).forEach(fg => {
-          fg.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-          fg.style.opacity = '0';
-          fg.style.transform = 'translateY(-10px)';
-          setTimeout(() => { fg.style.display = 'none'; }, 400);
-        });
-        submitBtn.style.transition = 'opacity 0.4s ease';
-        submitBtn.style.opacity = '0';
-        setTimeout(() => { submitBtn.style.display = 'none'; }, 400);
-      })();
+      // Reset form input values and clear error classes
+      form.reset();
+      fields.forEach(f => {
+        const inp = $(`#${f.id}`);
+        const err = $(`#${f.errorId}`);
+        if (inp) {
+          inp.classList.remove('error');
+          inp.removeAttribute('aria-invalid');
+        }
+        if (err) err.textContent = '';
+      });
 
-      setTimeout(() => {
+      // Show success message with smooth animation
+      if (successMsg) {
         successMsg.removeAttribute('hidden');
+        successMsg.style.display = 'flex';
         successMsg.style.opacity = '0';
-        successMsg.style.transform = 'translateY(10px)';
+        successMsg.style.transform = 'translateY(10px) scale(0.98)';
+        
         requestAnimationFrame(() => {
-          successMsg.style.transition = 'all 0.5s ease';
+          successMsg.style.transition = 'opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
           successMsg.style.opacity = '1';
-          successMsg.style.transform = 'translateY(0)';
+          successMsg.style.transform = 'translateY(0) scale(1)';
         });
-      }, 500);
+      }
+
+      // Re-enable submit button
+      if (submitBtn) {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }
 
     } catch (err) {
-      submitBtn.classList.remove('loading');
-      submitBtn.disabled = false;
+      if (submitBtn) {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }
       console.error('Form submission error:', err);
+    }
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   7B. FOOTER NEWSLETTER FORMS — UNIVERSAL VALIDATION & SUBMISSION
+   ══════════════════════════════════════════════════════ */
+(function initNewsletterForms() {
+  const forms = $$('.footer__newsletter-form');
+  if (!forms.length) return;
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  forms.forEach(form => {
+    // Remove inline onsubmit
+    form.removeAttribute('onsubmit');
+
+    const input = $('.footer__newsletter-input', form);
+    const submitBtn = $('.footer__newsletter-btn', form);
+
+    // Ensure feedback element exists
+    let feedback = $('.footer__newsletter-feedback', form);
+    if (!feedback) {
+      feedback = document.createElement('span');
+      feedback.className = 'footer__newsletter-feedback';
+      feedback.setAttribute('role', 'status');
+      feedback.setAttribute('aria-live', 'polite');
+      form.appendChild(feedback);
+    }
+
+    const showFeedback = (msg, isSuccess = false) => {
+      feedback.textContent = msg;
+      feedback.className = `footer__newsletter-feedback visible ${isSuccess ? 'is-success' : 'is-error'}`;
+    };
+
+    const clearFeedback = () => {
+      feedback.textContent = '';
+      feedback.className = 'footer__newsletter-feedback';
+    };
+
+    if (input) {
+      input.addEventListener('input', () => {
+        if (feedback.classList.contains('is-error')) {
+          clearFeedback();
+        }
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (!input) return;
+      const email = input.value.trim();
+
+      if (!email || !emailRegex.test(email)) {
+        showFeedback('Please enter a valid email address.', false);
+        input.focus();
+        return;
+      }
+
+      // Valid email: show success state without page reload
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+      }
+
+      showFeedback("You're subscribed successfully!", true);
+      input.value = '';
+
+      setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '';
+        }
+      }, 1500);
+    });
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   7C. CONTACT PAGE FORM — VALIDATION & SUBMISSION
+   ══════════════════════════════════════════════════════ */
+(function initContactForm() {
+  const form = $('#contact-form');
+  if (!form) return;
+
+  const submitBtn = $('#contact-submit-btn');
+  const toast = $('#contact-toast');
+
+  const fields = [
+    {
+      id: 'contact-name',
+      validate: (v) => v.trim().length >= 2 ? null : 'Please enter your full name.'
+    },
+    {
+      id: 'contact-business',
+      validate: (v) => v.trim().length >= 2 ? null : 'Please enter your business name.'
+    },
+    {
+      id: 'contact-email',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter your email address.';
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(v.trim()) ? null : 'Please enter a valid email address.';
+      }
+    },
+    {
+      id: 'contact-phone',
+      validate: (v) => v.trim().length >= 6 ? null : 'Please enter your work phone number.'
+    }
+  ];
+
+  const validateField = ({ id, validate }) => {
+    const input = $(`#${id}`);
+    if (!input) return true;
+    const err = validate(input.value);
+    if (err) {
+      input.classList.add('error');
+      input.setAttribute('aria-invalid', 'true');
+      return false;
+    } else {
+      input.classList.remove('error');
+      input.removeAttribute('aria-invalid');
+      return true;
+    }
+  };
+
+  fields.forEach(f => {
+    const input = $(`#${f.id}`);
+    if (!input) return;
+    input.addEventListener('blur', () => validateField(f));
+    input.addEventListener('input', () => {
+      if (input.classList.contains('error')) validateField(f);
+    });
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const allValid = fields.every(f => validateField(f));
+    if (!allValid) {
+      const firstInvalid = form.querySelector('[aria-invalid="true"]');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting Request...';
+    }
+
+    if (typeof triggerGravityParticles === 'function' && submitBtn) {
+      try { triggerGravityParticles(submitBtn); } catch (err) {}
+    }
+
+    await new Promise(r => setTimeout(r, 700));
+
+    form.reset();
+    fields.forEach(f => {
+      const inp = $(`#${f.id}`);
+      if (inp) inp.classList.remove('error');
+    });
+
+    if (toast) {
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 5000);
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Get My Quote';
+    }
+  });
+})();
+
+/* ══════════════════════════════════════════════════════
+   7D. BLOG SEARCH FORM
+   ══════════════════════════════════════════════════════ */
+(function initBlogSearch() {
+  const form = $('#blog-search-form');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const input = $('#blog-search-input', form);
+    if (input && !input.value.trim()) {
+      input.focus();
     }
   });
 })();

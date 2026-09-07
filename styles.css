@@ -1681,19 +1681,46 @@ body.menu-open {
   align-items: flex-start;
   gap: 0.75rem;
   margin-top: 1.25rem;
-  padding: 1rem;
-  background: rgba(0,0,0,0.06);
-  border-radius: 8px;
-  font-size: 0.9rem;
-  color: #111;
+  padding: 1rem 1.25rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 10px;
+  font-size: 0.92rem;
+  color: #111827;
   line-height: 1.5;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 .quote-form__success i {
-  font-size: 1.25rem;
-  color: #1a7f3f;
+  font-size: 1.35rem;
+  color: #10B981;
   flex-shrink: 0;
+  margin-top: 2px;
 }
-.quote-form__success[hidden] { display: none; }
+.quote-form__success[hidden] { display: none !important; }
+
+/* Newsletter Feedback */
+.footer__newsletter-feedback {
+  display: block;
+  font-size: 0.84rem;
+  margin-top: 0.6rem;
+  min-height: 1.2em;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  line-height: 1.4;
+  padding-left: 0.25rem;
+}
+.footer__newsletter-feedback.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.footer__newsletter-feedback.is-error {
+  color: #F87171;
+}
+.footer__newsletter-feedback.is-success {
+  color: #4ADE80;
+  font-weight: 600;
+}
 
 /* ══════════════════════════════════════════════════════
    MASTER FOOTER (OUTDOOR / DARK FOREST LUXURY DESIGN)
