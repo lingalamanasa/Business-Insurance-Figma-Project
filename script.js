@@ -26,24 +26,39 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 })();
 
 /* ══════════════════════════════════════════════════════
-   2. MOBILE NAVIGATION
+   2. MOBILE NAVIGATION (Spring-Board Physics & Focus Trap)
    ══════════════════════════════════════════════════════ */
 (function initMobileNav() {
   const hamburger = $('#hamburger-btn');
   const mobileMenu = $('#mobile-menu');
   const mobileOverlay = $('#mobile-overlay');
   const mobileClose = $('#mobile-close-btn');
-  const mobileLinks = $$('.nav__mobile-link, .nav__mobile-actions a');
+  const mobileLinks = $$('.nav__mobile-link, .nav__mobile-actions a, .nav__mobile-links a');
 
   if (!hamburger || !mobileMenu) return;
+
+  // Stagger indices for items
+  const menuItems = $$('.nav__mobile-links > li, .nav__mobile-actions');
+  menuItems.forEach((item, idx) => {
+    if (!item.style.getPropertyValue('--item-idx')) {
+      item.style.setProperty('--item-idx', idx);
+    }
+  });
 
   const openMenu = () => {
     hamburger.classList.add('open');
     hamburger.setAttribute('aria-expanded', 'true');
     mobileMenu.classList.add('open');
     mobileMenu.removeAttribute('aria-hidden');
-    mobileOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    if (mobileOverlay) mobileOverlay.classList.add('active');
+    document.body.classList.add('menu-open');
+    document.documentElement.classList.add('menu-open');
+
+    // Focus first link or close button
+    setTimeout(() => {
+      const firstFocusable = mobileMenu.querySelector('a, button');
+      if (firstFocusable) firstFocusable.focus();
+    }, 150);
   };
 
   const closeMenu = () => {
@@ -51,8 +66,9 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     hamburger.setAttribute('aria-expanded', 'false');
     mobileMenu.classList.remove('open');
     mobileMenu.setAttribute('aria-hidden', 'true');
-    mobileOverlay.classList.remove('active');
-    document.body.style.overflow = '';
+    if (mobileOverlay) mobileOverlay.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    document.documentElement.classList.remove('menu-open');
   };
 
   hamburger.addEventListener('click', () => {
@@ -60,8 +76,12 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     isOpen ? closeMenu() : openMenu();
   });
 
-  if (mobileClose) mobileClose.addEventListener('click', closeMenu);
-  mobileOverlay.addEventListener('click', closeMenu);
+  if (mobileClose) mobileClose.addEventListener('click', () => {
+    closeMenu();
+    hamburger.focus();
+  });
+
+  if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
 
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
@@ -69,19 +89,42 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     });
   });
 
-  // Escape key to close
+  // Escape key to close & Trap Tab key inside menu
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+    if (!mobileMenu.classList.contains('open')) return;
+
+    if (e.key === 'Escape') {
       closeMenu();
       hamburger.focus();
+    } else if (e.key === 'Tab') {
+      const focusables = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', mobileMenu);
+      if (!focusables.length) return;
+      const firstEl = focusables[0];
+      const lastEl = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstEl) {
+        lastEl.focus();
+        e.preventDefault();
+      } else if (!e.shiftKey && document.activeElement === lastEl) {
+        firstEl.focus();
+        e.preventDefault();
+      }
     }
   });
+
+  // Auto-close on resize if viewport expands beyond mobile breakpoint (1024px)
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024 && mobileMenu.classList.contains('open')) {
+      closeMenu();
+    }
+  }, { passive: true });
 })();
 
 /* ══════════════════════════════════════════════════════
-   3. SCROLL-TRIGGERED ANIMATIONS (Intersection Observer)
+   3. TASTEFUL WOBBLE CARDS & SCROLL REVEALS
    ══════════════════════════════════════════════════════ */
-(function initScrollAnimations() {
+(function initWobbleAndScroll() {
+  // 1. Standard Scroll Animations
   const animatedEls = $$([
     '.animate-fade-up',
     '.animate-fade-left',
@@ -90,21 +133,69 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
     '.animate-on-scroll'
   ].join(','));
 
-  if (!animatedEls.length) return;
+  if (animatedEls.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
+    );
+    animatedEls.forEach(el => observer.observe(el));
+  }
 
-  const observer = new IntersectionObserver(
+  // 2. Tasteful Wobble Cards Entrance
+  const cardSelectors = [
+    '.wobble-card',
+    '[data-wobble]',
+    '.policy__item',
+    '.workflow__step',
+    '.industry__card',
+    '.diff__card',
+    '.guarantee-card',
+    '.about-rule-card',
+    '.srv-claim-card',
+    '.blog-card',
+    '.about-team-card',
+    '.about-val-card',
+    '.policy-card'
+  ].join(',');
+
+  const cards = $$(cardSelectors);
+  if (!cards.length) return;
+
+  // Stagger siblings in their grid containers
+  const parents = new Set(cards.map(c => c.parentElement).filter(Boolean));
+  parents.forEach(parent => {
+    const siblings = $$(':scope > ' + cardSelectors.split(',').join(', :scope > '), parent);
+    siblings.forEach((card, idx) => {
+      if (!card.style.getPropertyValue('--wobble-delay')) {
+        card.style.setProperty('--wobble-delay', idx % 4);
+      }
+      card.classList.add('wobble-card');
+    });
+  });
+
+  const wobbleObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          entry.target.classList.add('wobble-revealed');
+          wobbleObserver.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.08, rootMargin: '0px 0px -20px 0px' }
   );
 
-  animatedEls.forEach(el => observer.observe(el));
+  cards.forEach(card => {
+    card.classList.add('wobble-card');
+    wobbleObserver.observe(card);
+  });
 })();
 
 /* ══════════════════════════════════════════════════════
