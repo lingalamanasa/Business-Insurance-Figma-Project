@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login — Stackly Commercial Insurance</title>
-  <meta name="description" content="Log in to your Stackly commercial insurance account. Access policyholder claims, coverage analytics, and admin underwriting portal." />
+  <meta name="description" content="Login to your Stackly commercial insurance account. Access policyholder claims, coverage analytics, and admin underwriting portal." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -71,7 +71,7 @@
     <div class="auth-split-form-wrap">
       <div class="auth-form-header">
         <h1 class="auth-form-title" id="formTitle">Welcome Back</h1>
-        <p class="auth-form-subtitle" id="formSubtitle">Log in to access your dashboard.</p>
+        <p class="auth-form-subtitle" id="formSubtitle">Login to access your dashboard.</p>
       </div>
 
       <!-- Alert Notification -->
@@ -311,7 +311,7 @@
         roleUserBtn.classList.remove('active');
         roleUserBtn.setAttribute('aria-selected', 'false');
         selectedRoleInput.value = 'admin';
-        formSubtitle.textContent = 'Log in to access administrative portal.';
+        formSubtitle.textContent = 'Login to access administrative portal.';
         loginEmail.placeholder = 'admin@stacklyinsurance.com';
       } else {
         roleUserBtn.classList.add('active');
@@ -319,7 +319,7 @@
         roleAdminBtn.classList.remove('active');
         roleAdminBtn.setAttribute('aria-selected', 'false');
         selectedRoleInput.value = 'user';
-        formSubtitle.textContent = 'Log in to access your dashboard.';
+        formSubtitle.textContent = 'Login to access your dashboard.';
         loginEmail.placeholder = 'you@example.com';
       }
     }
@@ -392,7 +392,7 @@
       }
 
       if (urlParams.get('registered') === 'true') {
-        showAlert('Account created successfully! Please enter your credentials to log in.', true);
+        showAlert('Account created successfully! Please enter your credentials to login.', true);
       }
     });
   </script>
