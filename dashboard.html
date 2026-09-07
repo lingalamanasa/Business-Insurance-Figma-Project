@@ -24,27 +24,27 @@
     </div>
 
     <nav class="dash-sidebar__nav" id="sidebarNav">
-      <a class="dash-nav-item active" data-tab="overview">
+      <a href="#overview" class="dash-nav-item active" data-tab="overview">
         <i class="fa-solid fa-chart-pie"></i>
         <span>Overview</span>
       </a>
-      <a class="dash-nav-item" data-tab="policies">
+      <a href="#policies" class="dash-nav-item" data-tab="policies">
         <i class="fa-solid fa-file-shield"></i>
         <span>Active Policies</span>
       </a>
-      <a class="dash-nav-item" data-tab="claims">
+      <a href="#claims" class="dash-nav-item" data-tab="claims">
         <i class="fa-solid fa-bolt-lightning"></i>
         <span>Claims Center</span>
       </a>
-      <a class="dash-nav-item" data-tab="analytics">
+      <a href="#analytics" class="dash-nav-item" data-tab="analytics">
         <i class="fa-solid fa-chart-line"></i>
         <span>Risk Analytics</span>
       </a>
-      <a class="dash-nav-item" data-tab="billing">
+      <a href="#billing" class="dash-nav-item" data-tab="billing">
         <i class="fa-solid fa-wallet"></i>
         <span>Billing &amp; Premium</span>
       </a>
-      <a class="dash-nav-item" data-tab="settings">
+      <a href="#settings" class="dash-nav-item" data-tab="settings">
         <i class="fa-solid fa-gear"></i>
         <span>Settings</span>
       </a>
@@ -824,29 +824,91 @@
       });
     }
 
-    // ═══ 4. TAB SWITCHING SYSTEM (ALL 6 MARKED VIEWS) ═══
+    // ═══ 4. TAB ROUTING SYSTEM (ALL 6 MARKED SECTIONS) ═══
     const navItems = document.querySelectorAll('.dash-nav-item');
     const viewSections = document.querySelectorAll('.dash-view-content');
+    const dashWelcomeHeading = document.getElementById('dashWelcomeHeading');
+    const dashWelcomeSub = document.getElementById('dashWelcomeSub');
+
+    let currentRole = 'user';
+    let currentTab = 'overview';
+
+    const tabMeta = {
+      overview: {
+        user: { title: 'Welcome back, Sarah', sub: 'Here is your live commercial coverage performance overview.' },
+        admin: { title: 'Admin Command Portal', sub: 'Underwriting queue, regional portfolio metrics & claim approvals.' }
+      },
+      policies: {
+        user: { title: 'Commercial Policy Portfolio', sub: 'Manage, renew, and download official Certificates of Insurance (COI).' },
+        admin: { title: 'Enterprise Underwriting Roster', sub: 'Active commercial policies across all regional accounts & renewal status.' }
+      },
+      claims: {
+        user: { title: 'Direct Claims Resolution Center', sub: 'Zero third-party broker friction. Guaranteed 48-hour assessment pipeline.' },
+        admin: { title: 'Claims Adjudication Queue', sub: 'Verify incident evidence, assess damages & authorize direct wire payouts.' }
+      },
+      analytics: {
+        user: { title: 'Risk Intelligence & Audit Benchmarks', sub: 'AI-assisted loss prevention and annual policyholder safety scoring.' },
+        admin: { title: 'Actuarial Portfolio Risk Modeling', sub: 'Aggregate loss ratios, safety compliance & catastrophic stress tests.' }
+      },
+      billing: {
+        user: { title: 'Billing, Invoices & Premium Stewardship', sub: 'Zero third-party broker commissions. 100% direct policyholder value.' },
+        admin: { title: 'Premium Revenue & Ledger Reconciliation', sub: 'Automated ACH collections, wire reconciliations & treasury payouts.' }
+      },
+      settings: {
+        user: { title: 'Account & Security Settings', sub: 'Manage corporate underwriting profile, security credentials, and alert preferences.' },
+        admin: { title: 'System Configuration & Underwriter Roles', sub: 'API credentials, permission tiers, audit logs & compliance rules.' }
+      }
+    };
+
+    function updateHeaderInfo() {
+      const meta = tabMeta[currentTab] ? tabMeta[currentTab][currentRole] : tabMeta.overview[currentRole];
+      if (meta && dashWelcomeHeading && dashWelcomeSub) {
+        dashWelcomeHeading.textContent = meta.title;
+        dashWelcomeSub.textContent = meta.sub;
+      }
+    }
+
+    function switchTab(tab) {
+      if (!tab) tab = 'overview';
+      currentTab = tab;
+
+      // Update active nav button
+      navItems.forEach(n => {
+        if (n.getAttribute('data-tab') === tab) {
+          n.classList.add('active');
+        } else {
+          n.classList.remove('active');
+        }
+      });
+
+      // Show matching section, hide all other sections
+      viewSections.forEach(v => {
+        if (v.id === `view-${tab}`) {
+          v.classList.add('active');
+        } else {
+          v.classList.remove('active');
+        }
+      });
+
+      // Update header
+      updateHeaderInfo();
+
+      // Scroll to top of content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // If returning to overview, trigger animations
+      if (tab === 'overview') {
+        animateCounters();
+        animateProgressRings();
+        animateBarChart();
+      }
+    }
 
     navItems.forEach(item => {
-      item.addEventListener('click', () => {
+      item.addEventListener('click', (e) => {
         const tab = item.getAttribute('data-tab');
-        if (!tab) return;
-
-        navItems.forEach(n => n.classList.remove('active'));
-        item.classList.add('active');
-
-        viewSections.forEach(v => v.classList.remove('active'));
-        const targetView = document.getElementById(`view-${tab}`);
-        if (targetView) {
-          targetView.classList.add('active');
-        }
-
-        // Re-trigger animations if returning to Overview
-        if (tab === 'overview') {
-          animateCounters();
-          animateProgressRings();
-          animateBarChart();
+        if (tab) {
+          switchTab(tab);
         }
       });
     });
@@ -896,19 +958,16 @@
     const modeUserBtn = document.getElementById('modeUserBtn');
     const modeAdminBtn = document.getElementById('modeAdminBtn');
     const sidebarRoleLabel = document.getElementById('sidebarRoleLabel');
-    const dashWelcomeHeading = document.getElementById('dashWelcomeHeading');
-    const dashWelcomeSub = document.getElementById('dashWelcomeSub');
     const userAvatar = document.getElementById('userAvatar');
     const userName = document.getElementById('userName');
 
     function applyRole(role) {
+      currentRole = role;
       if (role === 'admin') {
         modeAdminBtn.classList.add('active');
         modeUserBtn.classList.remove('active');
         sidebarRoleLabel.textContent = 'ADMIN';
         sidebarRoleLabel.style.color = '#38BDF8';
-        dashWelcomeHeading.textContent = 'Admin Command Portal';
-        dashWelcomeSub.textContent = 'Underwriting queue, regional portfolio metrics & claim approvals.';
         userAvatar.textContent = 'AD';
         userAvatar.style.background = 'linear-gradient(135deg, #38BDF8, #0284C7)';
         userName.textContent = 'Admin Supervisor';
@@ -917,30 +976,44 @@
         modeAdminBtn.classList.remove('active');
         sidebarRoleLabel.textContent = 'USER';
         sidebarRoleLabel.style.color = 'var(--dash-gold)';
-        dashWelcomeHeading.textContent = 'Welcome back, Sarah';
-        dashWelcomeSub.textContent = 'Here is your live commercial coverage performance overview.';
         userAvatar.textContent = 'SJ';
         userAvatar.style.background = 'linear-gradient(135deg, var(--dash-gold), #DEB528)';
         userName.textContent = 'Sarah Jenkins';
       }
+      updateHeaderInfo();
     }
 
     modeUserBtn.addEventListener('click', () => applyRole('user'));
     modeAdminBtn.addEventListener('click', () => applyRole('admin'));
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const initialRole = urlParams.get('role');
-    if (initialRole === 'admin') {
-      applyRole('admin');
-    } else {
-      applyRole('user');
+    // Handle Initial URL Query & Hash Routing
+    function handleInitialRoute() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialRole = urlParams.get('role');
+      if (initialRole === 'admin') {
+        applyRole('admin');
+      } else {
+        applyRole('user');
+      }
+
+      const initialHash = window.location.hash.replace('#', '');
+      if (initialHash && tabMeta[initialHash]) {
+        switchTab(initialHash);
+      } else {
+        switchTab('overview');
+      }
     }
+
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && tabMeta[hash]) {
+        switchTab(hash);
+      }
+    });
 
     // ═══ INITIALIZE ON LOAD ═══
     window.addEventListener('DOMContentLoaded', () => {
-      animateCounters();
-      animateProgressRings();
-      animateBarChart();
+      handleInitialRoute();
     });
   </script>
 </body>
