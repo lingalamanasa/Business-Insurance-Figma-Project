@@ -4,137 +4,157 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login — Stackly Commercial Insurance</title>
-  <meta name="description" content="Log in to your Stackly policyholder or admin account to access your commercial insurance portal." />
+  <meta name="description" content="Log in to your Stackly commercial insurance account. Access policyholder claims, coverage analytics, and admin underwriting portal." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="auth.css" />
 </head>
-<body class="auth-body">
+<body class="auth-split-body">
 
-  <!-- Organic Background Shapes -->
-  <div class="auth-bg-shapes" aria-hidden="true">
-    <div class="auth-bg-shape auth-bg-shape--1"></div>
-    <div class="auth-bg-shape auth-bg-shape--2"></div>
-    <div class="auth-bg-shape auth-bg-shape--3"></div>
-    <div class="auth-bg-curve-left"></div>
-    <div class="auth-bg-curve-right"></div>
-  </div>
+  <div class="auth-split-card" id="authSplitCard">
+    
+    <!-- ─── LEFT COLUMN: THEME VISUAL BANNER ─── -->
+    <div class="auth-split-visual">
+      <img
+        src="assets/policy-office-exterior.webp"
+        alt="Modern commercial office building architecture"
+        class="auth-split-visual__bg"
+      />
+      <div class="auth-split-visual__overlay"></div>
 
-  <!-- Top Header Bar: Logo & Back to Home (No Navbar/Footer) -->
-  <header class="auth-top-bar">
-    <a href="index.html" class="auth-brand" aria-label="Stackly Home">
-      <img src="assets/stackly-logo-black.webp" alt="STACKLY" class="auth-brand__logo" />
-    </a>
-    <a href="index.html" class="auth-back-btn" id="backToHomeBtn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="19" y1="12" x2="5" y2="12"></line>
-        <polyline points="12 19 5 12 12 5"></polyline>
-      </svg>
-      <span>Back to Home</span>
-    </a>
-  </header>
-
-  <!-- Main Login Card -->
-  <main class="auth-main">
-    <div class="auth-card">
-      
-      <!-- Role Selector: User vs Admin -->
-      <div class="auth-role-switch-wrap" role="tablist" aria-label="Account Role">
-        <button type="button" class="auth-role-btn active" id="roleUserBtn" role="tab" aria-selected="true" data-role="user">
-          <i class="fa-solid fa-user"></i>
-          <span>User Portal</span>
-        </button>
-        <button type="button" class="auth-role-btn" id="roleAdminBtn" role="tab" aria-selected="false" data-role="admin">
-          <i class="fa-solid fa-shield-halved"></i>
-          <span>Admin Portal</span>
-          <span class="auth-role-badge">Admin</span>
-        </button>
+      <!-- Top Row: Stackly Logo & Back to Home -->
+      <div class="auth-split-visual__top">
+        <a href="index.html" class="auth-split-visual__logo-link" aria-label="Stackly Home">
+          <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="auth-split-visual__logo-img" />
+        </a>
+        <a href="index.html" class="auth-split-visual__home-btn" id="backToHomeBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Home</span>
+        </a>
       </div>
 
-      <h1 class="auth-title" id="loginTitle">Login</h1>
-      <p class="auth-subtitle" id="loginSubtitle">Choose one of the option to go</p>
+      <!-- Main Visual Content -->
+      <div class="auth-split-visual__body">
+        <div class="auth-split-pill">
+          <span>🚀</span>
+          <span>Insurance Solutions</span>
+        </div>
+        <h2 class="auth-split-visual__title">
+          Streamline Your<br>Coverage Today
+        </h2>
+        <p class="auth-split-visual__desc">
+          Join thousands of businesses trusting STACKLY for seamless commercial protection, underwriting clarity, and financial growth.
+        </p>
+        <ul class="auth-split-features">
+          <li class="auth-split-feature">
+            <span class="auth-split-feature__icon"><i class="fa-solid fa-check"></i></span>
+            <span>Secure &amp; Reliable Platform</span>
+          </li>
+          <li class="auth-split-feature">
+            <span class="auth-split-feature__icon"><i class="fa-solid fa-check"></i></span>
+            <span>Real-time Role Management</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ─── RIGHT COLUMN: LOGIN FORM ─── -->
+    <div class="auth-split-form-wrap">
+      <div class="auth-form-header">
+        <h1 class="auth-form-title" id="formTitle">Welcome Back</h1>
+        <p class="auth-form-subtitle" id="formSubtitle">Log in to access your dashboard.</p>
+      </div>
 
       <!-- Alert Notification -->
-      <div class="auth-alert" id="authAlert" role="alert"></div>
+      <div class="auth-alert-box" id="authAlert" role="alert"></div>
 
-      <!-- Login Form -->
-      <form class="auth-form" id="loginForm" novalidate>
+      <form id="loginForm" novalidate>
         <input type="hidden" id="selectedRole" name="role" value="user" />
 
-        <!-- Email Field -->
-        <div class="auth-field">
-          <input
-            type="email"
-            class="auth-input"
-            id="loginEmail"
-            name="email"
-            placeholder="get@ziontutorial.com"
-            required
-            autocomplete="email"
-            aria-label="Email address"
-          />
-          <div class="auth-field-line"></div>
+        <!-- Email Address -->
+        <div class="auth-form-group">
+          <label for="loginEmail" class="auth-label">Email Address</label>
+          <div class="auth-input-box">
+            <input
+              type="email"
+              id="loginEmail"
+              name="email"
+              class="auth-text-input"
+              placeholder="you@example.com"
+              required
+              autocomplete="email"
+            />
+          </div>
         </div>
 
-        <!-- Password Field -->
-        <div class="auth-field">
-          <input
-            type="password"
-            class="auth-input"
-            id="loginPassword"
-            name="password"
-            placeholder="Password"
-            required
-            autocomplete="current-password"
-            aria-label="Password"
-          />
-          <div class="auth-field-line"></div>
-          <button type="button" class="auth-password-toggle" id="togglePasswordBtn" aria-label="Show password">
-            <i class="fa-regular fa-eye" id="togglePasswordIcon"></i>
-          </button>
+        <!-- Password -->
+        <div class="auth-form-group">
+          <label for="loginPassword" class="auth-label">Password</label>
+          <div class="auth-input-box">
+            <input
+              type="password"
+              id="loginPassword"
+              name="password"
+              class="auth-text-input"
+              placeholder="••••••••"
+              required
+              autocomplete="current-password"
+            />
+            <button type="button" class="auth-eye-btn" id="togglePasswordBtn" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye" id="toggleEyeIcon"></i>
+            </button>
+          </div>
         </div>
 
-        <!-- Meta Row: Or continue with & Forgot Password? -->
-        <div class="auth-meta-row">
-          <span class="auth-continue-text">Or continue with</span>
-          <a href="#" class="auth-forgot-link" id="forgotPasswordLink">Forgot Password?</a>
+        <!-- Role Selector: I am a... (Admin vs User) -->
+        <div class="auth-role-section">
+          <label class="auth-label">I am a...</label>
+          <div class="auth-role-grid" role="tablist">
+            <button type="button" class="auth-role-card-btn" id="roleAdminBtn" role="tab" aria-selected="false" data-role="admin">
+              <i class="fa-solid fa-user-shield"></i>
+              <span>Admin</span>
+            </button>
+            <button type="button" class="auth-role-card-btn active" id="roleUserBtn" role="tab" aria-selected="true" data-role="user">
+              <i class="fa-solid fa-user"></i>
+              <span>User</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Google Social Login Button -->
-        <button type="button" class="auth-social-btn" id="googleLoginBtn">
-          <svg class="auth-google-icon" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        <!-- Helper Row: Forgot Password & Sign Up -->
+        <div class="auth-meta-helper">
+          <a href="#" class="auth-gold-link" id="forgotPasswordLink">Forgot Password?</a>
+          <span class="auth-meta-right">
+            New here? <a href="signup.html" class="auth-gold-link">Sign Up</a>
+          </span>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="auth-main-btn" id="loginSubmitBtn">
+          <span>Login</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-          <span>Google</span>
         </button>
-
-        <!-- Primary CTA Submit Button -->
-        <button type="submit" class="auth-submit-btn" id="loginSubmitBtn">
-          <span>Get My Quote</span>
-        </button>
-
-        <!-- Switch to Sign Up -->
-        <div class="auth-switch">
-          <a href="signup.html" class="auth-switch-link" id="goToSignupLink">Sign Up</a>
-        </div>
       </form>
-
     </div>
-  </main>
+
+  </div>
 
   <script>
-    // ═══ ROLE TOGGLE (USER / ADMIN) ═══
-    const roleUserBtn = document.getElementById('roleUserBtn');
+    // ═══ ROLE TOGGLE (ADMIN VS USER) ═══
     const roleAdminBtn = document.getElementById('roleAdminBtn');
+    const roleUserBtn = document.getElementById('roleUserBtn');
     const selectedRoleInput = document.getElementById('selectedRole');
-    const loginSubtitle = document.getElementById('loginSubtitle');
-    const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+    const formSubtitle = document.getElementById('formSubtitle');
     const loginEmail = document.getElementById('loginEmail');
+    const loginSubmitBtn = document.getElementById('loginSubmitBtn');
 
     function setRole(role) {
       if (role === 'admin') {
@@ -143,43 +163,40 @@
         roleUserBtn.classList.remove('active');
         roleUserBtn.setAttribute('aria-selected', 'false');
         selectedRoleInput.value = 'admin';
-        loginSubtitle.textContent = 'Enter administrative credentials to proceed';
+        formSubtitle.textContent = 'Log in to access administrative portal.';
         loginEmail.placeholder = 'admin@stacklyinsurance.com';
-        loginSubmitBtn.querySelector('span').textContent = 'Access Admin Portal';
       } else {
         roleUserBtn.classList.add('active');
         roleUserBtn.setAttribute('aria-selected', 'true');
         roleAdminBtn.classList.remove('active');
         roleAdminBtn.setAttribute('aria-selected', 'false');
         selectedRoleInput.value = 'user';
-        loginSubtitle.textContent = 'Choose one of the option to go';
-        loginEmail.placeholder = 'get@ziontutorial.com';
-        loginSubmitBtn.querySelector('span').textContent = 'Get My Quote';
+        formSubtitle.textContent = 'Log in to access your dashboard.';
+        loginEmail.placeholder = 'you@example.com';
       }
     }
 
-    roleUserBtn.addEventListener('click', () => setRole('user'));
     roleAdminBtn.addEventListener('click', () => setRole('admin'));
+    roleUserBtn.addEventListener('click', () => setRole('user'));
 
-    // ═══ PASSWORD SHOW / HIDE TOGGLE ═══
+    // ═══ PASSWORD VISIBILITY TOGGLE ═══
     const togglePasswordBtn = document.getElementById('togglePasswordBtn');
     const loginPassword = document.getElementById('loginPassword');
-    const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+    const toggleEyeIcon = document.getElementById('toggleEyeIcon');
 
     togglePasswordBtn.addEventListener('click', () => {
       const isPassword = loginPassword.type === 'password';
       loginPassword.type = isPassword ? 'text' : 'password';
-      togglePasswordIcon.className = isPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
-      togglePasswordBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+      toggleEyeIcon.className = isPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
     });
 
-    // ═══ FORM SUBMISSION & VALIDATION ═══
+    // ═══ FORM SUBMISSION ═══
     const loginForm = document.getElementById('loginForm');
     const authAlert = document.getElementById('authAlert');
 
     function showAlert(msg, isSuccess = false) {
       authAlert.textContent = msg;
-      authAlert.className = `auth-alert show ${isSuccess ? 'auth-alert--success' : 'auth-alert--error'}`;
+      authAlert.className = `auth-alert-box show ${isSuccess ? 'auth-alert-box--success' : 'auth-alert-box--error'}`;
       setTimeout(() => {
         authAlert.classList.remove('show');
       }, 4000);
@@ -206,19 +223,11 @@
       loginSubmitBtn.querySelector('span').textContent = 'Authenticating...';
 
       setTimeout(() => {
-        showAlert(`Welcome back! Successfully authenticated as ${role.toUpperCase()}. Redirecting...`, true);
+        showAlert(`Welcome back! Authenticated as ${role.toUpperCase()}. Redirecting to dashboard...`, true);
         setTimeout(() => {
           window.location.href = 'index.html';
         }, 1200);
-      }, 900);
-    });
-
-    // Google Social Auth
-    document.getElementById('googleLoginBtn').addEventListener('click', () => {
-      showAlert('Connecting to Google Single Sign-On...', true);
-      setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 1400);
+      }, 800);
     });
 
     // Forgot Password
@@ -226,9 +235,9 @@
       e.preventDefault();
       const email = loginEmail.value.trim();
       if (email) {
-        showAlert(`Password reset link dispatched to ${email}! Check your inbox.`, true);
+        showAlert(`Password reset instructions sent to ${email}.`, true);
       } else {
-        showAlert('Please type your registered email address above first.');
+        showAlert('Please enter your email address first.');
         loginEmail.focus();
       }
     });
