@@ -13,6 +13,9 @@
 </head>
 <body class="dash-body">
 
+  <!-- Sidebar Backdrop Overlay -->
+  <div class="dash-sidebar-overlay" id="dashSidebarOverlay" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════════
        SIDEBAR NAVIGATION
   ═══════════════════════════════════════════ -->
@@ -21,6 +24,9 @@
       <a href="index.html" aria-label="Stackly Home">
         <img src="assets/stackly-logo-white.webp" alt="STACKLY" class="dash-sidebar__logo" />
       </a>
+      <button class="dash-sidebar-close" id="dashSidebarClose" aria-label="Close sidebar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
 
     <nav class="dash-sidebar__nav" id="sidebarNav">
@@ -69,9 +75,14 @@
     
     <!-- Top Dashboard Header -->
     <header class="dash-header">
-      <div class="dash-header__welcome">
-        <h1 id="dashWelcomeHeading">Welcome back, Sarah</h1>
-        <p id="dashWelcomeSub">Here is your live commercial coverage performance overview.</p>
+      <div class="dash-header__left">
+        <button class="dash-sidebar-toggle" id="dashSidebarToggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="dash-header__welcome">
+          <h1 id="dashWelcomeHeading">Welcome back, Sarah</h1>
+          <p id="dashWelcomeSub">Here is your live commercial coverage performance overview.</p>
+        </div>
       </div>
 
       <div class="dash-header__actions">
@@ -506,40 +517,42 @@
           <div class="dash-card-head">
             <h3 class="dash-card-title">Claims History (Past 12 Months)</h3>
           </div>
-          <table class="dash-policy-table">
-            <thead>
-              <tr>
-                <th>Claim ID</th>
-                <th>Incident Type</th>
-                <th>Date Filed</th>
-                <th>Settlement Amount</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>#CLM-2026-081</strong></td>
-                <td>Facility Water Leakage</td>
-                <td>Sep 02, 2026</td>
-                <td>$18,450</td>
-                <td><span class="dash-status-pill pending">Settlement Ready</span></td>
-              </tr>
-              <tr>
-                <td><strong>#CLM-2026-014</strong></td>
-                <td>Client Equipment Power Surge</td>
-                <td>May 18, 2026</td>
-                <td>$6,200</td>
-                <td><span class="dash-status-pill active">Direct Paid</span></td>
-              </tr>
-              <tr>
-                <td><strong>#CLM-2025-992</strong></td>
-                <td>Cargo Damage in Transit</td>
-                <td>Nov 11, 2025</td>
-                <td>$34,000</td>
-                <td><span class="dash-status-pill active">Direct Paid</span></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="dash-table-wrap">
+            <table class="dash-policy-table">
+              <thead>
+                <tr>
+                  <th>Claim ID</th>
+                  <th>Incident Type</th>
+                  <th>Date Filed</th>
+                  <th>Settlement Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#CLM-2026-081</strong></td>
+                  <td>Facility Water Leakage</td>
+                  <td>Sep 02, 2026</td>
+                  <td>$18,450</td>
+                  <td><span class="dash-status-pill pending">Settlement Ready</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#CLM-2026-014</strong></td>
+                  <td>Client Equipment Power Surge</td>
+                  <td>May 18, 2026</td>
+                  <td>$6,200</td>
+                  <td><span class="dash-status-pill active">Direct Paid</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#CLM-2025-992</strong></td>
+                  <td>Cargo Damage in Transit</td>
+                  <td>Nov 11, 2025</td>
+                  <td>$34,000</td>
+                  <td><span class="dash-status-pill active">Direct Paid</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </article>
       </section>
 
@@ -664,40 +677,42 @@
           <div class="dash-card-head">
             <h3 class="dash-card-title">Recent Invoices &amp; Receipts</h3>
           </div>
-          <table class="dash-policy-table">
-            <thead>
-              <tr>
-                <th>Invoice #</th>
-                <th>Billing Period</th>
-                <th>Amount</th>
-                <th>Payment Method</th>
-                <th>Invoice Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>#INV-2026-10</strong></td>
-                <td>Oct 01 - Oct 31, 2026</td>
-                <td>$4,850.00</td>
-                <td>Corporate ACH (•••• 8912)</td>
-                <td><button type="button" class="dash-policy-btn" style="max-width:140px;" onclick="alert('Downloading PDF Invoice #INV-2026-10');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
-              </tr>
-              <tr>
-                <td><strong>#INV-2026-09</strong></td>
-                <td>Sep 01 - Sep 30, 2026</td>
-                <td>$4,850.00</td>
-                <td>Corporate ACH (•••• 8912)</td>
-                <td><button type="button" class="dash-policy-btn" style="max-width:140px;" onclick="alert('Downloading PDF Invoice #INV-2026-09');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
-              </tr>
-              <tr>
-                <td><strong>#INV-2026-08</strong></td>
-                <td>Aug 01 - Aug 31, 2026</td>
-                <td>$4,850.00</td>
-                <td>Corporate ACH (•••• 8912)</td>
-                <td><button type="button" class="dash-policy-btn" style="max-width:140px;" onclick="alert('Downloading PDF Invoice #INV-2026-08');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="dash-table-wrap">
+            <table class="dash-policy-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Billing Period</th>
+                  <th>Amount</th>
+                  <th>Payment Method</th>
+                  <th>Invoice Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#INV-2026-10</strong></td>
+                  <td>Oct 01 - Oct 31, 2026</td>
+                  <td>$4,850.00</td>
+                  <td>Corporate ACH (•••• 8912)</td>
+                  <td><button type="button" class="dash-policy-btn" style="max-width:140px;" onclick="alert('Downloading PDF Invoice #INV-2026-10');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
+                </tr>
+                <tr>
+                  <td><strong>#INV-2026-09</strong></td>
+                  <td>Sep 01 - Sep 30, 2026</td>
+                  <td>$4,850.00</td>
+                  <td>Corporate ACH (•••• 8912)</td>
+                  <td><button type="button" class="dash-policy-btn" style="max-width:140px;" onclick="alert('Downloading PDF Invoice #INV-2026-09');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
+                </tr>
+                <tr>
+                  <td><strong>#INV-2026-08</strong></td>
+                  <td>Aug 01 - Aug 31, 2026</td>
+                  <td>$4,850.00</td>
+                  <td>Corporate ACH (•••• 8912)</td>
+                  <td><button type="button" class="dash-policy-btn" style="max-width:140px;" onclick="alert('Downloading PDF Invoice #INV-2026-08');"><i class="fa-solid fa-download"></i> PDF Receipt</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </article>
       </section>
 
@@ -1008,6 +1023,41 @@
       const hash = window.location.hash.replace('#', '');
       if (hash && tabMeta[hash]) {
         switchTab(hash);
+      }
+    });
+
+    // ═══ MOBILE SIDEBAR DRAWER TOGGLE ═══
+    const dashSidebar = document.getElementById('dashSidebar');
+    const dashSidebarToggle = document.getElementById('dashSidebarToggle');
+    const dashSidebarClose = document.getElementById('dashSidebarClose');
+    const dashSidebarOverlay = document.getElementById('dashSidebarOverlay');
+
+    function openSidebar() {
+      if (dashSidebar) dashSidebar.classList.add('open');
+      if (dashSidebarOverlay) dashSidebarOverlay.classList.add('active');
+      document.body.classList.add('sidebar-open');
+    }
+
+    function closeSidebar() {
+      if (dashSidebar) dashSidebar.classList.remove('open');
+      if (dashSidebarOverlay) dashSidebarOverlay.classList.remove('active');
+      document.body.classList.remove('sidebar-open');
+    }
+
+    if (dashSidebarToggle) dashSidebarToggle.addEventListener('click', openSidebar);
+    if (dashSidebarClose) dashSidebarClose.addEventListener('click', closeSidebar);
+    if (dashSidebarOverlay) dashSidebarOverlay.addEventListener('click', closeSidebar);
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (window.innerWidth <= 1024) closeSidebar();
+      });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dashSidebar && dashSidebar.classList.contains('open')) {
+        closeSidebar();
       }
     });
 
