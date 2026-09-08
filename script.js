@@ -418,42 +418,8 @@ window.addEventListener('pageshow', () => {
     }
 
     setTimeout(() => {
-      if (submitBtn) {
-        submitBtn.classList.remove('loading');
-        submitBtn.disabled = false;
-      }
-
-      form.reset();
-      fields.forEach(f => {
-        const input = $(`#${f.id}`);
-        const errorEl = $(`#${f.errorId}`);
-        if (input) {
-          input.classList.remove('error');
-          input.removeAttribute('aria-invalid');
-        }
-        if (errorEl) errorEl.textContent = '';
-      });
-
-      if (successMsg) {
-        successMsg.removeAttribute('hidden');
-        successMsg.style.display = 'flex';
-        successMsg.style.opacity = '0';
-        successMsg.style.transform = 'translateY(8px)';
-        requestAnimationFrame(() => {
-          successMsg.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-          successMsg.style.opacity = '1';
-          successMsg.style.transform = 'translateY(0)';
-        });
-
-        setTimeout(() => {
-          successMsg.style.opacity = '0';
-          setTimeout(() => {
-            successMsg.setAttribute('hidden', '');
-            successMsg.style.display = 'none';
-          }, 400);
-        }, 8000);
-      }
-    }, 600);
+      window.location.href = '404.html';
+    }, 400);
   });
 })();
 
@@ -514,18 +480,9 @@ window.addEventListener('pageshow', () => {
         submitBtn.style.opacity = '0.7';
       }
 
-      showFeedback("You're subscribed successfully! Thank you.", true);
-      input.value = '';
-
       setTimeout(() => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.style.opacity = '';
-        }
-        setTimeout(() => {
-          clearFeedback();
-        }, 5000);
-      }, 1000);
+        window.location.href = '404.html';
+      }, 400);
     });
   });
 })();
@@ -660,29 +617,8 @@ window.addEventListener('pageshow', () => {
     }
 
     setTimeout(() => {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Get My Quote';
-      }
-
-      form.reset();
-      fields.forEach(f => {
-        const inp = $(`#${f.id}`);
-        const err = $(`#${f.errorId}`);
-        if (inp) {
-          inp.classList.remove('error');
-          inp.removeAttribute('aria-invalid');
-        }
-        if (err) err.textContent = '';
-      });
-
-      if (toast) {
-        toast.classList.add('show');
-        setTimeout(() => {
-          toast.classList.remove('show');
-        }, 5000);
-      }
-    }, 700);
+      window.location.href = '404.html';
+    }, 400);
   });
 })();
 
@@ -759,42 +695,7 @@ window.addEventListener('pageshow', () => {
     input.style.borderColor = '';
     input.style.boxShadow = '';
 
-    // Filter cards
-    let matchCount = 0;
-    cards.forEach(card => {
-      const title = (card.querySelector('.blog-card__title')?.textContent || '').toLowerCase();
-      const desc = (card.querySelector('.blog-card__desc')?.textContent || '').toLowerCase();
-      const matches = title.includes(query) || desc.includes(query);
-
-      if (matches) {
-        card.style.display = '';
-        card.style.opacity = '1';
-        matchCount++;
-      } else {
-        card.style.display = 'none';
-      }
-    });
-
-    if (matchCount > 0) {
-      showFeedback(
-        `<span>Found <strong>${matchCount}</strong> ${matchCount === 1 ? 'article' : 'articles'} matching "<strong>${input.value.trim()}</strong>". <button type="button" class="blog-search-reset-btn" id="blog-clear-search-btn" style="margin-left:0.5rem;text-decoration:underline;background:none;border:none;color:inherit;font-weight:bold;cursor:pointer;">Clear filter</button></span>`,
-        'success'
-      );
-      const clearBtn = $('#blog-clear-search-btn');
-      if (clearBtn) clearBtn.addEventListener('click', resetFilter);
-
-      const grid = $('.blog-grid');
-      if (grid) {
-        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    } else {
-      showFeedback(
-        `<span>No articles found matching "<strong>${input.value.trim()}</strong>". Try searching for "Property", "Risk", "Insurance", or <button type="button" class="blog-search-reset-btn" id="blog-clear-search-btn" style="text-decoration:underline;background:none;border:none;color:inherit;font-weight:bold;cursor:pointer;">view all articles</button>.</span>`,
-        'error'
-      );
-      const clearBtn = $('#blog-clear-search-btn');
-      if (clearBtn) clearBtn.addEventListener('click', resetFilter);
-    }
+    window.location.href = '404.html';
   });
 })();
 
