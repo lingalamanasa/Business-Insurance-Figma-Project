@@ -30,7 +30,7 @@ function initStacklyPreloader() {
   const pathname = window.location.pathname.toLowerCase();
   if (pathname.includes('404')) return; // Never run or inject preloader on 404 page
 
-  let pageTagline = 'STACKLY HOME';
+  let pageTagline = 'COMMERCIAL UNDERWRITING';
   if (pathname.includes('about')) pageTagline = 'STACKLY ABOUT';
   else if (pathname.includes('services')) pageTagline = 'STACKLY SERVICES';
   else if (pathname.includes('blog')) pageTagline = 'STACKLY BLOG';
@@ -73,6 +73,8 @@ function initStacklyPreloader() {
     `;
     document.body.insertBefore(preloader, document.body.firstChild);
   } else {
+    preloader.classList.remove('loaded', 'is-hidden');
+    preloader.style.removeProperty('display');
     const taglineEl = preloader.querySelector('.stackly-preloader__tagline');
     if (taglineEl && pageTagline) {
       taglineEl.textContent = pageTagline;
@@ -85,6 +87,10 @@ function initStacklyPreloader() {
 
   const obj = { val: 0 };
   const totalLength = 276.46; // 2 * PI * 44
+
+  if (percentEl) percentEl.textContent = '0';
+  if (fill) fill.style.width = '0%';
+  if (ringBar) ringBar.style.strokeDashoffset = totalLength;
 
   if (typeof gsap !== 'undefined') {
     gsap.to(obj, {
@@ -105,14 +111,14 @@ function initStacklyPreloader() {
         setTimeout(() => {
           preloader.classList.add('is-hidden');
           if (typeof AOS !== 'undefined') AOS.refresh();
-        }, 750);
+        }, 900);
       }
     });
   } else {
     // Graceful fallback
     setTimeout(() => {
       preloader.classList.add('loaded');
-      setTimeout(() => preloader.classList.add('is-hidden'), 600);
+      setTimeout(() => preloader.classList.add('is-hidden'), 900);
     }, 900);
   }
 }
@@ -286,16 +292,17 @@ function initCTAReveal() {
 /* ══════════════════════════════════════════════════════
    GSAP PAGE TRANSITION (subtle fade between pages)
    ══════════════════════════════════════════════════════ */
-// Ensure body is visible and preloader is hidden whenever a page is shown (initial load or bfcache restore)
-window.addEventListener('pageshow', function () {
-  document.body.style.opacity = '1';
-  if (typeof gsap !== 'undefined') {
-    gsap.set('body', { opacity: 1, clearProps: 'opacity' });
-  }
-  var preloader = document.getElementById('stackly-preloader');
-  if (preloader) {
-    preloader.classList.add('loaded', 'is-hidden');
-    preloader.style.display = 'none';
+// Ensure body is visible and preloader dismissed ONLY on back/forward cache restore
+window.addEventListener('pageshow', function (event) {
+  if (event.persisted) {
+    document.body.style.opacity = '1';
+    if (typeof gsap !== 'undefined') {
+      gsap.set('body', { opacity: 1, clearProps: 'opacity' });
+    }
+    var preloader = document.getElementById('stackly-preloader');
+    if (preloader) {
+      preloader.classList.add('loaded', 'is-hidden');
+    }
   }
 });
 
@@ -308,9 +315,6 @@ window.addEventListener('pagehide', function () {
 
 function initPageTransition() {
   if (typeof gsap === 'undefined') return;
-
-  // Fade in on load
-  gsap.fromTo('body', { opacity: 0 }, { opacity: 1, duration: 0.45, ease: 'power1.out' });
 
   // Fade out on internal link click
   document.querySelectorAll('a[href]').forEach(link => {
@@ -2000,7 +2004,7 @@ function initBlogAnimations() {
 /* ══════════════════════════════════════════════════════
    INIT ALL
    ══════════════════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
+function initAllStacklyAnimations() {
   initStacklyPreloader();
   respectReducedMotion();
   initPageTransition();
@@ -2022,7 +2026,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initServicesAnimations();
   initBlogAnimations();
   initContactPageAnimations();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAllStacklyAnimations);
+} else {
+  initAllStacklyAnimations();
+}
 
 
 
