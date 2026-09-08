@@ -169,84 +169,8 @@
   color: #CBD5E1;
   max-width: 780px;
   line-height: 1.7;
-  margin-bottom: 2.25rem;
+  margin-bottom: 3rem;
   text-wrap: balance;
-}
-
-.contact-page-hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  margin-bottom: 3.25rem;
-}
-
-.contact-page-hero__btn-primary {
-  background: #F4D35E;
-  color: #000000 !important;
-  border: 2px solid #F4D35E;
-  font-weight: 800;
-  padding: 0.85rem 1.85rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  box-shadow: 0 10px 30px rgba(244, 211, 94, 0.35);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.contact-page-hero__btn-primary:hover {
-  background: #E5BE32;
-  border-color: #E5BE32;
-  transform: translateY(-2px);
-  box-shadow: 0 14px 40px rgba(244, 211, 94, 0.5);
-  color: #000000 !important;
-}
-
-.contact-page-hero__btn-secondary {
-  background: rgba(255, 255, 255, 0.08);
-  color: #FFFFFF !important;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  font-weight: 700;
-  padding: 0.85rem 1.75rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.25s ease;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.contact-page-hero__btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: #FFFFFF;
-  color: #FFFFFF !important;
-  transform: translateY(-2px);
-}
-
-.contact-page-hero__btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #94A3B8 !important;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-  padding: 0.5rem 0.75rem;
-  transition: color 0.2s ease;
-  cursor: pointer;
-}
-
-.contact-page-hero__btn-ghost:hover {
-  color: #F4D35E !important;
 }
 
 /* Glass Value Pillars */
@@ -309,6 +233,18 @@
   color: #94A3B8;
   line-height: 1.4;
   margin-top: 2px;
+}
+
+@media (max-width: 991px) {
+  .contact-page-hero {
+    padding-top: 120px;
+    padding-bottom: 3.5rem;
+  }
+  .contact-page-hero__cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 480px;
+  }
 }
 
 /* ─── 3. CONTACT FORM SECTION (EXACT FIGMA SPLIT) ───── */
