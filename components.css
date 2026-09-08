@@ -940,7 +940,7 @@
   height: 50%;
   background: #000000;
   z-index: 1;
-  transition: transform 0.55s cubic-bezier(0.85, 0, 0.15, 1);
+  transition: transform 0.38s cubic-bezier(0.85, 0, 0.15, 1);
   will-change: transform;
 }
 
@@ -971,7 +971,7 @@
   align-items: center;
   text-align: center;
   padding: 2rem;
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .stackly-preloader.loaded .stackly-preloader__content {
