@@ -636,12 +636,12 @@
         </div>
 
         <div class="quote-section__form-wrap animate-fade-right">
-          <form class="quote-form" id="quote-form" action="404.html" novalidate aria-label="Get a quote form">
+          <form class="quote-form" id="quote-form" action="404.html" method="GET" aria-label="Get a quote form">
             <h3 class="quote-form__title">Start a quote</h3>
 
             <div class="quote-form__alert" id="quote-alert" role="alert" aria-live="assertive" hidden>
               <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-              <span id="quote-alert-text">Please correct the highlighted fields below.</span>
+              <span id="quote-alert-text">Please fill this field in the highlighted rows below.</span>
             </div>
 
             <div class="form-group" id="fg-business-name">
@@ -656,6 +656,8 @@
                   autocomplete="organization"
                   required
                   aria-required="true"
+                  oninvalid="this.setCustomValidity('Please fill this field.')"
+                  oninput="this.setCustomValidity('')"
                 />
                 <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
               </div>
@@ -673,6 +675,8 @@
                   placeholder="e.g. Construction, Logistics, Retail"
                   required
                   aria-required="true"
+                  oninvalid="this.setCustomValidity('Please fill this field.')"
+                  oninput="this.setCustomValidity('')"
                 />
                 <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
               </div>
@@ -691,6 +695,8 @@
                   min="1"
                   required
                   aria-required="true"
+                  oninvalid="if(this.validity.valueMissing){this.setCustomValidity('Please fill this field.')}else if(this.validity.rangeUnderflow){this.setCustomValidity('Please enter 1 or more employees.')}"
+                  oninput="this.setCustomValidity('')"
                 />
                 <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
               </div>
@@ -709,6 +715,8 @@
                   autocomplete="email"
                   required
                   aria-required="true"
+                  oninvalid="if(this.validity.valueMissing){this.setCustomValidity('Please fill this field.')}else if(this.validity.typeMismatch){this.setCustomValidity('Please enter a valid work email address.')}"
+                  oninput="this.setCustomValidity('')"
                 />
                 <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
               </div>
@@ -832,7 +840,7 @@
           id: 'business-name',
           errId: 'business-name-error',
           validate: function (val) {
-            if (!val.trim()) return 'Please enter your business name.';
+            if (!val.trim()) return 'Please fill this field.';
             if (val.trim().length < 2) return 'Business name must be at least 2 characters.';
             return null;
           }
@@ -841,7 +849,7 @@
           id: 'industry',
           errId: 'industry-error',
           validate: function (val) {
-            if (!val.trim()) return 'Please enter your industry.';
+            if (!val.trim()) return 'Please fill this field.';
             if (val.trim().length < 2) return 'Industry must be at least 2 characters.';
             return null;
           }
@@ -850,7 +858,7 @@
           id: 'employees',
           errId: 'employees-error',
           validate: function (val) {
-            if (!val.trim()) return 'Please enter the number of employees.';
+            if (!val.trim()) return 'Please fill this field.';
             const n = parseInt(val, 10);
             if (isNaN(n) || n < 1) return 'Please enter 1 or more employees.';
             return null;
@@ -860,7 +868,7 @@
           id: 'work-email',
           errId: 'email-error',
           validate: function (val) {
-            if (!val.trim()) return 'Please enter your work email.';
+            if (!val.trim()) return 'Please fill this field.';
             const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!re.test(val.trim())) return 'Please enter a valid work email address.';
             return null;
@@ -938,14 +946,19 @@
         if (!isValid) {
           if (qAlert) {
             if (qAlertText) {
-              qAlertText.textContent = 'Please correct the ' + invalidCount + ' highlighted field' + (invalidCount > 1 ? 's' : '') + ' below.';
+              qAlertText.textContent = 'Please fill this field in all highlighted rows.';
             }
             qAlert.removeAttribute('hidden');
           }
           qForm.classList.remove('form-shake');
           void qForm.offsetWidth;
           qForm.classList.add('form-shake');
-          if (firstInvalid) firstInvalid.focus();
+          if (firstInvalid) {
+            firstInvalid.focus();
+            if (typeof firstInvalid.reportValidity === 'function') {
+              firstInvalid.reportValidity();
+            }
+          }
           return false;
         }
 

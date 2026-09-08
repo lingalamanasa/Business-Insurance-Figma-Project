@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'business-name',
       errorId: 'business-name-error',
       validate: (v) => {
-        if (!v.trim()) return 'Please enter your business name.';
+        if (!v.trim()) return 'Please fill this field.';
         if (v.trim().length < 2) return 'Business name must be at least 2 characters.';
         return null;
       }
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'industry',
       errorId: 'industry-error',
       validate: (v) => {
-        if (!v.trim()) return 'Please enter your industry.';
+        if (!v.trim()) return 'Please fill this field.';
         if (v.trim().length < 2) return 'Industry must be at least 2 characters.';
         return null;
       }
@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'employees',
       errorId: 'employees-error',
       validate: (v) => {
-        if (!v.trim()) return 'Please enter the number of employees.';
+        if (!v.trim()) return 'Please fill this field.';
         const num = parseInt(v, 10);
         if (isNaN(num) || num < 1) return 'Please enter 1 or more employees.';
         return null;
@@ -376,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'work-email',
       errorId: 'email-error',
       validate: (v) => {
-        if (!v.trim()) return 'Please enter your work email.';
+        if (!v.trim()) return 'Please fill this field.';
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(v.trim())) return 'Please enter a valid work email address.';
         return null;
@@ -391,7 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const error = f.validate(input.value);
     if (error) {
-      input.classList.add('error');
+      input.classList.add('error', 'is-invalid');
+      input.classList.remove('is-valid');
       input.setAttribute('aria-invalid', 'true');
       if (errorEl) {
         errorEl.textContent = error;
@@ -399,7 +400,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       return false;
     } else {
-      input.classList.remove('error');
+      input.classList.remove('error', 'is-invalid');
+      if (input.value.trim().length > 0) {
+        input.classList.add('is-valid');
+      } else {
+        input.classList.remove('is-valid');
+      }
       input.removeAttribute('aria-invalid');
       if (errorEl) {
         errorEl.textContent = '';
@@ -415,8 +421,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     input.addEventListener('blur', () => validateField(f));
     input.addEventListener('input', () => {
-      if (input.classList.contains('error')) {
+      if (input.classList.contains('error') || input.classList.contains('is-invalid')) {
         validateField(f);
+      }
+      const qAlert = $('#quote-alert');
+      if (qAlert && !qAlert.hasAttribute('hidden')) {
+        const allValid = fields.every(item => {
+          const el = $(`#${item.id}`);
+          return el && item.validate(el.value) === null;
+        });
+        if (allValid) qAlert.setAttribute('hidden', '');
       }
     });
   });
@@ -455,14 +469,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    const qAlert = $('#quote-alert');
     if (!isFormValid) {
+      if (qAlert) {
+        const qAlertText = $('#quote-alert-text');
+        if (qAlertText) {
+          qAlertText.textContent = 'Please fill this field in all highlighted rows.';
+        }
+        qAlert.removeAttribute('hidden');
+      }
       form.classList.remove('form-shake');
       void form.offsetWidth;
       form.classList.add('form-shake');
-      if (firstInvalid) firstInvalid.focus();
+      if (firstInvalid) {
+        firstInvalid.focus();
+        if (typeof firstInvalid.reportValidity === 'function') {
+          firstInvalid.reportValidity();
+        }
+      }
       return false;
     }
 
+    if (qAlert) qAlert.setAttribute('hidden', '');
     if (submitBtn) {
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
