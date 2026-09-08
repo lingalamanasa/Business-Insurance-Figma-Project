@@ -2095,7 +2095,7 @@ body.menu-open {
   }
   .policies__side-images {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     width: 100%;
     gap: 1rem;
     margin-top: 1.5rem;
@@ -2220,7 +2220,7 @@ body.menu-open {
     grid-template-columns: 1fr 1fr;
   }
   .policies__side-img:nth-child(3) {
-    grid-column: span 2;
+    grid-column: auto;
   }
   .policies__side-img img {
     height: 140px;
