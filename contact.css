@@ -1423,6 +1423,18 @@
   .contact-footer-grid {
     grid-template-columns: 1fr;
   }
+  .salem-section {
+    padding: 3rem 0 1rem;
+  }
+  .salem-section__header {
+    margin-bottom: 1.5rem;
+  }
+  .guarantees-section {
+    padding: 1rem 0 3rem;
+  }
+  .guarantees-section__header {
+    margin: 0 auto 1.5rem;
+  }
   .salem-map-card {
     border-radius: 18px;
   }
@@ -1452,6 +1464,18 @@
 }
 
 @media (max-width: 480px) {
+  .salem-section {
+    padding: 2.25rem 0 0.75rem;
+  }
+  .salem-section__header {
+    margin-bottom: 1.25rem;
+  }
+  .guarantees-section {
+    padding: 0.75rem 0 2rem;
+  }
+  .guarantees-section__header {
+    margin: 0 auto 1.25rem;
+  }
   .salem-map-card__viewport {
     height: 310px;
   }
