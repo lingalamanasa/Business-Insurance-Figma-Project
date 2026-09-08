@@ -211,7 +211,7 @@ body.menu-open {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 72px;
+  height: 80px;
   gap: 1.5rem;
 }
 
@@ -227,8 +227,9 @@ body.menu-open {
   transform: translateY(-1px);
 }
 .nav__logo-img {
-  height: 44px;
+  height: 52px;
   width: auto;
+  max-width: 180px;
   display: block;
   object-fit: contain;
 }
@@ -1760,9 +1761,11 @@ body.menu-open {
 }
 
 .footer__logo-img {
-  height: 28px;
+  height: 52px;
   width: auto;
+  max-width: 190px;
   display: block;
+  object-fit: contain;
 }
 
 .footer__brand-desc {
@@ -2130,13 +2133,16 @@ body.menu-open {
   }
 
   .header {
-    height: 64px;
+    height: 70px;
   }
   .nav {
-    height: 64px;
+    height: 70px;
   }
   .nav__logo-img {
-    height: 36px;
+    height: 42px;
+  }
+  .footer__logo-img {
+    height: 44px;
   }
 
   .hero {
@@ -2371,7 +2377,10 @@ body.menu-open {
     --container-padding: 0.85rem;
   }
   .nav__logo-img {
-    height: 30px;
+    height: 34px;
+  }
+  .footer__logo-img {
+    height: 38px;
   }
   .hero__heading {
     font-size: 1.85rem;

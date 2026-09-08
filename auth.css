@@ -181,8 +181,9 @@ body.auth-split-body {
 }
 
 .auth-split-visual__logo-img {
-  height: 28px;
+  height: 48px;
   width: auto;
+  max-width: 170px;
   display: block;
 }
 

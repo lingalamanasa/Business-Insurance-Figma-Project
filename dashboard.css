@@ -91,7 +91,7 @@ body.sidebar-open {
 }
 
 .dash-sidebar__logo {
-  height: 26px;
+  height: 36px;
   width: auto;
 }
 
@@ -364,7 +364,7 @@ body.sidebar-open {
 }
 
 .dash-header__mobile-logo {
-  height: 22px;
+  height: 30px;
   width: auto;
   display: block;
 }
