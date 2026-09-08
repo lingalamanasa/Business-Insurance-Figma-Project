@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-  <link rel="stylesheet" href="styles.css?v=2.2" />
-  <link rel="stylesheet" href="components.css?v=2.2" />
+  <link rel="stylesheet" href="styles.css?v=2.3" />
+  <link rel="stylesheet" href="components.css?v=2.3" />
 </head>
 <body>
 
@@ -636,7 +636,7 @@
         </div>
 
         <div class="quote-section__form-wrap animate-fade-right">
-          <form class="quote-form" id="quote-form" action="404.html" method="GET" aria-label="Get a quote form">
+          <form class="quote-form" id="quote-form" action="404.html" method="GET" novalidate aria-label="Get a quote form">
             <h3 class="quote-form__title">Start a quote</h3>
 
             <div class="quote-form__alert" id="quote-alert" role="alert" aria-live="assertive" hidden>
@@ -822,18 +822,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="data.js"></script>
-  <script src="script.js?v=2.2"></script>
-  <script src="animations.js?v=2.2"></script>
+  <script src="script.js?v=2.3"></script>
+  <script src="animations.js?v=2.3"></script>
 
   <!-- Quote Form Instant Validation Engine -->
   <script>
     (function () {
       const qForm = document.getElementById('quote-form');
       if (!qForm) return;
+      qForm.dataset.initialized = 'true';
 
       const qBtn = document.getElementById('get-quote-btn');
       const qAlert = document.getElementById('quote-alert');
       const qAlertText = document.getElementById('quote-alert-text');
+
+      function resetQuoteBtn() {
+        if (qBtn) {
+          qBtn.disabled = false;
+          qBtn.classList.remove('loading');
+        }
+      }
+      window.addEventListener('pageshow', resetQuoteBtn);
+      resetQuoteBtn();
 
       const inputs = [
         {
@@ -887,6 +897,9 @@
             inp.classList.add('error', 'is-invalid');
             inp.classList.remove('is-valid');
             inp.setAttribute('aria-invalid', 'true');
+            if (typeof inp.setCustomValidity === 'function') {
+              inp.setCustomValidity(errorMsg);
+            }
             if (err) {
               err.textContent = errorMsg;
               err.style.opacity = '1';
@@ -901,6 +914,9 @@
             inp.classList.remove('is-valid');
           }
           inp.removeAttribute('aria-invalid');
+          if (typeof inp.setCustomValidity === 'function') {
+            inp.setCustomValidity('');
+          }
           if (err) {
             err.textContent = '';
           }
@@ -913,6 +929,9 @@
         if (!inp) return;
 
         inp.addEventListener('input', function () {
+          if (typeof inp.setCustomValidity === 'function') {
+            inp.setCustomValidity('');
+          }
           checkField(cfg, inp.classList.contains('is-invalid') || inp.classList.contains('error'));
           if (qAlert && !qAlert.hasAttribute('hidden')) {
             const allValid = inputs.every(function (c) {
@@ -955,6 +974,9 @@
           qForm.classList.add('form-shake');
           if (firstInvalid) {
             firstInvalid.focus();
+            if (typeof firstInvalid.setCustomValidity === 'function') {
+              firstInvalid.setCustomValidity('Please fill this field.');
+            }
             if (typeof firstInvalid.reportValidity === 'function') {
               firstInvalid.reportValidity();
             }

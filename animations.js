@@ -605,27 +605,22 @@ function initGravityFormAnimation() {
     });
   }
 
-  // 3. Gravitational Magnetic Pull on Submit Button
+  // 3. Hover Feedback on Submit Button (Stable positioning ensures clicks register reliably)
   const submitBtn = quoteForm.querySelector('.quote-form__submit');
   if (submitBtn) {
-    submitBtn.addEventListener('mousemove', (e) => {
-      const rect = submitBtn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
+    submitBtn.addEventListener('mouseenter', () => {
       gsap.to(submitBtn, {
-        x: x * 0.35,
-        y: y * 0.4,
-        duration: 0.25,
+        scale: 1.02,
+        duration: 0.2,
         ease: 'power2.out'
       });
     });
 
     submitBtn.addEventListener('mouseleave', () => {
       gsap.to(submitBtn, {
-        x: 0,
-        y: 0,
-        duration: 0.75,
-        ease: 'elastic.out(1.2, 0.4)'
+        scale: 1,
+        duration: 0.25,
+        ease: 'power2.out'
       });
     });
   }

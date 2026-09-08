@@ -338,7 +338,8 @@ document.addEventListener('DOMContentLoaded', () => {
    ══════════════════════════════════════════════════════ */
 (function initQuoteForm() {
   const form = $('#quote-form');
-  if (!form) return;
+  if (!form || form.dataset.initialized) return;
+  form.dataset.initialized = 'true';
 
   const submitBtn = $('#get-quote-btn');
   const successMsg = $('#quote-success');
@@ -981,7 +982,7 @@ document.addEventListener('DOMContentLoaded', () => {
    15. BUTTON MAGNETIC HOVER EFFECT
    ══════════════════════════════════════════════════════ */
 (function initMagneticButtons() {
-  const buttons = $$('.btn--dark, .btn--outline');
+  const buttons = $$('.btn--dark:not(.quote-form__submit), .btn--outline');
 
   buttons.forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
