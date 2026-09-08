@@ -95,7 +95,7 @@ function initStacklyPreloader() {
   if (typeof gsap !== 'undefined') {
     gsap.to(obj, {
       val: 100,
-      duration: 1.1,
+      duration: 0.55,
       ease: 'power2.inOut',
       onUpdate: () => {
         const rounded = Math.round(obj.val);
@@ -111,15 +111,15 @@ function initStacklyPreloader() {
         setTimeout(() => {
           preloader.classList.add('is-hidden');
           if (typeof AOS !== 'undefined') AOS.refresh();
-        }, 900);
+        }, 600);
       }
     });
   } else {
     // Graceful fallback
     setTimeout(() => {
       preloader.classList.add('loaded');
-      setTimeout(() => preloader.classList.add('is-hidden'), 900);
-    }, 900);
+      setTimeout(() => preloader.classList.add('is-hidden'), 600);
+    }, 500);
   }
 }
 
