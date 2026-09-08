@@ -1687,20 +1687,56 @@ body.menu-open {
 .form-input:focus {
   border-bottom-color: var(--black);
 }
-.form-input.error {
-  border-bottom-color: #cc0000;
+.form-input.error,
+.form-input.is-invalid {
+  border-bottom-color: #DC2626;
 }
 
-.quote-form .form-input.error {
-  border-color: #DC2626 !important;
+.quote-form .form-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.quote-form .input-status-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.95rem;
+  pointer-events: none;
+  display: none;
+}
+
+.quote-form .form-input.is-valid + .input-status-icon {
+  display: block;
+  color: #059669;
+}
+
+.quote-form .form-input.is-invalid + .input-status-icon,
+.quote-form .form-input.error + .input-status-icon {
+  display: block;
+  color: #DC2626;
+}
+
+.quote-form .form-input.error,
+.quote-form .form-input.is-invalid {
+  border: 1.5px solid #DC2626 !important;
   background: #FFF5F5 !important;
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18) !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2) !important;
+  padding-right: 2.5rem !important;
+}
+
+.quote-form .form-input.is-valid {
+  border: 1.5px solid #059669 !important;
+  background: #F0FDF4 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
+  padding-right: 2.5rem !important;
 }
 
 .form-error {
   display: block;
   font-size: 0.75rem;
-  color: #cc0000;
+  color: #DC2626;
   margin-top: 0.3rem;
   min-height: 1em;
   transition: opacity 0.2s ease;
@@ -1708,12 +1744,31 @@ body.menu-open {
 
 .quote-form .form-error {
   display: block;
-  font-size: 0.775rem;
+  font-size: 0.785rem;
   font-weight: 600;
   color: #991B1B;
   margin-top: 0.35rem;
-  min-height: 1.1em;
+  min-height: 1.2em;
   transition: opacity 0.2s ease;
+}
+
+/* Quote Alert Banner */
+.quote-form__alert {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #FEF2F2;
+  border: 1.5px solid #FCA5A5;
+  color: #991B1B;
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  animation: formShake 0.35s ease;
+}
+.quote-form__alert[hidden] {
+  display: none !important;
 }
 
 .quote-form__submit {

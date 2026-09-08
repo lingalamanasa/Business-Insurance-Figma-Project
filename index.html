@@ -639,62 +639,79 @@
           <form class="quote-form" id="quote-form" action="404.html" novalidate aria-label="Get a quote form">
             <h3 class="quote-form__title">Start a quote</h3>
 
+            <div class="quote-form__alert" id="quote-alert" role="alert" aria-live="assertive" hidden>
+              <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+              <span id="quote-alert-text">Please correct the highlighted fields below.</span>
+            </div>
+
             <div class="form-group" id="fg-business-name">
               <label for="business-name" class="form-label">Business name</label>
-              <input
-                type="text"
-                id="business-name"
-                name="businessName"
-                class="form-input"
-                placeholder=" "
-                autocomplete="organization"
-                required
-                aria-required="true"
-              />
+              <div class="form-input-wrap">
+                <input
+                  type="text"
+                  id="business-name"
+                  name="businessName"
+                  class="form-input"
+                  placeholder="e.g. Acme Corp"
+                  autocomplete="organization"
+                  required
+                  aria-required="true"
+                />
+                <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
+              </div>
               <span class="form-error" id="business-name-error" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="form-group" id="fg-industry">
               <label for="industry" class="form-label">Industry</label>
-              <input
-                type="text"
-                id="industry"
-                name="industry"
-                class="form-input"
-                placeholder=" "
-                required
-                aria-required="true"
-              />
+              <div class="form-input-wrap">
+                <input
+                  type="text"
+                  id="industry"
+                  name="industry"
+                  class="form-input"
+                  placeholder="e.g. Construction, Logistics, Retail"
+                  required
+                  aria-required="true"
+                />
+                <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
+              </div>
               <span class="form-error" id="industry-error" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="form-group" id="fg-employees">
               <label for="employees" class="form-label">Number of employees</label>
-              <input
-                type="number"
-                id="employees"
-                name="employees"
-                class="form-input"
-                placeholder=" "
-                min="1"
-                required
-                aria-required="true"
-              />
+              <div class="form-input-wrap">
+                <input
+                  type="number"
+                  id="employees"
+                  name="employees"
+                  class="form-input"
+                  placeholder="e.g. 25"
+                  min="1"
+                  required
+                  aria-required="true"
+                />
+                <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
+              </div>
               <span class="form-error" id="employees-error" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="form-group" id="fg-email">
               <label for="work-email" class="form-label">Work email</label>
-              <input
-                type="email"
-                id="work-email"
-                name="workEmail"
-                class="form-input"
-                placeholder=" "
-                autocomplete="email"
-                required
-                aria-required="true"
-              />
+              <div class="form-input-wrap">
+                <input
+                  type="email"
+                  id="work-email"
+                  name="workEmail"
+                  class="form-input"
+                  placeholder="name@company.com"
+                  autocomplete="email"
+                  required
+                  aria-required="true"
+                />
+                <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
+              </div>
               <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
             </div>
 
@@ -799,5 +816,165 @@
   <script src="data.js"></script>
   <script src="script.js?v=2.2"></script>
   <script src="animations.js?v=2.2"></script>
+
+  <!-- Quote Form Instant Validation Engine -->
+  <script>
+    (function () {
+      const qForm = document.getElementById('quote-form');
+      if (!qForm) return;
+
+      const qBtn = document.getElementById('get-quote-btn');
+      const qAlert = document.getElementById('quote-alert');
+      const qAlertText = document.getElementById('quote-alert-text');
+
+      const inputs = [
+        {
+          id: 'business-name',
+          errId: 'business-name-error',
+          validate: function (val) {
+            if (!val.trim()) return 'Please enter your business name.';
+            if (val.trim().length < 2) return 'Business name must be at least 2 characters.';
+            return null;
+          }
+        },
+        {
+          id: 'industry',
+          errId: 'industry-error',
+          validate: function (val) {
+            if (!val.trim()) return 'Please enter your industry.';
+            if (val.trim().length < 2) return 'Industry must be at least 2 characters.';
+            return null;
+          }
+        },
+        {
+          id: 'employees',
+          errId: 'employees-error',
+          validate: function (val) {
+            if (!val.trim()) return 'Please enter the number of employees.';
+            const n = parseInt(val, 10);
+            if (isNaN(n) || n < 1) return 'Please enter 1 or more employees.';
+            return null;
+          }
+        },
+        {
+          id: 'work-email',
+          errId: 'email-error',
+          validate: function (val) {
+            if (!val.trim()) return 'Please enter your work email.';
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!re.test(val.trim())) return 'Please enter a valid work email address.';
+            return null;
+          }
+        }
+      ];
+
+      function checkField(cfg, showFeedback) {
+        const inp = document.getElementById(cfg.id);
+        const err = document.getElementById(cfg.errId);
+        if (!inp) return true;
+
+        const errorMsg = cfg.validate(inp.value);
+        if (errorMsg) {
+          if (showFeedback) {
+            inp.classList.add('error', 'is-invalid');
+            inp.classList.remove('is-valid');
+            inp.setAttribute('aria-invalid', 'true');
+            if (err) {
+              err.textContent = errorMsg;
+              err.style.opacity = '1';
+            }
+          }
+          return false;
+        } else {
+          inp.classList.remove('error', 'is-invalid');
+          if (inp.value.trim().length > 0) {
+            inp.classList.add('is-valid');
+          } else {
+            inp.classList.remove('is-valid');
+          }
+          inp.removeAttribute('aria-invalid');
+          if (err) {
+            err.textContent = '';
+          }
+          return true;
+        }
+      }
+
+      inputs.forEach(function (cfg) {
+        const inp = document.getElementById(cfg.id);
+        if (!inp) return;
+
+        inp.addEventListener('input', function () {
+          checkField(cfg, inp.classList.contains('is-invalid') || inp.classList.contains('error'));
+          if (qAlert && !qAlert.hasAttribute('hidden')) {
+            const allValid = inputs.every(function (c) {
+              return c.validate(document.getElementById(c.id)?.value || '') === null;
+            });
+            if (allValid) qAlert.setAttribute('hidden', '');
+          }
+        });
+
+        inp.addEventListener('blur', function () {
+          checkField(cfg, true);
+        });
+      });
+
+      function submitQuote(e) {
+        if (e && e.preventDefault) e.preventDefault();
+
+        let isValid = true;
+        let firstInvalid = null;
+        let invalidCount = 0;
+
+        inputs.forEach(function (cfg) {
+          const ok = checkField(cfg, true);
+          if (!ok) {
+            isValid = false;
+            invalidCount++;
+            if (!firstInvalid) firstInvalid = document.getElementById(cfg.id);
+          }
+        });
+
+        if (!isValid) {
+          if (qAlert) {
+            if (qAlertText) {
+              qAlertText.textContent = 'Please correct the ' + invalidCount + ' highlighted field' + (invalidCount > 1 ? 's' : '') + ' below.';
+            }
+            qAlert.removeAttribute('hidden');
+          }
+          qForm.classList.remove('form-shake');
+          void qForm.offsetWidth;
+          qForm.classList.add('form-shake');
+          if (firstInvalid) firstInvalid.focus();
+          return false;
+        }
+
+        if (qAlert) qAlert.setAttribute('hidden', '');
+        if (qBtn) {
+          qBtn.classList.add('loading');
+          qBtn.disabled = true;
+        }
+
+        setTimeout(function () {
+          const loc = window.location;
+          let p = loc.pathname;
+          let dest = '404.html';
+          if (p.endsWith('.html')) {
+            dest = p.substring(0, p.lastIndexOf('/') + 1) + '404.html';
+          } else if (p.endsWith('/')) {
+            dest = p + '404.html';
+          } else if (p.length > 0) {
+            dest = p + '/404.html';
+          }
+          window.location.href = dest;
+        }, 450);
+
+        return true;
+      }
+
+      qForm.addEventListener('submit', submitQuote);
+      if (qBtn) qBtn.addEventListener('click', submitQuote);
+    })();
+  </script>
 </body>
 </html>
