@@ -10,9 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="components.css" />
-  <link rel="stylesheet" href="contact.css" />
+  <link rel="stylesheet" href="styles.css?v=2.3" />
+  <link rel="stylesheet" href="components.css?v=2.3" />
+  <link rel="stylesheet" href="contact.css?v=2.3" />
 </head>
 <body class="contact-page">
 
@@ -93,7 +93,84 @@
 
   <main>
 
-    <!-- ═══ 1. CONTACT HERO SECTION (EXACT FIGMA SPLIT) ═══ -->
+    <!-- ═══ 1. CONTACT PAGE GRAND HERO (LUXURY ARCHITECTURAL BACKDROP) ═══ -->
+    <section class="contact-page-hero" id="contact-top-hero" aria-labelledby="contact-page-hero-title">
+      <!-- Ambient Backdrops & Overlays -->
+      <div class="contact-page-hero__bg-wrap" aria-hidden="true">
+        <img src="assets/contact-hero-bg.jpg" alt="Stackly Corporate Underwriting Headquarters" class="contact-page-hero__bg-img" />
+        <div class="contact-page-hero__overlay"></div>
+        <div class="contact-page-hero__mesh-glow"></div>
+      </div>
+
+      <div class="container contact-page-hero__container">
+        <!-- Breadcrumb / Live Status Badge -->
+        <div class="contact-page-hero__badge" data-aos="fade-down" data-aos-duration="700">
+          <span class="contact-page-hero__badge-dot"></span>
+          <span class="contact-page-hero__badge-text">Direct Underwriting Desk • 50-State Licensing</span>
+        </div>
+
+        <!-- Headline & Subtitle -->
+        <h1 class="contact-page-hero__headline" id="contact-page-hero-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          <span class="contact-page-hero__headline-top">Direct Access to</span>
+          <span class="contact-page-hero__headline-accent">Human Underwriters</span>
+        </h1>
+
+        <p class="contact-page-hero__subtext" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          Skip automated phone trees and chatbot loops. Connect directly with licensed commercial underwriting officers who review your operations by hand, understand real-world risk, and deliver bindable terms within 24 hours.
+        </p>
+
+        <!-- Interactive Quick Action Buttons -->
+        <div class="contact-page-hero__actions" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+          <a href="#contact-hero" class="btn contact-page-hero__btn-primary" id="hero-go-form-btn">
+            <span>Send Us a Message</span>
+            <i class="fa-solid fa-arrow-down-long"></i>
+          </a>
+          <a href="tel:18001801551" class="btn contact-page-hero__btn-secondary" id="hero-call-now-btn">
+            <i class="fa-solid fa-phone-volume"></i>
+            <span>Call 1800 180 1551</span>
+          </a>
+          <a href="#details-strip" class="contact-page-hero__btn-ghost">
+            <span>Branch Offices &amp; Desks</span>
+            <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+
+        <!-- Luxury Glass Highlights Grid (3 Value Pillars) -->
+        <div class="contact-page-hero__cards-grid" data-aos="fade-up" data-aos-duration="850" data-aos-delay="400">
+          <div class="contact-hero-card">
+            <div class="contact-hero-card__icon-box">
+              <i class="fa-solid fa-stopwatch-20"></i>
+            </div>
+            <div class="contact-hero-card__info">
+              <span class="contact-hero-card__value">&lt; 15 Minutes</span>
+              <span class="contact-hero-card__label">Average Initial Response</span>
+            </div>
+          </div>
+
+          <div class="contact-hero-card">
+            <div class="contact-hero-card__icon-box">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="contact-hero-card__info">
+              <span class="contact-hero-card__value">Direct Senior Officer</span>
+              <span class="contact-hero-card__label">Named Underwriter on File</span>
+            </div>
+          </div>
+
+          <div class="contact-hero-card">
+            <div class="contact-hero-card__icon-box">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+            <div class="contact-hero-card__info">
+              <span class="contact-hero-card__value">Instant COI Issuance</span>
+              <span class="contact-hero-card__label">Same-Day Proof of Coverage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2. CONTACT FORM & VISUAL SECTION (EXACT FIGMA SPLIT) ═══ -->
     <section class="contact-hero" id="contact-hero" aria-labelledby="contact-title">
       <div class="container contact-hero__container">
         <!-- LEFT: FORM -->
@@ -665,8 +742,8 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="animations.js"></script>
-  <script src="script.js"></script>
+  <script src="animations.js?v=2.3"></script>
+  <script src="script.js?v=2.3"></script>
 
   <!-- ═══════════════════════════════════════════
        GRAVITY CARD DROP ANIMATION CONTROLLER
