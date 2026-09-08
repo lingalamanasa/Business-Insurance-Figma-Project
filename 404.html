@@ -230,7 +230,7 @@
         <a href="https://lingalamanasa.github.io/Business-Insurance-Figma-Project/index.html" class="error-btn-primary">
           <i class="fa-solid fa-house"></i> Return to Home
         </a>
-        <button type="button" onclick="goBack()" class="error-btn-secondary" aria-label="Go back to previous page">
+        <button type="button" id="go-back-btn" class="error-btn-secondary" aria-label="Go back to previous page">
           <i class="fa-solid fa-arrow-left"></i> Go Back
         </button>
       </div>
@@ -239,17 +239,35 @@
 
   <!-- Go Back Logic -->
   <script>
-    function goBack() {
-      // history.back() is called first.
-      // If it navigates to a real page, this page unloads and the
-      // setTimeout never fires. If it goes to blank (about:blank from
-      // a new tab), we are still on this page after 150ms and we
-      // safely redirect to the home page instead.
-      window.history.back();
-      setTimeout(function () {
-        window.location.replace('https://lingalamanasa.github.io/Business-Insurance-Figma-Project/');
-      }, 150);
-    }
+    (function () {
+      var HOME = 'https://lingalamanasa.github.io/Business-Insurance-Figma-Project/';
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var btn = document.getElementById('go-back-btn');
+        if (!btn) return;
+
+        btn.addEventListener('click', function () {
+          var navigatingAway = false;
+
+          // pagehide fires when the browser is actually leaving this page
+          // (i.e. history.back() found a real page to go to)
+          window.addEventListener('pagehide', function () {
+            navigatingAway = true;
+          }, { once: true });
+
+          // Try to go back in history
+          window.history.back();
+
+          // After 500ms, if pagehide never fired we are still here
+          // (history.back() had nowhere real to go), so redirect to Home
+          setTimeout(function () {
+            if (!navigatingAway) {
+              window.location.replace(HOME);
+            }
+          }, 500);
+        });
+      });
+    })();
   </script>
 
   <!-- Scripts -->
