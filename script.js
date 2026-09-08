@@ -421,8 +421,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  function navigateTo404() {
+    const loc = window.location;
+    const pathname = loc.pathname;
+    let target404 = '404.html';
+    
+    // If hosted under a subpath like /Business-Insurance-Figma-Project/
+    if (pathname.endsWith('.html')) {
+      target404 = pathname.substring(0, pathname.lastIndexOf('/') + 1) + '404.html';
+    } else if (pathname.endsWith('/')) {
+      target404 = pathname + '404.html';
+    } else if (pathname.length > 0) {
+      target404 = pathname + '/404.html';
+    }
+    window.location.href = target404;
+  }
+
+  function handleQuoteSubmit(e) {
+    if (e && typeof e.preventDefault === 'function') {
+      e.preventDefault();
+    }
 
     let isFormValid = true;
     let firstInvalid = null;
@@ -442,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
       void form.offsetWidth;
       form.classList.add('form-shake');
       if (firstInvalid) firstInvalid.focus();
-      return;
+      return false;
     }
 
     if (submitBtn) {
@@ -455,9 +473,20 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.classList.remove('loading');
         submitBtn.disabled = false;
       }
-      window.location.href = '404.html';
-    }, 400);
-  });
+      navigateTo404();
+    }, 450);
+
+    return true;
+  }
+
+  form.addEventListener('submit', handleQuoteSubmit);
+
+  if (submitBtn) {
+    submitBtn.addEventListener('click', (e) => {
+      // If clicking button, run submission handler
+      handleQuoteSubmit(e);
+    });
+  }
 })();
 
 /* ══════════════════════════════════════════════════════
