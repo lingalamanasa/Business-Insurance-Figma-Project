@@ -107,26 +107,31 @@
             <div class="contact-form__field">
               <label for="contact-name" class="sr-only">Full Name</label>
               <input type="text" id="contact-name" name="fullName" class="contact-form__input" placeholder="Full Name" required />
+              <span class="contact-form__error" id="contact-name-error" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="contact-form__field">
               <label for="contact-business" class="sr-only">Business Name</label>
               <input type="text" id="contact-business" name="businessName" class="contact-form__input" placeholder="Business Name" required />
+              <span class="contact-form__error" id="contact-business-error" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="contact-form__field">
               <label for="contact-email" class="sr-only">Email Address</label>
               <input type="email" id="contact-email" name="emailAddress" class="contact-form__input" placeholder="Email Address" required />
+              <span class="contact-form__error" id="contact-email-error" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="contact-form__field">
-              <label for="contact-phone" class="sr-only">WorkPhone Number email</label>
-              <input type="text" id="contact-phone" name="workPhone" class="contact-form__input" placeholder="WorkPhone Number email" required />
+              <label for="contact-phone" class="sr-only">Work Phone Number</label>
+              <input type="tel" id="contact-phone" name="workPhone" class="contact-form__input" placeholder="Work Phone Number" required />
+              <span class="contact-form__error" id="contact-phone-error" role="alert" aria-live="polite"></span>
             </div>
 
             <div class="contact-form__field">
               <label for="contact-message" class="sr-only">How Can We Help?</label>
               <input type="text" id="contact-message" name="message" class="contact-form__input" placeholder="How Can We Help?" />
+              <span class="contact-form__error" id="contact-message-error" role="alert" aria-live="polite"></span>
             </div>
 
             <button type="submit" class="contact-form__submit" id="contact-submit-btn">

@@ -116,6 +116,16 @@
   box-shadow: 0 1px 0 #EF4444;
 }
 
+.contact-form__error {
+  display: block;
+  font-size: 0.75rem;
+  color: #EF4444;
+  margin-top: 0.35rem;
+  min-height: 1em;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
 .contact-form__submit {
   width: 100%;
   background: #F4D35E;

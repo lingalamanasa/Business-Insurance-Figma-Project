@@ -301,57 +301,500 @@ window.addEventListener('pageshow', () => {
 })();
 
 /* ══════════════════════════════════════════════════════
-   7. QUOTE FORM — SUBMISSION NAVIGATES TO 404
+   7. QUOTE FORM — REAL-TIME & SUBMISSION VALIDATION
    ══════════════════════════════════════════════════════ */
 (function initQuoteForm() {
   const form = $('#quote-form');
   if (!form) return;
 
+  const submitBtn = $('#get-quote-btn');
+  const successMsg = $('#quote-success');
+
+  const fields = [
+    {
+      id: 'business-name',
+      errorId: 'business-name-error',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter your business name.';
+        if (v.trim().length < 2) return 'Business name must be at least 2 characters.';
+        return null;
+      }
+    },
+    {
+      id: 'industry',
+      errorId: 'industry-error',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter your industry.';
+        if (v.trim().length < 2) return 'Industry must be at least 2 characters.';
+        return null;
+      }
+    },
+    {
+      id: 'employees',
+      errorId: 'employees-error',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter the number of employees.';
+        const num = parseInt(v, 10);
+        if (isNaN(num) || num < 1) return 'Please enter 1 or more employees.';
+        return null;
+      }
+    },
+    {
+      id: 'work-email',
+      errorId: 'email-error',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter your work email.';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(v.trim())) return 'Please enter a valid work email address.';
+        return null;
+      }
+    }
+  ];
+
+  function validateField(f) {
+    const input = $(`#${f.id}`);
+    const errorEl = $(`#${f.errorId}`);
+    if (!input) return true;
+
+    const error = f.validate(input.value);
+    if (error) {
+      input.classList.add('error');
+      input.setAttribute('aria-invalid', 'true');
+      if (errorEl) {
+        errorEl.textContent = error;
+        errorEl.style.opacity = '1';
+      }
+      return false;
+    } else {
+      input.classList.remove('error');
+      input.removeAttribute('aria-invalid');
+      if (errorEl) {
+        errorEl.textContent = '';
+      }
+      return true;
+    }
+  }
+
+  // Real-time validation listeners
+  fields.forEach(f => {
+    const input = $(`#${f.id}`);
+    if (!input) return;
+
+    input.addEventListener('blur', () => validateField(f));
+    input.addEventListener('input', () => {
+      if (input.classList.contains('error')) {
+        validateField(f);
+      }
+    });
+  });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    window.location.href = '404.html';
+
+    let isFormValid = true;
+    let firstInvalid = null;
+
+    fields.forEach(f => {
+      const isValid = validateField(f);
+      if (!isValid) {
+        isFormValid = false;
+        if (!firstInvalid) {
+          firstInvalid = $(`#${f.id}`);
+        }
+      }
+    });
+
+    if (!isFormValid) {
+      form.classList.remove('form-shake');
+      void form.offsetWidth;
+      form.classList.add('form-shake');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+    }
+
+    setTimeout(() => {
+      if (submitBtn) {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }
+
+      form.reset();
+      fields.forEach(f => {
+        const input = $(`#${f.id}`);
+        const errorEl = $(`#${f.errorId}`);
+        if (input) {
+          input.classList.remove('error');
+          input.removeAttribute('aria-invalid');
+        }
+        if (errorEl) errorEl.textContent = '';
+      });
+
+      if (successMsg) {
+        successMsg.removeAttribute('hidden');
+        successMsg.style.display = 'flex';
+        successMsg.style.opacity = '0';
+        successMsg.style.transform = 'translateY(8px)';
+        requestAnimationFrame(() => {
+          successMsg.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          successMsg.style.opacity = '1';
+          successMsg.style.transform = 'translateY(0)';
+        });
+
+        setTimeout(() => {
+          successMsg.style.opacity = '0';
+          setTimeout(() => {
+            successMsg.setAttribute('hidden', '');
+            successMsg.style.display = 'none';
+          }, 400);
+        }, 8000);
+      }
+    }, 600);
   });
 })();
 
 /* ══════════════════════════════════════════════════════
-   7B. FOOTER NEWSLETTER FORMS — SUBMISSION NAVIGATES TO 404
+   7B. FOOTER NEWSLETTER FORMS — VALIDATION & FEEDBACK
    ══════════════════════════════════════════════════════ */
 (function initNewsletterForms() {
   const forms = $$('.footer__newsletter-form');
   if (!forms.length) return;
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   forms.forEach(form => {
     form.removeAttribute('onsubmit');
+    const input = $('.footer__newsletter-input', form);
+    const submitBtn = $('.footer__newsletter-btn', form);
+    const feedback = $('.footer__newsletter-feedback', form);
+
+    const showFeedback = (msg, isSuccess = false) => {
+      if (!feedback) return;
+      feedback.textContent = msg;
+      feedback.className = `footer__newsletter-feedback visible ${isSuccess ? 'is-success' : 'is-error'}`;
+    };
+
+    const clearFeedback = () => {
+      if (!feedback) return;
+      feedback.textContent = '';
+      feedback.className = 'footer__newsletter-feedback';
+    };
+
+    if (input) {
+      input.addEventListener('input', () => {
+        if (feedback && feedback.classList.contains('is-error')) {
+          clearFeedback();
+        }
+      });
+    }
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      window.location.href = '404.html';
+      if (!input) return;
+
+      const email = input.value.trim();
+      if (!email) {
+        showFeedback('Please enter your email address.', false);
+        input.focus();
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        showFeedback('Please enter a valid email address (e.g. name@company.com).', false);
+        input.focus();
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+      }
+
+      showFeedback("You're subscribed successfully! Thank you.", true);
+      input.value = '';
+
+      setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '';
+        }
+        setTimeout(() => {
+          clearFeedback();
+        }, 5000);
+      }, 1000);
     });
   });
 })();
 
 /* ══════════════════════════════════════════════════════
-   7C. CONTACT PAGE FORM — SUBMISSION NAVIGATES TO 404
+   7C. CONTACT PAGE FORM — REAL-TIME & SUBMIT VALIDATION
    ══════════════════════════════════════════════════════ */
 (function initContactForm() {
   const form = $('#contact-form');
   if (!form) return;
 
+  const submitBtn = $('#contact-submit-btn');
+  const toast = $('#contact-toast');
+
+  const fields = [
+    {
+      id: 'contact-name',
+      errorId: 'contact-name-error',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter your full name.';
+        if (v.trim().length < 2) return 'Full name must be at least 2 characters.';
+        return null;
+      }
+    },
+    {
+      id: 'contact-business',
+      errorId: 'contact-business-error',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter your business name.';
+        if (v.trim().length < 2) return 'Business name must be at least 2 characters.';
+        return null;
+      }
+    },
+    {
+      id: 'contact-email',
+      errorId: 'contact-email-error',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter your email address.';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(v.trim())) return 'Please enter a valid email address.';
+        return null;
+      }
+    },
+    {
+      id: 'contact-phone',
+      errorId: 'contact-phone-error',
+      validate: (v) => {
+        if (!v.trim()) return 'Please enter your work phone number.';
+        const digits = v.replace(/[\s\-\(\)\+]/g, '');
+        if (digits.length < 7) return 'Please enter a valid phone number (at least 7 digits).';
+        return null;
+      }
+    },
+    {
+      id: 'contact-message',
+      errorId: 'contact-message-error',
+      validate: (v) => {
+        if (v.trim() && v.trim().length < 5) return 'Message must be at least 5 characters.';
+        return null;
+      }
+    }
+  ];
+
+  function validateField(f) {
+    const input = $(`#${f.id}`);
+    const errorEl = $(`#${f.errorId}`);
+    if (!input) return true;
+
+    const error = f.validate(input.value);
+    if (error) {
+      input.classList.add('error');
+      input.setAttribute('aria-invalid', 'true');
+      if (errorEl) {
+        errorEl.textContent = error;
+        errorEl.style.opacity = '1';
+      }
+      return false;
+    } else {
+      input.classList.remove('error');
+      input.removeAttribute('aria-invalid');
+      if (errorEl) {
+        errorEl.textContent = '';
+      }
+      return true;
+    }
+  }
+
+  // Real-time listeners
+  fields.forEach(f => {
+    const input = $(`#${f.id}`);
+    if (!input) return;
+
+    input.addEventListener('blur', () => validateField(f));
+    input.addEventListener('input', () => {
+      if (input.classList.contains('error')) {
+        validateField(f);
+      }
+    });
+  });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    window.location.href = '404.html';
+
+    let isFormValid = true;
+    let firstInvalid = null;
+
+    fields.forEach(f => {
+      const isValid = validateField(f);
+      if (!isValid) {
+        isFormValid = false;
+        if (!firstInvalid) {
+          firstInvalid = $(`#${f.id}`);
+        }
+      }
+    });
+
+    if (!isFormValid) {
+      form.classList.remove('form-shake');
+      void form.offsetWidth;
+      form.classList.add('form-shake');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+    }
+
+    if (typeof triggerGravityParticles === 'function' && submitBtn) {
+      try { triggerGravityParticles(submitBtn); } catch (err) {}
+    }
+
+    setTimeout(() => {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Get My Quote';
+      }
+
+      form.reset();
+      fields.forEach(f => {
+        const inp = $(`#${f.id}`);
+        const err = $(`#${f.errorId}`);
+        if (inp) {
+          inp.classList.remove('error');
+          inp.removeAttribute('aria-invalid');
+        }
+        if (err) err.textContent = '';
+      });
+
+      if (toast) {
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 5000);
+      }
+    }, 700);
   });
 })();
 
 /* ══════════════════════════════════════════════════════
-   7D. BLOG SEARCH FORM — SUBMISSION NAVIGATES TO 404
+   7D. BLOG SEARCH FORM — VALIDATION & ARTICLE FILTERING
    ══════════════════════════════════════════════════════ */
 (function initBlogSearch() {
   const form = $('#blog-search-form');
   if (!form) return;
 
+  const input = $('#blog-search-input');
+  const feedback = $('#blog-search-feedback');
+  const cards = $$('.blog-card');
+
+  const showFeedback = (html, type = 'info') => {
+    if (!feedback) return;
+    feedback.innerHTML = html;
+    feedback.className = `blog-search__feedback show is-${type}`;
+  };
+
+  const clearFeedback = () => {
+    if (!feedback) return;
+    feedback.innerHTML = '';
+    feedback.className = 'blog-search__feedback';
+  };
+
+  const resetFilter = () => {
+    cards.forEach(card => {
+      card.style.display = '';
+      card.style.opacity = '1';
+    });
+    if (input) {
+      input.value = '';
+      input.style.borderColor = '';
+      input.style.boxShadow = '';
+    }
+    clearFeedback();
+  };
+
+  if (input) {
+    input.addEventListener('input', () => {
+      if (feedback && feedback.classList.contains('is-error')) {
+        input.style.borderColor = '';
+        input.style.boxShadow = '';
+        clearFeedback();
+      }
+    });
+  }
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    window.location.href = '404.html';
+    if (!input) return;
+
+    const query = input.value.trim().toLowerCase();
+
+    // Validation: Empty query
+    if (!query) {
+      input.style.borderColor = '#EF4444';
+      input.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.25)';
+      showFeedback('<i class="fa-solid fa-circle-exclamation"></i> Please enter a keyword to search (e.g. "Property", "Risk", "Commercial", "Policy").', 'error');
+      input.focus();
+      return;
+    }
+
+    // Validation: Query too short
+    if (query.length < 2) {
+      input.style.borderColor = '#EF4444';
+      input.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.25)';
+      showFeedback('<i class="fa-solid fa-circle-exclamation"></i> Please enter at least 2 characters to search.', 'error');
+      input.focus();
+      return;
+    }
+
+    input.style.borderColor = '';
+    input.style.boxShadow = '';
+
+    // Filter cards
+    let matchCount = 0;
+    cards.forEach(card => {
+      const title = (card.querySelector('.blog-card__title')?.textContent || '').toLowerCase();
+      const desc = (card.querySelector('.blog-card__desc')?.textContent || '').toLowerCase();
+      const matches = title.includes(query) || desc.includes(query);
+
+      if (matches) {
+        card.style.display = '';
+        card.style.opacity = '1';
+        matchCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (matchCount > 0) {
+      showFeedback(
+        `<span>Found <strong>${matchCount}</strong> ${matchCount === 1 ? 'article' : 'articles'} matching "<strong>${input.value.trim()}</strong>". <button type="button" class="blog-search-reset-btn" id="blog-clear-search-btn" style="margin-left:0.5rem;text-decoration:underline;background:none;border:none;color:inherit;font-weight:bold;cursor:pointer;">Clear filter</button></span>`,
+        'success'
+      );
+      const clearBtn = $('#blog-clear-search-btn');
+      if (clearBtn) clearBtn.addEventListener('click', resetFilter);
+
+      const grid = $('.blog-grid');
+      if (grid) {
+        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      showFeedback(
+        `<span>No articles found matching "<strong>${input.value.trim()}</strong>". Try searching for "Property", "Risk", "Insurance", or <button type="button" class="blog-search-reset-btn" id="blog-clear-search-btn" style="text-decoration:underline;background:none;border:none;color:inherit;font-weight:bold;cursor:pointer;">view all articles</button>.</span>`,
+        'error'
+      );
+      const clearBtn = $('#blog-clear-search-btn');
+      if (clearBtn) clearBtn.addEventListener('click', resetFilter);
+    }
   });
 })();
 

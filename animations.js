@@ -452,50 +452,35 @@ function initGravityFormAnimation() {
   const gravityTL = gsap.timeline({
     scrollTrigger: {
       trigger: quoteSection,
-      start: 'top 75%',
+      start: 'top 90%',
       once: true
+    },
+    onComplete: () => {
+      gsap.set([quoteForm, quoteText], { clearProps: 'transform,opacity,scale' });
     }
   });
 
   // Left text slides in smoothly
   if (quoteText) {
     gravityTL.fromTo(quoteText,
-      { opacity: 0, x: -60 },
-      { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out' },
+      { opacity: 0, x: -40 },
+      { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' },
       0
     );
   }
 
-  // The yellow quote card drops down under heavy gravity with realistic physics bounce
+  // The yellow quote card drops down smoothly
   gravityTL.fromTo(quoteForm,
-    { y: -160, opacity: 0, scaleY: 0.88, scaleX: 1.06 },
+    { y: -60, opacity: 0, scale: 0.96 },
     {
       y: 0,
       opacity: 1,
-      scaleY: 1,
-      scaleX: 1,
-      duration: 1.25,
-      ease: 'bounce.out'
+      scale: 1,
+      duration: 0.9,
+      ease: 'back.out(1.4)'
     },
     0.1
   );
-
-  // Staggered drop-in of form children (title, each input group, submit button)
-  const formElements = quoteForm.querySelectorAll('.quote-form__title, .form-group, .quote-form__submit');
-  if (formElements.length) {
-    gravityTL.fromTo(formElements,
-      { y: -50, opacity: 0, scale: 0.95 },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.75,
-        stagger: 0.09,
-        ease: 'bounce.out'
-      },
-      0.45
-    );
-  }
 
   // 2. Gravitational Magnetic Pull on Submit Button
   const submitBtn = quoteForm.querySelector('.quote-form__submit');
@@ -1499,32 +1484,6 @@ function initContactPageAnimations() {
       });
     }
   });
-
-  // 4. Contact form handler with Gravity Particle Burst
-  const contactForm = document.getElementById('contact-form');
-  const toast = document.getElementById('contact-toast');
-  if (contactForm && toast) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
-        // Trigger realistic upward gravity burst of particles
-        triggerGravityParticles(submitBtn);
-      }
-      setTimeout(() => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = 'Get My Quote';
-        }
-        contactForm.reset();
-        toast.classList.add('show');
-        setTimeout(() => {
-          toast.classList.remove('show');
-        }, 4500);
-      }, 700);
-    });
-  }
 }
 
 /* ══════════════════════════════════════════════════════
