@@ -507,41 +507,105 @@ function initGravityFormAnimation() {
   if (quoteFormWrap) quoteFormWrap.classList.remove('animate-fade-right');
   if (quoteText) quoteText.classList.remove('animate-fade-left');
 
+  let ambientFloatTween = null;
+
   // 1. Gravitational Entrance Timeline
   const gravityTL = gsap.timeline({
     scrollTrigger: {
       trigger: quoteSection,
-      start: 'top 90%',
+      start: 'top 85%',
       once: true
     },
     onComplete: () => {
-      gsap.set([quoteForm, quoteText], { clearProps: 'transform,opacity,scale' });
+      // Start ambient Zero-G floating oscillation once the drop completes
+      ambientFloatTween = gsap.to(quoteForm, {
+        y: '-=6',
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
     }
   });
 
-  // Left text slides in smoothly
+  // Left text slides into place smoothly
   if (quoteText) {
     gravityTL.fromTo(quoteText,
-      { opacity: 0, x: -40 },
-      { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' },
+      { opacity: 0, x: -45 },
+      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' },
       0
     );
   }
 
-  // The yellow quote card drops down smoothly
+  // The yellow quote card drops down with gravitational acceleration and bounce
   gravityTL.fromTo(quoteForm,
-    { y: -60, opacity: 0, scale: 0.96 },
+    { y: -90, opacity: 0, scale: 0.94, rotateX: 6 },
     {
       y: 0,
       opacity: 1,
       scale: 1,
-      duration: 0.9,
-      ease: 'back.out(1.4)'
+      rotateX: 0,
+      duration: 1.1,
+      ease: 'bounce.out'
     },
     0.1
   );
 
-  // 2. Gravitational Magnetic Pull on Submit Button
+  // Staggered gravitational fall for internal form elements (title, inputs, button)
+  const formChildren = quoteForm.querySelectorAll('.quote-form__title, .form-group, .quote-form__submit');
+  if (formChildren.length) {
+    gravityTL.fromTo(formChildren,
+      { y: -30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: 'back.out(2)'
+      },
+      0.35
+    );
+  }
+
+  // 2. Interactive 3D Gravitational Cursor Attractor / Tilt
+  if (quoteFormWrap) {
+    quoteFormWrap.addEventListener('mousemove', (e) => {
+      const rect = quoteFormWrap.getBoundingClientRect();
+      const relX = e.clientX - rect.left - rect.width / 2;
+      const relY = e.clientY - rect.top - rect.height / 2;
+      const rotX = -(relY / (rect.height / 2)) * 6;
+      const rotY = (relX / (rect.width / 2)) * 6;
+
+      if (ambientFloatTween) ambientFloatTween.pause();
+
+      gsap.to(quoteForm, {
+        rotateX: rotX,
+        rotateY: rotY,
+        x: relX * 0.05,
+        y: relY * 0.05,
+        duration: 0.35,
+        ease: 'power2.out',
+        overwrite: 'auto'
+      });
+    });
+
+    quoteFormWrap.addEventListener('mouseleave', () => {
+      gsap.to(quoteForm, {
+        rotateX: 0,
+        rotateY: 0,
+        x: 0,
+        y: 0,
+        duration: 0.85,
+        ease: 'elastic.out(1.1, 0.4)',
+        overwrite: 'auto',
+        onComplete: () => {
+          if (ambientFloatTween) ambientFloatTween.resume();
+        }
+      });
+    });
+  }
+
+  // 3. Gravitational Magnetic Pull on Submit Button
   const submitBtn = quoteForm.querySelector('.quote-form__submit');
   if (submitBtn) {
     submitBtn.addEventListener('mousemove', (e) => {
@@ -566,7 +630,7 @@ function initGravityFormAnimation() {
     });
   }
 
-  // 3. Anti-Gravity Float on Input Focus
+  // 4. Anti-Gravity Float on Input Focus
   const inputs = quoteForm.querySelectorAll('.form-input');
   inputs.forEach(input => {
     const parent = input.closest('.form-group');
@@ -574,7 +638,7 @@ function initGravityFormAnimation() {
 
     input.addEventListener('focus', () => {
       gsap.to(parent, {
-        y: -4,
+        y: -5,
         duration: 0.25,
         ease: 'power2.out'
       });
@@ -583,13 +647,13 @@ function initGravityFormAnimation() {
     input.addEventListener('blur', () => {
       gsap.to(parent, {
         y: 0,
-        duration: 0.4,
+        duration: 0.45,
         ease: 'bounce.out'
       });
     });
   });
 
-  // 4. Gravitational Particle Explosion on Form Submit
+  // 5. Gravitational Particle Explosion on Form Submit
   quoteForm.addEventListener('submit', () => {
     const allFilled = Array.from(inputs).every(inp => inp.value.trim().length > 0);
     if (allFilled && submitBtn) {
