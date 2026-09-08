@@ -227,7 +227,7 @@ body.menu-open {
   transform: translateY(-1px);
 }
 .nav__logo-img {
-  height: 32px;
+  height: 44px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -2136,7 +2136,7 @@ body.menu-open {
     height: 64px;
   }
   .nav__logo-img {
-    height: 28px;
+    height: 36px;
   }
 
   .hero {
@@ -2371,7 +2371,7 @@ body.menu-open {
     --container-padding: 0.85rem;
   }
   .nav__logo-img {
-    height: 24px;
+    height: 30px;
   }
   .hero__heading {
     font-size: 1.85rem;
