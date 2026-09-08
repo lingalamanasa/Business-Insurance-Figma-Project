@@ -11,8 +11,38 @@
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-window.addEventListener('pageshow', () => {
+function resetAllFormButtons() {
+  const quoteBtn = document.getElementById('get-quote-btn');
+  if (quoteBtn) {
+    quoteBtn.classList.remove('loading');
+    quoteBtn.disabled = false;
+  }
+
+  const contactBtn = document.getElementById('contact-submit-btn');
+  if (contactBtn) {
+    contactBtn.disabled = false;
+    contactBtn.innerHTML = 'Get My Quote';
+  }
+
+  const newsletterBtns = document.querySelectorAll('.footer__newsletter-btn');
+  newsletterBtns.forEach(btn => {
+    btn.disabled = false;
+    btn.style.opacity = '';
+  });
+
+  const blogSearchBtn = document.getElementById('blog-search-btn');
+  if (blogSearchBtn) {
+    blogSearchBtn.disabled = false;
+  }
+}
+
+window.addEventListener('pageshow', (event) => {
   document.body.style.opacity = '1';
+  resetAllFormButtons();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  resetAllFormButtons();
 });
 
 /* ══════════════════════════════════════════════════════
@@ -418,6 +448,10 @@ window.addEventListener('pageshow', () => {
     }
 
     setTimeout(() => {
+      if (submitBtn) {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+      }
       window.location.href = '404.html';
     }, 400);
   });
@@ -481,6 +515,10 @@ window.addEventListener('pageshow', () => {
       }
 
       setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '';
+        }
         window.location.href = '404.html';
       }, 400);
     });
@@ -617,6 +655,10 @@ window.addEventListener('pageshow', () => {
     }
 
     setTimeout(() => {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Get My Quote';
+      }
       window.location.href = '404.html';
     }, 400);
   });
