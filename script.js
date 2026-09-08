@@ -6,10 +6,14 @@
 'use strict';
 
 /* ══════════════════════════════════════════════════════
-   UTILITY HELPERS
+   UTILITY HELPERS & BCACHE RESTORATION
    ══════════════════════════════════════════════════════ */
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+
+window.addEventListener('pageshow', () => {
+  document.body.style.opacity = '1';
+});
 
 /* ══════════════════════════════════════════════════════
    1. HEADER SCROLL BEHAVIOUR

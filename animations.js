@@ -28,6 +28,8 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 
 function initStacklyPreloader() {
   const pathname = window.location.pathname.toLowerCase();
+  if (pathname.includes('404')) return; // Never run or inject preloader on 404 page
+
   let pageTagline = 'STACKLY HOME';
   if (pathname.includes('about')) pageTagline = 'STACKLY ABOUT';
   else if (pathname.includes('services')) pageTagline = 'STACKLY SERVICES';
@@ -284,6 +286,26 @@ function initCTAReveal() {
 /* ══════════════════════════════════════════════════════
    GSAP PAGE TRANSITION (subtle fade between pages)
    ══════════════════════════════════════════════════════ */
+// Ensure body is visible and preloader is hidden whenever a page is shown (initial load or bfcache restore)
+window.addEventListener('pageshow', function () {
+  document.body.style.opacity = '1';
+  if (typeof gsap !== 'undefined') {
+    gsap.set('body', { opacity: 1, clearProps: 'opacity' });
+  }
+  var preloader = document.getElementById('stackly-preloader');
+  if (preloader) {
+    preloader.classList.add('loaded', 'is-hidden');
+    preloader.style.display = 'none';
+  }
+});
+
+window.addEventListener('pagehide', function () {
+  document.body.style.opacity = '1';
+  if (typeof gsap !== 'undefined') {
+    gsap.set('body', { opacity: 1, clearProps: 'opacity' });
+  }
+});
+
 function initPageTransition() {
   if (typeof gsap === 'undefined') return;
 
@@ -298,12 +320,16 @@ function initPageTransition() {
     if (!href.endsWith('.html') && !href.match(/^[a-zA-Z0-9_-]+\.html/)) return;
 
     link.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
       e.preventDefault();
       gsap.to('body', {
         opacity: 0,
-        duration: 0.3,
+        duration: 0.25,
         ease: 'power1.in',
-        onComplete: () => { window.location.href = href; }
+        onComplete: () => {
+          document.body.style.opacity = '1';
+          window.location.href = href;
+        }
       });
     });
   });
