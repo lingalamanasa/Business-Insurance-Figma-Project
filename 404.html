@@ -181,34 +181,7 @@
 </head>
 <body>
 
-  <!-- ═══ STACKLY LUXURY PRELOADER ═══ -->
-  <div class="stackly-preloader" id="stackly-preloader" aria-hidden="false">
-    <div class="stackly-preloader__curtain stackly-preloader__curtain--top"></div>
-    <div class="stackly-preloader__curtain stackly-preloader__curtain--bottom"></div>
-    <div class="stackly-preloader__content">
-      <div class="stackly-preloader__logo-wrap">
-        <div class="stackly-preloader__icon-ring">
-          <svg class="stackly-preloader__ring-svg" viewBox="0 0 100 100">
-            <circle class="stackly-preloader__ring-bg" cx="50" cy="50" r="44"></circle>
-            <circle class="stackly-preloader__ring-bar" id="preloader-ring-bar" cx="50" cy="50" r="44"></circle>
-          </svg>
-          <img src="assets/stackly-icon-white.webp" alt="Stackly" class="stackly-preloader__icon" />
-        </div>
-        <div class="stackly-preloader__brand">
-          <span class="stackly-preloader__wordmark">STACKLY</span>
-          <span class="stackly-preloader__tagline">PAGE NOT FOUND</span>
-        </div>
-      </div>
-      <div class="stackly-preloader__progress-box">
-        <div class="stackly-preloader__bar">
-          <div class="stackly-preloader__fill" id="preloader-fill"></div>
-        </div>
-        <div class="stackly-preloader__counter">
-          <span id="preloader-percent">0</span>%
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- ═══════════════════════════════════════════
        404 ERROR CONTENT (CLEAN CENTERED VIEW)
@@ -239,33 +212,23 @@
 
   <!-- Go Back Logic -->
   <script>
+    // Script is at end of <body> — DOM is fully parsed, no DOMContentLoaded needed.
+    // The preloader has been removed from this page so nothing blocks clicks.
     (function () {
       var HOME = 'https://lingalamanasa.github.io/Business-Insurance-Figma-Project/';
+      var btn = document.getElementById('go-back-btn');
 
-      document.addEventListener('DOMContentLoaded', function () {
-        var btn = document.getElementById('go-back-btn');
-        if (!btn) return;
+      if (!btn) return;
 
-        btn.addEventListener('click', function () {
-          var navigatingAway = false;
-
-          // pagehide fires when the browser is actually leaving this page
-          // (i.e. history.back() found a real page to go to)
-          window.addEventListener('pagehide', function () {
-            navigatingAway = true;
-          }, { once: true });
-
-          // Try to go back in history
-          window.history.back();
-
-          // After 500ms, if pagehide never fired we are still here
-          // (history.back() had nowhere real to go), so redirect to Home
-          setTimeout(function () {
-            if (!navigatingAway) {
-              window.location.replace(HOME);
-            }
-          }, 500);
-        });
+      btn.addEventListener('click', function () {
+        // history.back() navigates to the real previous page.
+        // setTimeout acts as a safety net: if back() had nowhere real to go
+        // (e.g. page opened in a new tab), we redirect to Home instead.
+        // If back() succeeds, the page unloads and the timeout never executes.
+        window.history.back();
+        setTimeout(function () {
+          window.location.replace(HOME);
+        }, 800);
       });
     })();
   </script>
