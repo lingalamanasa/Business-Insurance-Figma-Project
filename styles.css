@@ -1691,12 +1691,28 @@ body.menu-open {
   border-bottom-color: #cc0000;
 }
 
+.quote-form .form-input.error {
+  border-color: #DC2626 !important;
+  background: #FFF5F5 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18) !important;
+}
+
 .form-error {
   display: block;
   font-size: 0.75rem;
   color: #cc0000;
   margin-top: 0.3rem;
   min-height: 1em;
+  transition: opacity 0.2s ease;
+}
+
+.quote-form .form-error {
+  display: block;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: #991B1B;
+  margin-top: 0.35rem;
+  min-height: 1.1em;
   transition: opacity 0.2s ease;
 }
 
