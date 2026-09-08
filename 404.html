@@ -230,12 +230,27 @@
         <a href="https://lingalamanasa.github.io/Business-Insurance-Figma-Project/index.html" class="error-btn-primary">
           <i class="fa-solid fa-house"></i> Return to Home
         </a>
-        <button type="button" onclick="if(window.history.length > 1) { window.history.back(); } else { window.location.href = 'https://lingalamanasa.github.io/Business-Insurance-Figma-Project/'; }" class="error-btn-secondary" aria-label="Go back to previous page">
+        <button type="button" onclick="goBack()" class="error-btn-secondary" aria-label="Go back to previous page">
           <i class="fa-solid fa-arrow-left"></i> Go Back
         </button>
       </div>
     </div>
   </main>
+
+  <!-- Go Back Logic -->
+  <script>
+    function goBack() {
+      // history.back() is called first.
+      // If it navigates to a real page, this page unloads and the
+      // setTimeout never fires. If it goes to blank (about:blank from
+      // a new tab), we are still on this page after 150ms and we
+      // safely redirect to the home page instead.
+      window.history.back();
+      setTimeout(function () {
+        window.location.replace('https://lingalamanasa.github.io/Business-Insurance-Figma-Project/');
+      }, 150);
+    }
+  </script>
 
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
