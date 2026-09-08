@@ -1160,15 +1160,19 @@ body.menu-open {
 .diff__card:nth-child(even) { background: var(--white); }
 
 .diff__card-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  gap: 5rem;
+}
+.diff__card-inner > * {
+  flex: 1;
+  min-width: 0;
 }
 .diff__card-inner--reverse {
-  direction: rtl;
+  flex-direction: row-reverse;
 }
-.diff__card-inner--reverse > * { direction: ltr; }
 
 .diff__card-eyebrow {
   font-size: 0.875rem;
@@ -2094,11 +2098,15 @@ body.menu-open {
   }
 
   .diff__card-inner {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 2.5rem;
   }
   .diff__card-inner--reverse {
-    direction: ltr;
+    flex-direction: column;
+  }
+  .diff__card-inner > * {
+    width: 100%;
+    max-width: 100%;
   }
 
   .industries__grid {
