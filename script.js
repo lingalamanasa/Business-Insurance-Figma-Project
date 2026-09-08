@@ -164,7 +164,10 @@ document.addEventListener('DOMContentLoaded', () => {
     '.animate-fade-left',
     '.animate-fade-right',
     '.animate-scale-in',
-    '.animate-on-scroll'
+    '.animate-on-scroll',
+    '.workflow__slide-left',
+    '.workflow__slide-right',
+    '.workflow__slide-step'
   ].join(','));
 
   if (animatedEls.length) {

@@ -1058,6 +1058,38 @@ body.menu-open {
   border-radius: var(--border-radius-lg);
   overflow: hidden;
 }
+
+/* Slides from the sides animation */
+.workflow__slide-left {
+  opacity: 0;
+  transform: translateX(-120px);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.workflow__slide-right {
+  opacity: 0;
+  transform: translateX(120px);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.workflow__slide-step {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.workflow__slide-step:nth-child(1) { transition-delay: 0.1s; }
+.workflow__slide-step:nth-child(2) { transition-delay: 0.2s; }
+.workflow__slide-step:nth-child(3) { transition-delay: 0.3s; }
+.workflow__slide-step:nth-child(4) { transition-delay: 0.4s; }
+
+.workflow__slide-left.visible,
+.workflow__slide-right.visible,
+.workflow__slide-step.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .workflow__person-img {
   width: 100%;
   height: 520px;

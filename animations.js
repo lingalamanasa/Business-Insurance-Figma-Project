@@ -431,6 +431,65 @@ function initMVCards() {
 }
 
 /* ══════════════════════════════════════════════════════
+   GSAP WORKFLOW "SLIDES FROM THE SIDES" ANIMATION
+   Left visual slides in from left; Right heading and steps slide in from right
+   ══════════════════════════════════════════════════════ */
+function initWorkflowSlideAnimation() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  const workflowSec = document.querySelector('.workflow');
+  if (!workflowSec) return;
+
+  const visual = workflowSec.querySelector('.workflow__visual');
+  const heading = workflowSec.querySelector('.workflow__heading');
+  const steps = workflowSec.querySelectorAll('.workflow__step');
+
+  // Remove CSS animation classes to prevent conflict with GSAP
+  if (visual) visual.classList.remove('workflow__slide-left', 'animate-fade-right');
+  const content = workflowSec.querySelector('.workflow__content');
+  if (content) content.classList.remove('workflow__slide-right', 'animate-fade-left');
+  steps.forEach(st => st.classList.remove('workflow__slide-step', 'animate-on-scroll'));
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: workflowSec,
+      start: 'top 80%',
+      once: true
+    },
+    onComplete: () => {
+      gsap.set([visual, heading, ...steps], { clearProps: 'transform,opacity' });
+    }
+  });
+
+  // 1. Left visual slides smoothly in from the left
+  if (visual) {
+    tl.fromTo(visual,
+      { x: -140, opacity: 0, scale: 0.96 },
+      { x: 0, opacity: 1, scale: 1, duration: 1.05, ease: 'power3.out' },
+      0
+    );
+  }
+
+  // 2. Right heading slides in from the right
+  if (heading) {
+    tl.fromTo(heading,
+      { x: 120, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
+      0.1
+    );
+  }
+
+  // 3. Right steps slide in consecutively from the right with stagger
+  if (steps.length) {
+    tl.fromTo(steps,
+      { x: 90, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.75, stagger: 0.12, ease: 'power2.out' },
+      0.25
+    );
+  }
+}
+
+/* ══════════════════════════════════════════════════════
    GSAP GRAVITY FORM ANIMATION
    Physically realistic gravitational drop, bounce, magnetic pull, and particles
    ══════════════════════════════════════════════════════ */
@@ -1978,6 +2037,7 @@ function initAllStacklyAnimations() {
   initStatsGSAP();
   initMVCards();
   initGravityFormAnimation();
+  initWorkflowSlideAnimation();
   initAboutRulesGravityAnimation();
   initAboutTeamSlidingImageAnimation();
   initTestimonialCharacterAnimation();
