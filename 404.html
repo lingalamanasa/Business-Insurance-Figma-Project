@@ -230,7 +230,7 @@
         <a href="index.html" class="error-btn-primary">
           <i class="fa-solid fa-house"></i> Return to Home
         </a>
-        <button type="button" onclick="history.back()" class="error-btn-secondary" aria-label="Go back to previous page">
+        <button type="button" onclick="if(document.referrer && document.referrer !== '') { window.location.href = document.referrer; } else { window.location.href = 'index.html'; }" class="error-btn-secondary" aria-label="Go back to previous page">
           <i class="fa-solid fa-arrow-left"></i> Go Back
         </button>
       </div>
