@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'employees',
       errorId: 'employees-error',
       validate: (v) => {
-        if (!v || !v.trim()) return 'Please enter the number of employees.';
+        if (!v || !v.trim()) return 'Please enter number of employees.';
         const num = parseInt(v, 10);
         if (isNaN(num) || num < 1) return 'Please enter 1 or more employees.';
         return null;
@@ -378,9 +378,9 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'work-email',
       errorId: 'email-error',
       validate: (v) => {
-        if (!v || !v.trim()) return 'Please enter your work email.';
+        if (!v || !v.trim()) return 'Please enter your email address.';
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(v.trim())) return 'Please enter a valid work email address.';
+        if (!emailRegex.test(v.trim())) return 'Please enter a valid email address.';
         return null;
       }
     }
@@ -444,15 +444,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (input.value.trim().length > 0) {
         validateField(f, false);
       }
-
-      // Check if all fields are valid, then auto-hide alert banner
-      if (qAlert && !qAlert.hasAttribute('hidden')) {
-        const allValid = fields.every(item => {
-          const el = $(`#${item.id}`);
-          return el && item.validate(el.value) === null;
-        });
-        if (allValid) qAlert.setAttribute('hidden', '');
-      }
     });
   });
 
@@ -480,12 +471,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (!isFormValid) {
-      if (qAlert) {
-        if (qAlertText) {
-          qAlertText.textContent = 'Please complete all required fields correctly before submitting.';
-        }
-        qAlert.removeAttribute('hidden');
-      }
       form.classList.remove('form-shake');
       void form.offsetWidth;
       form.classList.add('form-shake');
@@ -495,9 +480,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return false;
     }
 
-    // All valid -> proceed with success flow (NO 404 navigation)
+    // All fields are valid -> navigate to 404 error page
     isSubmitting = true;
-    if (qAlert) qAlert.setAttribute('hidden', '');
     if (submitBtn) {
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
@@ -506,38 +490,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setTimeout(() => {
-      isSubmitting = false;
-      if (submitBtn) {
-        submitBtn.classList.remove('loading');
-        submitBtn.disabled = false;
-        const btnText = submitBtn.querySelector('.quote-form__submit-text');
-        if (btnText) btnText.textContent = 'Get My Quote';
-      }
-
-      // Show success message and smoothly scroll into view
-      if (successMsg) {
-        successMsg.removeAttribute('hidden');
-        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-
-      // Reset form fields cleanly
-      fields.forEach(f => {
-        const input = $(`#${f.id}`);
-        if (input) {
-          input.value = '';
-          input.classList.remove('is-valid', 'is-invalid', 'error');
-          input.removeAttribute('aria-invalid');
-          const icon = input.parentElement ? input.parentElement.querySelector('.input-status-icon i') : null;
-          if (icon) {
-            icon.className = 'fa-solid fa-check';
-          }
-        }
-        const errorEl = $(`#${f.errorId}`);
-        if (errorEl) {
-          errorEl.textContent = '';
-        }
-      });
-    }, 600);
+      window.location.href = '404.html';
+    }, 400);
 
     return true;
   }
