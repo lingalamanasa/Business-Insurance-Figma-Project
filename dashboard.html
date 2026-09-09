@@ -380,7 +380,7 @@
             <h2 class="dash-card-title" style="font-size: 1.4rem;">Commercial Policy Portfolio</h2>
             <p class="dash-card-subtitle">Manage, renew, and download official Certificates of Insurance (COI)</p>
           </div>
-          <button type="button" class="dash-action-btn" onclick="alert('Downloading Certificate of Insurance (COI) package...');">
+          <button type="button" class="dash-action-btn" onclick="window.location.href='404.html';">
             <i class="fa-solid fa-file-arrow-down"></i>
             <span>Download All COI (ZIP)</span>
           </button>
@@ -491,7 +491,7 @@
             <h2 class="dash-card-title" style="font-size: 1.4rem;">Direct Claims Resolution Center</h2>
             <p class="dash-card-subtitle">Zero third-party broker friction. Guaranteed 48-hour assessment pipeline.</p>
           </div>
-          <button type="button" class="dash-action-btn" onclick="alert('Opening claim incident intake form...');">
+          <button type="button" class="dash-action-btn" onclick="window.location.href='404.html';">
             <i class="fa-solid fa-plus"></i>
             <span>File New Claim</span>
           </button>
@@ -685,7 +685,7 @@
             <div class="dash-billing-amount">$4,850.00</div>
             <p style="font-size: 0.85rem; color: #CBD5E1; margin-top: 4px;">Due on <strong style="color:#FFFFFF;">November 01, 2026</strong> • Linked to Corporate ACH (•••• 8912)</p>
           </div>
-          <button type="button" class="dash-action-btn" onclick="alert('Processing early payment of $4,850.00...');">
+          <button type="button" class="dash-action-btn" onclick="window.location.href='404.html';">
             <i class="fa-solid fa-credit-card"></i>
             <span>Pay Premium Early</span>
           </button>
@@ -778,7 +778,7 @@
               <label class="dash-form-label">Underwriter Direct Line</label>
               <input type="text" class="dash-form-input" value="Marcus Vance • Ext 402" readonly />
             </div>
-            <button type="button" class="dash-action-btn" style="align-self: flex-start; margin-top: 0.5rem;" onclick="alert('Security preferences saved!');">Update Security</button>
+            <button type="button" class="dash-action-btn" style="align-self: flex-start; margin-top: 0.5rem;" onclick="window.location.href='404.html';">Update Security</button>
           </article>
         </div>
       </section>
@@ -1195,6 +1195,15 @@
     // ═══ INITIALIZE ON LOAD ═══
     window.addEventListener('DOMContentLoaded', () => {
       handleInitialRoute();
+    });
+
+    // Action buttons navigate to 404 error page
+    document.addEventListener('click', (e) => {
+      const actionBtn = e.target.closest('.dash-action-btn');
+      if (actionBtn) {
+        e.preventDefault();
+        window.location.href = '404.html';
+      }
     });
   </script>
 </body>
