@@ -1416,20 +1416,10 @@
           }
         });
 
-        // Always open selected page from the top of the page (scroll position 0)
+        // Reset scroll position smoothly to top
         window.scrollTo(0, 0);
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
         const mainEl = document.querySelector('.dash-main');
         if (mainEl) mainEl.scrollTop = 0;
-
-        requestAnimationFrame(() => {
-          window.scrollTo(0, 0);
-          document.documentElement.scrollTop = 0;
-          document.body.scrollTop = 0;
-          if (mainEl) mainEl.scrollTop = 0;
-        });
       }
 
       navItems.forEach(item => {

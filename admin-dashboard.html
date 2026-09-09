@@ -154,9 +154,8 @@
               <span class="dash-stat-label">Active Corporate Accounts</span>
               <div class="dash-stat-icon"><i class="fa-solid fa-building-user"></i></div>
             </div>
-            <div class="dash-stat-value" style="flex-direction:column; align-items:flex-start; gap:0.1rem;">
+            <div class="dash-stat-value">
               <span class="count-up" data-target="1420">0</span>
-              <span style="font-size:0.75rem; font-weight:600; color:var(--dash-text-muted); letter-spacing:0.04em; text-transform:uppercase;">Active Accounts</span>
             </div>
             <div class="dash-stat-trend up">
               <i class="fa-solid fa-award"></i>
@@ -1434,20 +1433,10 @@
           }
         });
 
-        // Always open selected page from the top of the page (scroll position 0)
+        // Reset scroll position smoothly to top
         window.scrollTo(0, 0);
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
         const mainEl = document.querySelector('.dash-main');
         if (mainEl) mainEl.scrollTop = 0;
-
-        requestAnimationFrame(() => {
-          window.scrollTo(0, 0);
-          document.documentElement.scrollTop = 0;
-          document.body.scrollTop = 0;
-          if (mainEl) mainEl.scrollTop = 0;
-        });
       }
 
       navItems.forEach(item => {
