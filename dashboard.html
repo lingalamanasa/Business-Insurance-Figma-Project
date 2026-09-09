@@ -111,12 +111,6 @@
       </div>
 
       <div class="dash-header__actions">
-        <!-- Interactive Role Switcher: User vs Admin -->
-        <div class="dash-mode-switch" role="tablist">
-          <button type="button" class="dash-mode-btn active" id="modeUserBtn" data-role="user">User View</button>
-          <button type="button" class="dash-mode-btn" id="modeAdminBtn" data-role="admin">Admin View</button>
-        </div>
-
         <div class="dash-user-profile">
           <div class="dash-user-avatar" id="userAvatar">SJ</div>
           <div class="dash-user-info">
@@ -1092,8 +1086,8 @@
     function applyRole(role) {
       currentRole = role;
       if (role === 'admin') {
-        modeAdminBtn.classList.add('active');
-        modeUserBtn.classList.remove('active');
+        if (modeAdminBtn) modeAdminBtn.classList.add('active');
+        if (modeUserBtn) modeUserBtn.classList.remove('active');
         sidebarRoleLabel.textContent = 'ADMIN';
         sidebarRoleLabel.style.color = '#38BDF8';
         userAvatar.style.background = 'linear-gradient(135deg, #38BDF8, #0284C7)';
@@ -1102,8 +1096,8 @@
           activeUserName = 'Admin Supervisor';
         }
       } else {
-        modeUserBtn.classList.add('active');
-        modeAdminBtn.classList.remove('active');
+        if (modeUserBtn) modeUserBtn.classList.add('active');
+        if (modeAdminBtn) modeAdminBtn.classList.remove('active');
         sidebarRoleLabel.textContent = 'USER';
         sidebarRoleLabel.style.color = 'var(--dash-gold)';
         userAvatar.style.background = 'linear-gradient(135deg, var(--dash-gold), #DEB528)';
@@ -1115,8 +1109,8 @@
       updateAllUserDisplays();
     }
 
-    modeUserBtn.addEventListener('click', () => applyRole('user'));
-    modeAdminBtn.addEventListener('click', () => applyRole('admin'));
+    if (modeUserBtn) modeUserBtn.addEventListener('click', () => applyRole('user'));
+    if (modeAdminBtn) modeAdminBtn.addEventListener('click', () => applyRole('admin'));
 
     // Handle Settings Contact Name Save
     if (settingsSaveBtn && settingsContactName) {
