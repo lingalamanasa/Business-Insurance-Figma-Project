@@ -1602,6 +1602,129 @@ body.menu-open {
 }
 
 /* ══════════════════════════════════════════════════════
+   SCROLLING IMAGE MARQUEE STRIP
+   ══════════════════════════════════════════════════════ */
+.marquee-section {
+  background: var(--white);
+  padding: 3.5rem 0 4rem;
+  overflow: hidden;
+}
+
+.marquee-section__label {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #aaa;
+  margin-bottom: 2rem;
+}
+
+/* Outer viewport — clips the scrolling content */
+.marquee-track {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Gradient fade on left & right edges */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+/* Two identical reels side-by-side in a flex row */
+.marquee-track {
+  display: flex;
+}
+
+.marquee-reel {
+  display: flex;
+  gap: 1.25rem;
+  flex-shrink: 0;
+  animation: marquee-scroll 40s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover */
+.marquee-track:hover .marquee-reel {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-reel { animation: none; }
+}
+
+/* Individual image card */
+.marquee-item {
+  position: relative;
+  flex-shrink: 0;
+  width: 280px;
+  height: 190px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.marquee-item:hover {
+  transform: scale(1.04) translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+}
+
+.marquee-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.marquee-item:hover img {
+  transform: scale(1.08);
+}
+
+/* Caption overlay at bottom */
+.marquee-item__caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 1.5rem 1rem 0.65rem;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.marquee-item:hover .marquee-item__caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════════════════════
    QUOTE / CONTACT FORM SECTION
    ══════════════════════════════════════════════════════ */
 .quote-section {
