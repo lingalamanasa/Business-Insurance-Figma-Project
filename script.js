@@ -480,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return false;
     }
 
-    // All fields are valid -> navigate to 404 error page
+    // All fields are valid -> save data and navigate to quote result page
     isSubmitting = true;
     if (submitBtn) {
       submitBtn.classList.add('loading');
@@ -489,8 +489,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btnText) btnText.textContent = 'Processing Quote...';
     }
 
+    // Save submitted data to sessionStorage for the result page to read
+    try {
+      const quoteData = {
+        businessName: ($('#business-name') || {}).value || '',
+        industry:     ($('#industry')      || {}).value || '',
+        employees:    ($('#employees')     || {}).value || '',
+        workEmail:    ($('#work-email')    || {}).value || ''
+      };
+      sessionStorage.setItem('stackly_quote_data', JSON.stringify(quoteData));
+    } catch (e) { /* sessionStorage unavailable, proceed anyway */ }
+
     setTimeout(() => {
-      window.location.href = '404.html';
+      window.location.href = 'quote-result.html';
     }, 400);
 
     return true;

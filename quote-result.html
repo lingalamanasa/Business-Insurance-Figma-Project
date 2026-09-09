@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Quote is Ready — Stackly Business Insurance</title>
+  <meta name="description" content="Your personalized Stackly business insurance quote is ready. Review your estimated premium and coverage details." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #F4D35E;
+      --gold-dark: #D4A017;
+      --gold-glow: rgba(244, 211, 94, 0.25);
+      --navy: #0A1628;
+      --navy-2: #0F1F3D;
+      --surface: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.1);
+      --text: #F1F5F9;
+      --muted: #94A3B8;
+      --emerald: #10B981;
+      --blue: #38BDF8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 10% 20%, rgba(244, 211, 94, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(56, 189, 248, 0.06) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(10, 22, 40, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar__logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+    .navbar__logo img { height: 30px; width: auto; }
+    .navbar__links { display: flex; align-items: center; gap: 1.25rem; }
+    .navbar__links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .navbar__links a:hover { color: var(--text); }
+    .btn-nav {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--gold); color: #000; font-weight: 700; font-size: 0.875rem;
+      padding: 0.55rem 1.25rem; border-radius: 50px; text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-nav:hover { transform: translateY(-1px); box-shadow: 0 4px 16px var(--gold-glow); }
+
+    /* Main */
+    .qr-main {
+      position: relative; z-index: 1;
+      padding: 3.5rem 1.5rem 5rem;
+      max-width: 900px; margin: 0 auto;
+    }
+
+    /* Steps */
+    .qr-steps {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      margin-bottom: 2.5rem; font-size: 0.8rem; color: var(--muted);
+      animation: fadeInUp 0.5s ease both;
+    }
+    .qr-step { display: flex; align-items: center; gap: 0.35rem; font-weight: 600; }
+    .qr-step__dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800;
+    }
+    .qr-step__dot--done  { background: var(--emerald); color: #fff; }
+    .qr-step__dot--active{ background: var(--gold); color: #000; }
+    .qr-step__dot--future{ background: rgba(255,255,255,0.1); color: var(--muted); }
+    .qr-step__line { width: 44px; height: 2px; background: var(--border); border-radius: 2px; }
+    .qr-step__line--done { background: var(--emerald); }
+
+    /* Hero */
+    .qr-hero { text-align: center; margin-bottom: 3rem; animation: fadeInUp 0.6s ease both; }
+    .qr-hero__icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold) 0%, #E8A900 100%);
+      box-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(244,211,94,0.1);
+      margin-bottom: 1.5rem;
+      animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+    }
+    .qr-hero__icon i { font-size: 2rem; color: #000; }
+    .qr-hero__title { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
+    .qr-hero__title span {
+      background: linear-gradient(135deg, var(--gold) 0%, #FFF9E0 50%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .qr-hero__sub { font-size: 1rem; color: var(--muted); max-width: 520px; margin: 0 auto; }
+
+    /* Cards grid */
+    .qr-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      margin-bottom: 2rem; animation: fadeInUp 0.6s ease 0.15s both;
+    }
+    @media (max-width: 640px) { .qr-grid { grid-template-columns: 1fr; } }
+
+    .qr-card {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 20px; padding: 1.75rem; backdrop-filter: blur(10px);
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+    .qr-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.25); border-color: rgba(244,211,94,0.25); }
+
+    .qr-premium-card {
+      background: linear-gradient(135deg, rgba(244,211,94,0.12) 0%, rgba(244,211,94,0.05) 100%);
+      border: 1px solid rgba(244,211,94,0.3);
+    }
+    .qr-premium-card:hover { border-color: rgba(244,211,94,0.5); box-shadow: 0 12px 40px rgba(244,211,94,0.1); }
+
+    .qr-card__label {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .qr-price { font-size: clamp(2.5rem, 6vw, 3.2rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1; color: var(--gold); margin-bottom: 0.25rem; }
+    .qr-price__suffix { font-size: 1.1rem; font-weight: 600; color: #D4A017; }
+    .qr-price__monthly { font-size: 0.875rem; color: var(--muted); margin-bottom: 1rem; }
+    .qr-price__note {
+      font-size: 0.72rem; color: var(--muted); padding: 0.5rem 0.8rem;
+      background: rgba(255,255,255,0.04); border-radius: 8px; border-left: 3px solid var(--gold);
+    }
+
+    .qr-summary-row { display: flex; flex-direction: column; gap: 0.85rem; }
+    .qr-summary-item { display: flex; flex-direction: column; gap: 0.12rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+    .qr-summary-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .qr-summary-item__key { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    .qr-summary-item__val { font-size: 0.95rem; font-weight: 700; color: var(--text); word-break: break-word; }
+
+    /* Coverage */
+    .qr-coverage { animation: fadeInUp 0.6s ease 0.3s both; margin-bottom: 2.5rem; }
+    .qr-section-title {
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .qr-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .qr-coverage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 600px) { .qr-coverage-grid { grid-template-columns: 1fr; } }
+
+    .qr-coverage-item {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.25rem 1rem; display: flex; flex-direction: column; gap: 0.5rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .qr-coverage-item:hover { transform: translateY(-2px); border-color: rgba(244,211,94,0.25); }
+
+    .qr-coverage-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .qr-coverage-icon--gold    { background: rgba(244,211,94,0.15); color: var(--gold); }
+    .qr-coverage-icon--emerald { background: rgba(16,185,129,0.15); color: var(--emerald); }
+    .qr-coverage-icon--blue    { background: rgba(56,189,248,0.15); color: var(--blue); }
+
+    .qr-coverage-name  { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .qr-coverage-desc  { font-size: 0.73rem; color: var(--muted); line-height: 1.4; }
+    .qr-coverage-limit { font-size: 0.8rem; font-weight: 700; color: var(--emerald); margin-top: auto; }
+
+    /* Actions */
+    .qr-actions {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease 0.45s both;
+    }
+    .qr-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700;
+      padding: 0.85rem 1.85rem; border-radius: 50px; border: none; cursor: pointer;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .qr-btn--primary { background: var(--gold); color: #000; box-shadow: 0 4px 20px rgba(244,211,94,0.3); }
+    .qr-btn--primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(244,211,94,0.45); }
+    .qr-btn--outline { background: transparent; color: var(--text); border: 2px solid var(--border); }
+    .qr-btn--outline:hover { border-color: rgba(244,211,94,0.4); color: var(--gold); transform: translateY(-2px); }
+
+    /* Disclaimer */
+    .qr-disclaimer {
+      text-align: center; font-size: 0.73rem; color: var(--muted);
+      margin-top: 2rem; line-height: 1.6; animation: fadeInUp 0.6s ease 0.55s both;
+    }
+
+    /* Particle */
+    .qr-particle {
+      position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+      animation: floatParticle linear infinite; opacity: 0;
+    }
+    @keyframes floatParticle {
+      0%  { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 0.5; }
+      90% { opacity: 0.15; }
+      100%{ transform: translateY(-20px) scale(1); opacity: 0; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.6); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="qr-particles" aria-hidden="true"></div>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <a href="index.html" class="navbar__logo" aria-label="Stackly Home">
+      <img src="assets/stackly-logo-white.webp" alt="STACKLY" />
+    </a>
+    <div class="navbar__links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="btn-nav" id="qr-advisor-nav-btn">
+        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i> Get Started
+      </a>
+    </div>
+  </nav>
+
+  <main class="qr-main" role="main">
+
+    <!-- Step Progress Indicator -->
+    <div class="qr-steps" role="list" aria-label="Quote process steps">
+      <div class="qr-step" role="listitem">
+        <div class="qr-step__dot qr-step__dot--done" aria-label="Step 1 complete">
+          <i class="fa-solid fa-check" aria-hidden="true"></i>
+        </div>
+        <span>Details</span>
+      </div>
+      <div class="qr-step__line qr-step__line--done" aria-hidden="true"></div>
+      <div class="qr-step" role="listitem">
+        <div class="qr-step__dot qr-step__dot--active" aria-label="Step 2 active, current step">2</div>
+        <span style="color: var(--gold); font-weight: 700;">Your Quote</span>
+      </div>
+      <div class="qr-step__line" aria-hidden="true"></div>
+      <div class="qr-step" role="listitem">
+        <div class="qr-step__dot qr-step__dot--future" aria-label="Step 3 upcoming">3</div>
+        <span>Bind Policy</span>
+      </div>
+    </div>
+
+    <!-- Hero Header -->
+    <div class="qr-hero">
+      <div class="qr-hero__icon" aria-hidden="true">
+        <i class="fa-solid fa-shield-check"></i>
+      </div>
+      <h1 class="qr-hero__title">Your Quote is <span>Ready!</span></h1>
+      <p class="qr-hero__sub">Based on your business profile, here's your estimated annual premium and recommended coverage package.</p>
+    </div>
+
+    <!-- Quote Summary Grid -->
+    <div class="qr-grid">
+
+      <!-- Estimated Premium -->
+      <div class="qr-card qr-premium-card" role="region" aria-label="Estimated premium">
+        <div class="qr-card__label">
+          <i class="fa-solid fa-sack-dollar" aria-hidden="true"></i>
+          Estimated Annual Premium
+        </div>
+        <div class="qr-price" aria-live="polite">
+          $<span id="qr-price-amount">4,200</span><span class="qr-price__suffix">/yr</span>
+        </div>
+        <p class="qr-price__monthly" id="qr-price-monthly">≈ $350 / month</p>
+        <p class="qr-price__note">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+          Estimate based on your inputs. Final rate confirmed after underwriting review.
+        </p>
+      </div>
+
+      <!-- Business Profile Summary -->
+      <div class="qr-card" role="region" aria-label="Business profile summary">
+        <div class="qr-card__label">
+          <i class="fa-solid fa-building" aria-hidden="true"></i>
+          Your Business Profile
+        </div>
+        <div class="qr-summary-row">
+          <div class="qr-summary-item">
+            <span class="qr-summary-item__key">Business Name</span>
+            <span class="qr-summary-item__val" id="qr-business-name">—</span>
+          </div>
+          <div class="qr-summary-item">
+            <span class="qr-summary-item__key">Industry</span>
+            <span class="qr-summary-item__val" id="qr-industry">—</span>
+          </div>
+          <div class="qr-summary-item">
+            <span class="qr-summary-item__key">Employees</span>
+            <span class="qr-summary-item__val" id="qr-employees">—</span>
+          </div>
+          <div class="qr-summary-item">
+            <span class="qr-summary-item__key">Contact Email</span>
+            <span class="qr-summary-item__val" id="qr-email">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommended Coverages -->
+    <div class="qr-coverage" role="region" aria-label="Recommended coverage package">
+      <p class="qr-section-title">
+        <i class="fa-solid fa-shield-halved" style="color: var(--gold);" aria-hidden="true"></i>
+        Recommended Coverage Package
+      </p>
+      <div class="qr-coverage-grid">
+        <div class="qr-coverage-item">
+          <div class="qr-coverage-icon qr-coverage-icon--gold" aria-hidden="true">
+            <i class="fa-solid fa-person-shelter"></i>
+          </div>
+          <div class="qr-coverage-name">General Liability</div>
+          <div class="qr-coverage-desc">Protection against third-party bodily injury and property damage claims.</div>
+          <div class="qr-coverage-limit">Up to $1,000,000</div>
+        </div>
+        <div class="qr-coverage-item">
+          <div class="qr-coverage-icon qr-coverage-icon--emerald" aria-hidden="true">
+            <i class="fa-solid fa-building"></i>
+          </div>
+          <div class="qr-coverage-name">Commercial Property</div>
+          <div class="qr-coverage-desc">Covers damage or loss to your business premises, equipment, and assets.</div>
+          <div class="qr-coverage-limit">Up to $500,000</div>
+        </div>
+        <div class="qr-coverage-item">
+          <div class="qr-coverage-icon qr-coverage-icon--blue" aria-hidden="true">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <div class="qr-coverage-name">Cyber Liability</div>
+          <div class="qr-coverage-desc">Safeguards against data breaches, ransomware, and cyber extortion losses.</div>
+          <div class="qr-coverage-limit">Up to $250,000</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="qr-actions">
+      <a href="login.html" class="qr-btn qr-btn--primary" id="qr-bind-btn">
+        <i class="fa-solid fa-file-signature" aria-hidden="true"></i>
+        Bind This Policy
+      </a>
+      <a href="contact.html" class="qr-btn qr-btn--outline" id="qr-advisor-btn">
+        <i class="fa-solid fa-phone" aria-hidden="true"></i>
+        Talk to an Advisor
+      </a>
+      <a href="index.html" class="qr-btn qr-btn--outline" id="qr-home-btn">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        Back to Home
+      </a>
+    </div>
+
+    <!-- Fine print -->
+    <p class="qr-disclaimer">
+      This is an indicative premium estimate only and not a final insurance contract or binding quote.
+      Coverage details, limits, deductibles, exclusions, and final pricing are subject to full underwriting review and may vary.
+      By proceeding, you agree to Stackly's
+      <a href="index.html" style="color: var(--gold); text-decoration: none;">Terms of Service</a> and
+      <a href="index.html" style="color: var(--gold); text-decoration: none;">Privacy Policy</a>.
+    </p>
+
+  </main>
+
+  <script>
+    /* Populate business data from sessionStorage */
+    (function () {
+      try {
+        const data = JSON.parse(sessionStorage.getItem('stackly_quote_data') || '{}');
+        const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
+
+        set('qr-business-name', data.businessName);
+        set('qr-industry', data.industry);
+        set('qr-employees', data.employees ? data.employees + ' employees' : null);
+        set('qr-email', data.workEmail);
+
+        /* Deterministic premium estimate based on employee count */
+        const emp    = Math.max(1, parseInt(data.employees, 10) || 10);
+        const annual = 2400 + (emp * 90);
+        const monthly = Math.round(annual / 12);
+        const fmt    = (n) => n.toLocaleString('en-US');
+
+        const priceEl   = document.getElementById('qr-price-amount');
+        const monthlyEl = document.getElementById('qr-price-monthly');
+        if (priceEl)   priceEl.textContent   = fmt(annual);
+        if (monthlyEl) monthlyEl.textContent  = '≈ $' + fmt(monthly) + ' / month';
+      } catch (e) { /* default values remain */ }
+    })();
+
+    /* Floating particles */
+    (function () {
+      const container = document.getElementById('qr-particles');
+      if (!container) return;
+      const colors = ['rgba(244,211,94,0.45)', 'rgba(255,255,255,0.25)', 'rgba(16,185,129,0.3)'];
+      for (let i = 0; i < 18; i++) {
+        const p = document.createElement('div');
+        p.className = 'qr-particle';
+        const size = Math.random() * 6 + 3;
+        Object.assign(p.style, {
+          width:  size + 'px',
+          height: size + 'px',
+          left:   Math.random() * 100 + '%',
+          background: colors[i % colors.length],
+          animationDuration: (Math.random() * 8 + 7) + 's',
+          animationDelay:    (Math.random() * 5)     + 's'
+        });
+        container.appendChild(p);
+      }
+    })();
+  </script>
+</body>
+</html>
