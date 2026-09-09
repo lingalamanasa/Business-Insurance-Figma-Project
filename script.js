@@ -432,6 +432,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     input.addEventListener('blur', () => validateField(f));
     input.addEventListener('input', () => {
+      if (typeof input.setCustomValidity === 'function') {
+        input.setCustomValidity('');
+      }
       if (input.classList.contains('error') || input.classList.contains('is-invalid')) {
         validateField(f);
       }
@@ -463,8 +466,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleQuoteSubmit(e) {
-    if (e && typeof e.preventDefault === 'function') {
-      e.preventDefault();
+    if (e) {
+      if (typeof e.preventDefault === 'function') e.preventDefault();
+      if (typeof e.stopPropagation === 'function') e.stopPropagation();
     }
 
     let isFormValid = true;
@@ -494,6 +498,14 @@ document.addEventListener('DOMContentLoaded', () => {
       form.classList.add('form-shake');
       if (firstInvalid) {
         firstInvalid.focus();
+        try {
+          if (typeof firstInvalid.setCustomValidity === 'function') {
+            firstInvalid.setCustomValidity('Please fill this field.');
+          }
+          if (typeof firstInvalid.reportValidity === 'function') {
+            firstInvalid.reportValidity();
+          }
+        } catch (err) {}
       }
       return false;
     }
@@ -506,25 +518,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btnText) btnText.textContent = 'Processing Quote...';
     }
 
+    if (successMsg) {
+      successMsg.removeAttribute('hidden');
+    }
+
     setTimeout(() => {
       if (submitBtn) {
         submitBtn.classList.remove('loading');
         submitBtn.disabled = false;
       }
       navigateTo404();
-    }, 500);
+    }, 600);
 
     return true;
   }
 
+  window.handleQuoteSubmit = handleQuoteSubmit;
   form.addEventListener('submit', handleQuoteSubmit);
-
-  if (submitBtn) {
-    submitBtn.addEventListener('click', (e) => {
-      // If clicking button, run submission handler
-      handleQuoteSubmit(e);
-    });
-  }
 })();
 
 /* ══════════════════════════════════════════════════════
