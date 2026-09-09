@@ -28,7 +28,7 @@
 }
 
 html, body.dash-body {
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   width: 100%;
 }
@@ -299,17 +299,19 @@ body.sidebar-open {
   min-height: 75px;
   padding: 1rem 2rem;
   border-bottom: 1px solid var(--dash-border);
-  background: rgba(17, 25, 35, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(17, 25, 35, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 .dash-header__left {
@@ -796,6 +798,39 @@ body.sidebar-open {
 .dash-ring-desc {
   font-size: 0.72rem;
   color: var(--dash-text-muted);
+}
+
+/* ─── RING CHART ALIASES (admin/user dashboard variants) ─ */
+/* admin-dashboard.html & user-dashboard.html use these class names */
+.ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 8;
+}
+
+.ring-fill {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ring-gold   { stroke: var(--dash-gold);    filter: drop-shadow(0 0 8px var(--dash-gold-glow)); }
+.ring-emerald{ stroke: var(--dash-emerald); filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.35)); }
+.ring-blue   { stroke: var(--dash-blue);    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.35)); }
+.ring-purple { stroke: var(--dash-purple);  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.35)); }
+
+/* Centered percentage label inside the ring SVG wrap */
+.dash-ring-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--dash-text);
+  pointer-events: none;
 }
 
 /* ─── ANIMATED BAR CHART & RECENT POLICIES ────────────── */
@@ -1568,7 +1603,7 @@ body.sidebar-open {
     margin-left: 0 !important;
     max-width: 100vw !important;
     width: 100% !important;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   /* Show mobile brand and welcome text */
   .dash-header__mobile-brand {
@@ -1591,7 +1626,7 @@ body.sidebar-open {
 @media (max-width: 768px) {
   /* ── Body / Root ── */
   html, body.dash-body {
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100vw;
   }
 
