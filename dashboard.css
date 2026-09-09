@@ -969,7 +969,14 @@ body.sidebar-open {
 
 .dash-action-btn:hover {
   background: #FFFFFF;
+  color: #000000;
   transform: translateY(-2px);
+}
+
+.dash-action-btn--secondary {
+  background: rgba(244, 211, 94, 0.15);
+  color: var(--dash-gold);
+  border: 1px solid var(--dash-gold);
 }
 
 .dash-policies-grid {
@@ -1078,8 +1085,9 @@ body.sidebar-open {
 }
 
 .dash-policy-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: #FFFFFF;
+  background: rgba(244, 211, 94, 0.15);
+  border-color: var(--dash-gold);
+  color: var(--dash-gold);
 }
 
 /* ─── CLAIMS CENTER PIPELINE STYLES ──────────────────── */
