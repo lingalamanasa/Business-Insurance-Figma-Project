@@ -10,9 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="components.css" />
-  <link rel="stylesheet" href="blog.css" />
+  <link rel="stylesheet" href="styles.css?v=2.5" />
+  <link rel="stylesheet" href="components.css?v=2.5" />
+  <link rel="stylesheet" href="blog.css?v=2.5" />
 </head>
 <body>
 
@@ -130,13 +130,6 @@
           </div>
         </div>
       </div>
-      <!-- 4 Carousel Dots -->
-      <div class="blog-dark-hero__dots" aria-hidden="true" data-aos="fade-up" data-aos-delay="300">
-        <span class="blog-dark-hero__dot active" data-cursor-text="Slide 1"></span>
-        <span class="blog-dark-hero__dot" data-cursor-text="Slide 2"></span>
-        <span class="blog-dark-hero__dot" data-cursor-text="Slide 3"></span>
-        <span class="blog-dark-hero__dot" data-cursor-text="Slide 4"></span>
-      </div>
     </section>
 
     <!-- ═══ 2. WHAT'S ACTUALLY IN EACH POLICY (2 FEATURED CARDS) ═══ -->
@@ -146,23 +139,21 @@
 
         <div class="blog-featured__grid">
           <!-- Card 1 -->
-          <article class="blog-featured-card" data-aos="fade-up" data-aos-delay="50">
+          <article class="blog-featured-card open-article-btn" data-article-id="is-your-coverage-still-right" tabindex="0" role="button" aria-label="Read article: Is Your Coverage Still Right for Your Business?" data-aos="fade-up" data-aos-delay="50">
             <div class="blog-featured-card__img-wrap">
               <img src="assets/blog-6-cyber.webp" alt="Cybersecurity lock and digital protection network" class="blog-featured-card__img" loading="lazy" />
             </div>
             <h3 class="blog-featured-card__title">Is Your Coverage Still Right for Your Business?</h3>
             <p class="blog-featured-card__desc">As businesses grow, change locations, hire employees, or invest in new equipment, their insurance needs can change too. A regular review helps identify gaps before they become costly problems.</p>
-            <button type="button" class="btn btn--yellow open-article-btn" data-article-id="is-your-coverage-still-right">Read the Article</button>
           </article>
 
           <!-- Card 2 -->
-          <article class="blog-featured-card" data-aos="fade-up" data-aos-delay="100">
+          <article class="blog-featured-card open-article-btn" data-article-id="why-risk-planning-matters" tabindex="0" role="button" aria-label="Read article: Why Risk Planning Matters More Than Ever" data-aos="fade-up" data-aos-delay="100">
             <div class="blog-featured-card__img-wrap">
               <img src="assets/blog-risk-magnifier.webp" alt="Wooden blocks spelling RISK with magnifying glass" class="blog-featured-card__img" loading="lazy" />
             </div>
             <h3 class="blog-featured-card__title">Why Risk Planning Matters More Than Ever</h3>
             <p class="blog-featured-card__desc">Insurance is one part of a broader risk strategy. Understanding potential challenges and preparing ahead can help your business respond with greater confidence when something unexpected happens.</p>
-            <button type="button" class="btn btn--yellow open-article-btn" data-article-id="why-risk-planning-matters">Read the Article</button>
           </article>
         </div>
       </div>
@@ -175,107 +166,75 @@
 
         <div class="blog-latest__grid">
           <!-- Card 1 -->
-          <article class="blog-card" data-aos="fade-up" data-aos-delay="50">
+          <article class="blog-card open-article-btn" data-article-id="choosing-right-liability" tabindex="0" role="button" aria-label="Read more about Choosing the Right Level of Liability Protection" data-aos="fade-up" data-aos-delay="50">
             <div class="blog-card__img-wrap">
               <img src="assets/blog-1-risk.webp" alt="Business team reviewing financial risk analytics" class="blog-card__img" loading="lazy" />
             </div>
             <h3 class="blog-card__title">Choosing the Right Level of Liability Protection</h3>
             <p class="blog-card__desc">A closer look at how liability coverage can support businesses facing customer claims, accidents, and unexpected legal costs.</p>
-            <button type="button" class="blog-card__btn open-article-btn" data-article-id="choosing-right-liability" aria-label="Read more about Choosing the Right Level of Liability Protection">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
           </article>
 
           <!-- Card 2 -->
-          <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+          <article class="blog-card open-article-btn" data-article-id="when-should-you-update" tabindex="0" role="button" aria-label="Read more about When Should You Update Your Business Policy" data-aos="fade-up" data-aos-delay="100">
             <div class="blog-card__img-wrap">
               <img src="assets/blog-2-general.webp" alt="Office desk with notebook and policy schedule" class="blog-card__img" loading="lazy" />
             </div>
             <h3 class="blog-card__title">When Should You Update Your Business Policy?</h3>
             <p class="blog-card__desc">From opening a new location to expanding your team, certain changes mean it is time to review your existing protection.</p>
-            <button type="button" class="blog-card__btn open-article-btn" data-article-id="when-should-you-update" aria-label="Read more about When Should You Update Your Business Policy">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
           </article>
 
           <!-- Card 3 -->
-          <article class="blog-card" data-aos="fade-up" data-aos-delay="150">
+          <article class="blog-card open-article-btn" data-article-id="property-insurance-guide" tabindex="0" role="button" aria-label="Read more about Property Insurance: What Business Owners Should Know" data-aos="fade-up" data-aos-delay="150">
             <div class="blog-card__img-wrap">
               <img src="assets/blog-house-model.webp" alt="Professional holding wooden model house with calculator" class="blog-card__img" loading="lazy" />
             </div>
             <h3 class="blog-card__title">Property Insurance: What Business Owners Should Know</h3>
             <p class="blog-card__desc">Understand the role property coverage can play in protecting the physical assets your business relies on every day.</p>
-            <button type="button" class="blog-card__btn open-article-btn" data-article-id="property-insurance-guide" aria-label="Read more about Property Insurance: What Business Owners Should Know">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
           </article>
 
           <!-- Card 4 -->
-          <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+          <article class="blog-card open-article-btn" data-article-id="making-sense-commercial-options" tabindex="0" role="button" aria-label="Read more about Making Sense of Commercial Insurance Options" data-aos="fade-up" data-aos-delay="200">
             <div class="blog-card__img-wrap">
               <img src="assets/blog-4-interruption.webp" alt="Commercial storefront operational continuity" class="blog-card__img" loading="lazy" />
             </div>
             <h3 class="blog-card__title">Making Sense of Commercial Insurance Options</h3>
             <p class="blog-card__desc">Different businesses face different risks. Explore the factors that can influence which types of coverage may be appropriate.</p>
-            <button type="button" class="blog-card__btn open-article-btn" data-article-id="making-sense-commercial-options" aria-label="Read more about Making Sense of Commercial Insurance Options">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
           </article>
 
           <!-- Card 5 -->
-          <article class="blog-card" data-aos="fade-up" data-aos-delay="250">
+          <article class="blog-card open-article-btn" data-article-id="practical-guide-managing-risk" tabindex="0" role="button" aria-label="Read more about A Practical Guide to Managing Business Risk" data-aos="fade-up" data-aos-delay="250">
             <div class="blog-card__img-wrap">
               <img src="assets/blog-5-practical.webp" alt="Desk with calendar schedule and risk planning sheets" class="blog-card__img" loading="lazy" />
             </div>
             <h3 class="blog-card__title">A Practical Guide to Managing Business Risk</h3>
             <p class="blog-card__desc">Learn about the everyday decisions that can help strengthen your business and support long-term stability.</p>
-            <button type="button" class="blog-card__btn open-article-btn" data-article-id="practical-guide-managing-risk" aria-label="Read more about A Practical Guide to Managing Business Risk">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
           </article>
 
           <!-- Card 6 -->
-          <article class="blog-card" data-aos="fade-up" data-aos-delay="300">
+          <article class="blog-card open-article-btn" data-article-id="confidence-comes-from-prepared" tabindex="0" role="button" aria-label="Read more about Confidence Comes From Being Prepared" data-aos="fade-up" data-aos-delay="300">
             <div class="blog-card__img-wrap">
               <img src="assets/blog-team-support.webp" alt="Business team meeting discussing business insurance policy" class="blog-card__img" loading="lazy" />
             </div>
             <h3 class="blog-card__title">Confidence Comes From Being Prepared</h3>
             <p class="blog-card__desc">Running a business involves making important decisions every day. You can take steps to prepare for the risks.</p>
-            <button type="button" class="blog-card__btn open-article-btn" data-article-id="confidence-comes-from-prepared" aria-label="Read more about Confidence Comes From Being Prepared">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
           </article>
 
           <!-- Card 7 -->
-          <article class="blog-card" data-aos="fade-up" data-aos-delay="350">
+          <article class="blog-card open-article-btn" data-article-id="what-to-consider-reviewing" tabindex="0" role="button" aria-label="Read more about What to Consider When Reviewing Your Insurance" data-aos="fade-up" data-aos-delay="350">
             <div class="blog-card__img-wrap">
               <img src="assets/blog-3-smallbiz.webp" alt="Business partners collaborating on company growth review" class="blog-card__img" loading="lazy" />
             </div>
             <h3 class="blog-card__title">What to Consider When Reviewing Your Insurance</h3>
             <p class="blog-card__desc">Look beyond the policy itself. Consider how your business has changed, what assets you now own, who you employ.</p>
-            <button type="button" class="blog-card__btn open-article-btn" data-article-id="what-to-consider-reviewing" aria-label="Read more about What to Consider When Reviewing Your Insurance">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
           </article>
 
           <!-- Card 8 -->
-          <article class="blog-card" data-aos="fade-up" data-aos-delay="400">
+          <article class="blog-card open-article-btn" data-article-id="how-growth-changes-needs" tabindex="0" role="button" aria-label="Read more about How Growth Changes Your Insurance Needs" data-aos="fade-up" data-aos-delay="400">
             <div class="blog-card__img-wrap">
               <img src="assets/blog-wooden-stairs.webp" alt="Ascending staircase wooden blocks with hand placing final block" class="blog-card__img" loading="lazy" />
             </div>
             <h3 class="blog-card__title">How Growth Changes Your Insurance Needs</h3>
             <p class="blog-card__desc">As your business expands, your risks can change too. Regular reviews help keep your coverage aligned with your operations.</p>
-            <button type="button" class="blog-card__btn open-article-btn" data-article-id="how-growth-changes-needs" aria-label="Read more about How Growth Changes Your Insurance Needs">
-              <span>Read More</span>
-              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-            </button>
           </article>
         </div>
       </div>
@@ -443,8 +402,8 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="animations.js"></script>
-  <script src="script.js"></script>
+  <script src="animations.js?v=2.5"></script>
+  <script src="script.js?v=2.5"></script>
   <script>
     // ═══════════════════════════════════════════
     // ARTICLE READER MODAL LOGIC (IN-PAGE)
@@ -616,6 +575,13 @@
           e.stopPropagation();
           const id = btn.getAttribute('data-article-id');
           openArticle(id);
+        });
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const id = btn.getAttribute('data-article-id');
+            if (id) openArticle(id);
+          }
         });
       });
 

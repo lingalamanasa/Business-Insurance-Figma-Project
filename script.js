@@ -1045,7 +1045,7 @@ document.addEventListener('DOMContentLoaded', () => {
    17. BLOG — READ THE ARTICLE & READ MORE → 404
    ══════════════════════════════════════════════════════ */
 (function initBlogArticleButtons() {
-  // Targets: .open-article-btn (all "Read the Article" and "Read More" buttons on blog.html)
+  if (document.getElementById('articleModal')) return;
   const articleBtns = document.querySelectorAll('.open-article-btn');
   articleBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
