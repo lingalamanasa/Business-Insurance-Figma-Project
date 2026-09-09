@@ -1378,6 +1378,20 @@
   border-radius: 8px;
   text-decoration: none;
   display: inline-block;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.srv-btn-badge:hover,
+.srv-btn-badge:focus-visible {
+  background: rgba(244, 211, 94, 0.15);
+  color: #F4D35E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(244, 211, 94, 0.25);
+}
+
+.srv-btn-badge:active {
+  transform: translateY(0);
 }
 
 /* Footer bottom grid */
