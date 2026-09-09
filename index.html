@@ -626,109 +626,132 @@
     </section>
 
     <!-- ═══════════════════════════════════════════
-         QUOTE / CONTACT FORM SECTION
+         HORIZONTAL SCROLL GALLERY SECTION
     ═══════════════════════════════════════════ -->
-    <section class="quote-section" id="contact" aria-labelledby="quote-heading">
-      <div class="container quote-section__inner">
-        <div class="quote-section__text animate-fade-left">
-          <h2 class="quote-section__heading" id="quote-heading">See your rate before you talk to anyone</h2>
-          <p class="quote-section__subtext">No sales call required to get a number. Fill in the basics and your quote is ready to review — adjust it or bind it whenever you're ready.</p>
+    <section class="hscroll-section" id="contact" aria-labelledby="hscroll-heading">
+      <div class="hscroll-header">
+        <div>
+          <h2 class="hscroll-heading" id="hscroll-heading">See your rate before you talk to anyone</h2>
+          <p class="hscroll-subtext">Explore the industries we protect — drag or swipe to discover more.</p>
+        </div>
+      </div>
+
+      <!-- Scroll container -->
+      <div class="hscroll-track" id="hscroll-track" role="list" aria-label="Industry image gallery">
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/industry-construction.webp" alt="Construction industry coverage" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Industry</span>
+            <h3 class="hscroll-card__title">Construction</h3>
+            <p class="hscroll-card__desc">General liability & workers comp for builders and contractors.</p>
+          </div>
         </div>
 
-        <div class="quote-section__form-wrap animate-fade-right">
-          <form class="quote-form" id="quote-form" action="javascript:void(0);" method="POST" novalidate onsubmit="return window.handleQuoteSubmit ? window.handleQuoteSubmit(event) : false;" aria-label="Get a quote form">
-            <h3 class="quote-form__title">Start a quote</h3>
-
-            <div class="quote-form__alert" id="quote-alert" role="alert" aria-live="assertive" hidden>
-              <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-              <span id="quote-alert-text">Please complete all required fields correctly before submitting.</span>
-            </div>
-
-            <div class="form-group" id="fg-business-name">
-              <label for="business-name" class="form-label">Business name</label>
-              <div class="form-input-wrap">
-                <input
-                  type="text"
-                  id="business-name"
-                  name="businessName"
-                  class="form-input"
-                  placeholder="e.g. Acme Corp"
-                  autocomplete="organization"
-                  required
-                  aria-required="true"
-                />
-                <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
-              </div>
-              <span class="form-error" id="business-name-error" role="alert" aria-live="polite"></span>
-            </div>
-
-            <div class="form-group" id="fg-industry">
-              <label for="industry" class="form-label">Industry</label>
-              <div class="form-input-wrap">
-                <input
-                  type="text"
-                  id="industry"
-                  name="industry"
-                  class="form-input"
-                  placeholder="e.g. Construction, Logistics, Retail"
-                  required
-                  aria-required="true"
-                />
-                <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
-              </div>
-              <span class="form-error" id="industry-error" role="alert" aria-live="polite"></span>
-            </div>
-
-            <div class="form-group" id="fg-employees">
-              <label for="employees" class="form-label">Number of employees</label>
-              <div class="form-input-wrap">
-                <input
-                  type="number"
-                  id="employees"
-                  name="employees"
-                  class="form-input"
-                  placeholder="e.g. 25"
-                  min="1"
-                  required
-                  aria-required="true"
-                />
-                <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
-              </div>
-              <span class="form-error" id="employees-error" role="alert" aria-live="polite"></span>
-            </div>
-
-            <div class="form-group" id="fg-email">
-              <label for="work-email" class="form-label">Work email</label>
-              <div class="form-input-wrap">
-                <input
-                  type="email"
-                  id="work-email"
-                  name="workEmail"
-                  class="form-input"
-                  placeholder="name@company.com"
-                  autocomplete="email"
-                  required
-                  aria-required="true"
-                />
-                <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
-              </div>
-              <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
-            </div>
-
-            <button type="submit" class="btn btn--dark quote-form__submit" id="get-quote-btn">
-              <span class="quote-form__submit-text">Get My Quote</span>
-              <span class="quote-form__submit-loader" aria-hidden="true"></span>
-            </button>
-
-            <div class="quote-form__success" id="quote-success" role="status" aria-live="polite" hidden>
-              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-              <div>
-                <strong style="display:block;font-size:0.95rem;color:#064E3B;margin-bottom:0.25rem;">Quote request submitted successfully!</strong>
-                <p style="margin:0;font-size:0.85rem;color:#1E293B;line-height:1.45;">Thank you! Your quote request has been received. Our team will review your business information and send your custom rate to your work email shortly.</p>
-              </div>
-            </div>
-          </form>
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/industry-freight.webp" alt="Freight and logistics coverage" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Industry</span>
+            <h3 class="hscroll-card__title">Freight &amp; Logistics</h3>
+            <p class="hscroll-card__desc">Fleet, cargo, and inland marine policies for transport businesses.</p>
+          </div>
         </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/industry-healthcare.webp" alt="Healthcare industry coverage" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Industry</span>
+            <h3 class="hscroll-card__title">Healthcare</h3>
+            <p class="hscroll-card__desc">Professional liability and malpractice coverage for health services.</p>
+          </div>
+        </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/services-property-building.webp" alt="Commercial property coverage" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Coverage</span>
+            <h3 class="hscroll-card__title">Commercial Property</h3>
+            <p class="hscroll-card__desc">Protect your premises, equipment, and business assets.</p>
+          </div>
+        </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/services-cyber-lock.webp" alt="Cyber liability coverage" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Coverage</span>
+            <h3 class="hscroll-card__title">Cyber Liability</h3>
+            <p class="hscroll-card__desc">Data breach, ransomware &amp; cyber extortion protection.</p>
+          </div>
+        </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/workflow-advisor-steps.webp" alt="Risk advisory services" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Service</span>
+            <h3 class="hscroll-card__title">Risk Advisory</h3>
+            <p class="hscroll-card__desc">Expert guidance to identify, assess and mitigate your business risks.</p>
+          </div>
+        </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/blog-hero-skyscraper.webp" alt="Real estate coverage" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Industry</span>
+            <h3 class="hscroll-card__title">Commercial Real Estate</h3>
+            <p class="hscroll-card__desc">Building owner policies, umbrella &amp; D&amp;O coverage.</p>
+          </div>
+        </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/about-solidarity-hands.webp" alt="Partnership and team coverage" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Service</span>
+            <h3 class="hscroll-card__title">Business Partnerships</h3>
+            <p class="hscroll-card__desc">Partnership liability and key-person insurance solutions.</p>
+          </div>
+        </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/policy-office-exterior.webp" alt="Office insurance coverage" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Coverage</span>
+            <h3 class="hscroll-card__title">Office Coverage</h3>
+            <p class="hscroll-card__desc">Interior fit-out, contents &amp; business interruption for offices.</p>
+          </div>
+        </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/services-bandage.webp" alt="Workers compensation coverage" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Coverage</span>
+            <h3 class="hscroll-card__title">Workers Comp</h3>
+            <p class="hscroll-card__desc">Statutory workers compensation for businesses of all sizes.</p>
+          </div>
+        </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/services-claim-step1.webp" alt="Claims process step 1" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Process</span>
+            <h3 class="hscroll-card__title">Fast Claims</h3>
+            <p class="hscroll-card__desc">48-hour claim acknowledgement with dedicated adjuster support.</p>
+          </div>
+        </div>
+
+        <div class="hscroll-card" role="listitem">
+          <img src="assets/services-claim-step2.webp" alt="Claims assessment" loading="lazy" width="440" height="580" />
+          <div class="hscroll-card__overlay">
+            <span class="hscroll-card__tag">Process</span>
+            <h3 class="hscroll-card__title">Damage Assessment</h3>
+            <p class="hscroll-card__desc">Expert appraisers dispatched within 24 hours of claim filing.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll progress indicator -->
+      <div class="hscroll-progress" aria-hidden="true">
+        <div class="hscroll-progress__bar" id="hscroll-progress-bar"></div>
       </div>
     </section>
 

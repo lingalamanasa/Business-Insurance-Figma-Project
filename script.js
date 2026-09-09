@@ -333,6 +333,58 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
+
+/* ══════════════════════════════════════════════════════
+   6B. HORIZONTAL SCROLL GALLERY — DRAG & PROGRESS BAR
+   ══════════════════════════════════════════════════════ */
+(function initHScrollGallery() {
+  const track = document.getElementById('hscroll-track');
+  const bar   = document.getElementById('hscroll-progress-bar');
+  if (!track) return;
+
+  /* ── Live progress bar ────────────────────────────── */
+  function updateProgress() {
+    if (!bar) return;
+    const max = track.scrollWidth - track.clientWidth;
+    const pct = max > 0 ? (track.scrollLeft / max) * 100 : 0;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }
+  track.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  /* ── Mouse drag-to-scroll ─────────────────────────── */
+  let isDragging = false;
+  let startX     = 0;
+  let scrollStart = 0;
+
+  track.addEventListener('mousedown', (e) => {
+    isDragging  = true;
+    startX      = e.pageX - track.offsetLeft;
+    scrollStart = track.scrollLeft;
+    track.classList.add('is-dragging');
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x    = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.4;          /* drag speed multiplier */
+    track.scrollLeft = scrollStart - walk;
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    track.classList.remove('is-dragging');
+  });
+
+  /* Prevent link clicks during drag */
+  track.addEventListener('click', (e) => {
+    if (Math.abs(track.scrollLeft - scrollStart) > 5) {
+      e.preventDefault();
+    }
+  }, { capture: true });
+})();
+
 /* ══════════════════════════════════════════════════════
    7. QUOTE FORM — REAL-TIME & SUBMISSION VALIDATION
    ══════════════════════════════════════════════════════ */
