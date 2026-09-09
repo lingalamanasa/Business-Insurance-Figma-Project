@@ -571,12 +571,17 @@ body.sidebar-open {
 }
 
 .dash-stat-value {
-  font-size: 2rem;
+  font-size: clamp(1.25rem, 2.2vw, 2rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 0.35rem;
   display: flex;
   align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.15em;
+  min-width: 0;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .dash-stat-trend {
@@ -1720,7 +1725,9 @@ body.sidebar-open {
     gap: 0.85rem;
   }
   .dash-stat-value {
-    font-size: 1.55rem;
+    font-size: clamp(1.1rem, 3vw, 1.55rem);
+    overflow: hidden;
+    word-break: break-word;
   }
   .dash-stat-label {
     font-size: 0.75rem;
@@ -1919,7 +1926,9 @@ body.sidebar-open {
     gap: 0.75rem;
   }
   .dash-stat-value {
-    font-size: 1.45rem;
+    font-size: clamp(1rem, 4vw, 1.45rem);
+    overflow: hidden;
+    word-break: break-word;
   }
 
   /* ── Cards ── */
@@ -2021,7 +2030,9 @@ body.sidebar-open {
     font-size: 0.82rem;
   }
   .dash-stat-value {
-    font-size: 1.3rem;
+    font-size: clamp(0.95rem, 5vw, 1.3rem);
+    overflow: hidden;
+    word-break: break-word;
   }
   .dash-rings-grid {
     grid-template-columns: 1fr;
