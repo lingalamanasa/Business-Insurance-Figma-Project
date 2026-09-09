@@ -338,18 +338,19 @@ document.addEventListener('DOMContentLoaded', () => {
    ══════════════════════════════════════════════════════ */
 (function initQuoteForm() {
   const form = $('#quote-form');
-  if (!form || form.dataset.initialized) return;
-  form.dataset.initialized = 'true';
+  if (!form) return;
 
   const submitBtn = $('#get-quote-btn');
   const successMsg = $('#quote-success');
+  const qAlert = $('#quote-alert');
+  const qAlertText = $('#quote-alert-text');
 
   const fields = [
     {
       id: 'business-name',
       errorId: 'business-name-error',
       validate: (v) => {
-        if (!v.trim()) return 'Please fill this field.';
+        if (!v || !v.trim()) return 'Please enter your business name.';
         if (v.trim().length < 2) return 'Business name must be at least 2 characters.';
         return null;
       }
@@ -358,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'industry',
       errorId: 'industry-error',
       validate: (v) => {
-        if (!v.trim()) return 'Please fill this field.';
+        if (!v || !v.trim()) return 'Please enter your industry.';
         if (v.trim().length < 2) return 'Industry must be at least 2 characters.';
         return null;
       }
@@ -367,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'employees',
       errorId: 'employees-error',
       validate: (v) => {
-        if (!v.trim()) return 'Please fill this field.';
+        if (!v || !v.trim()) return 'Please enter the number of employees.';
         const num = parseInt(v, 10);
         if (isNaN(num) || num < 1) return 'Please enter 1 or more employees.';
         return null;
@@ -377,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'work-email',
       errorId: 'email-error',
       validate: (v) => {
-        if (!v.trim()) return 'Please fill this field.';
+        if (!v || !v.trim()) return 'Please enter your work email.';
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(v.trim())) return 'Please enter a valid work email address.';
         return null;
@@ -385,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
-  function validateField(f) {
+  function validateField(f, showError = true) {
     const input = $(`#${f.id}`);
     const errorEl = $(`#${f.errorId}`);
     const icon = input && input.parentElement ? input.parentElement.querySelector('.input-status-icon i') : null;
@@ -393,15 +394,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const error = f.validate(input.value);
     if (error) {
-      input.classList.add('error', 'is-invalid');
-      input.classList.remove('is-valid');
-      input.setAttribute('aria-invalid', 'true');
-      if (icon) {
-        icon.className = 'fa-solid fa-circle-exclamation';
-      }
-      if (errorEl) {
-        errorEl.textContent = error;
-        errorEl.style.opacity = '1';
+      if (showError) {
+        input.classList.add('error', 'is-invalid');
+        input.classList.remove('is-valid');
+        input.setAttribute('aria-invalid', 'true');
+        if (icon) {
+          icon.className = 'fa-solid fa-circle-exclamation';
+        }
+        if (errorEl) {
+          errorEl.textContent = error;
+          errorEl.style.opacity = '1';
+        }
       }
       return false;
     } else {
@@ -430,15 +433,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = $(`#${f.id}`);
     if (!input) return;
 
-    input.addEventListener('blur', () => validateField(f));
+    input.addEventListener('blur', () => {
+      validateField(f, true);
+    });
+
     input.addEventListener('input', () => {
-      if (typeof input.setCustomValidity === 'function') {
-        input.setCustomValidity('');
-      }
+      // If field is currently invalid, re-validate immediately to clear error
       if (input.classList.contains('error') || input.classList.contains('is-invalid')) {
-        validateField(f);
+        validateField(f, true);
+      } else if (input.value.trim().length > 0) {
+        validateField(f, false);
       }
-      const qAlert = $('#quote-alert');
+
+      // Check if all fields are valid, then auto-hide alert banner
       if (qAlert && !qAlert.hasAttribute('hidden')) {
         const allValid = fields.every(item => {
           const el = $(`#${item.id}`);
@@ -449,21 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  function navigateTo404() {
-    const loc = window.location;
-    const pathname = loc.pathname;
-    let target404 = '404.html';
-    
-    // If hosted under a subpath like /Business-Insurance-Figma-Project/
-    if (pathname.endsWith('.html')) {
-      target404 = pathname.substring(0, pathname.lastIndexOf('/') + 1) + '404.html';
-    } else if (pathname.endsWith('/')) {
-      target404 = pathname + '404.html';
-    } else if (pathname.length > 0) {
-      target404 = pathname + '/404.html';
-    }
-    window.location.href = target404;
-  }
+  let isSubmitting = false;
 
   function handleQuoteSubmit(e) {
     if (e) {
@@ -471,11 +464,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof e.stopPropagation === 'function') e.stopPropagation();
     }
 
+    if (isSubmitting) return false;
+
     let isFormValid = true;
     let firstInvalid = null;
 
     fields.forEach(f => {
-      const isValid = validateField(f);
+      const isValid = validateField(f, true);
       if (!isValid) {
         isFormValid = false;
         if (!firstInvalid) {
@@ -484,12 +479,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    const qAlert = $('#quote-alert');
     if (!isFormValid) {
       if (qAlert) {
-        const qAlertText = $('#quote-alert-text');
         if (qAlertText) {
-          qAlertText.textContent = 'Please fill this field in all highlighted rows.';
+          qAlertText.textContent = 'Please complete all required fields correctly before submitting.';
         }
         qAlert.removeAttribute('hidden');
       }
@@ -498,18 +491,12 @@ document.addEventListener('DOMContentLoaded', () => {
       form.classList.add('form-shake');
       if (firstInvalid) {
         firstInvalid.focus();
-        try {
-          if (typeof firstInvalid.setCustomValidity === 'function') {
-            firstInvalid.setCustomValidity('Please fill this field.');
-          }
-          if (typeof firstInvalid.reportValidity === 'function') {
-            firstInvalid.reportValidity();
-          }
-        } catch (err) {}
       }
       return false;
     }
 
+    // All valid -> proceed with success flow (NO 404 navigation)
+    isSubmitting = true;
     if (qAlert) qAlert.setAttribute('hidden', '');
     if (submitBtn) {
       submitBtn.classList.add('loading');
@@ -518,16 +505,38 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btnText) btnText.textContent = 'Processing Quote...';
     }
 
-    if (successMsg) {
-      successMsg.removeAttribute('hidden');
-    }
-
     setTimeout(() => {
+      isSubmitting = false;
       if (submitBtn) {
         submitBtn.classList.remove('loading');
         submitBtn.disabled = false;
+        const btnText = submitBtn.querySelector('.quote-form__submit-text');
+        if (btnText) btnText.textContent = 'Get My Quote';
       }
-      navigateTo404();
+
+      // Show success message and smoothly scroll into view
+      if (successMsg) {
+        successMsg.removeAttribute('hidden');
+        successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      // Reset form fields cleanly
+      fields.forEach(f => {
+        const input = $(`#${f.id}`);
+        if (input) {
+          input.value = '';
+          input.classList.remove('is-valid', 'is-invalid', 'error');
+          input.removeAttribute('aria-invalid');
+          const icon = input.parentElement ? input.parentElement.querySelector('.input-status-icon i') : null;
+          if (icon) {
+            icon.className = 'fa-solid fa-check';
+          }
+        }
+        const errorEl = $(`#${f.errorId}`);
+        if (errorEl) {
+          errorEl.textContent = '';
+        }
+      });
     }, 600);
 
     return true;
