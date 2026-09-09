@@ -1021,8 +1021,20 @@
       // Update header
       updateHeaderInfo();
 
-      // Scroll to top of content
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Scroll to top of page (scroll position 0)
+      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      const mainEl = document.querySelector('.dash-main');
+      if (mainEl) mainEl.scrollTop = 0;
+
+      requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        if (mainEl) mainEl.scrollTop = 0;
+      });
 
       // If returning to overview, trigger animations
       if (tab === 'overview') {
@@ -1034,9 +1046,13 @@
 
     navItems.forEach(item => {
       item.addEventListener('click', (e) => {
+        e.preventDefault();
         const tab = item.getAttribute('data-tab');
         if (tab) {
           switchTab(tab);
+          try {
+            history.replaceState(null, '', `#${tab}`);
+          } catch (err) {}
         }
       });
     });

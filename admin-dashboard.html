@@ -1432,6 +1432,21 @@
             section.classList.remove('active');
           }
         });
+
+        // Always open selected page from the top of the page (scroll position 0)
+        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        const mainEl = document.querySelector('.dash-main');
+        if (mainEl) mainEl.scrollTop = 0;
+
+        requestAnimationFrame(() => {
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+          if (mainEl) mainEl.scrollTop = 0;
+        });
       }
 
       navItems.forEach(item => {
@@ -1439,6 +1454,9 @@
           e.preventDefault();
           const tab = item.getAttribute('data-tab');
           switchTab(tab);
+          try {
+            history.replaceState(null, '', `#${tab}`);
+          } catch (err) {}
           // Close mobile sidebar if open
           const sidebar = document.getElementById('dashSidebar');
           const overlay = document.getElementById('dashSidebarOverlay');
@@ -1446,6 +1464,18 @@
           if (overlay) overlay.classList.remove('active');
         });
       });
+
+      // Handle initial hash on page load and reset scroll position to 0
+      if (window.location.hash) {
+        const initialTab = window.location.hash.replace('#', '');
+        if (document.getElementById(`view-${initialTab}`)) {
+          switchTab(initialTab);
+        }
+      } else {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      }
 
       // 3. Count Up Animation Engine
       function triggerCountUps(container = document) {
