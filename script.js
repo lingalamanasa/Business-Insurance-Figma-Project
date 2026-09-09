@@ -388,6 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function validateField(f) {
     const input = $(`#${f.id}`);
     const errorEl = $(`#${f.errorId}`);
+    const icon = input && input.parentElement ? input.parentElement.querySelector('.input-status-icon i') : null;
     if (!input) return true;
 
     const error = f.validate(input.value);
@@ -395,6 +396,9 @@ document.addEventListener('DOMContentLoaded', () => {
       input.classList.add('error', 'is-invalid');
       input.classList.remove('is-valid');
       input.setAttribute('aria-invalid', 'true');
+      if (icon) {
+        icon.className = 'fa-solid fa-circle-exclamation';
+      }
       if (errorEl) {
         errorEl.textContent = error;
         errorEl.style.opacity = '1';
@@ -404,8 +408,14 @@ document.addEventListener('DOMContentLoaded', () => {
       input.classList.remove('error', 'is-invalid');
       if (input.value.trim().length > 0) {
         input.classList.add('is-valid');
+        if (icon) {
+          icon.className = 'fa-solid fa-check';
+        }
       } else {
         input.classList.remove('is-valid');
+        if (icon) {
+          icon.className = 'fa-solid fa-check';
+        }
       }
       input.removeAttribute('aria-invalid');
       if (errorEl) {
@@ -484,9 +494,6 @@ document.addEventListener('DOMContentLoaded', () => {
       form.classList.add('form-shake');
       if (firstInvalid) {
         firstInvalid.focus();
-        if (typeof firstInvalid.reportValidity === 'function') {
-          firstInvalid.reportValidity();
-        }
       }
       return false;
     }
@@ -495,6 +502,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (submitBtn) {
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
+      const btnText = submitBtn.querySelector('.quote-form__submit-text');
+      if (btnText) btnText.textContent = 'Processing Quote...';
     }
 
     setTimeout(() => {
@@ -503,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = false;
       }
       navigateTo404();
-    }, 450);
+    }, 500);
 
     return true;
   }

@@ -656,8 +656,6 @@
                   autocomplete="organization"
                   required
                   aria-required="true"
-                  oninvalid="this.setCustomValidity('Please fill this field.')"
-                  oninput="this.setCustomValidity('')"
                 />
                 <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
               </div>
@@ -675,8 +673,6 @@
                   placeholder="e.g. Construction, Logistics, Retail"
                   required
                   aria-required="true"
-                  oninvalid="this.setCustomValidity('Please fill this field.')"
-                  oninput="this.setCustomValidity('')"
                 />
                 <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
               </div>
@@ -695,8 +691,6 @@
                   min="1"
                   required
                   aria-required="true"
-                  oninvalid="if(this.validity.valueMissing){this.setCustomValidity('Please fill this field.')}else if(this.validity.rangeUnderflow){this.setCustomValidity('Please enter 1 or more employees.')}"
-                  oninput="this.setCustomValidity('')"
                 />
                 <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
               </div>
@@ -715,8 +709,6 @@
                   autocomplete="email"
                   required
                   aria-required="true"
-                  oninvalid="if(this.validity.valueMissing){this.setCustomValidity('Please fill this field.')}else if(this.validity.typeMismatch){this.setCustomValidity('Please enter a valid work email address.')}"
-                  oninput="this.setCustomValidity('')"
                 />
                 <span class="input-status-icon"><i class="fa-solid fa-check"></i></span>
               </div>
@@ -889,6 +881,7 @@
       function checkField(cfg, showFeedback) {
         const inp = document.getElementById(cfg.id);
         const err = document.getElementById(cfg.errId);
+        const icon = inp && inp.parentElement ? inp.parentElement.querySelector('.input-status-icon i') : null;
         if (!inp) return true;
 
         const errorMsg = cfg.validate(inp.value);
@@ -897,8 +890,8 @@
             inp.classList.add('error', 'is-invalid');
             inp.classList.remove('is-valid');
             inp.setAttribute('aria-invalid', 'true');
-            if (typeof inp.setCustomValidity === 'function') {
-              inp.setCustomValidity(errorMsg);
+            if (icon) {
+              icon.className = 'fa-solid fa-circle-exclamation';
             }
             if (err) {
               err.textContent = errorMsg;
@@ -910,13 +903,16 @@
           inp.classList.remove('error', 'is-invalid');
           if (inp.value.trim().length > 0) {
             inp.classList.add('is-valid');
+            if (icon) {
+              icon.className = 'fa-solid fa-check';
+            }
           } else {
             inp.classList.remove('is-valid');
+            if (icon) {
+              icon.className = 'fa-solid fa-check';
+            }
           }
           inp.removeAttribute('aria-invalid');
-          if (typeof inp.setCustomValidity === 'function') {
-            inp.setCustomValidity('');
-          }
           if (err) {
             err.textContent = '';
           }
@@ -929,13 +925,11 @@
         if (!inp) return;
 
         inp.addEventListener('input', function () {
-          if (typeof inp.setCustomValidity === 'function') {
-            inp.setCustomValidity('');
-          }
           checkField(cfg, inp.classList.contains('is-invalid') || inp.classList.contains('error'));
           if (qAlert && !qAlert.hasAttribute('hidden')) {
             const allValid = inputs.every(function (c) {
-              return c.validate(document.getElementById(c.id)?.value || '') === null;
+              const el = document.getElementById(c.id);
+              return el && c.validate(el.value) === null;
             });
             if (allValid) qAlert.setAttribute('hidden', '');
           }
@@ -974,12 +968,6 @@
           qForm.classList.add('form-shake');
           if (firstInvalid) {
             firstInvalid.focus();
-            if (typeof firstInvalid.setCustomValidity === 'function') {
-              firstInvalid.setCustomValidity('Please fill this field.');
-            }
-            if (typeof firstInvalid.reportValidity === 'function') {
-              firstInvalid.reportValidity();
-            }
           }
           return false;
         }
@@ -988,6 +976,8 @@
         if (qBtn) {
           qBtn.classList.add('loading');
           qBtn.disabled = true;
+          const btnText = qBtn.querySelector('.quote-form__submit-text');
+          if (btnText) btnText.textContent = 'Processing Quote...';
         }
 
         setTimeout(function () {
@@ -1002,7 +992,7 @@
             dest = p + '/404.html';
           }
           window.location.href = dest;
-        }, 450);
+        }, 500);
 
         return true;
       }

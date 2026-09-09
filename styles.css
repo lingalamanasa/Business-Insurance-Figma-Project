@@ -1705,17 +1705,26 @@ body.menu-open {
   font-size: 0.95rem;
   pointer-events: none;
   display: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .quote-form .form-input.is-valid + .input-status-icon {
-  display: block;
+  display: flex;
   color: #059669;
+}
+.quote-form .form-input.is-valid + .input-status-icon i::before {
+  content: "\f00c"; /* fa-check */
 }
 
 .quote-form .form-input.is-invalid + .input-status-icon,
 .quote-form .form-input.error + .input-status-icon {
-  display: block;
+  display: flex;
   color: #DC2626;
+}
+.quote-form .form-input.is-invalid + .input-status-icon i::before,
+.quote-form .form-input.error + .input-status-icon i::before {
+  content: "\f06a"; /* fa-circle-exclamation */
 }
 
 .quote-form .form-input.error,
